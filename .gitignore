@@ -1,4 +1,4 @@
 venv/**
-Setup/Selenium/**
+#Setup/Selenium/**
 **/__pycache__/
 
