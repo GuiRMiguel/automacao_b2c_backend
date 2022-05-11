@@ -196,6 +196,50 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
 
+    #378 #mlv
+    def changePPPoESettingsWrongAuthentication_378(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(1)
+            config = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
+            time.sleep(1)
+            config_internet = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').send_keys('cliente@cliente')
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').send_keys('vivo')
+            self._driver.find_element_by_xpath('//*[@id="btnSave"]').click()
+            time.sleep(15)
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[4]/td/label/font').text == 'Conectado':
+                    if self._driver.find_element_by_xpath('//*[@id="txtUsername"]').get_attribute('value') == 'cliente@cliente':
+                        self._dict_result.update({"obs": "Usuario aceito"})
+                    else:
+                        self._dict_result.update({"obs": f"Erro de autenticacao com as credenciais PPPoE inseridas pelo usuario.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
 
     
     def connectWizardhttps_379(self,flask_username):
@@ -243,6 +287,29 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    #381 mlv
+    def getFullConfig_381(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
+            self._driver.quit()
+            
+            self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
+            dict_saida = {"Resultado_Probe": "NOK"}
+        except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
+            dict_saida = {"Resultado_Probe": "OK"}
+
+        finally:
+            self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
+            return self._dict_result
+
 
 
     def getFullConfig_382(self, flask_username):
@@ -294,6 +361,23 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
+    #386 mlv
+    def statusWizardIptv_386(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status24 = result['Status']['Wi-Fi 2,4 GHz']
+            status5 = result['Status']['Wi-Fi 5 GHz']
+            wifi24 = wizard_config.WIFI24
+            wifi5 = wizard_config.WIFI5
+            if set(status24) == set(wifi24) and set(status5) == set(wifi5):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno WI-FI 2.4 GHz: {status24 and status5}"})
+            
+        return self._dict_result
 
     def statusWizardInet_387(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -362,6 +446,313 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             
         return self._dict_result
 
+    #391 HPNA mlv
+    def statusWizardHpna_391(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status = result['Status']['Telefone']
+            voip = wizard_config.VOIP
+
+            if set(status) == set(voip):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
+            
+        return self._dict_result
+
+    # 392
+    def verifyDnsService_392(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(1)
+            # Enabling DNS
+            self._driver.find_element_by_id('radDhcpDnsEn1').click()
+            # Entering primary DNS
+            prim_dns_1 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[8]/td[2]/input[1]')
+            prim_dns_1.send_keys('8')
+            prim_dns_2 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[8]/td[2]/input[2]')
+            prim_dns_2.send_keys('8')
+            prim_dns_3 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[8]/td[2]/input[3]')
+            prim_dns_3.send_keys('8')
+            prim_dns_4 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[8]/td[2]/input[4]')
+            prim_dns_4.send_keys('8')
+            # Entering Secondary DNS
+            sec_dns_1 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[9]/td[2]/input[1]')
+            sec_dns_1.send_keys('8')
+            sec_dns_2 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[9]/td[2]/input[2]')
+            sec_dns_2.send_keys('8')
+            sec_dns_3 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[9]/td[2]/input[3]')
+            sec_dns_3.send_keys('4')
+            sec_dns_4 = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[9]/td[2]/input[4]')
+            sec_dns_4.send_keys('4')
+            self._driver.find_element_by_id('btnDhcpSave').click()
+            time.sleep(1)
+            # Desabling DNS
+            self._driver.find_element_by_id('radDhcpDnsEn0').click()
+            self._driver.find_element_by_id('btnDhcpSave').click()
+            time.sleep(1)
+
+            # Checking if primary DNS fields are available
+            if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[8]/td[2]/input[1]') == None:
+                return self._dict_result
+            else:
+                return self._dict_result.update({"obs": "Servi;o DNS habilitado com sucesso", "result":"passed", "Resultado_Probe": "OK"})
+        
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
+            
+    #393 mlv
+    def createDmzViaWizard_393(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
+            self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
+            time.sleep(5)
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+    
+    #394 mlv
+    def configFirewallViaWizard_394(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[6]/a')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
+            self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
+            time.sleep(5)
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
+
+    #395 mlv
+    def configUpnpViaWizard_395(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[4]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="radUpnpEn1"]').click()
+            #self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
+            #self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
+            self._driver.find_element_by_xpath('//*[@id="btnUpnpSave"]').click()
+            time.sleep(1)
+
+            try:
+                #verificar se tem como validar configuracao UPnP
+                self._dict_result.update({"obs": f"Configuracao de UPnP realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
+    #396 mlv
+    def configDdnsViaWizard_396(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[5]/a').click() #DDNS
+            
+            """
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
+            self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
+            time.sleep(5)"""
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+    
+    #397 mlv
+    def configIpDhcpViaWizard_397(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[1]/a').click() #DHCP
+            time.sleep(1)
+            print('passou aqui 1')
+
+            self._driver.find_element_by_id('txtStaticMac').click()
+            print('passou aqui 2')
+
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('00:0c:29:bb:0b:35')
+            print('passou aqui 3')
+
+            time.sleep(5)
+            #self._driver.find_element_by_id('txtStaticMac').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('192')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('15')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[4]').send_keys('3')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('//*[@id="spnDhcpReserve"]').click()
+            time.sleep(5)
+            
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == '00:0c:29:bb:0b:35':
+                    self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
+    
+    def checkRedeGpon_36(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 375 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'checkRedeGpon_375')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 375 primeiro'})
+        else:
+            link = result['Status']['GPON']['Link']
+            if link == 'Estabelecido':
+                self._dict_result.update({"obs": "Link Estabelecido", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno Link: {link}"})
+    
+        return self._dict_result
+     
+
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
         site2 = f'http://{self._address_ip}/index_instalador.asp'
@@ -369,9 +760,9 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         
         try:
             self._driver.get(site1)
-            time.sleep(1)
+            time.sleep(5)
             self._driver.switch_to.frame('mainFrame')
-            time.sleep(1)
+            time.sleep(5)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
             resultado1 = 'ok'

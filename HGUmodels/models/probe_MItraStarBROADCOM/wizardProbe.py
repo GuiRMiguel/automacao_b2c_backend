@@ -25,7 +25,7 @@ config_collection = mongo_conn.get_collection()
 
 dict_test_result_memory = {}
 
-class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarECNT):
+class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
     def accessWizard_373(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 401 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'accessWizard_401')

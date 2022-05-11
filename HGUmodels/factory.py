@@ -56,10 +56,5 @@ class HGUModelFactory:
                 return HGU_AskeyBROADCOM_wizardProbe(address_ip, model_name, username, password, driver, dict_result)
             if probe == 'functionalProbe':
                 return HGU_AskeyBROADCOM_functionalProbe(address_ip, model_name, username, password, driver, dict_result)
-<<<<<<< HEAD
-
         else:
             return None
-=======
-        
->>>>>>> a0de903db0d748bc28ab245b33b442f4cf5e8504

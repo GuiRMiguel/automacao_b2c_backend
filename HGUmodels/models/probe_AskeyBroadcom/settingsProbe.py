@@ -944,7 +944,7 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         if config_original_wifi24 == 1:
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[2]/ul/li[1]/a').click()
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[2]').clck()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[2]').click()
             config_original_wifi24 = 0
 
         time.sleep(3)

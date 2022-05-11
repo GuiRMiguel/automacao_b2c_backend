@@ -12,9 +12,18 @@ INTERNET_IPV6 = ['DNS Primário:', 'DNS Secundário:', 'Endereço IPv6 Global - 
 INTERNET_IPV6_MITRA_ECNT = ['DNS Primário:', 'DNS Secundário:', 'Endereço de IPv6 Global - WAN:', 
                 'Endereço de IPv6 Link-Local - LAN:', 'Gateway Padrao:', 'Prefixo Delegado:']                 
 
+###--> INFORMAÇÕES INTERFACE GUI REFERENTE AO WI-FI 2.4 e 5 GHz
+####
+WIFI24 = ['Segurança:', 'WPS:', 'Anúncio de SSID:', 'Canal:', 'Estações Conectadas:']
+
+WIFI5 = ['Segurança:', 'WPS:', 'Anúncio de SSID:', 'Canal:', 'Estações Conectadas:']
+
+
+
+
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE Ao TELEFONE
 ####
-VOIP = ['Estações Conectadas:', 'Rede:', 'Telefone:', 'Endereço IP de VoIP:']
+VOIP = ['Rede:', 'Telefone:', 'Estações Conectadas:']
 
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE A TV
 ####

@@ -620,6 +620,25 @@ class gui:
                                      dict_result=dict_result)
         return hgu.changePPPoESettingsWrong_377(flask_username)
 
+    # 378 #mlv
+    def changePPPoESettingsWrongAuthentication(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "changePPPoESettingsWrongAuthentication", 
+                        "Probe#": "XXXXXXX", 
+                        "Description": "Erro de autenticacao com as credenciais PPPoE inseridas pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.changePPPoESettingsWrongAuthentication_378(flask_username)
 
     # def connectWizardhttps(self,ip,username,password): ### TUDO OK
         
@@ -805,7 +824,26 @@ class gui:
                                      dict_result=dict_result)
         return hgu.checkPPPoEStatus_380(flask_username)
 
-    
+    # 381 #mlv
+    def checkPPPoELoginToConfigWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "checkPPPoELoginToConfigWizard", 
+                        "Probe#": "146", 
+                        "Description": "Verifica se o usuario esta logado para editar configuracoes no Wizard", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.getFullConfig_381(flask_username)
+ 
     #382
     def getFullConfig_2(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",
@@ -914,6 +952,24 @@ class gui:
                                      dict_result=dict_result)
         return hgu.execPingWizard_384(flask_username)
 
+    #386 mlv
+    def statusWizardWifi(self, ip, username, password, model_name, flask_username, **kwargs):
+        
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "getFullConfig", 
+                        "Probe#": "350", 
+                        "Description": "Mostrar corretamente o Status do WI-FI 2.4GHz caso possua esse serviço.", 
+                        "obs": None}
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.statusWizardIptv_386(flask_username)
 
     #387
     def statusWizardInet(self, ip, username, password, model_name, flask_username, **kwargs):
@@ -993,6 +1049,132 @@ class gui:
                                      password=password, 
                                      dict_result=dict_result)
         return hgu.statusWizardVoip_390(flask_username)
+
+
+    # 392
+    def verifyDnsService(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "verifyDnsService", 
+                        "Probe#": "392", 
+                        "Description": "Erro na habilitacao do servico DNS", 
+                        "obs": None}
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.verifyDnsService_392(flask_username)
+        
+
+
+    #393 mlv
+    def createDmzViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "createDmzViaWizard", 
+                        "Probe#": "393", 
+                        "Description": "Erro de criacao de uma DMZ pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.createDmzViaWizard_393(flask_username)
+
+    #394 mlv
+    def configFirewallViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "createDmzViaWizard", 
+                        "Probe#": "393", 
+                        "Description": "Erro de criacao de uma DMZ pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.configFirewallViaWizard_394(flask_username)
+
+
+
+      #395 mlv
+    def configUpnpViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "configUpnpViaWizard", 
+                        "Probe#": "395", 
+                        "Description": "Erro de configuracao de uma UPnP pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.configUpnpViaWizard_395(flask_username)
+
+    #396 mlv
+    def configDdnsViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "configDdnsViaWizard", 
+                        "Probe#": "396", 
+                        "Description": "Fornecer configuracao DDNS pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.configDdnsViaWizard_396(flask_username)
+    
+    #397 mlv
+    def configIpDhcpViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "configIpDhcpViaWizard", 
+                        "Probe#": "397", 
+                        "Description": "Erro ao associar um endereco de IP no DHCP pelo usuario.", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.configIpDhcpViaWizard_397(flask_username)
 
 
     # def testeSite(self,site1, site2, site3): ### TUDO OK

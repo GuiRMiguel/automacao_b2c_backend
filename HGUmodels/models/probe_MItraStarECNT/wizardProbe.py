@@ -13,6 +13,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import NoSuchFrameException, NoSuchElementException, InvalidSelectorException
 
+from selenium.common.exceptions import UnexpectedAlertPresentException
+
 from HGUmodels.config import TEST_NOT_IMPLEMENTED_WARNING
 from HGUmodels.utils import chunks
 from daos.mongo_dao import MongoConnSigleton
@@ -180,6 +182,55 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         finally:
             return self._dict_result  
 
+    #378 #mlv
+    def changePPPoESettingsWrongAuthentication_378(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a/span').click()
+            time.sleep(5)
+            self.admin_authentication_mitraStat()
+            time.sleep(1)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').send_keys('cliente@cliente')
+            self._driver.find_element_by_xpath('//*[@id="RN_Password"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="RN_Password"]').send_keys('vivo')
+            self._driver.find_element_by_xpath('//*[@id="PPPOE_Account_Save"]').click()
+            time.sleep(25)
+
+            try: 
+                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                self._driver.switch_to.frame(iframe)
+                print(self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[1]/td/font/span').text)
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a/span').click()
+                #if self._driver.find_element_by_xpath('//*[@id="MLG_Pop_Fail_691_Title"]/span').text() == "Erro 691 - Provedor":    
+                    #self._dict_result.update({"obs": "Acesso Negado", "result":"passed", "Resultado_Probe": "OK"})
+            
+
+                time.sleep(5)
+            except:
+                self._dict_result.update({"obs": "Teste falhou"})
+                time.sleep(1)
+                # Deixando o valor padrao de volta
+                self._driver.switch_to.default_content()
+                self._driver.switch_to.frame('basefrm')
+                self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').clear()
+                self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').send_keys('cliente@cliente')
+                self._driver.find_element_by_xpath('//*[@id="RN_Password"]').clear()
+                self._driver.find_element_by_xpath('//*[@id="RN_Password"]').send_keys('cliente')
+                self._driver.find_element_by_xpath('//*[@id="PPPOE_Account_Save"]').click()
+
+            self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
 
     # Algumas vezes a conexão é realizada, outras vezes fica na tela de conexão sem evolução
     def connectWizardhttps_379(self,flask_username):
@@ -229,6 +280,32 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    #381 mlv
+    def getFullConfig_381(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a/span').click()
+            time.sleep(5)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            self._driver.quit()
+            
+            self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
+            dict_saida = {"Resultado_Probe": "NOK"}
+        except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
+            dict_saida = {"Resultado_Probe": "OK"}
+        finally:
+            self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
+            return self._dict_result
+
+
 
 
     def getFullConfig_382(self, flask_username):
