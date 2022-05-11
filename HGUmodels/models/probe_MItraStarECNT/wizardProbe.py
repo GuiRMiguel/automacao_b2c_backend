@@ -363,6 +363,25 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
+    #386 mlv
+    def statusWizardIptv_386(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status24 = result['Status']['WI-FI 2.4GHZ']
+            status5 = result['Status']['WI-FI 5GHZ']
+            wifi24 = wizard_config.WIFI24_mitraecnt
+            wifi5 = wizard_config.WIFI5_mitraecnt
+            if set(status24) == set(wifi24) and set(status5) == set(wifi5):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno WI-FI 2.4 GHz: {status24 and status5}"})
+            
+        return self._dict_result
+
+
     # como fazer wizard config consistente entre os modelos?
     def statusWizardInet_387(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -437,6 +456,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             else:
                 self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
         return self._dict_result
+    
+
 
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'

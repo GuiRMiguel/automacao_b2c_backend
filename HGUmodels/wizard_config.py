@@ -18,7 +18,11 @@ WIFI24 = ['Segurança:', 'WPS:', 'Anúncio de SSID:', 'Canal:', 'Estações Cone
 
 WIFI5 = ['Segurança:', 'WPS:', 'Anúncio de SSID:', 'Canal:', 'Estações Conectadas:']
 
+###--> INFORMAÇÕES INTERFACE GUI REFERENTE AO WI-FI 2.4 e 5 GHz - APARELHO MITRA ECONECT
+####
+WIFI24_mitraecnt = {'Segurança:', 'WPS:', 'Anúncio do SSID:', 'Canal:', 'Estações Conectadas:'}
 
+WIFI5_mitraecnt = {'Segurança:', 'WPS:', 'Anúncio do SSID:', 'Canal:', 'Estações Conectadas:'}
 
 
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE Ao TELEFONE
