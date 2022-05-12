@@ -468,7 +468,6 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         try:
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)

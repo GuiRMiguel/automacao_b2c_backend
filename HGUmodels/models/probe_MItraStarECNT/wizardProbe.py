@@ -458,6 +458,84 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
     
 
+    
+    def verifyDnsService_392(self, flask_username):
+        """
+            A method to test if the DNS Service is available
+        :return : A dict with the result of the test
+        """
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(1)
+            # Enabling DNS
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[7]/td[2]/input[1]').click()
+            # Entering primary DNS
+            prim_dns_1 = self._driver.find_element_by_id('PrimaryDns_1')
+            prim_dns_1.clear()
+            prim_dns_1.send_keys('8')
+            prim_dns_2 = self._driver.find_element_by_id('PrimaryDns_2')
+            prim_dns_2.clear()
+            prim_dns_2.send_keys('8')
+            prim_dns_3 = self._driver.find_element_by_id('PrimaryDns_3')
+            prim_dns_3.clear()
+            prim_dns_3.send_keys('8')
+            prim_dns_4 = self._driver.find_element_by_id('PrimaryDns_4')
+            prim_dns_4.clear()
+            prim_dns_4.send_keys('8')
+            # Entering Secondary DNS
+            sec_dns_1 = self._driver.find_element_by_id('SecondDns_1')
+            sec_dns_1.clear()
+            sec_dns_1.send_keys('8')
+            sec_dns_2 = self._driver.find_element_by_id('SecondDns_2')
+            sec_dns_2.clear()
+            sec_dns_2.send_keys('8')
+            sec_dns_3 = self._driver.find_element_by_id('SecondDns_3')
+            sec_dns_3.clear()
+            sec_dns_3.send_keys('4')
+            sec_dns_4 = self._driver.find_element_by_id('SecondDns_4')
+            sec_dns_4.clear()
+            sec_dns_4.send_keys('4')
+            # Saving DNS changes
+            self._driver.find_element_by_id('MLG_Dhcp_Save').click()
+            time.sleep(10)
+            # Desabling DNS
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[7]/td[2]/input[2]').click()
+            self._driver.find_element_by_id('MLG_Dhcp_Save').click()
+            time.sleep(10)
+
+            # Checking if primary DNS fields are available
+            if self._driver.find_element_by_id('PrimaryDns_1') == None:
+                return self._dict_result
+            else:
+                return self._dict_result.update({"obs": "Servi;o DNS habilitado com sucesso", "result":"passed", "Resultado_Probe": "OK"})
+        
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
+        
+
+
 
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
