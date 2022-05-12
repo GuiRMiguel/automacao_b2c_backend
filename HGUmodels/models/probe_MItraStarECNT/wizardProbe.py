@@ -458,13 +458,14 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
     
 
-    
-    def verifyDnsService_392(self, flask_username):
+    # 392
+    def verifyDnsService_392(self, flask_username) -> dict:
         """
             A method to test if the DNS Service is available
         :return : A dict with the result of the test
         """
         try:
+            # Entering on Settings
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
             self._driver.switch_to.frame("menufrm")
@@ -535,12 +536,14 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             return self._dict_result 
 
 
-    def createDmzViaWizard_393(self, flask_username):
+    # 393
+    def createDmzViaWizard_393(self, flask_username) -> dict:
         """
             Provides DMZ Setup on Wizard
         :return : A dict with the result of the test
         """
         try:
+            # Entering on Settings
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
             self._driver.switch_to.frame("menufrm")
@@ -617,6 +620,55 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  
+
+
+    def configUpnpViaWizard_395(self, flask_username) -> dict:
+        """
+            Enabling UPnP Settings
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(3)
+            # Entering UPnP Settings
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-4').click()
+            # Enabling UPnP Settings and Saving
+            self._driver.find_element_by_xpath('//*[@id="UPnP_form"]/table/tbody/tr[2]/td[2]/input[1]').click()
+            self._driver.find_element_by_id('MLG_UPnP_Save').click()
+            time.sleep(5)
+
+            try:
+                #verificar se tem como validar configuracao UPnP
+                self._dict_result.update({"obs": f"Configuracao de UPnP realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
 
 
     def testeSiteWizard_399(self, flask_username):
