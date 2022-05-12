@@ -600,10 +600,12 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[3]/a').click()
+            time.sleep(10)
 
             try:
                 time.sleep(8)
-                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                fail_alert = self._driver.find_element_by_xpath('//*[@id="IP_Format_Error"]')
+                if fail_alert is None or fail_alert.text != 'Please, type a valid IP address.':
                     self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
                     self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
