@@ -533,8 +533,88 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result 
-        
 
+
+    def createDmzViaWizard_393(self, flask_username):
+        """
+            Provides DMZ Setup on Wizard
+        :return : A dict with the result of the test
+        """
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            # Entering DMZ Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[3]/a').click()
+            # Entering IP Address
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[2]/div/table/tbody/tr[2]/td[2]/input[1]').click()
+            input_ip = self._driver.find_element_by_xpath('//*[@id="dmzHostIP"]')
+            input_ip.clear()
+            input_ip.send_keys('192.168.17.49')
+            self._driver.find_element_by_id('Save_dmz').click()
+            time.sleep(5)
+            # Switch to iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            self._driver.find_element_by_id('MLG_Pop_DMZ_Reboot_Yes').click()
+            # Entering againg on settings
+            time.sleep(105)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            # Entering DMZ Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[3]/a').click()
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
 
 
     def testeSiteWizard_399(self, flask_username):
