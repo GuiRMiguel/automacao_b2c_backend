@@ -724,6 +724,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
 
             try:
                 time.sleep(8)
+                # Check on the frontend for the text fields that remains available even when DDnS is disable
                 if self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[4]/td[2]/input').is_enable != True:
                     self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
