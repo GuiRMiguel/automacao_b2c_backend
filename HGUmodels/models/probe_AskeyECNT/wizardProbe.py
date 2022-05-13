@@ -641,10 +641,10 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         try:
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
+            # ENtering on Wizard
             self._driver.get('http://' + self._address_ip + '/login.asp')
             self._driver.switch_to.default_content()
             user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
@@ -654,19 +654,28 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             login_button = self._driver.find_element_by_id('btnLogin')
             time.sleep(1)
             login_button.click()
-            time.sleep(5)
+            time.sleep(1)
+            # Sentting DDnS
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[5]/a').click() #DDNS
-            
-            """
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
-            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
-            self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
-            time.sleep(5)"""
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[1]').click()
+            user_field = self._driver.find_element_by_xpath('//*[@id="idDdnsUsername"]')
+            user_field.clear()
+            user_field.send_keys('telefonica.labs@gmail.com')
+            pass_field = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[5]/td[2]/input')
+            pass_field.clear()
+            pass_field.send_keys('vivo@123')
+            hostname_field = self._driver.find_element_by_xpath('//*[@id="idDdnsHostName"]')
+            hostname_field.clear()
+            hostname_field.send_keys('telefonicalabs.ddns.net')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(1)
+            # Disabling DDNS
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[2]').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[7]/td/a[2]/span').click()
 
             try:
                 time.sleep(8)
-                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
+                if self._driver.find_element_by_xpath('//*[@id="idDdnsUsername"]').is_enabled != True:
                     self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
                     self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
