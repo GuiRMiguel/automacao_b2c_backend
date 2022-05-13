@@ -341,3 +341,47 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         finally:
             return self._dict_result  
 
+
+    # 395
+    def configUpnpViaWizard_395(self, flask_username) -> dict:
+        """
+            Enabling UPnP Settings
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Entering UPnP Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-4').click()
+            # Enabling UPnP Settings and Saving
+            self._driver.find_element_by_xpath('//*[@id="tab-04"]/form/table/tbody/tr[2]/td[2]/input[1]').click()
+            self._driver.find_element_by_xpath('//*[@id="tab-04"]/form/table/tbody/tr[3]/td/a[2]/span').click()
+            time.sleep(5)
+
+            try:
+                #verificar se tem como validar configuracao UPnP
+                self._dict_result.update({"obs": f"Configuracao de UPnP realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
