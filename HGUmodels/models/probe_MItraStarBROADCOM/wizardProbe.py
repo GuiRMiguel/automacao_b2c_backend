@@ -385,3 +385,58 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result 
+
+    def testeSiteWizard_399(self, flask_username):
+        site1 = 'http://menuvivofibra.br'
+        site2 = f'http://{self._address_ip}/instalador'
+        site3 = 'http://instaladorvivofibra.br'        
+        try:
+            self._driver.get(site1)
+            time.sleep(1)
+            #self._driver.switch_to.frame('mainFrame')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            resultado1 = 'ok'
+        except:
+            resultado1 = 'falhou'
+
+        try:
+            self._driver.get(site2)
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+
+            resultado2 = 'ok'
+        except:
+            resultado2 = 'falhou'
+
+        try:
+            self._driver.get(site3)
+            time.sleep(1)
+            #self._driver.switch_to.frame('mainFrame')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click() 
+
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            print('ALOOOOOOO')
+            print(elementos)
+            resultado3 = 'ok'
+        except:
+            resultado3 = 'falhou'
+ 
+        self._driver.quit()
+        if resultado1 == 'ok' and resultado2 == 'ok' and resultado3 == 'ok':
+            self._dict_result.update({"obs": "URLs de redirecionamento ok", "result":"passed", "Resultado_Probe": "OK"})
+        else:
+            self._dict_result.update({"obs": f"Teste incorreto, retorno URLs: {site1}: {resultado1}; {site2}: {resultado2}; {site3}: {resultado3}"})
+        return self._dict_result
