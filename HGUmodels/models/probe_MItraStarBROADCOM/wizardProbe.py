@@ -84,3 +84,111 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
 
+#378 #mlv
+    def changePPPoESettingsWrongAuthentication_378(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[1]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            #config / Internet
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click() 
+            time.sleep(3)
+            print('1')
+
+            time.sleep(5)
+            # PPPoE
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('//*[@id="username"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
+            self._driver.find_element_by_xpath('//*[@id="password"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="password"]').send_keys('vivo')
+            login_button = self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(1)
+            
+
+            try:
+                time.sleep(22)
+                if self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[1]/td').text == 'Erro 651 - Rede':
+                    self._dict_result.update({"obs": "Teste falhou, Usuario aceito"})
+                else:
+                    self._dict_result.update({"obs": f"Teste correto, usuario nao foi aceito", "result":"passed", "Resultado_Probe": "OK"})
+
+            except UnexpectedAlertPresentException as e:
+                time.sleep(2)
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+        
+
+    def connectWizardhttps_379(self,flask_username):
+        try:
+            try:
+                self._driver.get('https://' + self._address_ip + '/')
+                time.sleep(1)
+                self._dict_result.update({"obs": "Acesso via HTTPS OK", "result":"passed", "Resultado_Probe": "OK"})
+            except:
+                self._dict_result.update({"obs": "Nao foi possivel acessar via HTTPS"})
+
+        except NoSuchElementException as exception:
+            self._dict_result.update({"obs": exception})
+
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        
+        finally:
+            self._driver.quit()
+            return self._dict_result   
+
+
+    def checkPPPoEStatus_380(self, flask_username):
+        try:
+            try:
+                self._driver.get('http://' + self._address_ip + '/')
+                self._driver.switch_to.frame('mainFrame')
+                time.sleep(1)
+                self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+                time.sleep(1)
+                gpon = self._driver.find_element_by_xpath('//*[@id="status"]/tbody/tr[1]/th/span').text
+                div = [value.text.replace('\n', '') for value in self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]//div')]
+                dict_saida = {
+                    "Status":
+                        {
+                            gpon:
+                                {div[0].split(':')[0]: div[0].split(':')[1],
+                                div[1].split(':')[0]: div[1].split(':')[1],
+                                div[2].split(':')[0]: div[2].split(':')[1],
+                                }
+                        }
+                }
+                print(dict_saida)
+                self._dict_result.update({"obs": dict_saida, "result":"passed", "Resultado_Probe": "OK"})
+            except:
+                self._dict_result.update({"obs": "Nao foi possivel acessar sem login"})
+
+        except NoSuchElementException as exception:
+            self._dict_result.update({"obs": exception})
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            self._driver.quit()
+            return self._dict_result

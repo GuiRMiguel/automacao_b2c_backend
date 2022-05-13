@@ -633,7 +633,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         try:
             self._driver.get(site1)
             time.sleep(1)
-            self._driver.switch_to.frame('mainFrame')
+            #self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
@@ -660,10 +660,13 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         try:
             self._driver.get(site3)
             time.sleep(1)
-            self._driver.switch_to.frame('mainFrame')
+            #self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click() 
+
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            print('ALOOOOOOO')
+            print(elementos)
             resultado3 = 'ok'
         except:
             resultado3 = 'falhou'
