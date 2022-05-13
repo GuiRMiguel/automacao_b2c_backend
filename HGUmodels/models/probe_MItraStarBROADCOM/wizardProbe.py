@@ -17,6 +17,9 @@ from daos.mongo_dao import MongoConnSigleton
 
 from HGUmodels.main_session import MainSession
 
+from HGUmodels import wizard_config
+
+
 session = MainSession()
 
 
@@ -190,6 +193,29 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    #386 
+    def statusWizardIptv_386(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status24 = result['Status']['Wi-Fi 2.4 GHz']
+            print(status24)
+            status5 = result['Status']['Wi-Fi 5 GHz']
+            print(status5)
+            wifi24 = wizard_config.WIFI24_mitraBroadCom
+            print(wifi24)
+            wifi5 = wizard_config.WIFI5_mitraBroadCom
+            print(wifi5)
+            if set(status24) == set(wifi24) and set(status5) == set(wifi5):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno WI-FI 2.4 GHz: {status24 and status5}"})
+            
+        return self._dict_result
+
 
 
     # 392

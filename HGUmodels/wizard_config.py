@@ -24,6 +24,12 @@ WIFI24_mitraecnt = {'Segurança:', 'WPS:', 'Anúncio do SSID:', 'Canal:', 'Esta�
 
 WIFI5_mitraecnt = {'Segurança:', 'WPS:', 'Anúncio do SSID:', 'Canal:', 'Estações Conectadas:'}
 
+###--> INFORMAÇÕES INTERFACE GUI REFERENTE AO WI-FI 2.4 e 5 GHz - APARELHO MITRA BROADCOM
+####
+WIFI24_mitraBroadCom = {'Segurança:', 'WPS:', 'Anúnciar de SSID:', 'Canal:', 'Estações Conectadas:'}
+
+WIFI5_mitraBroadCom = {'Segurança:', 'WPS:', 'Anúnciar de SSID:', 'Canal:', 'Estações Conectadas:'}
+
 
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE Ao TELEFONE
 ####
