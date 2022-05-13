@@ -190,3 +190,74 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         finally:
             self._driver.quit()
             return self._dict_result
+
+
+    # 392
+    def verifyDnsService_392(self, flask_username) -> dict:
+        """
+            A method to test if the DNS Service is available
+        :return : A dict with the result of the test
+        """
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Enabling DNS
+            # self._driver.switch_to.default_content()
+            # time.sleep(1)
+            # self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[7]/td[2]/input[1]').click()
+            # Entering primary DNS
+            prim_dns_1 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[8]/td[2]/input[1]')
+            prim_dns_1.clear()
+            prim_dns_1.send_keys('8')
+            prim_dns_2 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[8]/td[2]/input[2]')
+            prim_dns_2.clear()
+            prim_dns_2.send_keys('8')
+            prim_dns_3 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[8]/td[2]/input[3]')
+            prim_dns_3.clear()
+            prim_dns_3.send_keys('8')
+            prim_dns_4 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[8]/td[2]/input[4]')
+            prim_dns_4.clear()
+            prim_dns_4.send_keys('8')
+            # Entering Secondary DNS
+            sec_dns_1 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[9]/td[2]/input[1]')
+            sec_dns_1.clear()
+            sec_dns_1.send_keys('8')
+            sec_dns_2 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[9]/td[2]/input[2]')
+            sec_dns_2.clear()
+            sec_dns_2.send_keys('8')
+            sec_dns_3 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[9]/td[2]/input[3]')
+            sec_dns_3.clear()
+            sec_dns_3.send_keys('4')
+            sec_dns_4 = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[9]/td[2]/input[4]')
+            sec_dns_4.clear()
+            sec_dns_4.send_keys('4')
+            # Saving DNS changes
+            self._driver.find_element_by_xpath('//*[@id="tab-01"]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click()
+            time.sleep(10)
+            # Desabling DNS
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[7]/td[2]/input[2]').click()
+            self._driver.find_element_by_xpath('//*[@id="tab-01"]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click()
+            time.sleep(10)
+
+            # Checking if primary DNS fields are available
+            if self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[8]/td[2]/input[1]') == None:
+                return self._dict_result
+            else:
+                return self._dict_result.update({"obs": "Servi;o DNS habilitado com sucesso", "result":"passed", "Resultado_Probe": "OK"})
+            
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
