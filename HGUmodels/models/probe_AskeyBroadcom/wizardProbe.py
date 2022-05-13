@@ -260,7 +260,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._driver.quit()
             return self._dict_result
 
-    #381 mlv
+    #381
     def getFullConfig_381(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -277,9 +277,6 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
             self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
             dict_saida = {"Resultado_Probe": "OK"}
-
-            
-
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
             return self._dict_result

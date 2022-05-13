@@ -194,6 +194,36 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
 
+    #381
+    def getFullConfig_381(self, flask_username):
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(5)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]/span')
+            time.sleep(1)
+            if login_button.click() == None:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
+                dict_saida = {"Resultado_Probe": "OK"}
+            else:
+                self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
+                dict_saida = {"Resultado_Probe": "NOK"}
+
+            self._driver.quit()
+        finally:
+            self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
+            return self._dict_result
+
     #386 
     def statusWizardIptv_386(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
