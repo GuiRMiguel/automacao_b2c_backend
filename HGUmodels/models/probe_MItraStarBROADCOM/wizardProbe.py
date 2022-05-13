@@ -261,3 +261,83 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result 
+
+
+    # 393
+    def createDmzViaWizard_393(self, flask_username) -> dict:
+        """
+            Provides DMZ Setup on Wizard
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Entering DMZ Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-3').click()
+            # Entering IP Address
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[5]/form/table/tbody/tr[2]/td[2]/input[1]').click()
+            input_ip = self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[3]/td[2]/input')
+            input_ip.clear()
+            input_ip.send_keys('192.168.17.49')
+            self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[4]/td/a[2]/span').click()
+            time.sleep(5)
+            # Switch to iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[2]/td/a[1]/span').click()
+            # Entering againg on settings
+            time.sleep(105)
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Entering DMZ Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-3').click()
+
+            try:
+                time.sleep(8)
+                warning_message = self._driver.find_element_by_xpath('//*[@id="dmz_warning_message"]')
+                if warning_message is None or warning_message != 'Please, type a valid IP address.':
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+

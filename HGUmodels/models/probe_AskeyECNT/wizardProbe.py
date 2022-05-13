@@ -636,15 +636,20 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
 
+
     #396 mlv
     def configDdnsViaWizard_396(self, flask_username):
+        """
+            Provides DDnS Settings
+        :return : A dict with the result of the test
+        """
         try:
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
-            # ENtering on Wizard
+            # Entering on Wizard
             self._driver.get('http://' + self._address_ip + '/login.asp')
             self._driver.switch_to.default_content()
             user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')

@@ -442,7 +442,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             
         return self._dict_result
 
-     # 392
+    # 392
     def verifyDnsService_392(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -535,7 +535,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         finally:
             return self._dict_result  
   
-#395 mlv
+    #395 mlv
     def configUpnpViaWizard_395(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -570,6 +570,58 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  
+
+    #396 mlv
+    def configDdnsViaWizard_396(self, flask_username):
+        """
+            Provides DDnS Settings
+        :return : A dict with the result of the test
+        """
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self.login_admin()
+            time.sleep(1)
+            self._driver.switch_to.frame('mainFrame')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
+            time.sleep(2)
+            # Sentting DDnS
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[5]/a').click() #DDNS
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[1]').click()
+            select = Select(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[3]/td[2]/select'))
+            select.select_by_visible_text('No-IP')
+            user_field = self._driver.find_element_by_xpath('//*[@id="idDdnsUsername"]')
+            user_field.clear()
+            user_field.send_keys('telefonica.labs@gmail.com')
+            pass_field = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[5]/td[2]/input')
+            pass_field.clear()
+            pass_field.send_keys('vivo@123')
+            hostname_field = self._driver.find_element_by_xpath('//*[@id="idDdnsHostName"]')
+            hostname_field.clear()
+            hostname_field.send_keys('telefonicalabs.ddns.net')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(3)
+            # Disabling DDNS
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[2]').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[7]/td/a[2]/span').click()
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('//*[@id="idDdnsUsername"]').is_enabled != True:
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
 
 
     #397 mlv

@@ -1,4 +1,5 @@
 #from asyncio import exceptions
+from ast import Dict
 from cgi import print_form
 from os import name
 import re
@@ -669,6 +670,72 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result 
+
+    
+    #396 mlv
+    def configDdnsViaWizard_396(self, flask_username) -> dict:
+        """
+            Provides DDnS Settings
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(3)
+            # Sentting DDnS
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-5').click()
+            self._driver.find_element_by_xpath('//*[@id="tab-05"]/table/tbody/tr[2]/td[2]/input[1]').click()
+            select = Select(self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[3]/td[2]/select'))
+            select.select_by_visible_text('No-IP')
+            user_field = self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[4]/td[2]/input')
+            user_field.clear()
+            user_field.send_keys('telefonica.labs@gmail.com')
+            pass_field = self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[5]/td[2]/input')
+            pass_field.clear()
+            pass_field.send_keys('vivo@123')
+            hostname_field = self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[6]/td[2]/input')
+            hostname_field.clear()
+            hostname_field.send_keys('telefonicalabs.ddns.net')
+            self._driver.find_element_by_id('MLG_DDNS_Account_Save').click()
+            time.sleep(8)
+            # Disabling DDNS
+            self._driver.find_element_by_xpath('//*[@id="tab-05"]/table/tbody/tr[2]/td[2]/input[2]').click()
+            self._driver.find_element_by_id('MLG_DDNS_Account_Save').click()
+
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[4]/td[2]/input').is_enable != True:
+                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
     
 
     # 397
