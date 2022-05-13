@@ -111,7 +111,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             # PPPoE
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("basefrm")
-            time.sleep(1)
+            time.sleep(3)
             self._driver.find_element_by_xpath('//*[@id="username"]').clear()
             self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
             self._driver.find_element_by_xpath('//*[@id="password"]').clear()
@@ -120,11 +120,9 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             login_button.click()
             time.sleep(1)
-            
-
             try:
                 time.sleep(22)
-                if self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[1]/td').text == 'Erro 651 - Rede':
+                if self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span') == None:
                     self._dict_result.update({"obs": "Teste falhou, Usuario aceito"})
                 else:
                     self._dict_result.update({"obs": f"Teste correto, usuario nao foi aceito", "result":"passed", "Resultado_Probe": "OK"})
