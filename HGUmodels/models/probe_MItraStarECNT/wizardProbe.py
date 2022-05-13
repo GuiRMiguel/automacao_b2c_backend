@@ -669,6 +669,69 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result 
+    
+
+    # 397
+    def configIpDhcpViaWizard_397(self, flask_username) -> dict:
+        """
+            Provides IP in DHCP Setup on Wizard
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('setmenu').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Local_Network').click()
+            time.sleep(2)
+            # Entering login informations
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            # Entering DHCP Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a').click()
+            time.sleep(5)
+            #MAC settings
+            input_mac = self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[3]/input')
+            input_mac.clear()
+            input_mac.send_keys('00:0c:29:bb:0b:35')
+            time.sleep(5)
+            #IP settings
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[1]').send_keys('192')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[3]').send_keys('17')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[4]').send_keys('3')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[2]/td/a/span').click()
+            
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[3]/tbody/tr/td[2]').text == '00:0C:29:BB:0B:35':
+                    self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
 
 
     def testeSiteWizard_399(self, flask_username):
