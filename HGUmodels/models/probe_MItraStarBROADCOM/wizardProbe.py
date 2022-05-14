@@ -471,11 +471,10 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-1').click()
             #MAC settings
-            self._driver.implicitly_wait(10)
-            input_mac = self._driver.find_element_by_xpath('//*[@id="staticDHCPMAC"]')
+            input_mac = self._driver.find_element_by_id('staticDHCPMAC')
             self._driver.implicitly_wait(10)
             ActionChains(self._driver).move_to_element(input_mac).send_keys('00:0c:29:bb:0b:35').perform()
-            time.sleep(5)
+            time.sleep(8)
             #IP settings
             ip_field_1 = self._driver.find_element_by_name('staticDHCPIP_part1')
             ip_field_1.send_keys('192')
@@ -490,6 +489,11 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             ip_field_4.send_keys('3')
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[2]/tbody/tr[2]/td/a/span').click()
+            time.sleep(5)
+            if self._driver.find_element_by_xpath('//*[@id="static_warning_message"]').text == 'Por favor, informe um endereço MAC válido.':
+                self._driver.implicitly_wait(10)
+                input_mac.send_keys('00:0c:29:bb:0b:35')
+                self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[2]/tbody/tr[2]/td/a/span').click()
             
             try:
                 time.sleep(8)
