@@ -442,6 +442,71 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         finally:
             return self._dict_result 
 
+
+    # 397
+    def configIpDhcpViaWizard_397(self, flask_username) -> dict:
+        """
+            Provides IP in DHCP Setup on Wizard
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Entering DHCP Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-1').click()
+            #MAC settings
+            self._driver.implicitly_wait(10)
+            input_mac = self._driver.find_element_by_xpath('//*[@id="staticDHCPMAC"]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(input_mac).send_keys('00:0c:29:bb:0b:35').perform()
+            time.sleep(5)
+            #IP settings
+            ip_field_1 = self._driver.find_element_by_name('staticDHCPIP_part1')
+            ip_field_1.send_keys('192')
+            time.sleep(1)
+            ip_field_2 = self._driver.find_element_by_name('staticDHCPIP_part2')
+            ip_field_2.send_keys('168')
+            time.sleep(1)
+            ip_field_3 = self._driver.find_element_by_name('staticDHCPIP_part3')
+            ip_field_3.send_keys('17')
+            time.sleep(1)
+            ip_field_4 = self._driver.find_element_by_name('staticDHCPIP_part4')
+            ip_field_4.send_keys('3')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[2]/tbody/tr[2]/td/a/span').click()
+            
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[3]/tbody/tr/td[2]').text == '00:0C:29:BB:0B:35':
+                    self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
+
+
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
         site2 = f'http://{self._address_ip}/instalador'
