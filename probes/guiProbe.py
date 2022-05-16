@@ -1365,6 +1365,29 @@ class gui:
                                      dict_result=dict_result)
         return hgu.checkBridgeMode_21(flask_username)
 
+    #29
+    def changeIPDhcpViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "changeIPDhcpViaWizard", 
+                        "Probe#": "29", 
+                        "Description": "Mudar range de IP do DHCP Server.", 
+                        "obs": None}
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username,
+                                     driver=driver,
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.changeIPDhcpViaWizard_29(flask_username)
+
+        
+    
+
     # 36
     def checkRedeGpon_2(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",

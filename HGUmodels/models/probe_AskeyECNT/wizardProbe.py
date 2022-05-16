@@ -847,6 +847,70 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    #29
+    def changeIPDhcpViaWizard_29(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[1]/a').click() #DHCP
+            time.sleep(1)
+            print('passou aqui 1')
+            #Changing IP
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]')
+
+            #Changing address range
+            self._driver.find_element_by_id('txtStaticMac').click()
+            print('passou aqui 2')
+
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('00:0c:29:bb:0b:35')
+            print('passou aqui 3')
+
+            time.sleep(5)
+            #self._driver.find_element_by_id('txtStaticMac').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('192')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('15')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[4]').send_keys('3')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('//*[@id="spnDhcpReserve"]').click()
+            time.sleep(5)
+            
+            try:
+                time.sleep(8)
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == '00:0c:29:bb:0b:35':
+                    self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
     
     def checkRedeGpon_36(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 375 seja executado em conjunto
