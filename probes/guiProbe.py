@@ -1475,6 +1475,27 @@ class gui:
                                      dict_result=dict_result)
         return hgu.checkRedeGpon_36(flask_username)
 
+    # 68
+    def pingDifferNetwork(self, ip, username, password, model_name, flask_username, **kwargs):
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "pingDifferNetwork", 
+                        "Probe#": "68", 
+                        "Description": "Pingar rede diferente", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.pingDifferNetwork_68(flask_username)
+
+
+        
+
     
     # 79
     def accessPadrao_2(self, ip, username, password, flask_username, model_name, **kwargs): ### TUDO OK
