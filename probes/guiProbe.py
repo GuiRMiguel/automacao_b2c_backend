@@ -38,6 +38,75 @@ class gui:
         # driver.quit()
 
 
+    # 17
+    def checkSpeedEthernetCable(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "checkSpeedEthernetCable", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Verificar a velocidade de transmissao no cabo de rede Ethernet" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.checkSpeedEthernetCable_17(flask_username)
+
+
+    # 18
+    def checkSpeed2GHz(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "checkSpeed2GHz", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Verificar a velocidade de transmissao no WiFi 2.4GHz" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.checkSpeed2GHz_18(flask_username)
+
+
+    # 19
+    def checkSpeed5GHz(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "checkSpeed5GHz", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Verificar a velocidade de transmissao no WiFi 5GHz" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.checkSpeed5GHz_19(flask_username)
+
+
     #68
     def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
 

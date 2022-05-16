@@ -29,6 +29,82 @@ config_collection = mongo_conn.get_collection()
 
 class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
+
+    def checkSpeedEthernetCable_17(self, ip, username, password, flask_username, model_name, **kwargs):
+        """
+            Check the transmission speed on the ethernet network cable
+        :return : A dict with the result of the test
+        """
+        speed_test = "https://www.speedtest.net/"
+        
+        try:
+            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site1)
+            time.sleep(5)
+            print('\n\n == Aguardando redirecionamento de página == ')
+            if self._driver.find_element_by_xpath('/html/body/h4'):
+                result = self._driver.find_element_by_xpath('/html/body/h4').text
+                print(result)
+            time.sleep(1)
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except NoSuchElementException as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    def checkSpeed2GHz_18(self, ip, username, password, flask_username, model_name, **kwargs):
+        """
+            Check the transmission speed on the 2.4GHz WiFi Network
+        :return : A dict with the result of the test
+        """
+        speed_test = "https://www.speedtest.net/"
+        
+        try:
+            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site1)
+            time.sleep(5)
+            print('\n\n == Aguardando redirecionamento de página == ')
+            if self._driver.find_element_by_xpath('/html/body/h4'):
+                result = self._driver.find_element_by_xpath('/html/body/h4').text
+                print(result)
+            time.sleep(1)
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except NoSuchElementException as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    def checkSpeed5GHz_19(self, ip, username, password, flask_username, model_name, **kwargs):
+        """
+            Check the transmission speed on the 5GHz WiFi Network
+        :return : A dict with the result of the test
+        """
+        speed_test = "https://www.speedtest.net/"
+        
+        try:
+            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site1)
+            time.sleep(5)
+            print('\n\n == Aguardando redirecionamento de página == ')
+            if self._driver.find_element_by_xpath('/html/body/h4'):
+                result = self._driver.find_element_by_xpath('/html/body/h4').text
+                print(result)
+            time.sleep(1)
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except NoSuchElementException as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
     def connectFakeWizard_68(self, flask_username):
 
         site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)

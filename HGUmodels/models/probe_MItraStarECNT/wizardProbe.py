@@ -767,7 +767,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(1)
             login_button.click()
             # Entering DHCP Settings
-            time.sleep(5)
+            time.sleep(50000)
             self._driver.switch_to.default_content()
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
