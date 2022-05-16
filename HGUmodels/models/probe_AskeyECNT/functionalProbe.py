@@ -37,6 +37,19 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         """
         speed_test = "https://www.speedtest.net/"
         
+        # Entering on settings
+        self._driver.get('http://' + self._address_ip + '/')
+        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+        time.sleep(1)
+        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+        time.sleep(1)
+        user_input = self._driver.find_element_by_id('txtUser')
+        user_input.send_keys(self._username)
+        pass_input = self._driver.find_element_by_id('txtPass')
+        pass_input.send_keys(self._password)
+        self._driver.find_element_by_id('btnLogin').click()
+        time.sleep(1)
+
         try:
             print('\n\n == Abrindo URL ' + site1 + ' == ')
             self._driver.get(site1)
