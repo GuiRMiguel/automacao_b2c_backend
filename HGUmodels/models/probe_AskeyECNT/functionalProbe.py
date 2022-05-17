@@ -68,7 +68,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(3)
             self._driver.switch_to_alert().accept()
 
-
+            
             time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
 
