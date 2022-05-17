@@ -68,7 +68,15 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(3)
             self._driver.switch_to_alert().accept()
 
-            
+            self._driver.set_page_load_timeout(10)
+
+            try:
+                self._driver.execute_script("window.stop();")
+            except Exception as e:
+                print(e)
+                self._driver.get('http://' + self._address_ip + '/')
+
+
             time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
 
@@ -99,7 +107,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
             elif upload_speed < 0.8*up_speed_exp:
                 self._driver.quit()
-                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
             else:
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         except Exception as exception:
@@ -112,22 +120,75 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
     def checkSpeed2GHz_18(self, ip, username, password, flask_username, model_name, **kwargs):
         """
-            Check the transmission speed on the 2.4GHz WiFi Network
+            Check the transmission speed on the 2.4GHz WiFI Network
         :return : A dict with the result of the test
         """
         speed_test = "https://www.speedtest.net/"
-        
         try:
-            print('\n\n == Abrindo URL ' + site1 + ' == ')
-            self._driver.get(site1)
-            time.sleep(5)
-            print('\n\n == Aguardando redirecionamento de página == ')
-            if self._driver.find_element_by_xpath('/html/body/h4'):
-                result = self._driver.find_element_by_xpath('/html/body/h4').text
-                print(result)
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
-        except NoSuchElementException as exception:
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+            
+            # Desabling 2.4GHz WiFi
+
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+            
+            # Desabling 5GHz WiFi
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+
+
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
+            # Executing a Speed Test
+            self._driver.get(speed_test)
+            self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+            time.sleep(60)
+            download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
+            upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+            print('#####################################################################')
+            print('Download Speed   -   ', download_speed)
+            print('Upload Speed     -   ', upload_speed)
+            print('#####################################################################')
+            
+            down_speed_exp = 0
+            up_speed_exp = 0
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
@@ -137,91 +198,82 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
     def checkSpeed5GHz_19(self, ip, username, password, flask_username, model_name, **kwargs):
         """
-            Check the transmission speed on the 5GHz WiFi Network
+            Check the transmission speed on the 2.4GHz WiFI Network
         :return : A dict with the result of the test
         """
         speed_test = "https://www.speedtest.net/"
-        
         try:
-            print('\n\n == Abrindo URL ' + site1 + ' == ')
-            self._driver.get(site1)
-            time.sleep(5)
-            print('\n\n == Aguardando redirecionamento de página == ')
-            if self._driver.find_element_by_xpath('/html/body/h4'):
-                result = self._driver.find_element_by_xpath('/html/body/h4').text
-                print(result)
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
-        except NoSuchElementException as exception:
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+            
+            # Desabling 2.4GHz WiFi
+
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+            
+            # Desabling 5GHz WiFi
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+
+
+            time.sleep(5)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
+            # Executing a Speed Test
+            self._driver.get(speed_test)
+            self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+            time.sleep(60)
+            download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
+            upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+            print('#####################################################################')
+            print('Download Speed   -   ', download_speed)
+            print('Upload Speed     -   ', upload_speed)
+            print('#####################################################################')
+            
+            down_speed_exp = 0
+            up_speed_exp = 0
+            if download_speed < 50:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 50:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
 
-    
-    def pingDifferNetwork_68(self, flask_username):
-        site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
-        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
 
-        try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(2)
-        except:
-            loginVivo = 'falhou'
-
-        try:
-            self._driver.get(site1)
-            time.sleep(5)
-            self._driver.switch_to.frame('mainFrame')
-            time.sleep(5)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
-            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
-            resultado1 = 'ok'
-        except:
-            resultado1 = 'falhou'
-        
-        try:
-            self._driver.get(site2)
-            time.sleep(2)
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys('support')
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
-            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
-            resultado2 = 'ok'
-        except:
-            resultado2 = 'falhou'
-
-        finally:
-            #self._driver.quit()
-            if (resultado1 == 'ok' or resultado2 == 'ok') and loginVivo == 'ok':
-               self._dict_result.update({"obs": f"Teste incorreto, retorno URLs: {site1}: {resultado1}; {site2}: {resultado2}"})
-            else:
-                self._dict_result.update({"obs": "Nao foi possivel acessar interface avacada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
-            return self._dict_result
-    
-
-    """
     def connectFakeWizard_68(self, flask_username):
 
         site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
@@ -250,7 +302,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
-    """
+
     
     def changeAdminPassword_69(self, flask_username, new_password):
 
