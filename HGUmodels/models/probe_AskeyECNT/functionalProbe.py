@@ -2,6 +2,7 @@ import re
 import time
 import subprocess
 from datetime import datetime
+#from tkinter.tix import Select
 from ..AskeyECNT import HGU_AskeyECNT
 from json import JSONEncoder
 import json
@@ -14,6 +15,8 @@ from HGUmodels.utils import chunks
 from daos.mongo_dao import MongoConnSigleton
 from selenium.common.exceptions import InvalidSelectorException, NoSuchElementException, NoSuchFrameException
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains import ActionChains
 
 from paramiko.ssh_exception import SSHException
 import socket
@@ -88,7 +91,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             try:
                 self._driver.get(speed_test)
                 time.sleep(10)
-                self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+                self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
                 download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
@@ -110,6 +113,116 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
             else:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+    
+    def swapWiFiChannelandBandwidth_33(self, flask_username):
+        """
+            Swap WiFi Channel and Bandwidth and check if it was changed
+        :return : A dict with the result of the test
+        """
+        channel_2g_exp = "9"
+        channel_5g_exp = "36"
+        try:
+            def enablingWiFi2G():
+                self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+                time.sleep(1)
+                self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+                time.sleep(1)
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+                self._driver.switch_to_alert().accept()
+
+            def enablingWiFi5G():
+                self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+                time.sleep(1)
+                self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+                time.sleep(1)
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+                self._driver.switch_to_alert().accept()
+
+
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+                
+            #Entering on 2.4GHz advanced settings
+            enablingWiFi2G()
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(3)
+            self._driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/ul/li[2]/a").click()
+            self._driver.implicitly_wait(10)
+            select = Select(self._driver.find_element_by_id('selChannel'))
+            select.select_by_value(channel_2g_exp)
+            self._driver.find_element_by_id('btnAdvSave').click()
+            time.sleep(3)
+
+            #Entering on 5GHz advanced settings
+            enablingWiFi5G()
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(3)
+            self._driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/ul/li[2]/a").click()
+            self._driver.implicitly_wait(10)
+            select = Select(self._driver.find_element_by_id('selChannel'))
+            select.select_by_value(channel_5g_exp)
+            time.sleep(2)
+            try:
+                self._driver.find_element_by_id('btnAdvSave').click()
+                time.sleep(5)
+                self._driver.switch_to_alert().accept()
+                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                self._driver.switch_to.frame(iframe)
+                time.sleep(2)
+                self._driver.find_element_by_xpath('//*[@id="btnChannelAccept"]/span').click()
+                time.sleep(3)
+            except Exception as e:
+                print(e)
+                self._driver.find_element_by_id('btnAdvSave').click()
+                time.sleep(5)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                self._driver.switch_to.frame(iframe)
+                time.sleep(2)
+                self._driver.find_element_by_xpath('//*[@id="btnChannelAccept"]/span').click()
+                time.sleep(3)
+
+            
+            # Entering on Status
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[5]/td[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[7]/td[2]/a').click()
+            time.sleep(1)
+            channel_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[6]/td[1]/div/ul/li[8]').text
+            channel_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[8]/td[1]/div/ul/li[8]').text
+            print(channel_2g, channel_5g)
+
+            if channel_2g != channel_2g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O canal do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_2g_exp, channel_2g)})
+            elif channel_5g != channel_5g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O canal do WiFI 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_5g_exp, channel_5g)})
+            else:
+                self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         except Exception as exception:
             print(exception)

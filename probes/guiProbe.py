@@ -107,6 +107,29 @@ class gui:
         return hgu.checkSpeed5GHz_19(flask_username)
 
 
+    # 33
+    def swapWiFiChannelandBandwidth(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "swapWiFiChannelandBandwidth", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Trocar os canais do 2.4GHz e 5GHz, largura de banda e observar se foi alterado no device" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.swapWiFiChannelandBandwidth_33(flask_username)
+
+
     #68
     """
     def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
