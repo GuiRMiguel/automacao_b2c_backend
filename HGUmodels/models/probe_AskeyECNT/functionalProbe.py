@@ -148,6 +148,36 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 time.sleep(3)
                 self._driver.switch_to_alert().accept()
 
+            # Entering on Advanced Interface
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+
+            # Entering on 2.4GHz WiFi Settings
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/fieldset/div[4]/a[1]').click()
+            time.sleep(1)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            select = Select(self._driver.find_element_by_id('adm_bandwidth'))
+            select.select_by_value('2')
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/form/div[5]/input[2]').click()
+            time.sleep(3)
+
+            # Entering on 5GHz WiFi Settings
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/fieldset/div[4]/a[2]').click()
+            time.sleep(1)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            select = Select(self._driver.find_element_by_id('adm_bandwidth'))
+            select.select_by_value('2')
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/form/div[6]/input[2]').click()
+            time.sleep(3)
 
             # Entering on WiFi 2.4GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
@@ -155,12 +185,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
             time.sleep(1)
-            user_input = self._driver.find_element_by_id('txtUser')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(3)
                 
             #Entering on 2.4GHz advanced settings
             enablingWiFi2G()
@@ -187,20 +211,21 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             try:
                 self._driver.find_element_by_id('btnAdvSave').click()
                 time.sleep(5)
-                self._driver.switch_to_alert().accept()
                 iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
                 self._driver.switch_to.frame(iframe)
                 time.sleep(2)
-                self._driver.find_element_by_xpath('//*[@id="btnChannelAccept"]/span').click()
+                button = self._driver.find_element_by_id('btnChannelAccept')
+                self._driver.execute_script("arguments[0].click();", button)
                 time.sleep(3)
             except Exception as e:
-                print(e)
+                print("exceção",e)
                 self._driver.find_element_by_id('btnAdvSave').click()
                 time.sleep(5)
                 iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
                 self._driver.switch_to.frame(iframe)
                 time.sleep(2)
-                self._driver.find_element_by_xpath('//*[@id="btnChannelAccept"]/span').click()
+                button = self._driver.find_element_by_id('btnChannelAccept')
+                self._driver.execute_script("arguments[0].click();", button)
                 time.sleep(3)
             
             # Entering on Status
