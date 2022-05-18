@@ -130,6 +130,29 @@ class gui:
         return hgu.swapWiFiChannelandBandwidth_33(flask_username)
 
 
+    # 46
+    def performWiFiSetup(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "performWiFiSetup", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Realizar configurações WiFi utilizando caracteres especiais (Ex.: !@#$%&<>)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.performWiFiSetup_46(flask_username)
+
+
     #68
     """
     def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):

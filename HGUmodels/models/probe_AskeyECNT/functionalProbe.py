@@ -202,7 +202,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 time.sleep(2)
                 self._driver.find_element_by_xpath('//*[@id="btnChannelAccept"]/span').click()
                 time.sleep(3)
-
             
             # Entering on Status
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
@@ -221,6 +220,207 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             elif channel_5g != channel_5g_exp:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O canal do WiFI 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_5g_exp, channel_5g)})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    def performWiFiSetup_46(self, flask_username):
+        """
+            Make WiFi configurations using special characters (Ex.: !@#$%&<>), following the rules below:
+                1) 2.4/5GHz SSID cannot be set to "¨"\n
+                2) 2.4/5GHz SSID First and last character cannot be space\n
+                3) 2.4/5GHz SSID cannot be set to double space character\n
+                4) 2.4/5 GHz password cannot be set to "¨"\n
+                5) 2.4/5GHz password cannot be set as space character\n
+        :return : A dict with the result of the test
+        """
+        # SSID and Password for basic interface
+        ssid_2g_exp = '!@# $%&<> <><@#$'
+        pass_2g_exp = '!@2a#$%&<>!@#<>$%&'
+        ssid_5g_exp = '<>#%$ !#@$ &&$%<>'
+        pass_5g_exp = '&%$b#@4!<>!@#&$#!<>'
+
+        # SSID and Password for advanced interface
+        ssid_2g_adv_exp = '#@! %$%# <><>!!'
+        pass_2g_adv_exp = '<>!a@6#$%&#@<>!@$<>!'
+        ssid_5g_adv_exp = '?><>@#$ &&&%!@ <>'
+        pass_5g_adv_exp = '<>!@#$%&!@#12as$$$#@'
+
+        try:
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+                
+            # Making changes on 2.4GHz WiFi Settings
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+            time.sleep(3)
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys(ssid_2g_exp)
+            time.sleep(1)
+            input_pass_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            input_pass_2g.clear()
+            input_pass_2g.send_keys(pass_2g_exp)
+            time.sleep(1)
+            if len(pass_2g_exp) < 15:
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+                self._driver.switch_to_alert().accept()
+            else:
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+
+            # Making changes on 5GHz WiFi Settings
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+            time.sleep(3)
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys(ssid_5g_exp)
+            time.sleep(1)
+            input_pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            input_pass_5g.clear()
+            input_pass_5g.send_keys(pass_5g_exp)
+            time.sleep(1)
+            if len(pass_5g_exp) < 15:
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+                self._driver.switch_to_alert().accept()
+            else:
+                self._driver.find_element_by_id('btnBasSave').click()
+                time.sleep(3)
+            
+            # Entering on Status
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
+            time.sleep(1) 
+
+            # Checking SSID and password for 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input').get_attribute('value')
+            pass_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value')
+
+            if ssid_2g_exp != ssid_2g:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(ssid_2g_exp, ssid_2g)})
+            elif pass_2g_exp != pass_2g:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A Senha do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(pass_2g_exp, pass_2g)})
+            
+            # Checking SSID and password for 5GHz WiFi
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(1)
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input').get_attribute('value')
+            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value')
+
+            if ssid_5g_exp != ssid_5g:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(ssid_5g_exp, ssid_5g)})
+            elif pass_5g_exp != pass_5g:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A Senha do WiFi 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(pass_5g_exp, pass_5g)})
+
+            # Entering on Advanced Interface
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+
+            # Entering on 2.4GHz WiFi Settings
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/fieldset/div[4]/a[1]').click()
+            time.sleep(1)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            self._driver.find_element_by_xpath('/html/body/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[1]/table/tbody/tr[1]/td[1]/a').click()
+            time.sleep(1)
+            ssid_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/div[3]/input')
+            ssid_adv_2g_input.clear()
+            ssid_adv_2g_input.send_keys(ssid_2g_adv_exp)
+            time.sleep(1)
+            pass_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/fieldset[1]/div/div[4]/div[1]/input')
+            pass_adv_2g_input.clear()
+            pass_adv_2g_input.send_keys(pass_2g_adv_exp)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/div[6]/input[5]').click()
+
+            # Entering on 5GHz WiFi Settings
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/fieldset/div[4]/a[2]').click()
+            time.sleep(1)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            self._driver.find_element_by_xpath('/html/body/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[1]/table/tbody/tr[1]/td[1]/a').click()
+            time.sleep(1)
+            ssid_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/div[3]/input')
+            ssid_adv_2g_input.clear()
+            ssid_adv_2g_input.send_keys(ssid_5g_adv_exp)
+            time.sleep(1)
+            pass_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/fieldset[1]/div/div[4]/div[1]/input')
+            pass_adv_2g_input.clear()
+            pass_adv_2g_input.send_keys(pass_5g_adv_exp)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/form/div[6]/input[5]').click()
+            time.sleep(3)
+            self._driver._switch_to.default_content()
+            time.sleep(1)
+
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(3)
+
+            # Checking SSID and password for 2.4GHz WiFi
+            ssid_2g_adv = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input').get_attribute('value')
+            pass_2g_adv = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value')
+
+            if ssid_2g_adv_exp != ssid_2g_adv:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}}'.format(ssid_2g_adv_exp, ssid_2g_adv)})
+            elif pass_2g_adv_exp != pass_2g_adv:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A Senha do WiFi 2.4GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}}'.format(pass_2g_adv_exp, pass_2g_adv)})
+            
+            # Checking SSID and password for 5GHz WiFi
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(1)
+            ssid_5g_adv = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input').get_attribute('value')
+            pass_5g_adv = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value')
+
+            if ssid_5g_adv_exp != ssid_5g_adv:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}}'.format(ssid_5g_adv_exp, ssid_5g_adv)})
+            elif pass_5g_adv_exp != pass_5g_adv:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A Senha do WiFi 5GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}}'.format(pass_2g_adv_exp, pass_2g_adv)})
             else:
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
