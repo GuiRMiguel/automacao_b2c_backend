@@ -153,6 +153,29 @@ class gui:
         return hgu.performWiFiSetup_46(flask_username)
 
 
+    # 49
+    def accessWebGui(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "accessWebGui", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Utilizar o endereço http://1.1.1.1/ para acessar a Web Gui do dispositivo em teste" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.accessWebGui_49(flask_username)
+
+
     #68
     """
     def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
