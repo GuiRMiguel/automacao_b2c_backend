@@ -116,6 +116,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
             else:
+                self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         except Exception as exception:
             print(exception)
@@ -133,6 +134,40 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         :return : A dict with the result of the test
         """
         self._driver.get('http://ipv6-test.com/pingtest/')
+
+
+    # 25
+    def testStreaming_25(self, flask_username):
+        """
+            Play video connected to WiFi 2.4 and 5GHz for 1 hour (NetFlix and YouTube).
+            Test with different equipment (PlayStation, Notebook, Cellular, etc...)
+        :return : A dict with the result of the test
+        """
+        try:
+            # Making a request
+            self._driver.get('https://www.youtube.com/watch?v=dV_0KOMeejA&ab_channel=SamukaBoss')
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            time.sleep(3)
+            time.sleep(3600)
+            self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            time.sleep(3)
+            progress_bar = self._driver.find_element_by_class_name('ytp-progress-bar')
+            time_spent = int(progress_bar.get_attribute('aria-valuenow'))
+            print(time_spent)
+            time.sleep(2)
+            if time_spent < 3599:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Ocorreu algum erro na reprodução do vídeo'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
 
 
     # 27
