@@ -130,6 +130,29 @@ class gui:
         return hgu.uninterruptedPing_23(flask_username)
 
 
+    # 24
+    def testICMPv6(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "testICMPv6", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Efetuar teste de ICMPv6 na página http://ipv6-test.com/" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.testICMPv6_24(flask_username)
+
+
     # 25
     def testStreaming(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()
