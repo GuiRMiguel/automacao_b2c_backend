@@ -130,6 +130,29 @@ class gui:
         return hgu.uninterruptedPing_23(flask_username)
 
 
+    # 27
+    def useWhatsAPP(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "useWhatsAPP", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Utilizar o aplicativo WPSApp,Utilizar o aplicativo WPSApp (disponível na Play Store) para fechar uma conexão WiFi via WPS" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.useWhatsAPP_27(flask_username)
+
+
     # 33
     def swapWiFiChannelandBandwidth(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()

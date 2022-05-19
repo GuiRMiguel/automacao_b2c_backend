@@ -18,6 +18,7 @@ from selenium.common.exceptions import InvalidSelectorException, NoSuchElementEx
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from paramiko.ssh_exception import SSHException
 import socket
@@ -36,6 +37,7 @@ config_collection = mongo_conn.get_collection()
 class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
 
+    # 17
     def checkSpeedEthernetCable_17(self, flask_username):
         """
             Check the transmission speed on the ethernet network cable
@@ -131,6 +133,42 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         :return : A dict with the result of the test
         """
         self._driver.get('http://ipv6-test.com/pingtest/')
+
+
+    # 27
+    def useWhatsAPP_27(self, flask_username):
+        """
+            Using the WPSApp app,Using the WPSApp app (available on the Play Store) to close a WiFi connection via WPS
+        :return : A dict with the result of the test
+        """
+        try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
+            # Making a request
+            self._driver.get('https://web.whatsapp.com/')
+            response = requests.get('https://web.whatsapp.com/').status_code
+            time.sleep(2)
+
+            if response != 200:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Não foi possível acessar o site'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
 
     
     # 33
@@ -534,6 +572,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 49
     def accessWebGui_49(self, flask_username):
         """
             Use the address http://1.1.1.1/ to access a Web Gui of the device under test
@@ -562,6 +601,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 68
     def connectFakeWizard_68(self, flask_username):
 
         site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
@@ -592,6 +632,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             return self._dict_result
 
     
+    # 69
     def changeAdminPassword_69(self, flask_username, new_password):
 
         def open_change_password(driver):
