@@ -107,6 +107,29 @@ class gui:
         return hgu.checkSpeed5GHz_19(flask_username)
 
 
+    # 23
+    def uninterruptedPing(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "uninterruptedPing", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Gerar ping (IPv4 e IPv6) de maquinas conectadas via WiFi (2.4 e 5GHz) para o IP da caixa e externo (Dois sites distintos) ex. google por 6 horas" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.uninterruptedPing_23(flask_username)
+
+
     # 33
     def swapWiFiChannelandBandwidth(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()
@@ -128,6 +151,52 @@ class gui:
                                      dict_result=dict_result)
 
         return hgu.swapWiFiChannelandBandwidth_33(flask_username)
+
+
+    # 41
+    def testNetInf(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "testNetInf", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Efetuar testes de Net Inf na interface Web GUI do usuário em todos os access class disponiveis para o dispositivo em teste (MEDIAROOM)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.testNetInf_41(flask_username)
+
+
+    # 44
+    def acsURL(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "acsURL", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Validar a URL de ACS do dispositivo para saber qual Plataforma está direcionado o device. (WAN desconectada)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.acsURL_44(flask_username)
 
 
     # 46

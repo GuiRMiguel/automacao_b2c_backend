@@ -122,7 +122,18 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
+
+    # 23
+    def uninterruptedPing_23(self, flask_username):
+        """
+            Generate ping (IPv4 and IPv6) from machines connected via WiFi (2.4 and 5GHz) to the 
+            IP of the box and external (Two different sites) ex. google for 6 hours
+        :return : A dict with the result of the test
+        """
+        self._driver.get('http://ipv6-test.com/pingtest/')
+
     
+    # 33
     def swapWiFiChannelandBandwidth_33(self, flask_username):
         """
             Swap WiFi Channel and Bandwidth and check if it was changed
@@ -257,6 +268,71 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 41
+    def testNetInf_41(self, flask_username):
+        """
+            Perform Net Inf tests in the web GUI user interface on all access classes available for 
+            the device under test (MEDIAROOM)
+        :return : A dict with the result of the test
+        """
+        # Entering on WiFi 2.4GHz settings and sign in
+        self._driver.get('http://' + self._address_ip + '/')
+        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a').click()
+        time.sleep(1)
+        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/ul/li[6]/a').click()
+        time.sleep(1)
+        user_input = self._driver.find_element_by_id('txtUser')
+        user_input.send_keys(self._username)
+        pass_input = self._driver.find_element_by_id('txtPass')
+        pass_input.send_keys(self._password)
+        self._driver.find_element_by_id('btnLogin').click()
+        time.sleep(3)
+
+
+    # 44
+    def acsURL_44(self, flask_username):
+        """
+            Validate the device's ACS URL to know which Platform the device is targeting. (WAN disconnected)
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Advanced Interface
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+
+            # Entering on TR-069 Settings
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[5]/div/fieldset/div[1]/a[1]').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            acs_url = str(self._driver.find_element_by_xpath('/html/body/div/fieldset/form/div[2]/input').get_attribute('value'))
+            acs_username = str(self._driver.find_element_by_xpath('/html/body/div/fieldset/form/fieldset/div[2]/input').get_attribute('value'))
+            port_7015 = bool(re.search(":7015/", acs_url))
+            time.sleep(2)
+
+            if port_7015 is not True:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A porta 7015 não está na URL ACS'})
+            elif acs_username == 'telefonica':
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O username não é válido ("telefonica")'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 46
     def performWiFiSetup_46(self, flask_username):
         """
             Make WiFi configurations using special characters (Ex.: !@#$%&<>), following the rules below:
