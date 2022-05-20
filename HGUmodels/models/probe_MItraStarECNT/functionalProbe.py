@@ -211,6 +211,35 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result
 
 
+    # 49
+    def accessWebGui_49(self, flask_username):
+        """
+            Use the address http://1.1.1.1/ to access a Web Gui of the device under test
+        :return : A dict with the result of the test
+        """
+        # Entering on http://1.1.1.1/ address
+        try:
+            self._driver.get('http://1.1.1.1/')
+            time.sleep(2)
+            try:
+                if self._driver.find_element_by_xpath('/html/body/div[1]/div[1]/a') is not None:
+                    if self._driver.find_element_by_xpath('/html/body/div[1]/div[1]/a').get_attribute('href') == 'https://www.vivo.com.br/':
+                        self._driver.quit()
+                        self._dict_result.update({"obs": 'A Web Gui do aparelho foi acessada}'})
+                elif self._driver.current_url == 'http://' + self._address_ip + '/':
+                    self._driver.quit()
+                    self._dict_result.update({"obs": 'A Web Gui do aparelho foi acessada}'})
+            except NoSuchElementException:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
     # 68
     def connectFakeWizard_68(self, flask_username):
 
