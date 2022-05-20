@@ -1329,6 +1329,29 @@ class gui:
         return hgu.statusWizardVoip_390(flask_username)
 
 
+    #391
+    def statusWizardHpna(self, ip, username, password, model_name, flask_username, **kwargs):
+        
+        dict_result = {
+            "result":"failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "gui", 
+            "ProbeName": "statusWizardHpna", 
+            "Probe#": "350", 
+            "Description": "Mostra corretamente o status HPNA no índice", 
+            "obs": None
+            }
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.statusWizardHpna_391(flask_username)
+
+
+
     # 392
     def verifyDnsService(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()

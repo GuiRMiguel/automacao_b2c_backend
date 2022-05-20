@@ -264,6 +264,24 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             
         return self._dict_result
 
+        
+    #391 HPNA mlv
+    def statusWizardHpna_391(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status = result['Status']['Telefone']
+            voip = wizard_config.VOIP
+
+            if set(status) == set(voip):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
+            
+        return self._dict_result
+
 
     # 392
     def verifyDnsService_392(self, flask_username) -> dict:
