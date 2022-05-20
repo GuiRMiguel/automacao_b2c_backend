@@ -31,7 +31,7 @@ config_collection = mongo_conn.get_collection()
 class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
     
 
-        # 17
+    # 17
     def checkSpeedEthernetCable_17(self, flask_username):
         """
             Check the transmission speed on the ethernet network cable
@@ -128,6 +128,51 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
+
+
+    # 24
+    def testICMPv6_24(self, flask_username):
+        """
+            Perform ICMPv6 test at http://ipv6-test.com/
+        :return : A dict with the result of the test
+        """
+        try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
+            # Desabling Firewall
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+            subprocess.run(['sudo', 'systemctl', 'stop', 'firewalld'])
+
+            # Making a request
+            self._driver.get('http://ipv6-test.com/')
+            time.sleep(3)
+            icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
+            self._driver.implicitly_wait(10)
+            icmpv6_status = icmpv6_status.text
+            time.sleep(3)
+
+            if icmpv6_status != 'Reachable':
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O ICMP não está acessível'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
 
     # 68
     def connectFakeWizard_68(self, flask_username):
