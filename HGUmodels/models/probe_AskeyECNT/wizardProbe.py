@@ -36,6 +36,8 @@ config_collection = mongo_conn.get_collection()
 
 class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
+
+    # 373
     def accessWizard_373(self, flask_username):
             #TODO: Fazer logica no frontend para garantir que o teste 401 seja executado em conjunto
             result = session.get_result_from_test(flask_username, 'accessWizard_401')
@@ -49,6 +51,8 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
                     self._dict_result.update({"obs": f"Teste incorreto, retorno: {ans_500}"})
             return self._dict_result
 
+
+    # 374
     def logoutWizard_374(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -71,6 +75,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 375
     def checkRedeGpon_375(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/login.asp')
@@ -116,6 +121,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
     
 
+    # 376
     def changePPPoESettingsWrong_376(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -153,6 +159,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
 
 
+    # 377
     def changePPPoESettingsWrong_377(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -195,6 +202,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  
+
 
     #378 #mlv
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
@@ -241,7 +249,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
 
 
-    
+    # 379
     def connectWizardhttps_379(self,flask_username):
         try:
             try:
@@ -262,6 +270,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 380
     def checkPPPoEStatus_380(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/index_cliente.asp')
@@ -288,6 +297,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._driver.quit()
             return self._dict_result
 
+
     #381 mlv
     def getFullConfig_381(self, flask_username):
         try:
@@ -311,7 +321,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
-
+    # 382
     def getFullConfig_382(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -326,6 +336,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
+    # 384
     def execPingWizard_384(self, flask_username):
 
         destino = '8.8.8.8',
@@ -361,6 +372,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
+
     #386 mlv
     def statusWizardIptv_386(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -379,6 +391,8 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             
         return self._dict_result
 
+
+    # 387
     def statusWizardInet_387(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -398,6 +412,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
+    # 388
     def registerWizardVoip_388(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -414,6 +429,8 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
+
+    # 389
     def statusWizardIptv_389(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -430,6 +447,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
+    # 390
     def statusWizardVoip_390(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -445,6 +463,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
             
         return self._dict_result
+
 
     #391 HPNA mlv
     def statusWizardHpna_391(self, flask_username):
@@ -462,6 +481,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
             
         return self._dict_result
+
 
     # 392
     def verifyDnsService_392(self, flask_username):
@@ -515,6 +535,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result 
             
+
     #393 mlv
     def createDmzViaWizard_393(self, flask_username):
         try:
@@ -556,6 +577,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
     
+
     #394 mlv
     def configFirewallViaWizard_394(self, flask_username):
         try:
@@ -693,6 +715,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
     
+
     #397 mlv
     def configIpDhcpViaWizard_397(self, flask_username):
         try:
@@ -751,6 +774,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
 
     
+    # 36
     def checkRedeGpon_36(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 375 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'checkRedeGpon_375')
@@ -766,6 +790,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
      
 
+    # 399
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
         site2 = f'http://{self._address_ip}/index_instalador.asp'
@@ -818,6 +843,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
+    # 21
     def checkBridgeMode_21(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/login.asp')
@@ -847,6 +873,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
 
     #29
     def changeIPDhcpViaWizard_29(self, flask_username):
@@ -934,7 +961,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
  
    
-
+    # 79
     def accessPadrao_79(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -950,6 +977,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
+    # 146
     def checkPPPoEStatus_146(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/login.asp')
