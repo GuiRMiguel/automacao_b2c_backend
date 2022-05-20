@@ -158,6 +158,42 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             return self._dict_result
 
 
+    # 27
+    def useWhatsAPP_27(self, flask_username):
+        """
+            Using the WPSApp app,Using the WPSApp app (available on the Play Store) to close a WiFi connection via WPS
+        :return : A dict with the result of the test
+        """
+        try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+
+            # Making a request
+            self._driver.get('https://web.whatsapp.com/')
+            response = requests.get('https://web.whatsapp.com/').status_code
+            time.sleep(2)
+
+            if response != 200:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Não foi possível acessar o site'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
     # 49
     def accessWebGui_49(self, flask_username):
         """
