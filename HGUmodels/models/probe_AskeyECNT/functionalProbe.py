@@ -143,6 +143,15 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         :return : A dict with the result of the test
         """
         try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
             # Desabling Firewall
             pwd = '4ut0m4c40'
             cmd = 'ls'
