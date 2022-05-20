@@ -129,6 +129,120 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             return self._dict_result
 
 
+    # 24
+    def testICMPv6_24(self, flask_username):
+        """
+            Perform ICMPv6 test at http://ipv6-test.com/
+        :return : A dict with the result of the test
+        """
+        try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+
+            # Desabling Firewall
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+            subprocess.run(['sudo', 'systemctl', 'stop', 'firewalld'])
+
+            # Making a request
+            self._driver.get('http://ipv6-test.com/')
+            time.sleep(3)
+            icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
+            self._driver.implicitly_wait(10)
+            icmpv6_status = icmpv6_status.text
+            time.sleep(3)
+
+            if icmpv6_status != 'Reachable':
+                if icmpv6_status == "Not tested":
+                    self._driver.quit()
+                    self._dict_result.update({"obs": 'O ICMP encontra-se como não testado'})
+                else:
+                    self._driver.quit()
+                    self._dict_result.update({"obs": 'O ICMP não está acessível'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 27
+    def useWhatsAPP_27(self, flask_username):
+        """
+            Using the WPSApp app,Using the WPSApp app (available on the Play Store) to close a WiFi connection via WPS
+        :return : A dict with the result of the test
+        """
+        try:
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+            time.sleep(10)
+
+            # Making a request
+            self._driver.get('https://web.whatsapp.com/')
+            response = requests.get('https://web.whatsapp.com/').status_code
+            time.sleep(3)
+
+            if response != 200:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Não foi possível acessar o site'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 49
+    def accessWebGui_49(self, flask_username):
+        """
+            Use the address http://1.1.1.1/ to access a Web Gui of the device under test
+        :return : A dict with the result of the test
+        """
+        # Entering on http://1.1.1.1/ address
+        try:
+            self._driver.get('http://1.1.1.1/')
+            time.sleep(2)
+            try:
+                if self._driver.find_element_by_xpath('/html/body/div/div[1]/a') is not None:
+                    if self._driver.find_element_by_xpath('/html/body/div/div[1]/a').get_attribute('href') == 'https://www.vivo.com.br/':
+                        self._driver.quit()
+                        self._dict_result.update({"obs": 'A Web Gui do aparelho foi acessada}'})
+                elif self._driver.current_url == 'http://' + self._address_ip + '/':
+                    self._driver.quit()
+                    self._dict_result.update({"obs": 'A Web Gui do aparelho foi acessada}'})
+            except NoSuchElementException:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
     # 68
     def connectFakeWizard_68(self, flask_username):
 
