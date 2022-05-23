@@ -214,7 +214,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
-<<<<<<< HEAD
     #29
     def changeIPDhcpViaWizard_29(self, flask_username):
         try:
@@ -1064,8 +1063,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
     def pingDifferNetwork_68(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
         site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
-=======
->>>>>>> b5ebdd1ecf993bcbb4883dff33cd037e8a156a32
 
     # 27
     def useWhatsAPP_27(self, flask_username):

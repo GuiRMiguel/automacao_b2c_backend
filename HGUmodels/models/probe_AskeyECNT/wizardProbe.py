@@ -464,12 +464,9 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             
         return self._dict_result
 
-<<<<<<< HEAD
     
-=======
 
     #391 HPNA mlv
->>>>>>> b5ebdd1ecf993bcbb4883dff33cd037e8a156a32
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -878,8 +875,6 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._driver.quit()
             return self._dict_result
 
-<<<<<<< HEAD
-=======
 
     #29
     def changeIPDhcpViaWizard_29(self, flask_username):
@@ -951,7 +946,6 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
 
->>>>>>> b5ebdd1ecf993bcbb4883dff33cd037e8a156a32
     
     def checkRedeGpon_36(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 375 seja executado em conjunto
