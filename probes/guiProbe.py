@@ -106,19 +106,40 @@ class gui:
 
         return hgu.checkSpeed5GHz_19(flask_username)
 
+    
+    # 32
+    def UpgradeDowngradeFirmware(self, ip, username, password, flask_username, model_name, **kwargs):
 
-    #68
-    """
-    def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+        
+        dict_result = {'result':'failed', 
+                       'obs':None, 
+                       "Resultado_Probe": "NOK", 
+                       "ControllerName": "gui", 
+                       "ProbeName": "UpgradeDowngradeFirmware", 
+                       "Probe#": "32", 
+                       "Description": "Upgrade/Downgrade de Firmware,Permanecer tentando conseguir um endereco de IP se nenhuma resposta for retornada."}
+                       
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+        return hgu.UpgradeDowngradeFirmware_32(flask_username)
 
+
+    # 41
+    def validiteConectStbTv(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()
 
         dict_result =  {"result":'failed', 
                         "obs":None,
                         "Resultado_Probe": "NOK", 
-                        "ProbeName": "connectFakeWizard", 
-                        "Probe#": "XXXXXX", 
-                        "Description": "Validar que não é possível acessar a URL http://{ip}/wancfg.cmd?action=view".format(ip=ip), 
+                        "ProbeName": "validiteConectStbTv", 
+                        "Probe#": "41", 
+                        "Description": "Validar conectividade STB x TV com as conexoes RCA e HDMI(Modelos de TV diferentes)" 
                        }
 
         hgu = HGUModelFactory.getHGU(probe='functionalProbe',
@@ -129,8 +150,146 @@ class gui:
                                      driver=driver, 
                                      dict_result=dict_result)
 
-        return hgu.connectFakeWizard_68(flask_username)
-    """
+        return hgu.validiteConectStbTv_41(flask_username)
+
+
+    # 48
+    def validiteDefaultModeAfterReset(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "validiteDefaultModeAfterReset", 
+                        "Probe#": "48", 
+                        "Description": "Verificar se o dispositivo esta online no ACS depois de resetar no HGU e atualizar FW" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.validiteDefaultModeAfterReset_48(flask_username)
+
+
+    # 50
+    def validiteSerialNumberAndMac(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "validiteSerialNumberAndMac", 
+                        "Probe#": "50", 
+                        "Description": "Verificar o numero de serie e MAN da Wan depois de resetar para default" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.validiteSerialNumberAndMac_50(flask_username)
+
+
+     # 64
+    def validiteUrlsWancfgCmd(self, ip, username, password, model_name, flask_username, **kwargs):
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "validiteUrlsWancfgCmd", 
+                        "Probe#": "64", 
+                        "Description": "Validar que nao eh possivel acessar interface avancada por ip/wancfg.cmd", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.validiteUrlsWancfgCmd_64(flask_username)
+
+    # 65
+    def validiteUrlsWancfgCmdActionView(self, ip, username, password, model_name, flask_username, **kwargs):
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "validiteUrlsWancfgCmdActionView", 
+                        "Probe#": "65", 
+                        "Description": "Validar que nao eh possivel acessar interface avancada por ip/wancfg.cmd?action=view", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.validiteUrlsWancfgCmdActionView_65(flask_username)
+
+    # 66
+    def changePasswordAccess(self, ip, username, password, flask_username, model_name, **kwargs):
+
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "changePasswordAccess", 
+                        "Probe#": "66", 
+                        "Description": "Alterar a senha de acesso ao dispositivo", 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        new_password ='S@oP@ulo*15'
+
+        res1 = hgu.changePasswordAccess_66(flask_username, new_password)
+
+        hgu2 = HGUModelFactory.getHGU(probe='settingsProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        res2 = hgu2.accessWizard_401(flask_username)
+
+        return res2
+    
+    # 68
+    def pingDifferNetwork(self, ip, username, password, model_name, flask_username, **kwargs):
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "pingDifferNetwork", 
+                        "Probe#": "68", 
+                        "Description": "Pingar rede diferente", 
+                        "obs": None}
+                        
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.pingDifferNetwork_68(flask_username)
+
 
     #69
     def changeAdminPassword(self, ip, username, password, flask_username, model_name, **kwargs):
@@ -1447,7 +1606,7 @@ class gui:
                         "Description": "Mudar range de IP do DHCP Server.", 
                         "obs": None}
 
-        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
                                      address_ip=ip, 
                                      model_name=model_name, 
                                      username=username,
@@ -1477,52 +1636,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.checkRedeGpon_36(flask_username)
 
-    # 68
-    def pingDifferNetwork(self, ip, username, password, model_name, flask_username, **kwargs):
-        dict_result = {"result":"failed",
-                        "Resultado_Probe": "NOK", 
-                        "ControllerName": "gui", 
-                        "ProbeName": "pingDifferNetwork", 
-                        "Probe#": "68", 
-                        "Description": "Pingar rede diferente", 
-                        "obs": None}
-                        
-        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
-                                     address_ip=ip, 
-                                     model_name=model_name, 
-                                     username=username, 
-                                     password=password, 
-                                     dict_result=dict_result)
-        return hgu.pingDifferNetwork_68(flask_username)
-
-    #68
-    """
-    def pingDifferNetwork(self, ip, username, password, flask_username, model_name, **kwargs):
-
-        driver = WebDriver.get_driver()
-
-        dict_result =  {"result":'failed', 
-                        "obs":None,
-                        "Resultado_Probe": "NOK", 
-                        "ProbeName": "pingDifferNetwork", 
-                        "Probe#": "68", 
-                        "Description": "Validar que não é possível acessar as URLs http://{ip}/wancfg.cmd?action=view".format(ip=ip), 
-                       }
-
-        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
-                                     address_ip=ip, 
-                                     model_name=model_name, 
-                                     username=username, 
-                                     password=password, 
-                                     driver=driver, 
-                                     dict_result=dict_result)
-
-        return hgu.connectFakeWizard_68(flask_username)
-
-"""
         
-
-    
     # 79
     def accessPadrao_2(self, ip, username, password, flask_username, model_name, **kwargs): ### TUDO OK
         
