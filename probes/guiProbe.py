@@ -338,11 +338,6 @@ class gui:
         return hgu.accessWebGui_49(flask_username)
 
 
-    #68
-    """
-    def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
->>>>>>> b5ebdd1ecf993bcbb4883dff33cd037e8a156a32
-
     # 41
     def validiteConectStbTv(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()
