@@ -129,6 +129,219 @@ class gui:
                                      dict_result=dict_result)
         return hgu.UpgradeDowngradeFirmware_32(flask_username)
 
+<<<<<<< HEAD
+=======
+    # 23
+    def uninterruptedPing(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "uninterruptedPing", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Gerar ping (IPv4 e IPv6) de maquinas conectadas via WiFi (2.4 e 5GHz) para o IP da caixa e externo (Dois sites distintos) ex. google por 6 horas" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.uninterruptedPing_23(flask_username)
+
+
+    # 24
+    def testICMPv6(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "testICMPv6", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Efetuar teste de ICMPv6 na página http://ipv6-test.com/" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.testICMPv6_24(flask_username)
+
+
+    # 25
+    def testStreaming(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "testStreaming", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Rodar video conectado no WiFi 2.4 e 5GHz por 1 hora (NetFlix e YouTube). Fazer o teste com equipamentos distintos (PlayStation, Notebook, Celular e etc...)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.testStreaming_25(flask_username)
+
+
+    # 27
+    def useWhatsAPP(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "useWhatsAPP", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Utilizar o aplicativo WPSApp,Utilizar o aplicativo WPSApp (disponível na Play Store) para fechar uma conexão WiFi via WPS" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.useWhatsAPP_27(flask_username)
+
+
+    # 33
+    def swapWiFiChannelandBandwidth(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "swapWiFiChannelandBandwidth", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Trocar os canais do 2.4GHz e 5GHz, largura de banda e observar se foi alterado no device" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.swapWiFiChannelandBandwidth_33(flask_username)
+
+
+    # 41
+    def testNetInf(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "testNetInf", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Efetuar testes de Net Inf na interface Web GUI do usuário em todos os access class disponiveis para o dispositivo em teste (MEDIAROOM)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.testNetInf_41(flask_username)
+
+
+    # 44
+    def acsURL(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "acsURL", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Validar a URL de ACS do dispositivo para saber qual Plataforma está direcionado o device. (WAN desconectada)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.acsURL_44(flask_username)
+
+
+    # 46
+    def performWiFiSetup(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "performWiFiSetup", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Realizar configurações WiFi utilizando caracteres especiais (Ex.: !@#$%&<>)" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.performWiFiSetup_46(flask_username)
+
+
+    # 49
+    def accessWebGui(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "accessWebGui", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Utilizar o endereço http://1.1.1.1/ para acessar a Web Gui do dispositivo em teste" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.accessWebGui_49(flask_username)
+
+
+    #68
+    """
+    def connectFakeWizard(self, ip, username, password, flask_username, model_name, **kwargs):
+>>>>>>> b5ebdd1ecf993bcbb4883dff33cd037e8a156a32
 
     # 41
     def validiteConectStbTv(self, ip, username, password, flask_username, model_name, **kwargs):
@@ -1279,6 +1492,29 @@ class gui:
                                      password=password, 
                                      dict_result=dict_result)
         return hgu.statusWizardVoip_390(flask_username)
+
+
+    #391
+    def statusWizardHpna(self, ip, username, password, model_name, flask_username, **kwargs):
+        
+        dict_result = {
+            "result":"failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "gui", 
+            "ProbeName": "statusWizardHpna", 
+            "Probe#": "350", 
+            "Description": "Mostra corretamente o status HPNA no índice", 
+            "obs": None
+            }
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     dict_result=dict_result)
+        return hgu.statusWizardHpna_391(flask_username)
+
 
 
     # 392

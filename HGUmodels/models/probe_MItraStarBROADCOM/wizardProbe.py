@@ -247,6 +247,41 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         return self._dict_result
 
 
+    # 390
+    def statusWizardVoip_390(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status = result['Status']['Telefone']
+            voip = wizard_config.VOIP
+
+            if set(status) == set(voip):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
+            
+        return self._dict_result
+
+        
+    #391 HPNA mlv
+    def statusWizardHpna_391(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status = result['Status']['Telefone']
+            voip = wizard_config.VOIP
+
+            if set(status) == set(voip):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
+            
+        return self._dict_result
+
 
     # 392
     def verifyDnsService_392(self, flask_username) -> dict:
@@ -443,6 +478,74 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             return self._dict_result 
 
 
+    #396 
+    def configDdnsViaWizard_396(self, flask_username):
+        """
+            Provides DDnS Settings
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            # Entering DDNS Settings
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_id('tabtitle-5').click()
+            time.sleep(2)
+            # Sentting DDnS
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[2]/td[2]/input[1]').click()
+            select = Select(self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[3]/td[2]/select'))
+            select.select_by_value('noip')
+            user_field = self._driver.find_element_by_xpath('//*[@id="ddnsUsername"]')
+            user_field.clear()
+            time.sleep(1)
+            user_field.send_keys('telefonica.labs@gmail.com')
+            time.sleep(1)
+            pass_field = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[5]/td[2]/input')
+            pass_field.clear()
+            time.sleep(1)
+            pass_field.send_keys('vivo@123')
+            time.sleep(1)
+            hostname_field = self._driver.find_element_by_xpath('//*[@id="ddnsHostname"]')
+            hostname_field.clear()
+            time.sleep(1)
+            hostname_field.send_keys('telefonicalabs.ddns.net')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(2)
+            # Disabling DDNS
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[2]/td[2]/input[2]').click()
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(1)
+
+            try:
+                #verificar se tem como validar configuracao DDNS
+                self._dict_result.update({"obs": f"Configuracao de DDNS realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result 
+
+
     # 397
     def configIpDhcpViaWizard_397(self, flask_username) -> dict:
         """
@@ -511,6 +614,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             return self._dict_result 
 
 
+    # 399
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
         site2 = f'http://{self._address_ip}/instalador'
