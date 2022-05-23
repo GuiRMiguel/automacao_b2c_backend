@@ -13,6 +13,7 @@ from ...config import TEST_NOT_IMPLEMENTED_WARNING
 from HGUmodels.utils import chunks
 from daos.mongo_dao import MongoConnSigleton
 from selenium.common.exceptions import InvalidSelectorException, NoSuchElementException, NoSuchFrameException
+from selenium.webdriver.common.action_chains import ActionChains
 
 from paramiko.ssh_exception import SSHException
 import socket
@@ -199,6 +200,55 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             if response != 200:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'Não foi possível acessar o site'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 44
+    def acsURL_44(self, flask_username):
+        """
+            Validate the device's ACS URL to know which Platform the device is targeting. (WAN disconnected)
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on Advanced Interface
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[1]/input').send_keys("support")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[2]/input[3]').send_keys(self._password)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[4]/input').click()
+            time.sleep(3)
+
+            # Entering on TR-069 Settings
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            tr069_settings = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[3]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(tr069_settings).click().perform()
+            time.sleep(5)
+
+            # Looking for specific informations
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            acs_url = str(self._driver.find_element_by_xpath('/html/body/form/div[2]/div[2]/ul/li[1]/div[2]/ul/li[2]/input').get_attribute('value'))
+            acs_username = str(self._driver.find_element_by_xpath('/html/body/form/div[2]/div[2]/ul/li[1]/div[3]/ul/li[2]/input').get_attribute('value'))
+            port_7015 = bool(re.search(":7015/", acs_url))
+            time.sleep(2)
+
+            if port_7015 is not True:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A porta 7015 não está na URL ACS'})
+            elif acs_username == 'telefonica':
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O username não é válido ("telefonica")'})
             else:
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})

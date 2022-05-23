@@ -384,9 +384,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
-
-    # 41
-    def testNetInf_41(self, flask_username):
         """
             Perform Net Inf tests in the web GUI user interface on all access classes available for 
             the device under test (MEDIAROOM)
