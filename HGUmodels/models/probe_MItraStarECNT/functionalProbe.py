@@ -14,6 +14,7 @@ from HGUmodels.utils import chunks
 from daos.mongo_dao import MongoConnSigleton
 from selenium.common.exceptions import InvalidSelectorException, NoSuchElementException, NoSuchFrameException
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
 
 from paramiko.ssh_exception import SSHException
 import socket
@@ -204,6 +205,136 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
 
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 33
+    def swapWiFiChannelandBandwidth_33(self, flask_username):
+        """
+            Swap WiFi Channel and Bandwidth and check if it was changed
+        :return : A dict with the result of the test
+        """
+        channel_2g_exp = "9"
+        channel_5g_exp = "36"
+        try:
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(3)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+
+            # Enabling WiFi
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(8)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame("menufrm")
+            self._driver.implicitly_wait(10)
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_Menu_Wireless5G').click()
+            time.sleep(3)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(20)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(20)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(15)
+
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
+            time.sleep(2)
+
+            # Changing channel 2.4GHz WiFi
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            select_channel = Select(self._driver.find_element_by_id('select_Channel'))
+            time.sleep(1)
+            select_channel.select_by_value(channel_2g_exp)
+            time.sleep(1)
+            select_bdw = Select(self._driver.find_element_by_id('select_Bandwidth'))
+            time.sleep(1)
+            select_bdw.select_by_value('1')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[4]/form/table[1]/tbody/tr[8]/td/a[2]/span').click()
+            time.sleep(8)
+
+            # Entering on 5GHz WiFi Settings
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame("menufrm")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[4]/a').click()
+            self._driver.implicitly_wait(10)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[2]/ul/li[2]/a/span').click()
+            time.sleep(2)
+            select_channel = Select(self._driver.find_element_by_id('select_Channel_5G'))
+            time.sleep(1)
+            select_channel.select_by_value(channel_5g_exp)
+            time.sleep(1)
+            select_bdw = Select(self._driver.find_element_by_id('select_Bandwidth_5G'))
+            time.sleep(1)
+            select_bdw.select_by_value('2040auto')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[4]/form/table[1]/tbody/tr[7]/td/a[2]/span').click()
+            time.sleep(8)
+
+            # Entering on Status
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[5]/td[2]/a/span').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[7]/td[2]/a/span').click()
+            time.sleep
+            channel_2g = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[6]/td[1]/div/ul/li[8]').text
+            channel_5g = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[8]/td[1]/div/ul/li[8]').text
+            print(channel_2g, channel_5g)
+
+            if channel_2g != channel_2g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O canal do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_2g_exp, channel_2g)})
+            elif channel_5g != channel_5g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O canal do WiFI 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_5g_exp, channel_5g)})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         except Exception as exception:
             print(exception)
             self._driver.quit()
