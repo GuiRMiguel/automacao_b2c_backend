@@ -308,14 +308,40 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/form/div[6]/input[2]').click()
             time.sleep(3)
 
+            # Rebooting 
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menuFrm')
+            self._driver.find_element_by_xpath('/html/body/div[5]/div/fieldset/a').click()
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('mainFrm')
+            self._driver.find_element_by_id('btnReboot').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+            time.sleep(5)
+            try:
+                self._driver.get('http://' + self._address_ip + '/')
+            except Exception as e:
+                print(e)
+                time.sleep(240)
+                self._driver.get('http://' + self._address_ip + '/padrao')
+                time.sleep(4)
+
             # Entering on WiFi 2.4GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
             time.sleep(1)
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
                 
-            #Entering on 2.4GHz advanced settings
+            # Entering on 2.4GHz WiFi settings
             enablingWiFi2G()
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
@@ -327,7 +353,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_id('btnAdvSave').click()
             time.sleep(3)
 
-            #Entering on 5GHz advanced settings
+            # Entering on 5GHz WiFi settings
             enablingWiFi5G()
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
@@ -383,24 +409,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
-
-        """
-            Perform Net Inf tests in the web GUI user interface on all access classes available for 
-            the device under test (MEDIAROOM)
-        :return : A dict with the result of the test
-        """
-        # Entering on WiFi 2.4GHz settings and sign in
-        self._driver.get('http://' + self._address_ip + '/')
-        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a').click()
-        time.sleep(1)
-        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/ul/li[6]/a').click()
-        time.sleep(1)
-        user_input = self._driver.find_element_by_id('txtUser')
-        user_input.send_keys(self._username)
-        pass_input = self._driver.find_element_by_id('txtPass')
-        pass_input.send_keys(self._password)
-        self._driver.find_element_by_id('btnLogin').click()
-        time.sleep(3)
 
 
     # 44
