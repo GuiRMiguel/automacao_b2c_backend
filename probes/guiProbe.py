@@ -129,8 +129,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.UpgradeDowngradeFirmware_32(flask_username)
 
-<<<<<<< HEAD
-=======
+
     # 23
     def uninterruptedPing(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()
@@ -244,29 +243,6 @@ class gui:
                                      dict_result=dict_result)
 
         return hgu.swapWiFiChannelandBandwidth_33(flask_username)
-
-
-    # 41
-    def testNetInf(self, ip, username, password, flask_username, model_name, **kwargs):
-        driver = WebDriver.get_driver()
-
-        dict_result =  {"result":'failed', 
-                        "obs":None,
-                        "Resultado_Probe": "NOK", 
-                        "ProbeName": "testNetInf", 
-                        "Probe#": "XXXXXX", 
-                        "Description": "Efetuar testes de Net Inf na interface Web GUI do usuário em todos os access class disponiveis para o dispositivo em teste (MEDIAROOM)" 
-                       }
-
-        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
-                                     address_ip=ip, 
-                                     model_name=model_name, 
-                                     username=username, 
-                                     password=password, 
-                                     driver=driver, 
-                                     dict_result=dict_result)
-
-        return hgu.testNetInf_41(flask_username)
 
 
     # 44
@@ -425,6 +401,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.validiteUrlsWancfgCmd_64(flask_username)
 
+
     # 65
     def validiteUrlsWancfgCmdActionView(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",
@@ -442,6 +419,7 @@ class gui:
                                      password=password, 
                                      dict_result=dict_result)
         return hgu.validiteUrlsWancfgCmdActionView_65(flask_username)
+
 
     # 66
     def changePasswordAccess(self, ip, username, password, flask_username, model_name, **kwargs):
@@ -480,6 +458,7 @@ class gui:
 
         return res2
     
+
     # 68
     def pingDifferNetwork(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",
