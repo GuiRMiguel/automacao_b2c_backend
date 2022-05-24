@@ -383,7 +383,7 @@ class gui:
         return hgu.validiteSerialNumberAndMac_50(flask_username)
 
 
-     # 64
+    # 64
     def validiteUrlsWancfgCmd(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
