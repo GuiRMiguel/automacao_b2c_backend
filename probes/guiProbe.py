@@ -460,7 +460,7 @@ class gui:
     
 
     # 68
-    def pingDifferNetwork(self, ip, username, password, model_name, flask_username, **kwargs):
+    def connectFakeWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
@@ -475,7 +475,7 @@ class gui:
                                      username=username, 
                                      password=password, 
                                      dict_result=dict_result)
-        return hgu.pingDifferNetwork_68(flask_username)
+        return hgu.connectFakeWizard_68(flask_username)
 
 
     #69

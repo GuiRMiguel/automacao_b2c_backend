@@ -1059,11 +1059,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 print(' == Fim do teste == ')
                 return self._dict_result
 
-
-    def pingDifferNetwork_68(self, flask_username):
-        site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
-        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
-
     # 27
     def useWhatsAPP_27(self, flask_username):
         """

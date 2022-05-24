@@ -273,38 +273,6 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         finally:
             return self._dict_result
 
-
-    # 68
-    def connectFakeWizard_68(self, flask_username):
-
-        site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
-        
-        print()
-        print()
-        print('-=-' * 20)
-        print('\t\t --- INICIANDO ROBO AUTOMAÇÃO ---')
-        print('-=-' * 20)
-        print('\n\n -- PARAMETROS DE ENTRADA --')
-        print('site1 = ' + site1)
-        print('-=-' * 20)
-        try:
-            print('\n\n == Abrindo URL ' + site1 + ' == ')
-            self._driver.get(site1)
-            time.sleep(5)
-            print('\n\n == Aguardando redirecionamento de página == ')
-            if self._driver.find_element_by_xpath('/html/body/h4'):
-                result = self._driver.find_element_by_xpath('/html/body/h4').text
-                print(result)
-            time.sleep(1)
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": "Nao foi possivel acessar a URL"})
-        except NoSuchElementException as exception:
-            print(exception)
-            self._dict_result.update({"obs": str(exception)})
-        finally:
-            self._driver.quit()
-            return self._dict_result
-
-
     #29
     def changeIPDhcpViaWizard_29(self, flask_username):
         try:
@@ -564,4 +532,126 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             return self._dict_result  
     
 
+
+    def changePasswordAccess_66(self, flask_username, new_password):
+
+        def open_change_password(driver):
+            driver.switch_to.default_content()
+            time.sleep(5)
+            self._driver.switch_to.frame('mainFrame')
+            #Management
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a').click() 
+            time.sleep(1)
+            # Change Password
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/ul/li[2]/a').click()
+            time.sleep(1)
+
+        def admin_authentication(driver, user, password):
+            driver.switch_to.default_content()
+            #Login
+            self._driver.switch_to.frame('mainFrame')
+            self.check_before_login()
+            time.sleep(2)
+            user_input = self._driver.find_element_by_xpath('//*[@id="txtUser"]')
+            user_input.send_keys(user)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="txtPass"]')
+            pass_input.send_keys(password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="btnLogin"]')
+            time.sleep(2)
+            login_button.click()
+            time.sleep(1)
+
+        def changing_password(driver, old_password, new_password):
+            driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame('mainFrame')
+            time.sleep(1)
+            gerenc_senha_old_valor = driver.find_element_by_xpath('//*[@id="txtOldPass"]').send_keys(str(old_password))
+            time.sleep(1)
+            gerenc_senha_new_valor = driver.find_element_by_xpath('//*[@id="txtNewPass"]').send_keys(str(new_password))
+            time.sleep(1)
+            gerenc_senha_new_valor2 = driver.find_element_by_xpath('//*[@id="txtConfirm"]').send_keys(str(new_password))
+            time.sleep(1)
+            config_wifi5_basico_ssid_senha_salvar = driver.find_element_by_xpath('//*[@id="btnSave"]').click()  ### SAVE BUTTON
+            time.sleep(8)  ### Tempo para recarregar a página após salvar as configs
+
+        def change_password_back(driver, user, old_password, new_password):
+            print("ola back 1")
+            open_change_password(driver)
+            print("ola back 2")
+            print(' == Autenticando == ')
+            admin_authentication(self._driver, user, new_password)
+            time.sleep(5)
+            changing_password(driver, new_password, old_password)
+            print("ola back 3")
+
+
+        self._driver.execute_script("window.alert = function() {};")
+        
+        print('\n\n == Abrindo URL == ')
+        self._driver.get('http://' + self._address_ip + '/')
+
+
+        if re.match(r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z]).*$", new_password):
+            print('SenhaAdmin de Entrada cumpre requisitos...')
+            
+            try:
+                print(' == Solicitando troca de senha == ')
+                open_change_password(self._driver)
+                time.sleep(3)
+                ########################################################################################
+                print(' == Autenticando == ')
+                admin_authentication(self._driver, self._username, self._password)
+                time.sleep(5)
+
+                #########################################################################################
+                print(' == Troca de senha == ')
+                changing_password(self._driver, self._password, new_password)
+
+                
+                time.sleep(5)
+                self._driver.get('http://' + self._address_ip + '/')
+
+                print(' == Troca para senha antiga == ')
+                change_password_back(self._driver, self._username, self._password, new_password)
+
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            except Exception as exception:
+                print(exception)
+                self._dict_result.update({"obs": str(exception)})
+
+            finally:
+                print(' == Fim do teste == ')
+                return self._dict_result
+
+   # 68
+    def connectFakeWizard_68(self, flask_username):
+
+        site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
+        
+        print()
+        print()
+        print('-=-' * 20)
+        print('\t\t --- INICIANDO ROBO AUTOMAÇÃO ---')
+        print('-=-' * 20)
+        print('\n\n -- PARAMETROS DE ENTRADA --')
+        print('site1 = ' + site1)
+        print('-=-' * 20)
+        try:
+            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site1)
+            time.sleep(5)
+            print('\n\n == Aguardando redirecionamento de página == ')
+            if self._driver.find_element_by_xpath('/html/body/h4'):
+                result = self._driver.find_element_by_xpath('/html/body/h4').text
+                print(result)
+            time.sleep(1)
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": "Nao foi possivel acessar a URL"})
+        except NoSuchElementException as exception:
+            print(exception)
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            self._driver.quit()
+            return self._dict_result
 
