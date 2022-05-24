@@ -1532,33 +1532,69 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
     # 68
     def connectFakeWizard_68(self, flask_username):
-
-        site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
         
-        print()
-        print()
-        print('-=-' * 20)
-        print('\t\t --- INICIANDO ROBO AUTOMAÇÃO ---')
-        print('-=-' * 20)
-        print('\n\n -- PARAMETROS DE ENTRADA --')
-        print('site1 = ' + site1)
-        print('-=-' * 20)
+        site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
+        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
+        site3 = 'http://' + self._address_ip + '/'
+
         try:
-            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/login.asp')
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(2)
+            loginVivo = 'ok'
+            print(loginVivo)
+        except:
+            loginVivo = 'falhou'
+
+        try:
             self._driver.get(site1)
             time.sleep(5)
-            print('\n\n == Aguardando redirecionamento de página == ')
-            if self._driver.find_element_by_xpath('/html/body/h4'):
-                result = self._driver.find_element_by_xpath('/html/body/h4').text
-                print(result)
+            self._driver.switch_to.frame('mainFrame')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            resultado1 = 'ok'
+
+        except:
+            resultado1 = 'falhou'
+        
+        try:
+            self._driver.get(site2)
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys('support')
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
             time.sleep(1)
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
-        except NoSuchElementException as exception:
-            print(exception)
-            self._driver.quit()
-            self._dict_result.update({"obs": str(exception)})
+            login_button.click()
+            time.sleep(1)
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            resultado2 = 'ok'
+        except:
+            resultado2 = 'falhou'
+
         finally:
+            #self._driver.quit()
+            if (resultado1 == 'ok' or resultado2 == 'ok') and loginVivo == 'ok':
+               self._dict_result.update({"obs": f"Teste incorreto, retorno URLs: {site1}: {resultado1}; {site2}: {resultado2}"})
+            else:
+                self._dict_result.update({"obs": "Nao foi possivel acessar interface avancada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
             return self._dict_result
+
 
     
     # 69
