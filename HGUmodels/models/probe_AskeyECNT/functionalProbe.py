@@ -914,12 +914,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             if (resultado1 == 'ok' or resultado2 == 'ok') and loginVivo == 'ok':
                self._dict_result.update({"obs": f"Teste incorreto, retorno URLs: {site1}: {resultado1}; {site2}: {resultado2}"})
             else:
-                self._dict_result.update({"obs": "Nao foi possivel acessar interface avacada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
+                self._dict_result.update({"obs": "Nao foi possivel acessar interface avancada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
             return self._dict_result
 
+
     def validiteUrlsWancfgCmdActionView_65(self, flask_username):
-        site1 = f'http://{self._address_ip}/wancfg.cmd'
-        site2 = 'http://192.168.1.1/wancfg.cmd'
+        site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
+        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
 
         try:
             self._driver.get('http://' + self._address_ip + '/')

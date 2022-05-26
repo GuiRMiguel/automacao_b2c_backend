@@ -184,6 +184,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         try:
             # Entering on Settings
             self._driver.get('http://' + self._address_ip + '/')
+            #self._driver.get('http://192.168.18.3/')
             time.sleep(1)
             # config / Internet
             self._driver.switch_to.frame("menufrm")
@@ -234,16 +235,21 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[3]').send_keys('18')
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[4]').send_keys('204')
             
+            self._driver.find_element_by_xpath('//*[@id="tab-01"]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click() 
+
+            self._driver.set_page_load_timeout(10)
             try:
-                self._driver.find_element_by_xpath('//*[@id="tab-01"]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click() 
-                self._dict_result.update({"obs": f"Alterar range de IP do DHCP.", "result":"passed", "Resultado_Probe": "OK"})
-            except UnexpectedAlertPresentException as e:                
+                self._driver.execute_script("window.stop();")
+            except Exception as e:
+                print(e)
+                self._driver.get('http://' + self._address_ip + '/')
+
+            self._dict_result.update({"obs": f"Alterar range de IP do DHCP.", "result":"passed", "Resultado_Probe": "OK"})
+            
+        except UnexpectedAlertPresentException as e:                
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
-        except Exception as e:
-            self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
 
 
@@ -478,6 +484,52 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         finally:
             return self._dict_result
 
+
+    def validiteSerialNumberAndMac_50(self, flask_username):
+        try:
+            #Login
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            # Management / Restart
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[3]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[3]/ul/li[3]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            #Reconfigure
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/table/tbody/tr[2]/td[1]/a/span').click()
+            time.sleep(3)
+            print('antes do iframe')
+            iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #print(iframe)
+            self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a[1]/span').click()
+            time.sleep(300)
+            #Verify serial number and MAC
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.switch_to.frame('menufrm')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
+            time.sleep(3)
+            try:
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == 'ACC662028CA8' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == 'ac:c6:62:02:8c:a8':
+                    self._dict_result.update({"obs": "Teste passou. Numero de serie e MAC da WAN corretos.", "result":"passed", "Resultado_Probe": "OK"})
+
+                else:
+                    self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+    
 
     # 68
     def connectFakeWizard_68(self, flask_username):
