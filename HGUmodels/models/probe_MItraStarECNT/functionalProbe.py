@@ -781,6 +781,160 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result
 
 
+    def validiteSerialNumberAndMac_50(self, flask_username):
+        try:
+            #Login
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('//*[@id="MLG_Menu_Management"]').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[3]/ul/li[3]/a/span').click()
+            time.sleep(2)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            #Reconfigure
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(2)
+            self._driver.find_element_by_xpath('/html/body/form/div/div/div[1]/table/tbody/tr[2]/td[1]/a/span').click()
+            time.sleep(2)
+            print('antes do iframe')
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(2)
+            iframe = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/iframe')
+            print(iframe)
+            self._driver.switch_to.frame(iframe)
+            self._driver.find_element_by_xpath('//*[@id="MLG_Pop_Reset_Yes"]').click()
+            time.sleep(100)
+
+            self._driver.set_page_load_timeout(10)
+            try:
+                self._driver.execute_script("window.stop();")
+            except Exception as e:
+                print(e)
+                self._driver.get('http://' + self._address_ip + '/')
+
+            #Verify serial number and MAC
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            time.sleep(10)
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up'])
+            print("sub processos feitos")
+            #Enter IP-reset
+            time.sleep(10)
+
+            self._driver.get('http://192.168.15.1/')
+            time.sleep(5)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[2]/a/span').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            
+            #Click DHCP
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a').click()
+            time.sleep(2)
+            #Changing IP
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[1]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[2]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[3]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[4]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[4]').send_keys('1')
+            time.sleep(2)
+            #Changing address range
+            #range-1
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[1]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[2]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[3]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[4]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[4]').send_keys('2')
+            time.sleep(3)
+            #renge-2
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[1]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[2]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[3]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[4]').clear()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[3]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[4]').send_keys('200')
+            
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click() 
+
+            self._driver.set_page_load_timeout(10)
+            try:
+                self._driver.execute_script("window.stop();")
+            except Exception as e:
+                print(e)
+                self._driver.get('http://' + self._address_ip + '/')
+
+            #Verify serial number and MAC
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up'])
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
+            time.sleep(10)
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up'])
+            print("sub processos feitos 2")
+            time.sleep(10)
+
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('//*[@id="MLG_Menu_About_Power_Box"]').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            time.sleep(2)
+
+
+            try:
+                if self._driver.find_element_by_xpath('/html/body/div/div[1]/table[1]/tbody/tr[3]/td[2]').text == '84aa9cd27948' and self._driver.find_element_by_xpath('/html/body/div/div[1]/table[1]/tbody/tr[4]/td[2]').text == '84:AA:9C:D2:79:48':
+                    self._dict_result.update({"obs": "Teste passou. Numero de serie e MAC da WAN corretos.", "result":"passed", "Resultado_Probe": "OK"})
+                else:
+                    self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+     
+
+
     def validiteUrlsWancfgCmd_64(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd'
         site2 = 'http://192.168.1.1/wancfg.cmd'
@@ -903,34 +1057,235 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._dict_result.update({"obs": "Nao foi possivel acessar interface avacada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
             return self._dict_result
 
+    #66
+    def changePasswordAccess_66(self, flask_username, new_password):
+
+        def open_change_password(driver):
+            driver.switch_to.default_content()
+            #time.sleep(5)
+            driver.switch_to.frame("menufrm")
+            driver.find_element_by_xpath('//*[@id="MLG_Menu_Management"]').click()
+            time.sleep(1)
+            link = driver.find_element_by_xpath('//*[@id="MLG_Menu_Account_Settings"]').click()
+            time.sleep(1)
+
+        def admin_authentication(driver, user, password):
+            driver.switch_to.default_content()
+            time.sleep(1)
+            driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(user)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+
+        def changing_password(driver, old_password, new_password):
+            driver.switch_to.default_content()
+            time.sleep(1)
+            driver.switch_to.frame("basefrm")
+            time.sleep(1)
+            gerenc_senha_old_valor = driver.find_element_by_xpath('//*[@id="pwdOld"]').send_keys(str(old_password))
+            time.sleep(1)
+            gerenc_senha_new_valor = driver.find_element_by_xpath('//*[@id="pwdNew"]').send_keys(str(new_password))
+            time.sleep(1)
+            gerenc_senha_new_valor2 = driver.find_element_by_xpath('//*[@id="pwdCfm"]').send_keys(str(new_password))
+            time.sleep(1)
+            config_wifi5_basico_ssid_senha_salvar = driver.find_element_by_xpath('//*[@id="SOPHIA_UserAccount_Save"]').click()  ### SAVE BUTTON
+            time.sleep(8)  ### Tempo para recarregar a página após salvar as configs
+
+        def change_password_back(driver, user, old_password, new_password):
+            open_change_password(driver)
+            print(' == Autenticando == ')
+            admin_authentication(self._driver, user, new_password)
+            time.sleep(5)
+            changing_password(driver, new_password, old_password)
+
+        self._driver.execute_script("window.alert = function() {};")
+        
+        print('\n\n == Abrindo URL == ')
+        self._driver.get('http://' + self._address_ip + '/')
+
+
+        if re.match(r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z]).*$", new_password):
+            print('SenhaAdmin de Entrada cumpre requisitos...')
+            
+            try:
+                print(' == Solicitando troca de senha == ')
+                open_change_password(self._driver)
+
+                ########################################################################################
+                print(' == Autenticando == ')
+                admin_authentication(self._driver, self._username, self._password)
+                time.sleep(5)
+
+                #########################################################################################
+                print(' == Troca de senha == ')
+                changing_password(self._driver, self._password, new_password)
+
+                
+                time.sleep(5)
+                self._driver.get('http://' + self._address_ip + '/')
+
+
+                change_password_back(self._driver, self._username, self._password, new_password)
+
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            except Exception as exception:
+                print(exception)
+                self._dict_result.update({"obs": str(exception)})
+
+            finally:
+                print(' == Fim do teste == ')
+                return self._dict_result
 
 
     # 68
     def connectFakeWizard_68(self, flask_username):
-
-        site1 = "http://{address_ip}/wancfg.cmd?action=view".format(address_ip=self._address_ip)
         
-        print()
-        print()
-        print('-=-' * 20)
-        print('\t\t --- INICIANDO ROBO AUTOMAÇÃO ---')
-        print('-=-' * 20)
-        print('\n\n -- PARAMETROS DE ENTRADA --')
-        print('site1 = ' + site1)
-        print('-=-' * 20)
+        site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
+        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
+        site3 = 'http://' + self._address_ip + '/'
+
         try:
-            print('\n\n == Abrindo URL ' + site1 + ' == ')
+            self._driver.get(site3)
+            #Login
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('//*[@id="MLG_Menu_Management"]').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[3]/ul/li[3]/a/span').click()
+            time.sleep(2)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            loginVivo = 'ok'
+            print(loginVivo)
+        except:
+            loginVivo = 'falhou'
+
+        try:
             self._driver.get(site1)
             time.sleep(5)
-            print('\n\n == Aguardando redirecionamento de página == ')
-            if self._driver.find_element_by_xpath('/html/body/h4'):
-                result = self._driver.find_element_by_xpath('/html/body/h4').text
-                print(result)
+            self._driver.switch_to.frame('mainFrame')
+            time.sleep(5)
+            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            resultado1 = 'ok'
+
+        except:
+            resultado1 = 'falhou'
+        
+        try:
+            self._driver.get(site2)
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys('support')
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
             time.sleep(1)
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
-        except NoSuchElementException as exception:
-            print(exception)
-            self._driver.quit()
-            self._dict_result.update({"obs": str(exception)})
+            login_button.click()
+            time.sleep(1)
+            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            resultado2 = 'ok'
+        except:
+            resultado2 = 'falhou'
+
         finally:
+            #self._driver.quit()
+            if (resultado1 == 'ok' or resultado2 == 'ok') and loginVivo == 'ok':
+               self._dict_result.update({"obs": f"Teste incorreto, retorno URLs: {site1}: {resultado1}; {site2}: {resultado2}"})
+            else:
+                self._dict_result.update({"obs": "Nao foi possivel acessar interface avancada pelas URLs", "result":"passed", "Resultado_Probe": "OK"})
             return self._dict_result
+
+
+
+    #69
+    def changeAdminPassword_69(self, flask_username, new_password):
+
+        def open_change_password(driver):
+            driver.switch_to.default_content()
+            #time.sleep(5)
+            driver.switch_to.frame("menufrm")
+            driver.find_element_by_xpath('//*[@id="MLG_Menu_Management"]').click()
+            time.sleep(1)
+            link = driver.find_element_by_xpath('//*[@id="MLG_Menu_Account_Settings"]').click()
+            time.sleep(1)
+
+        def admin_authentication(driver, user, password):
+            driver.switch_to.default_content()
+            time.sleep(1)
+            driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(user)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+
+        def changing_password(driver, old_password, new_password):
+            driver.switch_to.default_content()
+            time.sleep(1)
+            driver.switch_to.frame("basefrm")
+            time.sleep(1)
+            gerenc_senha_old_valor = driver.find_element_by_xpath('//*[@id="pwdOld"]').send_keys(str(old_password))
+            time.sleep(1)
+            gerenc_senha_new_valor = driver.find_element_by_xpath('//*[@id="pwdNew"]').send_keys(str(new_password))
+            time.sleep(1)
+            gerenc_senha_new_valor2 = driver.find_element_by_xpath('//*[@id="pwdCfm"]').send_keys(str(new_password))
+            time.sleep(1)
+            config_wifi5_basico_ssid_senha_salvar = driver.find_element_by_xpath('//*[@id="SOPHIA_UserAccount_Save"]').click()  ### SAVE BUTTON
+            time.sleep(8)  ### Tempo para recarregar a página após salvar as configs
+
+        def change_password_back(driver, user, old_password, new_password):
+            open_change_password(driver)
+            print(' == Autenticando == ')
+            admin_authentication(self._driver, user, new_password)
+            time.sleep(5)
+            changing_password(driver, new_password, old_password)
+
+        self._driver.execute_script("window.alert = function() {};")
+        
+        print('\n\n == Abrindo URL == ')
+        self._driver.get('http://' + self._address_ip + '/')
+
+
+        if re.match(r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z]).*$", new_password):
+            print('SenhaAdmin de Entrada cumpre requisitos...')
+            
+            try:
+                print(' == Solicitando troca de senha == ')
+                open_change_password(self._driver)
+
+                ########################################################################################
+                print(' == Autenticando == ')
+                admin_authentication(self._driver, self._username, self._password)
+                time.sleep(5)
+
+                #########################################################################################
+                print(' == Troca de senha == ')
+                changing_password(self._driver, self._password, new_password)
+
+                
+                time.sleep(5)
+                self._driver.get('http://' + self._address_ip + '/')
+
+
+                change_password_back(self._driver, self._username, self._password, new_password)
+
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            except Exception as exception:
+                print(exception)
+                self._dict_result.update({"obs": str(exception)})
+
+            finally:
+                print(' == Fim do teste == ')
+                return self._dict_result
+
