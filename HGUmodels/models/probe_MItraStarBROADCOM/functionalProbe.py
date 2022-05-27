@@ -1080,6 +1080,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             except Exception as e:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A senha do WiFi 5GHz aceitou espaço vazio'})
+
             pass_adv_5g_input.clear()
             time.sleep(1)
             pass_adv_5g_input.send_keys(pass_5g_adv_exp)

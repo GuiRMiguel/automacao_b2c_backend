@@ -477,16 +477,16 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         :return : A dict with the result of the test
         """
         # SSID and Password for basic interface
-        ssid_2g_exp = '!@# $%&<> <><@#$'
-        pass_2g_exp = '!@2a#$%&<>!@#<>$%&'
-        ssid_5g_exp = '<>#%$ !#@$ &&$%<>'
-        pass_5g_exp = '&%$b#@4!<>!@#&$#!<>'
+        ssid_2g_exp = 'VIVO-@UTO-2GHz'
+        pass_2g_exp = '123$abc!de0'
+        ssid_5g_exp = 'VIVO-@UTO-5GHz'
+        pass_5g_exp = '123#@abc<10'
 
         # SSID and Password for advanced interface
-        ssid_2g_adv_exp = '<%@ $%&<> <><@#!'
-        pass_2g_adv_exp = '<>!a@6#$%&#@<>!@'
-        ssid_5g_adv_exp = '?><>@#$ &&&%!@ <>'
-        pass_5g_adv_exp = '<>!@#$%&!@#12as$'
+        ssid_2g_adv_exp = 'V!VO-AUTO-2GHz'
+        pass_2g_adv_exp = '987@#$<>abc12'
+        ssid_5g_adv_exp = 'V!VO-AUTO-5GHz'
+        pass_5g_adv_exp = '987<>!jklm!@0'
 
         try:
             # Entering on WiFi 2.4GHz settings and sign in
@@ -527,10 +527,120 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._driver.find_element_by_id('MLG_GVTSettings_WL_Basic_Save').click()
                 time.sleep(1)
                 self._driver.switch_to_alert().accept()
-                time.sleep(10)
+                time.sleep(20)
             except Exception as e:
                 print(e)
-                time.sleep(15)
+                time.sleep(20)
+
+            # 1) 2.4/5GHz SSID cannot be set to "¨"
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO 2GHz ¨')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            time.sleep(1)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou ¨'})
+            else:
+                print('\n#########################################')
+                print('Test 1: passed')
+                print('#########################################\n')
+            
+            # 2.1) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys(' VIVO 2GHZ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            time.sleep(1)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do primeiro caracter'})
+            else:
+                print('\n#########################################')
+                print('Test 2.1: passed')
+                print('#########################################\n')
+
+            # 2.2) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO 2GHZ ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            time.sleep(1)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do último caracter'})
+            else:
+                print('\n#########################################')
+                print('Test 2.2: passed')
+                print('#########################################\n')
+
+            # 3) 2.4/5GHz SSID cannot be set to double space character
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO  2GHz')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            time.sleep(1)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou dois espaços vazios'})
+            else:
+                print('\n#########################################')
+                print('Test 3: passed')
+                print('#########################################\n')
+
+            # Setting correct SSID
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys(ssid_2g_exp)
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(10)
+
+            # 4) 2.4/5 GHz password cannot be set to "¨"
+            input_pass_2g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            input_pass_2g.clear()
+            input_pass_2g.send_keys("123456789abcde¨")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]/span')
+            time.sleep(1)
+            if message_error_pass.text == '' or message_error_pass.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou ¨'})
+            else:
+                print('\n#########################################')
+                print('Test 4: passed')
+                print('#########################################\n')
+
+            # 5) 2.4/5GHz password cannot be set as space character
+            input_pass_2g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            input_pass_2g.clear()
+            input_pass_2g.send_keys("123456789 abcde")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]/span')
+            time.sleep(1)
+            if message_error_pass.text == '' or message_error_pass.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou espaço vazio'})
+            else:
+                print('\n#########################################')
+                print('Test 5: passed')
+                print('#########################################\n')
 
             # Making changes on 5GHz WiFi Settings
             self._driver.switch_to.default_content()
@@ -540,10 +650,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[4]/a').click()
-            time.sleep(5)
+            time.sleep(20)
             self._driver.switch_to.default_content()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.switch_to.frame("basefrm")
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             time.sleep(3)
             input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
@@ -562,6 +673,121 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             except Exception as e:
                 print(e)
                 time.sleep(20)
+
+            # 1) 2.4/5GHz SSID cannot be set to "¨"
+            time.sleep(2)
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO 5GHz ¨')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou ¨'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 1: passed')
+                print('#########################################\n')
+            
+            # 2) 2.4/5GHz SSID First and last character cannot be space
+            time.sleep(2)
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys(' VIVO 5GHZ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou um espaço vazio no lugar do primeiro caracter'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 2.1: passed')
+                print('#########################################\n')
+
+            # 2) 2.4/5GHz SSID First and last character cannot be space
+            time.sleep(2)
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO 5GHZ ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou um espaço vazio no lugar do último caracter'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 2.2: passed')
+                print('#########################################\n')
+
+            # 3) 2.4/5GHz SSID cannot be set to double space character
+            time.sleep(2)
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO  5GHz')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error.text == '' or message_error.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou dois espaços vazios'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 3: passed')
+                print('#########################################\n')
+
+            # Setting correct SSID
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys(ssid_5g_exp)
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(10)
+
+            # 4) 2.4/5 GHz password cannot be set to "¨"
+            time.sleep(2)
+            input_pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            input_pass_5g.clear()
+            input_pass_5g.send_keys("123456789abcde¨")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error_pass.text == '' or message_error_pass.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 5GHz aceitou ¨'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 4: passed')
+                print('#########################################\n')
+
+            # 5) 2.4/5GHz password cannot be set as space character
+            time.sleep(2)
+            input_pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            input_pass_5g.clear()
+            input_pass_5g.send_keys("123456789 abcde")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(3)
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(2)
+            if message_error_pass.text == '' or message_error_pass.text is None:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 5GHz aceitou espaço vazio'})
+            else:
+                print('\n#########################################')
+                print('5GHZ Test 5: passed')
+                print('#########################################\n')
             
             # Entering on Status
             self._driver.switch_to.default_content()
@@ -631,10 +857,159 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
             ssid_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[2]/li[2]/input')
+            time.sleep(1)
+            if ssid_adv_2g_input.get_attribute('value') != ssid_2g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(ssid_2g_exp, ssid_adv_2g_input)})
+            else:
+                print('\n#########################################')
+                print('2.4GHZ SSID changed succesfully')
+                print('#########################################\n')
+            time.sleep(1)
+
+            # 1) 2.4/5GHz SSID cannot be set to "¨"
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[2]/li[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO 2GHz ¨')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(3)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 1 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou ¨'})
+            
+            # 2.1) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[2]/li[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys(' VIVO 2GHZ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 2.1 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do primeiro caracter'})
+
+            # 2.2) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[2]/li[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO 2GHZ ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 2.2 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do último caracter'})
+                
+            # 3) 2.4/5GHz SSID cannot be set to double space character
+            input_ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[2]/li[2]/input')
+            input_ssid_2g.clear()
+            input_ssid_2g.send_keys('VIVO  2GHz')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(1)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 3 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou dois espaços vazios'})
+                
+            # Setting correct SSID
             ssid_adv_2g_input.clear()
             ssid_adv_2g_input.send_keys(ssid_2g_adv_exp)
             time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(15)
+
+            # Performing changes on 2.4GHz password
             pass_adv_2g_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/div[3]/ul/li/div[2]/div[2]/ul/li[2]/input')
+            if pass_adv_2g_input.get_attribute('value') != pass_2g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz não foi alterada corretamente:\nesperado: {}, \nobtido: {}'.format(pass_2g_exp, pass_adv_2g_input)})
+            else:
+                print('\n#########################################')
+                print('2.4GHZ password changed succesfully')
+                print('#########################################\n')
+            time.sleep(1)
+
+            # 4) 2.4/5 GHz password cannot be set to "¨"
+            time.sleep(1)
+            input_pass_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/div[3]/ul/li/div[2]/div[2]/ul/li[2]/input')
+            input_pass_2g.clear()
+            input_pass_2g.send_keys("123456789abcde¨")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/blockquote[1]/form/table[2]/tbody/tr/td[2]/input').click()
+            time.sleep(1)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 4 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou ¨'})
+                
+            # 5) 2.4/5GHz password cannot be set as space character
+            time.sleep(1)
+            input_pass_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/div[3]/ul/li/div[2]/div[2]/ul/li[2]/input')
+            input_pass_2g.clear()
+            input_pass_2g.send_keys("123456789 abcde")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/blockquote[1]/form/table[2]/tbody/tr/td[2]/input').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('Test 5 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou espaço vazio'})
+            
             pass_adv_2g_input.clear()
             try:
                 time.sleep(1)
@@ -657,20 +1032,170 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
 
             # Entering on 5GHz WiFi Settings
             self._driver.switch_to.default_content()
+            time.sleep(1)
             menu_net = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[2]/span[2]')
             self._driver.implicitly_wait(10)
             ActionChains(self._driver).move_to_element(menu_net).perform()
             wifi_5g_settings = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[1]/li[4]')
             self._driver.implicitly_wait(10)
             ActionChains(self._driver).move_to_element(wifi_5g_settings).click().perform()
-            time.sleep(8)
+            time.sleep(10)
             self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
             ssid_adv_5g_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[1]/li[2]/input')
+            if ssid_adv_5g_input.get_attribute('value') != ssid_5g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(ssid_5g_exp, ssid_adv_5g_input)})
+            else:
+                print('\n#########################################')
+                print('5GHZ SSID changed succesfully')
+                print('#########################################\n')
+            time.sleep(1)
+
+            # 1) 2.4/5GHz SSID cannot be set to "¨"
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[1]/li[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO 2GHz ¨')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(3)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 1 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou ¨'})
+            
+            # 2.1) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[1]/li[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys(' VIVO 2GHZ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 2.1 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do primeiro caracter'})
+
+            # 2.2) 2.4/5GHz SSID First and last character cannot be space
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[1]/li[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO 2GHZ ')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 2.2 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou um espaço vazio no lugar do último caracter'})
+                
+            # 3) 2.4/5GHz SSID cannot be set to double space character
+            input_ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[2]/div[2]/ul[1]/li[2]/input')
+            input_ssid_5g.clear()
+            input_ssid_5g.send_keys('VIVO  2GHz')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(1)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 3 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou dois espaços vazios'})
+                
+            # Setting correct SSID
             ssid_adv_5g_input.clear()
             ssid_adv_5g_input.send_keys(ssid_5g_adv_exp)
             time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
+            time.sleep(20)
+
+            # Performing changes on 5GHz password
             pass_adv_5g_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[4]/div[2]/div/ul[3]/li[2]/input')
+            if pass_adv_5g_input.get_attribute('value') != pass_5g_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 5GHz não foi alterada corretamente:\nesperado: {}, \nobtido: {}'.format(pass_5g_exp, pass_adv_5g_input)})
+            else:
+                print('\n#########################################')
+                print('5GHZ password changed succesfully')
+                print('#########################################\n')
+            time.sleep(1)
+
+            # 4) 2.4/5 GHz password cannot be set to "¨"
+            time.sleep(1)
+            input_pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[4]/div[2]/div/ul[3]/li[2]/input')
+            input_pass_5g.clear()
+            input_pass_5g.send_keys("123456789abcde¨")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/blockquote[1]/form/table[2]/tbody/tr/td[2]/input').click()
+            time.sleep(1)
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 4 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou ¨'})
+                
+            # 5) 2.4/5GHz password cannot be set as space character
+            time.sleep(1)
+            input_pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/div/li[4]/div[2]/div/ul[3]/li[2]/input')
+            input_pass_5g.clear()
+            input_pass_5g.send_keys("123456789 abcde")
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/blockquote[1]/form/table[2]/tbody/tr/td[2]/input').click()
+            alert = self._driver.switch_to.alert()
+            time.sleep(1)
+            alert_text = alert.text
+            time.sleep(1)
+            if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
+                self._driver.switch_to_alert().accept()
+                time.sleep(2)
+                print('\n#########################################')
+                print('5GHz Test 5 ADVANCED: passed')
+                print('#########################################\n')
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou espaço vazio'})
+
+            time.sleep(1)
             pass_adv_5g_input.clear()
             pass_adv_5g_input.send_keys(pass_5g_adv_exp)
             time.sleep(1)
