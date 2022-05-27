@@ -19,7 +19,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
     def login_admin(self):
         self._driver.switch_to.frame('mainFrame')
         self.check_before_login()
-        time.sleep(2)
+        time.sleep(8)
         user_input = self._driver.find_element_by_xpath('//*[@id="txtUser"]')
         user_input.send_keys(self._username)
         pass_input = self._driver.find_element_by_xpath('//*[@id="txtPass"]')

@@ -792,6 +792,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 print('2.4GHZ SSID changed succesfully')
                 print('#########################################\n')
             time.sleep(1)
+            
             # 1) 2.4/5GHz SSID cannot be set to "¨"
             input_ssid_2g = self._driver.find_element_by_xpath('/html/body/blockquote/form/div[3]/table[2]/tbody/tr[1]/td[2]/input')
             input_ssid_2g.clear()
