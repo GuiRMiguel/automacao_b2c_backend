@@ -1,3 +1,4 @@
+from pickle import FALSE, TRUE
 import re
 import time
 import subprocess
@@ -1149,14 +1150,18 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
             self.login_support()
-            #Menu-Left 
+            #Menu-Left
+            #self._driver.switch_to.default_content()
             self._driver.switch_to.frame('menufrm')
             #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[68]/table/tbody/tr/td/a').click()
+            print(1)
+            self._driver.find_element_by_xpath('//*[@id="folder67"]/table/tbody/tr/td/a').click()
             time.sleep(1)
             #Update Software
+            print(2)
             self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[82]/table/tbody/tr/td/a').click()
             time.sleep(1)
+            print(3)
             #FW update SW
             self._driver.switch_to.parent_frame()
             self._driver.switch_to.frame('basefrm')
@@ -1164,19 +1169,21 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             print("STARTING DOWNGRADE...")
 
             #Upload File
-            #self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/askeyBroadcom/BR_SV_g000_R3505VWN1001_s36')
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/askeyBroadcom/BR_SV_g000_R3505VWN1001_s36')
             #Update SW
-            #self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
-            #time.sleep(240)
-                
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
+            time.sleep(240)
+
             #Testing Downgrade 
             self._driver.get('http://' + self._address_ip + '/padrao')
             time.sleep(5)
             self.login_support()
             #Menu-Left
-            #self._driver.switch_to.frame('menuFrm')
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            time.sleep(5)
             #FW Upgrade
-            #self._driver.find_element_by_xpath('/html/body/div[1]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="folder1"]/table/tbody/tr/td/a').click()
             time.sleep(3)
             self._driver.switch_to.parent_frame()
             self._driver.switch_to.frame('basefrm')
@@ -1184,10 +1191,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             print(dw_sw_version)
 
             if dw_sw_version=='BR_SV_g000_R3505VWN1001_s36':
-                downgrade = TRUE
+                downgrade = True
             else:
-                downgrade = FALSE
+                downgrade = False
 
+
+            self._driver.switch_to.parent_frame()
+            self._driver.switch_to.frame('logofrm')
+            print("Logout")
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[3]/a').click()
+            time.sleep(5)
 
             print("downgrade")
             print(downgrade)
@@ -1195,45 +1208,61 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             print("<<<<<<<<<<<>>>>>>>>>>")
             print("STARTING UPGRADE...")
 
+
             
             self._driver.get('http://' + self._address_ip + '/padrao')
             self.login_support()
-            #Menu-Left 
+            #Menu-Left
+
+            iframe = self._driver.find_element_by_xpath('/html/frameset/frame[1]')
+            self._driver.switch_to.frame(iframe)
+
+            self._driver.switch_to.default_content()
             self._driver.switch_to.frame('menufrm')
+            time.sleep(5)
+            print("uai?")
             #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[68]/table/tbody/tr/td/a').click()
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[67]/table/tbody/tr/td/a').click()
             time.sleep(1)
-            #Update Sofrtware
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[82]/table/tbody/tr/td/a').click()
+            #Update Software
+            print(2)
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[81]/table/tbody/tr/td/a').click()
             time.sleep(1)
+            print(3)
             #FW update SW
             self._driver.switch_to.parent_frame()
             self._driver.switch_to.frame('basefrm')
             
             #Upload File
-            #self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/askeyBroadcom/BR_SV_g000_R3505VWN1001_s37')
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/askeyBroadcom/BR_SV_g000_R3505VWN1001_s37')
             #Update SW
-            #self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
-            #time.sleep(240)
-            
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
+            time.sleep(240)
+
             #Testing upgrade
             self._driver.get('http://' + self._address_ip + '/padrao')
             time.sleep(5)
             self.login_support()
             #Menu-Left
-            #self._driver.switch_to.frame('menuFrm')
+            iframe = self._driver.find_element_by_xpath('/html/frameset/frame[1]')
+            self._driver.switch_to.frame(iframe)
+
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
             #FW Upgrade
-            #self._driver.find_element_by_xpath('/html/body/div[1]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="folder1"]/table/tbody/tr/td/a').click()
             time.sleep(3)
             self._driver.switch_to.parent_frame()
             self._driver.switch_to.frame('basefrm')
-            up_sw_version = self._driver.find_element_by_xpath('/html/body/table/tbody/tr[2]/td[1]').text
+            up_sw_version = self._driver.find_element_by_xpath('/html/body/blockquote/form/b/table/tbody/tr[4]/td[2]').text
             print(up_sw_version)
 
             if up_sw_version=='BR_SV_g000_R3505VWN1001_s37':
-                upgrade = TRUE
+                upgrade = True
             else: 
-                upgrade = FALSE
+                upgrade = False
+            
+            
             time.sleep(3)
 
             print("upgrade:")
