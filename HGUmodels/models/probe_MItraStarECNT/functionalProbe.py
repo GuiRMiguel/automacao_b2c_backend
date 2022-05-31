@@ -15,6 +15,9 @@ from daos.mongo_dao import MongoConnSigleton
 from selenium.common.exceptions import InvalidSelectorException, NoSuchElementException, NoSuchFrameException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 from paramiko.ssh_exception import SSHException
 import socket
@@ -580,6 +583,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 5) 2.4/5GHz password cannot be set as space character\n
         :return : A dict with the result of the test
         """
+
         # SSID and Password for basic interface
         ssid_2g_exp = 'VIVO-@UTO-2GHz'
         pass_2g_exp = '123$abc!de0'
@@ -593,7 +597,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         pass_5g_adv_exp = '987<>!jklm!@0'
 
         try:
-            # Entering on WiFi 2.4GHz settings and sign in
+            """# Entering on WiFi 2.4GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
             self._driver.switch_to.frame("menufrm")
@@ -643,9 +647,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[1]')
             time.sleep(1)
-            if message_error.text == '' or message_error.text is None:
+            message_error_text = message_error.text
+            time.sleep(1)
+            if message_error_text == '' or message_error_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou ¨'})
             else:
@@ -660,7 +666,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            message_error = self._driver.find_element_by_id('MLG_GVTSettings_WL_Error_SSID_Space_Char')
             time.sleep(1)
             if message_error.text == '' or message_error.text is None:
                 self._driver.quit()
@@ -677,7 +683,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            message_error = self._driver.find_element_by_id('MLG_GVTSettings_WL_Error_SSID_Space_Char')
             time.sleep(1)
             if message_error.text == '' or message_error.text is None:
                 self._driver.quit()
@@ -694,7 +700,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]/span')
+            message_error = self._driver.find_element_by_id('MLG_GVTSettings_WL_Error_SSID_Space_Char')
             time.sleep(1)
             if message_error.text == '' or message_error.text is None:
                 self._driver.quit()
@@ -709,8 +715,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             input_ssid_2g.clear()
             input_ssid_2g.send_keys(ssid_2g_exp)
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
-            time.sleep(10)
 
             # 4) 2.4/5 GHz password cannot be set to "¨"
             input_pass_2g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
@@ -719,9 +723,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]/span')
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[3]')
             time.sleep(1)
-            if message_error_pass.text == '' or message_error_pass.text is None:
+            message_error_pass_text = message_error_pass.text
+            time.sleep(1)
+            if message_error_pass_text == '' or message_error_pass_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou ¨'})
             else:
@@ -736,9 +742,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]/span')
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]')
             time.sleep(1)
-            if message_error_pass.text == '' or message_error_pass.text is None:
+            message_error_pass_text = message_error_pass.text
+            time.sleep(1)
+            if message_error_pass_text == '' or message_error_pass_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A senha do WiFi 2.4GHz aceitou espaço vazio'})
             else:
@@ -773,7 +781,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
                 time.sleep(1)
                 self._driver.switch_to_alert().accept()
-                time.sleep(10)
+                time.sleep(20)
             except Exception as e:
                 print(e)
                 time.sleep(20)
@@ -786,9 +794,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error.text == '' or message_error.text is None:
+            message_error = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[3]')
+            time.sleep(1)
+            message_error_text = message_error.text
+            time.sleep(1)
+            if message_error_text == '' or message_error_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou ¨'})
             else:
@@ -804,9 +814,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error.text == '' or message_error.text is None:
+            message_error = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(1)
+            message_error_text = message_error.text
+            time.sleep(1)
+            if message_error_text == '' or message_error_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou um espaço vazio no lugar do primeiro caracter'})
             else:
@@ -822,9 +834,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error.text == '' or message_error.text is None:
+            message_error = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(1)
+            message_error_text = message_error.text
+            time.sleep(1)
+            if message_error_text == '' or message_error_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O SSID do WiFi 5GHz aceitou um espaço vazio no lugar do último caracter'})
             else:
@@ -840,9 +854,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error.text == '' or message_error.text is None:
+            message_error = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
+            time.sleep(1)
+            message_error_text = message_error.text
+            time.sleep(1)
+            if message_error_text == '' or message_error_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz aceitou dois espaços vazios'})
             else:
@@ -854,8 +870,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             input_ssid_5g.clear()
             input_ssid_5g.send_keys(ssid_5g_exp)
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
-            time.sleep(10)
 
             # 4) 2.4/5 GHz password cannot be set to "¨"
             time.sleep(2)
@@ -865,9 +879,11 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error_pass.text == '' or message_error_pass.text is None:
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[5]')
+            time.sleep(1)
+            message_error_pass_text = message_error_pass.text
+            time.sleep(1)
+            if message_error_pass_text == '' or message_error_pass_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A senha do WiFi 5GHz aceitou ¨'})
             else:
@@ -883,65 +899,17 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(3)
-            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/span[4]')
-            time.sleep(2)
-            if message_error_pass.text == '' or message_error_pass.text is None:
+            message_error_pass = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/span[4]')
+            time.sleep(1)
+            message_error_pass_text = message_error_pass.text
+            time.sleep(1)
+            if message_error_pass_text == '' or message_error_pass_text is None:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'A senha do WiFi 5GHz aceitou espaço vazio'})
             else:
                 print('\n#########################################')
                 print('5GHZ Test 5: passed')
-                print('#########################################\n')
-            
-            # Entering on Status
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("menufrm")
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[1]/a').click()
-            time.sleep(10) 
-
-            # Checking SSID and password for 2.4GHz WiFi
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("menufrm")
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
-            time.sleep(10)
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("basefrm")
-            ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input').get_attribute('value')
-            pass_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]').get_attribute('value')
-
-            if ssid_2g_exp != ssid_2g:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(ssid_2g_exp, ssid_2g)})
-            elif pass_2g_exp != pass_2g:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'A Senha do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(pass_2g_exp, pass_2g)})
-            
-            # Checking SSID and password for 5GHz WiFi
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("menufrm")
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[4]/a/span').click()
-            time.sleep(10)
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("basefrm")
-            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input').get_attribute('value')
-            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input').get_attribute('value')
-
-            if ssid_5g_exp != ssid_5g:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(ssid_5g_exp, ssid_5g)})
-            elif pass_5g_exp != pass_5g:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'A Senha do WiFi 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(pass_5g_exp, pass_5g)})
+                print('#########################################\n')"""
             
             # Entering on Advanced Interface
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -977,9 +945,8 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             input_ssid_2g.send_keys('VIVO 2GHz ¨')
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
-            time.sleep(3)
-            alert = self._driver.switch_to.alert()
             time.sleep(1)
+            alert = WebDriverWait(self._driver, 5).until(EC.alert_is_present)
             alert_text = alert.text
             time.sleep(1)
             if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
@@ -998,9 +965,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             input_ssid_2g.send_keys(' VIVO 2GHZ')
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/form/div/div[2]/ul/li[3]/div/input[1]').click()
-            alert = self._driver.switch_to.alert()
-            time.sleep(1)
-            alert_text = alert.text
+            alert_text = self._driver.switch_to.alert().text
             time.sleep(1)
             if alert_text != "Wi-Fi clients may lose their connectivity with the gateway. Please connect again after the change has been updated.":
                 self._driver.switch_to_alert().accept()
