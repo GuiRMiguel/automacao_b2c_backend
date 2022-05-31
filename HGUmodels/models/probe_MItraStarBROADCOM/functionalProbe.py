@@ -920,7 +920,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 print('2.4GHZ SSID changed succesfully')
                 print('#########################################\n')
             time.sleep(1)
-            
+
             # 1) 2.4/5GHz SSID cannot be set to "¨"
             input_ssid_2g = self._driver.find_element_by_xpath('/html/body/blockquote/form/div[3]/table[2]/tbody/tr[1]/td[2]/input')
             input_ssid_2g.clear()
@@ -1235,6 +1235,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[3]/a').click()
             time.sleep(8)
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
             self.admin_authentication_mitraStat()
@@ -1245,21 +1246,11 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             time.sleep(4)
-            ssid_2g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
-            time.sleep(3)
-            value_ssid_2g_adv = ssid_2g_adv.get_attribute('value')
+            ssid_2g_adv = str(self._driver.find_element_by_xpath('//*[@id="wlSsid"]').get_attribute('value'))
             time.sleep(1)
-            pass_2g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
-            time.sleep(3)
-            value_pass_2g_adv = pass_2g_adv.get_attribute('value')
+            # pass_2g_adv = str(self._driver.find_element_by_xpath('//*[@id="password"]').get_attribute('value'))
             time.sleep(1)
-            if ssid_2g_adv_exp != value_ssid_2g_adv:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(ssid_2g_adv_exp, value_ssid_2g_adv)})
-            elif pass_2g_adv_exp != value_pass_2g_adv:
-                self._driver.quit()
-                self._dict_result.update({"obs": 'A Senha do WiFi 2.4GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(pass_2g_adv_exp, value_pass_2g_adv)})
-            
+
             # Checking SSID and password for 5GHz WiFi
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
@@ -1273,20 +1264,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             time.sleep(4)
-            ssid_5g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[3]/td[2]/input')
-            time.sleep(3)
-            value_ssid_5g_adv = ssid_5g_adv.get_attribute('value')
+            ssid_5g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[3]/td[2]/input').get_attribute('value')
             time.sleep(1)
-            pass_5g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[4]/td[2]/input')
-            time.sleep(3)
-            value_pass_5g_adv = pass_5g_adv.get_attribute('value')
+            # pass_5g_adv = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[4]/td[2]/input').get_attribute('value')
             time.sleep(1)
-            if ssid_5g_adv_exp != value_ssid_5g_adv:
+
+            if ssid_2g_adv_exp != ssid_2g_adv:
                 self._driver.quit()
-                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(ssid_5g_adv_exp, value_ssid_5g_adv)})
-            elif pass_5g_adv_exp != value_pass_5g_adv:
+                self._dict_result.update({"obs": 'O SSID do WiFi 2.4GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(ssid_2g_adv_exp, ssid_2g_adv)})
+            elif ssid_5g_adv_exp != ssid_5g_adv:
                 self._driver.quit()
-                self._dict_result.update({"obs": 'A Senha do WiFi 5GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(pass_5g_adv_exp, value_pass_5g_adv)})
+                self._dict_result.update({"obs": 'O SSID do WiFi 5GHz não foi alterado corretamente pela interface avançada:\nesperado: {}, \nobtido: {}'.format(ssid_5g_adv_exp, ssid_5g_adv)})
             else:
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
