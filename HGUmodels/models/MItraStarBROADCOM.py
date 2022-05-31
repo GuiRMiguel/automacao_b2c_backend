@@ -6,16 +6,18 @@ from selenium.webdriver.common.action_chains import ActionChains
 class HGU_MItraStarBROADCOM(HGUModelInterface):
 
     def login_support(self):
-        time.sleep(2)
-        user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div/div[3]/form/div[3]/input[2]')
-        user_input.send_keys(self._username)
+        # Entering on Advanced Interface
+        self._driver.get('http://' + self._address_ip + '/padrao')
+        time.sleep(3)
+        frame = self._driver.find_element_by_xpath('/html/frameset/frame')
+        self._driver.switch_to.frame(frame)
+        time.sleep(3)
+        self._driver.find_element_by_xpath('//*[@id="user"]').send_keys("support")
+        self._driver.implicitly_wait(10)
+        self._driver.find_element_by_xpath('//*[@id="pass"]').send_keys(self._password)
         time.sleep(1)
-        pass_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div/div[3]/form/div[3]/input[3]')
-        pass_input.send_keys(self._password)
-        time.sleep(1)
-        login_button = self._driver.find_element_by_xpath('/html/body/div[2]/div/div/div[3]/form/div[3]/input[4]')
-        login_button.click()
-        time.sleep(5)
+        self._driver.find_element_by_xpath('//*[@id="acceptLogin"]').click()
+        time.sleep(3)
 
     # def open_change_password_mitraStar(self):
     #     time.sleep(10)

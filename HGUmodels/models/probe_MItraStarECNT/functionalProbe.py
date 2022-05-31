@@ -435,13 +435,13 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             # Iframe
             iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
             self._driver.switch_to.frame(iframe)
+            #Choice File
+            self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[2]/li[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraEcnt/BR_g5.9_1.11WVK_0_b31.bin')
+            time.sleep(5)
+            #Upload
+            self._driver.find_element_by_xpath('//*[@id="Upload_Id"]').click()
+            time.sleep(240)
 
-            #Upload File
-            self._driver.find_element_by_id('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[2]/li[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraEcnt/BR_g5.9_1.11WVK_0_b31.bin')
-            #Upgrade
-            #self._driver.find_element_by_xpath('//*[@id="Upload_Id"]').click()
-            #time.sleep(240)
-                
             #Testing Downgrade Admin
             self._driver.get('http://' + self._address_ip + '/padrao')
             self.login_support()
@@ -453,54 +453,82 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.implicitly_wait(10)
             ActionChains(self._driver).move_to_element(update_sw).click().perform()
             time.sleep(5)
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #FW Version
             dw_sw_version = self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[1]/li/font').text
             print(dw_sw_version)
 
-            if dw_sw_version=='BR_SV_g12.6_RTF_TEF001_V7.15_V015':
+            if dw_sw_version=='BR_g5.9_1.11(WVK.0)b31': 
                 downgrade = True
             else:
                 downgrade = False
-
+            
+            print(downgrade)
+            
+            #Logout
+            self._driver.switch_to.default_content()
+            time.sleep(5) 
+            logout = self._driver.find_element_by_xpath('/html/body/div/div[1]/div/ul/li[3]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(logout).click().perform()
+            #Confirm Logout
+            confirm_logout = self._driver.find_element_by_xpath('/html/body/div[3]/div[3]/button[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(confirm_logout).click().perform()
+            
+            time.sleep(5)
             print("...FINISHING DOWNGRADE")
             print("<<<<<<<<<<<>>>>>>>>>>")
-            # print("STARTING UPGRADE...")
+            print("STARTING UPGRADE...")
             
-            # self._driver.get('http://' + self._address_ip + '/padrao')
-            # self.login_support()
-            # #Menu-Left
-            # self._driver.switch_to.frame('menuFrm')
-            # #FW Upgrade
-            # self._driver.find_element_by_xpath('/html/body/div[5]/div/fieldset/div[3]/a').click()
-            # time.sleep(1)
-            # self._driver.switch_to.parent_frame()
-            # self._driver.switch_to.frame('mainFrm')
-            # #Upload File
-            # self._driver.find_element_by_id('fileUpgradeByHTTP').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/BR_g12.6_RTF_TEF001_V7.20_V016')
-            # #Upgrade
-            # self._driver.find_element_by_xpath('/html/body/div/fieldset/fieldset[2]/form/p[6]/input').click()
-            # time.sleep(240)
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
 
-            # #Testing Downgrade Admin
-            # self._driver.get('http://' + self._address_ip + '/padrao')
-            # self.login_support()
-            # time.sleep(4)
-            # #Menu-Left
-            # self._driver.switch_to.frame('menuFrm')
-            # #FW Upgrade
-            # self._driver.find_element_by_xpath('/html/body/div[1]/a').click()
-            # time.sleep(3)
-            # self._driver.switch_to.parent_frame()
-            # self._driver.switch_to.frame('mainFrm')
-            # up_sw_version = self._driver.find_element_by_xpath('/html/body/table/tbody/tr[2]/td[1]').text
-            # print(up_sw_version)
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #Choice File
+            self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[2]/li[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraEcnt/BR_g5.9_1.11WVK_0_b32.bin')
+            time.sleep(5)
+            #Upload
+            self._driver.find_element_by_xpath('//*[@id="Upload_Id"]').click()
+            time.sleep(240)
 
-            # if up_sw_version=='BR_g12.6_RTF_TEF001_V7.20_V016':
-            #     upgrade = TRUE
-            # else: 
-            #     upgrade = FALSE
-            # time.sleep(3)
-            # print("...FINISHING UPGRADE")
-            upgrade = False
+            #Testing Downgrade Admin
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #FW Version
+            up_sw_version = self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[1]/li/font').text
+            print(up_sw_version)
+
+            if up_sw_version=='BR_g5.9_1.11(WVK.0)b32':
+                upgrade = True
+            else:
+                upgrade = False
+            
+            print(upgrade)
+            print("...FINISHING UPGRADE")
 
             try:
                 if downgrade and upgrade:

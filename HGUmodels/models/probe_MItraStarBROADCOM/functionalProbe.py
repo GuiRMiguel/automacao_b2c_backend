@@ -401,6 +401,134 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             return self._dict_result
 
 
+     #32
+    def UpgradeDowngradeFirmware_32(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            #Management
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[71]/table/tbody/tr/td/a').click()
+            self._driver.implicitly_wait(5)
+            #Update Software
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[85]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+
+            print("STARTING DOWNGRADE...")
+
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            #Upload File
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraBroadcom/BR_g3.5_100VNZ0b32.bin')
+            #Update SW
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
+            time.sleep(240)
+
+            # #Testing Downgrade 
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            #Management
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+            #Update Software
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            
+            dw_sw_version = self._driver.find_element_by_xpath('/html/body/blockquote/form/b/table/tbody/tr[4]/td[2]').text
+            print(dw_sw_version)
+
+            if dw_sw_version=='BR_g3.5_100VNZ0b32':
+                downgrade = True
+            else:
+                downgrade = False
+
+            self._driver.switch_to.parent_frame()
+            self._driver.switch_to.frame('header')
+            print("Logout")
+            self._driver.find_element_by_xpath('/html/body/div/form/input').click()
+            time.sleep(5)
+
+            print("downgrade")
+            print(downgrade)
+            print("...FINISHING DOWNGRADE")
+            print("<<<<<<<<<<<>>>>>>>>>>")
+
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            #Management
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[71]/table/tbody/tr/td/a').click()
+            self._driver.implicitly_wait(5)
+            #Update Software
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[85]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+
+            print("STARTING UPGRADE...")
+
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            #Upload File
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr/td[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraBroadcom/BR_g3.5_100VNZ0b33.bin')
+            #Update SW
+            self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
+            time.sleep(240)
+
+            # #Testing Downgrade 
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('menufrm')
+            #Management
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+            #Update Software
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
+            self._driver.implicitly_wait(5)
+
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            
+            up_sw_version = self._driver.find_element_by_xpath('/html/body/blockquote/form/b/table/tbody/tr[4]/td[2]').text
+            print(up_sw_version)
+
+            if up_sw_version=='BR_g3.5_100VNZ0b33':
+                upgrade = True
+            else:
+                upgrade = False
+            
+            time.sleep(3)
+
+            print("upgrade:")
+            print(upgrade)
+            print("...FINISHING UPGRADE")
+
+            try:
+                if downgrade and upgrade:
+                    self._dict_result.update({"obs": "Teste passou. Up/Down de FW ok.", "result":"passed", "Resultado_Probe": "OK"})
+
+                else:
+                    self._dict_result.update({"obs": f"Teste falhou.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+
+
     # 44
     def acsURL_44(self, flask_username):
         """
