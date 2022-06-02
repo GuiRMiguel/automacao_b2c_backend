@@ -46,9 +46,11 @@ class NRH:
             dadosNbiPar = NbiParameter(name='serialNumber', value=xsd.AnyObject(xsd.String(), serialNumber))
             ArrayOfNBITemplate = client.get_type('ns3:ArrayOfNBITemplate')
             dadosArray = ArrayOfNBITemplate([dadosNbiPar])
+            print(dadosArray)
             NbiTemplate = client.get_type('ns3:NBITemplate')
             dadosNbiTem = NbiTemplate(name="ct.find.devices.serialNumber", parameters=dadosArray)
             connService = client.service.findDevicesByTemplate(dadosNbiTem, 500, -1)
+            print(connService)
             self.device = {  "OUI" : connService[0]['deviceId']['OUI'],
                             "productClass" : connService[0]['deviceId']['productClass'],
                             "serialNumber" : connService[0]['deviceId']['serialNumber'],
@@ -62,6 +64,7 @@ class NRH:
                             "lastContactTime" : connService[0]['lastContactTime'],
                             "activated" : connService[0]['activated']
                             }
+            print(self.device)
             self.msgTagExecution_02 = 'EXECUTED'
             self.msgErrorLog_02 = 'SERIAL ENCONTRADO'
             self.msgErrorDetail_02 = 'MSG_006-SUCESSO AO EXECUTAR BUSCA DE INFORMACOES PELO SERIAL'

@@ -1,3 +1,4 @@
+from ..ACSutils import utils
 from audioop import lin2lin
 from gc import collect
 from http import client
@@ -35,6 +36,9 @@ mongo_conn = MongoConnSigleton(db='config', collection='cpe_config')
 config_collection = mongo_conn.get_collection()
 
 class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
+    class MyEncoder(JSONEncoder):
+            def default(self, o):
+                return o.__dict__
 
     def initialInformations_4(self, flask_sername):
         """
@@ -44,7 +48,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
         time.sleep(5)
         firmware_version = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[2]/td[2]')
-        
+
 
 
 
@@ -401,78 +405,15 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
-    def GPV_OneObjct_414(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword):
+    def GPV_OneObjct_414(self, dados):
         #TODO: This function needs refactoring, zeep library not working, test crashing
-        class MyEncoder(JSONEncoder):
-            def default(self, o):
-                return o.__dict__
-        acsPort = 7015
-        objeto = GPV_Param['name']
-
-       
-        try:
-            url = f'http://{IPACS}:{acsPort}/hdm'
-            connTest = requests.post(url, timeout=4)
-
-            if connTest.status_code != 200:
-                self._dict_result.update({'result':'failed',"obs":f'ERROR002-ERRO DE CONECTIVIDADE COM ACS-HDM: {IPACS}:{acsPort}'})
-                return self._dict_result
-            else:
-                ###INICIANDO WEBSERIVCES###
-                #
-                #try:
-                import Setup.ACS.webSDO
-                import Setup.ACS.webRemoteHDM
-                from Setup.ACS import webRemoteHDM
-                from Setup.ACS import webServiceImpl
-                from Setup.ACS import webSDO
-                nbiSDO = webSDO.SDO(IPACS, str(acsPort), acsUsername, acsPassword)
-                nbiRH = webRemoteHDM.NRH(IPACS, str(acsPort), acsUsername, acsPassword)
-                #except Exception as exception:
-                #    print(exception)
-                #    self._dict_result.update({'result':'failed',"obs":'ERROR_003-ERRO AO VALIDAR ARQUIVO WSDL NO SERVIDOR ACS-HDM #(LINE:84)'})
-                #    return self._dict_result
-                #
-                ###BUSCANDO DADOS DO DISPOSITIVO###
-                #
-                tsa = time.time()
-                sta = datetime.fromtimestamp(tsa).strftime('%Y_%m_%d_%HH:%MM:%SS')
-                nbiRH.findDeviceBySerial(serialnumber, acsUsername, acsPassword)
-                if nbiRH.msgTagExecution_02 == 'EXECUTED':
-                    OUI = str(nbiRH.device["OUI"])
-                    productClass = str(nbiRH.device["productClass"])
-                    protocol = str(nbiRH.device["protocol"])
-                    subscriberId = str(nbiRH.device["subscriberId"])
-                    lastContactTime = str(nbiRH.device["lastContactTime"])
-                    softwareVersion = str(nbiRH.device["softwareVersion"])
-                    externalIpAddress = str(nbiRH.device["iPAddressWAN"])
-                    activated = str(nbiRH.device["activated"])
-                    lastActivationTime = pd.Timestamp(str(nbiRH.device["lastActivationTime"])).tz_convert("UTC")
-                    lastActivationTime = lastActivationTime.strftime("%d-%m-%Y %H:%M:%S")
-                    GPV = nbiSDO.getParameterValue(OUI, productClass, protocol, serialnumber, objeto)
-                    if GPV != None:
-                        GPV = json.dumps(GPV, cls=MyEncoder)
-                        GPV_1 = json.loads(GPV)
-                        json_saida = []
-                        for key, value in enumerate(GPV_1):
-                            for chave, valor in value.items():
-                                aux = {
-                                    "name":valor['name'],
-                                    "type":valor['type'],
-                                    "value":valor['value']
-                                }
-                                json_saida.append(aux)
-                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', 'obs':json_saida})
-                        return self._dict_result
-                    else:
-                        self._dict_result.update({'result':'failed',"obs":"GPV == None"})
-                        return self._dict_result
-                else:
-                    self._dict_result.update({'result':'failed',"obs":"nbiRH.msgTagExecution_02 != EXECUTED"})
-                    return self._dict_result   
-        except Exception as exception:
-            self._dict_result.update({'result':'failed',"obs":str(exception)})
-            return self._dict_result
+        
+        
+        dados_entrada = dados
+        print(dados_entrada)
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        print(gpv_get)
+        
 
 
     def periodicInformEnable_415(self, flask_username):

@@ -27,6 +27,7 @@ class acs(Resource):
             IPACS = request.json['IPACS']
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -34,7 +35,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.GPV_OneObjct(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, modelo)
+            result = obj.GPV_OneObjct(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)

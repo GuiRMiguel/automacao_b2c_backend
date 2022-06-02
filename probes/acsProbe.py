@@ -35,7 +35,7 @@ class acs:
 
 
     #414
-    def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, model_name):
+    def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
 
         dict_result = {
             "result": "failed",
@@ -46,9 +46,18 @@ class acs:
             "Description": "Executa Get Parameter Value via ACS", 
             "obs": None}
 
+        dados_entrada = {
+            'serialnumber': serialnumber,
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort
+        }
+
         hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.GPV_OneObjct_414(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.GPV_OneObjct_414(dados_entrada)
 
     #417
     def connectionRequestPort(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, model_name):
