@@ -36,6 +36,18 @@ config_collection = mongo_conn.get_collection()
 
 class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
+    def initialInformations_4(self, flask_sername):
+        """
+        """
+        self._driver.get('http://' + self._address_ip + '/')
+        time.sleep(3)
+        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
+        time.sleep(5)
+        firmware_version = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[2]/td[2]')
+        
+
+
+
     def accessWizard_401(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')

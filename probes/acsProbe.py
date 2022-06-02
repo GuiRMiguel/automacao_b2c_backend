@@ -17,6 +17,23 @@ class acs:
         self.username = []
         self.password = []
     
+    # 4
+    def initialInformations(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, model_name):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "initialInformations", 
+            "Probe#": "XXXXXXX", 
+            "Description": "DUT pré configurado e acesso com conectividade ao HDM de Laboratório. Device Type já criado no HDM.", 
+            "obs": None}
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.initialInformations_4(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+
+
     #414
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, model_name):
 
