@@ -209,7 +209,6 @@ class ACS():
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
 
-
     def getParameterValues(**dados_entrada):
 
         ts = time.time()
@@ -217,12 +216,14 @@ class ACS():
 
         print('\n\n >>> Iniciando Função GetParameterValues ACS -', start_time, '\n\n')
 
-        print(' -- Validações de Entrada --')
-        print(dados_entrada.get('serialnumber'))
-        print(dados_entrada.get('IPACS'))
-        print(dados_entrada.get('portaACS'))
-        print(dados_entrada.get('acsUsername'))
-        print(dados_entrada.get('acsPassword'))
+        # print(' -- Validações de Entrada --')
+        # print(dados_entrada.get('serialnumber'))
+        # print(dados_entrada.get('IPACS'))
+        # print(dados_entrada.get('portaACS'))
+        # print(dados_entrada.get('acsUsername'))
+        # print(dados_entrada.get('acsPassword'))
+
+        dict_result = dict
 
         if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMAÇÔES DE ENTRADA OK --')
@@ -262,6 +263,7 @@ class ACS():
                                 final_time = time.time()
                                 total_time = (final_time - ts)
                                 print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
                             else:
                                 print(' -- GetParameterValues NOK -- ERRO: Device OFFLINE')
                                 final_time = time.time()
@@ -269,6 +271,7 @@ class ACS():
                                 print(' -- GetParameterValues NOK --')
                                 print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
                                 print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                dict_result = {"obs": "ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST!"} 
                            
                         else:
                             final_time = time.time()
@@ -276,16 +279,21 @@ class ACS():
                             print(' -- FindDeviceBySerial NOK --')
                             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
                             print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
                     except:
                         final_time = time.time()
                         total_time = (final_time - ts)
                         print(' -- WEBSERVICES NOK --')
                         print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                        dict_result = {"obs": "WEBSERVICES NOK"}
+
                 else:
                     final_time = time.time()
                     total_time = (final_time - ts)
                     print(' -- CONECTIVIDADE COM ACS NOK --')
                     print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                    dict_result = {"obs": "CONECTIVIDADE COM ACS NOK"}
+
 
             except:
                 e = sys.exc_info()[1]
@@ -295,6 +303,9 @@ class ACS():
             print(' -- Informações de Entrada NOK --')
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
             print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
+        
+        return dict_result
 
     def reboot(**dados_entrada):
         # print(f'\ndados_entrada = {dados_entrada}')

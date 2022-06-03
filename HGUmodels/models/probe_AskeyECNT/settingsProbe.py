@@ -420,16 +420,18 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         # print(gpv_apv)
 
         # #GET
-        # gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        # print(gpv_get)  
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        print(gpv_get)
+        self._dict_result.update(gpv_get)
+        return self._dict_result
 
         # #Reboot
         # gpv_rbt = utils.ACS.reboot(**dados_entrada)
         # print(gpv_rbt)
 
         #SetVoIP
-        gpv_avip = utils.ACS.setVoIP(**dados_entrada)
-        print(gpv_avip)
+        # gpv_avip = utils.ACS.setVoIP(**dados_entrada)
+        # print(gpv_avip)
 
 
 
