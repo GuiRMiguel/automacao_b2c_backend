@@ -36,25 +36,25 @@ class ACS():
         print('\n\n >>> Iniciando Função CheckDeviceAvailability ACS -',start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-        if dados_entrada.get('serialNumber') and dados_entrada.get('ipACS') and dados_entrada.get('portaACS') and dados_entrada.get('ipACS') and dados_entrada.get('username') and dados_entrada.get('password'):
+        if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMAÇÔES DE ENTRADA OK --')
             #
             ###Testando Conectividade ACS-NOKIA###
             #
             try:
-                url = 'http://' + dados_entrada['ipACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
+                url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
                 connTest = requests.post(url, timeout=4)
                 print(' -- Validação de Conectividade com ACS --')
                 if connTest.status_code == 200:
-                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['ipACS'])
+                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSDO = webSDO.SDO(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
-                        nbiRH.findDeviceBySerial(dados_entrada['serialNumber'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         if nbiRH.msgTagExecution_02 == 'EXECUTED':
                             print(' -- FindDeviceBySerial OK --')
                             OUI = str(nbiRH.device["OUI"])
@@ -65,7 +65,7 @@ class ACS():
                             softwareVersion = str(nbiRH.device["softwareVersion"])
 
                             print(' -- Executando ACS [CheckDeviceAvailability] --')
-                            connectionRequest = nbiSDO.checkDeviceAvailability(OUI, productClass, protocol, dados_entrada['serialNumber'])
+                            connectionRequest = nbiSDO.checkDeviceAvailability(OUI, productClass, protocol, dados_entrada['serialnumber'])
                             if connectionRequest.startswith('org/apache/xml/serializer/TreeWalker'):
                                 print(' -- CheckDeviceAvailability NOK -- ERRO: org/apache/xml/serializer/TreeWalker')
                                 final_time = time.time()
@@ -122,25 +122,25 @@ class ACS():
         print('\n\n >>> Iniciando Função SetParameterValues ACS -', start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-        if dados_entrada.get('serialNumber') and dados_entrada.get('ipACS') and dados_entrada.get('portaACS') and dados_entrada.get('ipACS') and dados_entrada.get('username') and dados_entrada.get('password'):
+        if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMAÇÔES DE ENTRADA OK --')
             #
             ###Testando Conectividade ACS-NOKIA###
             #
             try:
-                url = 'http://' + dados_entrada['ipACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
+                url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
                 connTest = requests.post(url, timeout=4)
                 print(' -- Validação de Conectividade com ACS --')
                 if connTest.status_code == 200:
-                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['ipACS'])
+                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSDO = webSDO.SDO(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
-                        nbiRH.findDeviceBySerial(dados_entrada['serialNumber'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         if nbiRH.msgTagExecution_02 == 'EXECUTED':
                             print(' -- FindDeviceBySerial OK --')
                             OUI = str(nbiRH.device["OUI"])
@@ -151,7 +151,7 @@ class ACS():
                             softwareVersion = str(nbiRH.device["softwareVersion"])
 
                             print(' -- Executando ACS [SetParameterValues] --')
-                            spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialNumber'], dados_entrada['SPV_Object'])
+                            spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['SPV_Object'])
                             if spv == 0:
                                 print(' -- SetParameterValues OK --')
                                 final_time = time.time()
@@ -307,25 +307,25 @@ class ACS():
         print('\n\n >>> Iniciando Função Reboot ACS -', start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-        if dados_entrada.get('serialNumber') and dados_entrada.get('ipACS') and dados_entrada.get('portaACS') and dados_entrada.get('ipACS') and dados_entrada.get('username') and dados_entrada.get('password'):
+        if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMAÇÔES DE ENTRADA OK --')
             #
             ###Testando Conectividade ACS-NOKIA###
             #
             try:
-                url = 'http://' + dados_entrada['ipACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
+                url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
                 connTest = requests.post(url, timeout=4)
                 print(' -- Validação de Conectividade com ACS --')
                 if connTest.status_code == 200:
-                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['ipACS'])
+                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSDO = webSDO.SDO(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
-                        nbiRH.findDeviceBySerial(dados_entrada['serialNumber'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         if nbiRH.msgTagExecution_02 == 'EXECUTED':
                             print(' -- FindDeviceBySerial OK --')
                             OUI = str(nbiRH.device["OUI"])
@@ -408,25 +408,25 @@ class ACS():
         print('\n\n >>> Iniciando Função SeT VoIP ACS -', start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-        if dados_entrada.get('serialNumber') and dados_entrada.get('ipACS') and dados_entrada.get('portaACS') and dados_entrada.get('ipACS') and dados_entrada.get('username') and dados_entrada.get('password'):
+        if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMAÇÔES DE ENTRADA OK --')
             #
             ###Testando Conectividade ACS-NOKIA###
             #
             try:
-                url = 'http://' + dados_entrada['ipACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
+                url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
                 connTest = requests.post(url, timeout=4)
                 print(' -- Validação de Conectividade com ACS --')
                 if connTest.status_code == 200:
-                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['ipACS'])
+                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSDO = webSDO.SDO(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['ipACS'], dados_entrada['portaACS'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
-                        nbiRH.findDeviceBySerial(dados_entrada['serialNumber'], dados_entrada['username'], dados_entrada['password'])
+                        nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         if nbiRH.msgTagExecution_02 == 'EXECUTED':
                             print(' -- FindDeviceBySerial OK --')
                             OUI = str(nbiRH.device["OUI"])
