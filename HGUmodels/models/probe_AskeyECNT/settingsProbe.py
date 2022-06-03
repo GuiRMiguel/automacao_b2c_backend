@@ -408,11 +408,31 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     def GPV_OneObjct_414(self, dados):
         #TODO: This function needs refactoring, zeep library not working, test crashing
         
-        
         dados_entrada = dados
         print(dados_entrada)
+        
+        #CheckDA
+        gpv_cda = utils.ACS.checkDeviceAvailability(**dados_entrada)
+        print(gpv_cda)
+
+        #Set
+        gpv_apv = utils.ACS.setParameterValues(**dados_entrada)
+        printi(gpv_apv)
+
+        #GET
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        print(gpv_get)
+        print(gpv_get)  
+
+        #Reboot
+        gpv_rbt = utils.ACS.reboot(**dados_entrada)
+        print(gpv_rbt)
+
+        #SetVoIP
+        gpv_avip = utils.ACS.setVoIP(**dados_entrada)
+        print(gpv_avip)
+
+
+
         
 
 
