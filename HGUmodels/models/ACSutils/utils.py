@@ -23,9 +23,6 @@ class ACS():
             print(chave, valor)
 
     def checkDeviceAvailability(**dados_entrada):
-        # print(f'\ndados_entrada = {dados_entrada}')
-        # for chave, valor in dados_entrada.items():
-        #     print(chave, valor)
 
         ts = time.time()
         start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
@@ -50,11 +47,11 @@ class ACS():
                         nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        print("NBI - RH:")
+                        print("\nNBI - RH:")
                         print(nbiRH.ip)
-                        print("NBI - SDO:")
+                        print("\nNBI - SDO:")
                         print(nbiSDO.ip)
-                        print("NBI - SI")
+                        print("\nNBI - SI")
                         print(nbiSI.ip)
                         
                         print(' -- WebServices OK --')
@@ -144,9 +141,9 @@ class ACS():
                     print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
                         nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
@@ -226,14 +223,9 @@ class ACS():
 
         print('\n\n >>> Iniciando Função GetParameterValues ACS -', start_time, '\n\n')
 
-        # print(' -- Validações de Entrada --')
-        # print(dados_entrada.get('serialnumber'))
-        # print(dados_entrada.get('IPACS'))
-        # print(dados_entrada.get('portaACS'))
-        # print(dados_entrada.get('acsUsername'))
-        # print(dados_entrada.get('acsPassword'))
-        print('o que e GPV_PARAM:')
-        print(dados_entrada.get('GPV_Param'))
+        print(' -- Validações de Entrada --')
+        
+        print(dados_entrada['GPV_Param'])
 
         dict_result = dict
 
@@ -250,9 +242,9 @@ class ACS():
                     print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
                         nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
@@ -343,9 +335,9 @@ class ACS():
                     print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
                         nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
@@ -444,9 +436,9 @@ class ACS():
                     print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
                         nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])

@@ -7632,7 +7632,7 @@
  <service   name="NBIService">
   <port    name="NBIServicePort"
     binding="tns:NBIServicePort">
-    <soap:address location="http://201.95.254.37:7015/remotehdm/NBIService" />
+    <soap:address location="http://201.95.254.37:7005/remotehdm/NBIService" />
   </port>
  </service>
 </definitions>

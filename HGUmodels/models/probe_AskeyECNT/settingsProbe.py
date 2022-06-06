@@ -40,15 +40,31 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             def default(self, o):
                 return o.__dict__
 
-    def initialInformations_4(self, flask_sername):
-        """
-        """
-        self._driver.get('http://' + self._address_ip + '/')
-        time.sleep(3)
-        self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
-        time.sleep(5)
-        firmware_version = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[2]/td[2]')
+    def initialInformations_4(self, dados):
+        #TODO: This function needs refactoring, zeep library not working, test crashing
+        
+        dados_gpv = {'GPV_Param': {'parameterNames': [
+                        "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                        "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                        "InternetGatewayDevice.DeviceInfo.ModelName",
+                        "InternetGatewayDevice.DeviceInfo.ProductClass",
+                        "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                        "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                        "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
 
+                        "InternetGatewayDevice.ManagementServer.URL",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                        ]}}
+        dados.update(dados_gpv)
+        dados_entrada = dados
+        #GET
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        # #print(gpv_get)
+        self._dict_result.update(gpv_get)
+        return self._dict_result
+
+        
 
 
 
@@ -408,11 +424,25 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     def GPV_OneObjct_414(self, dados):
         #TODO: This function needs refactoring, zeep library not working, test crashing
         
+        dados_gpv = {'GPV_Param': {'parameterNames': [
+                        "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                        "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                        "InternetGatewayDevice.DeviceInfo.ModelName",
+                        "InternetGatewayDevice.DeviceInfo.ProductClass",
+                        "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                        "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                        "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+
+                        "InternetGatewayDevice.ManagementServer.URL",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                        ]}}
+        dados.update(dados_gpv)
         dados_entrada = dados
-        #print(dados_entrada)
+        print(dados_entrada)
         
         #CheckDA
-        gpv_cda = utils.ACS.checkDeviceAvailability(**dados_entrada)
+        # gpv_cda = utils.ACS.checkDeviceAvailability(**dados_entrada)
         #print(gpv_cda)
 
         #Set
@@ -420,10 +450,10 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         #print(gpv_apv)
 
         #GET
-        # gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
         # #print(gpv_get)
-        # self._dict_result.update(gpv_get)
-        # return self._dict_result
+        self._dict_result.update(gpv_get)
+        return self._dict_result
 
         # #Reboot
         # gpv_rbt = utils.ACS.reboot(**dados_entrada)
