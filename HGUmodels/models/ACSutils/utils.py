@@ -1,8 +1,6 @@
 import Setup.ACS.webSDO
 import Setup.ACS.webRemoteHDM
-from Setup.ACS import webRemoteHDM
-from Setup.ACS import webServiceImpl
-from Setup.ACS import webSDO
+import Setup.ACS.webServiceImpl
 import os
 import sys
 import time
@@ -49,12 +47,21 @@ class ACS():
                     print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
                     print(' -- Validação de WebServices ACS --')
                     try:
-                        nbiRH = webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        print("NBI - RH:")
+                        print(nbiRH.ip)
+                        print("NBI - SDO:")
+                        print(nbiSDO.ip)
+                        print("NBI - SI")
+                        print(nbiSI.ip)
+                        
                         print(' -- WebServices OK --')
                         print(' -- Executando ACS [FindDeviceBySerial] --')
                         nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                        print(dados_entrada['serialnumber'])
+                        
                         if nbiRH.msgTagExecution_02 == 'EXECUTED':
                             print(' -- FindDeviceBySerial OK --')
                             OUI = str(nbiRH.device["OUI"])
@@ -66,6 +73,8 @@ class ACS():
 
                             print(' -- Executando ACS [CheckDeviceAvailability] --')
                             connectionRequest = nbiSDO.checkDeviceAvailability(OUI, productClass, protocol, dados_entrada['serialnumber'])
+                            print('conexao:  ')
+                            print(connectionRequest)
                             if connectionRequest.startswith('org/apache/xml/serializer/TreeWalker'):
                                 print(' -- CheckDeviceAvailability NOK -- ERRO: org/apache/xml/serializer/TreeWalker')
                                 final_time = time.time()
@@ -209,6 +218,7 @@ class ACS():
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
 
+
     def getParameterValues(**dados_entrada):
 
         ts = time.time()
@@ -222,11 +232,13 @@ class ACS():
         # print(dados_entrada.get('portaACS'))
         # print(dados_entrada.get('acsUsername'))
         # print(dados_entrada.get('acsPassword'))
+        print('o que e GPV_PARAM:')
+        print(dados_entrada.get('GPV_Param'))
 
         dict_result = dict
 
         if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
-            print(' -- INFORMAÇÔES DE ENTRADA OK --')
+            print(' -- INFORMACOES DE ENTRADA OK --')
             #
             ###Testando Conectividade ACS-NOKIA###
             #

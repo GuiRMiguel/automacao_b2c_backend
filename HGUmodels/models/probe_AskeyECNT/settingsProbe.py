@@ -409,21 +409,21 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         #TODO: This function needs refactoring, zeep library not working, test crashing
         
         dados_entrada = dados
-        print(dados_entrada)
+        #print(dados_entrada)
         
-        # #CheckDA
-        # gpv_cda = utils.ACS.checkDeviceAvailability(**dados_entrada)
-        # print(gpv_cda)
+        #CheckDA
+        gpv_cda = utils.ACS.checkDeviceAvailability(**dados_entrada)
+        #print(gpv_cda)
 
-        # #Set
-        # gpv_apv = utils.ACS.setParameterValues(**dados_entrada)
-        # print(gpv_apv)
+        #Set
+        #gpv_apv = utils.ACS.setParameterValues(**dados_entrada)
+        #print(gpv_apv)
 
-        # #GET
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        print(gpv_get)
-        self._dict_result.update(gpv_get)
-        return self._dict_result
+        #GET
+        # gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        # #print(gpv_get)
+        # self._dict_result.update(gpv_get)
+        # return self._dict_result
 
         # #Reboot
         # gpv_rbt = utils.ACS.reboot(**dados_entrada)
