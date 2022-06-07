@@ -69,6 +69,32 @@ class acs:
         return hgu.wifi2GHzInformations_5(dados_entrada)
 
 
+    # 6
+    def wifi5GHzInformations(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "wifi5GHzInformations", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': serialnumber,
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.wifi5GHzInformations_6(dados_entrada)
+
+
     #414
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
 
