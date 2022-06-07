@@ -224,8 +224,6 @@ class ACS():
         print('\n\n >>> Iniciando Função GetParameterValues ACS -', start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-        
-        print(dados_entrada['GPV_Param'])
 
         dict_result = dict
 
@@ -261,13 +259,11 @@ class ACS():
                             gpv = nbiSDO.getParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['GPV_Param'])
                             if gpv != None:
                                 GPV_1 = json.dumps(gpv, cls=MyEncoder)
-                                print(GPV_1)
-                                
                                 print(' -- GetParameterValues OK --')
                                 final_time = time.time()
                                 total_time = (final_time - ts)
                                 print('\n\n >>> Finalizando GetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                                return gpv
                             else:
                                 print(' -- GetParameterValues NOK -- ERRO: Device OFFLINE')
                                 final_time = time.time()

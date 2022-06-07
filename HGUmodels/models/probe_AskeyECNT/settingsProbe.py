@@ -32,6 +32,9 @@ from HGUmodels import wizard_config
 
 session = MainSession()
 
+file = open('/home/automacao/Projects/automacao_b2c_backend/Default_Settings.json')
+defautl_settings = json.load(file)
+
 mongo_conn = MongoConnSigleton(db='config', collection='cpe_config')
 config_collection = mongo_conn.get_collection()
 
@@ -58,10 +61,19 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                         ]}}
         dados.update(dados_gpv)
         dados_entrada = dados
+        
         #GET
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        # #print(gpv_get)
-        self._dict_result.update(gpv_get)
+        parameters = defautl_settings['Default_Settings']["CWMP (TR-069)"]["Parameter"]
+
+        for value_parameter in gpv_get:
+            for dict_value in parameters.values():
+                if value_parameter['value'] == dict_value['Value']:
+                    dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                else:
+
+                    dict_result = {"obs": f"Objeto {value_parameter} não encontrado"}
+        self._dict_result.update(dict_result)
         return self._dict_result
 
         

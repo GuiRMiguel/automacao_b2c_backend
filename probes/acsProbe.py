@@ -24,9 +24,9 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "GPV_OneObjct", 
+            "ProbeName": "initialInformations", 
             "Probe#": "XXXXXXX", 
-            "Description": "Executa Get Parameter Value via ACS", 
+            "Description": "DUT pré configurado e acesso com conectividade ao HDM de Laboratório. Device Type já criado no HDM.", 
             "obs": None}
 
         dados_entrada = {

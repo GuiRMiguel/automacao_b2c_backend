@@ -154,7 +154,6 @@ class SDO:
             # print('get_type "getParameterValuesDTO" = ', teste)
             # getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), object), arg2=nBIOptions, arg3=timeout)
             getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=object, arg2=nBIOptions, arg3=timeout)
-            # connect = self.client.service.checkOnline(arg0=nbiDeviceId, arg1=nBIOptions, arg2=timeout)
             self.msgTagExecution_GPV = 'EXECUTED'
             return getParameterValue
         except TypeError:
