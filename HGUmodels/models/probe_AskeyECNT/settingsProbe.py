@@ -75,6 +75,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
                     dict_result = {"obs": f"Objeto {value_parameter['name']} não encontrado"}
         self._dict_result.update(dict_result)
+        print('\n', self._dict_result, '\n')
         return self._dict_result
 
         
@@ -105,6 +106,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
                         dict_result = {"obs": f"Objeto {value_parameter['name']} não encontrado"}
             self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
             return self._dict_result
 
 
@@ -135,6 +137,129 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
                         dict_result = {"obs": f"Objeto {value_parameter['name']} não encontrado"}
             self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 10
+    def setDHCP_10(self, dados):
+            #TODO: This function needs refactoring, zeep library not working, test crashing
+            
+            dados_spv = {'SPV_Param': [
+                {
+            "name" : "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+            "type"  : "string",
+            "value" : "192.168.15.6"
+            }, {
+            "name" : "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+            "type" : "string",
+            "value" : "192.168.15.150"
+            }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != "192.168.15.6":
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] != "192.168.15.150":
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            else:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 12
+    def set2GHzWiFi_12(self, dados):
+            #TODO: This function needs refactoring, zeep library not working, test crashing
+            
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID", 
+                    "type"  : "string", 
+                    "value" : "automacao_24"
+                    },
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase", 
+                    "type" : "string", 
+                    "value" : "vivo@12345678"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            else:
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 13
+    def set5GHzWiFi_13(self, dados):
+            #TODO: This function needs refactoring, zeep library not working, test crashing
+            
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID", 
+                    "type"  : "string", 
+                    "value" : "automacao_24"
+                    },
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "type" : "string",
+                    "value" : "vivo@12345678"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            else:
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
             return self._dict_result
 
 

@@ -10,6 +10,7 @@ import threading
 import json
 from json import JSONEncoder
 
+dict_result = dict
 
 class MyEncoder(JSONEncoder):
     def default(self, o):
@@ -157,12 +158,13 @@ class ACS():
                             softwareVersion = str(nbiRH.device["softwareVersion"])
 
                             print(' -- Executando ACS [SetParameterValues] --')
-                            spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['SPV_Object'])
+                            spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['SPV_Param'])
                             if spv == 0:
                                 print(' -- SetParameterValues OK --')
                                 final_time = time.time()
                                 total_time = (final_time - ts)
                                 print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                return spv
                             else:
                                 print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
                                 final_time = time.time()
@@ -170,41 +172,26 @@ class ACS():
                                 print(' -- SetParameterValues NOK --')
                                 print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
                                 print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # if spv.startswith('org/apache/xml/serializer/TreeWalker'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: org/apache/xml/serializer/TreeWalker')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! ERRO TRANSPORT! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # elif spv.startswith('status=6,'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # else:
-                            #     print(' -- SetParameterValues OK --')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                dict_result = {"obs": "ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST!"}
                         else:
                             final_time = time.time()
                             total_time = (final_time - ts)
                             print(' -- FindDeviceBySerial NOK --')
                             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
                             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
                     except:
                         final_time = time.time()
                         total_time = (final_time - ts)
                         print(' -- WEBSERVICES NOK --')
                         print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                        dict_result = {"obs": "WEBSERVICES NOK"}
                 else:
                     final_time = time.time()
                     total_time = (final_time - ts)
                     print(' -- CONECTIVIDADE COM ACS NOK --')
                     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                    dict_result = {"obs": "CONECTIVIDADE COM ACS NOK"}
 
             except:
                 e = sys.exc_info()[1]
@@ -214,6 +201,8 @@ class ACS():
             print(' -- Informações de Entrada NOK --')
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
+        return dict_result
 
 
     def getParameterValues(**dados_entrada):
@@ -224,8 +213,6 @@ class ACS():
         print('\n\n >>> Iniciando Função GetParameterValues ACS -', start_time, '\n\n')
 
         print(' -- Validações de Entrada --')
-
-        dict_result = dict
 
         if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMACOES DE ENTRADA OK --')

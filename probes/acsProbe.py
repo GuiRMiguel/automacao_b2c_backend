@@ -95,6 +95,82 @@ class acs:
         return hgu.wifi5GHzInformations_6(dados_entrada)
 
 
+    # 10
+    def setDHCP(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setDHCP", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': serialnumber,
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.setDHCP_10(dados_entrada)
+
+
+    # 12
+    def set2GHzWiFi(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "set2GHzWiFi", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': serialnumber,
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        return hgu.set2GHzWiFi_12(dados_entrada)
+
+
+    # 13
+    def set5GHzWiFi(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "set5GHzWiFi", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': serialnumber,
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        return hgu.set5GHzWiFi_13(dados_entrada)
+
+
     #414
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
 
