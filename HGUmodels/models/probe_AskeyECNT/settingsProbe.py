@@ -42,7 +42,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     class MyEncoder(JSONEncoder):
             def default(self, o):
                 return o.__dict__
-
+    
+    # 4
     def initialInformations_4(self, dados):
         #TODO: This function needs refactoring, zeep library not working, test crashing
         
@@ -77,7 +78,34 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
         
+    # 5
+    def wifi2GHzInformations_5(self, dados):
+            #TODO: This function needs refactoring, zeep library not working, test crashing
+            
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            
+            #GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameters = defautl_settings['Default_Settings']["Wifi 2.4"]["Parameter"]
 
+            for value_parameter in gpv_get:
+                for dict_value in parameters.values():
+                    if value_parameter['value'] == dict_value['Value']:
+                        dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                    else:
+
+                        dict_result = {"obs": f"Objeto {value_parameter} não encontrado"}
+            self._dict_result.update(dict_result)
+            return self._dict_result
 
 
     def accessWizard_401(self, flask_username):
