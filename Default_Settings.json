@@ -877,7 +877,7 @@
             }
         },
         "ACS_aux":{
-            "Devices":{
+    "Devices":{
                 "Askey_Broadcom":{
                     "modelos": ["RTF3505VW-N1", "RTF3505VW-N2", "RTF3507VW-N1", "RTF3507VW-N2"],
                     "oui": ["009096"],
@@ -900,5 +900,5 @@
                 }
             }
         }
-    }
+}
 }
