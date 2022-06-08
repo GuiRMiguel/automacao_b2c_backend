@@ -1,4 +1,5 @@
 #from asyncio import exceptions
+from ..ACSutils import utils
 from cgi import print_form
 from os import name
 import re
@@ -8,6 +9,8 @@ import time
 import paramiko
 from paramiko.ssh_exception import AuthenticationException
 import socket
+from json import JSONEncoder
+import json
 
 # import pyperclip
 
@@ -23,6 +26,9 @@ from HGUmodels.main_session import MainSession
 
 session = MainSession()
 
+file = open('/home/automacao/Projects/automacao_b2c_backend/Default_Settings.json')
+defautl_settings = json.load(file)
+
 
 mongo_conn = MongoConnSigleton(db='config', collection='cpe_config')
 config_collection = mongo_conn.get_collection()
@@ -30,6 +36,212 @@ config_collection = mongo_conn.get_collection()
 dict_test_result_memory = {}
 
 class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
+
+# 4
+    def initialInformations_4(self, dados):        
+        dados_gpv = {'GPV_Param': {'parameterNames': [
+                        "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                        "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                        "InternetGatewayDevice.DeviceInfo.ModelName",
+                        "InternetGatewayDevice.DeviceInfo.ProductClass",
+                        "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                        "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                        "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+
+                        "InternetGatewayDevice.ManagementServer.URL",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                        "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                        ]}}
+        dados.update(dados_gpv)
+        dados_entrada = dados
+        
+        #GET
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        parameters = defautl_settings['Default_Settings']["CWMP (TR-069)"]["Parameter"]
+
+        for value_parameter in gpv_get:
+            for dict_value in parameters.values():
+                if value_parameter['value'] == dict_value['Value']:
+                    dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                else:
+
+                    dict_result = {"obs": f"Objeto {value_parameter} não encontrado"}
+        self._dict_result.update(dict_result)
+        return self._dict_result
+
+        
+    # 5
+    def wifi2GHzInformations_5(self, dados):            
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            
+            #GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameters = defautl_settings['Default_Settings']["Wifi 2.4"]["Parameter"]
+
+            for value_parameter in gpv_get:
+                for dict_value in parameters.values():
+                    if value_parameter['value'] == dict_value['Value']:
+                        dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                    else:
+
+                        dict_result = {"obs": f"Objeto {value_parameter} não encontrado"}
+            self._dict_result.update(dict_result)
+            return self._dict_result
+
+# 6
+    def wifi5GHzInformations_6(self, dados):            
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            
+            #GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameters = defautl_settings['Default_Settings']["Wifi 5"]["Parameter"]
+
+            for value_parameter in gpv_get:
+                for dict_value in parameters.values():
+                    if value_parameter['value'] == dict_value['Value']:
+                        dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+                    else:
+
+                        dict_result = {"obs": f"Objeto {value_parameter['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 10
+    def setDHCP_10(self, dados):            
+            dados_spv = {'SPV_Param': [
+                {
+            "name" : "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+            "type"  : "string",
+            "value" : "192.168.15.6"
+            }, {
+            "name" : "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+            "type" : "string",
+            "value" : "192.168.15.150"
+            }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != "192.168.15.6":
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] != "192.168.15.150":
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            else:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 12
+    def set2GHzWiFi_12(self, dados):            
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID", 
+                    "type"  : "string", 
+                    "value" : "automacao_24"
+                    },
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase", 
+                    "type" : "string", 
+                    "value" : "vivo@12345678"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            else:
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 13
+    def set5GHzWiFi_13(self, dados):            
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID", 
+                    "type"  : "string", 
+                    "value" : "automacao_24"
+                    },
+                {
+                    "name" : "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "type" : "string",
+                    "value" : "vivo@12345678"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+            
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
+                            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {"obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result":"passed"}
+            else:
+                dict_result = {"obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
 
 
     def accessWizard_401(self, flask_username):
