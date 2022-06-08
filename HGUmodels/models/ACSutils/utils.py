@@ -79,6 +79,7 @@ class ACS():
                                 total_time = (final_time - ts)
                                 print(' -- CheckDeviceAvailability NOK --')
                                 print(' -- ATENÇÃO! ERRO TRANSPORT! -- ')
+                                dict_result = {'obs': ' -- ATENÇÃO! ERRO TRANSPORT! -- '}
                                 print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
                             elif connectionRequest.startswith('status=6,'):
                                 print(' -- CheckDeviceAvailability NOK -- ERRO: Device OFFLINE')
@@ -86,27 +87,33 @@ class ACS():
                                 total_time = (final_time - ts)
                                 print(' -- CheckDeviceAvailability NOK --')
                                 print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
+                                dict_result = {"obs": "ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST!"}
+
                                 print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
                             else:
                                 print(' -- CheckDeviceAvailability OK --')
                                 final_time = time.time()
                                 total_time = (final_time - ts)
+                                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}
                                 print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
                         else:
                             final_time = time.time()
                             total_time = (final_time - ts)
                             print(' -- FindDeviceBySerial NOK --')
                             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+                            dict_result = {'obs': " -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- "}
                             print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
                     except:
                         final_time = time.time()
                         total_time = (final_time - ts)
                         print(' -- WEBSERVICES NOK --')
+                        dict_result = {'obs': ' -- WEBSERVICES NOK --'}
                         print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
                 else:
                     final_time = time.time()
                     total_time = (final_time - ts)
                     print(' -- CONECTIVIDADE COM ACS NOK --')
+                    dict_result = {'obs': ' -- CONECTIVIDADE COM ACS NOK --'}
                     print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
 
             except:
@@ -116,7 +123,9 @@ class ACS():
             total_time = (final_time - ts)
             print(' -- Informações de Entrada NOK --')
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+            dict_result = {'obs': " -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- "}
             print('\n\n >>> Finalizando CheckDeviceAvailability ACS - Tempo de Execução:',total_time, '\n\n')
+        return dict_result
 
     def setParameterValues(**dados_entrada):
         # print(f'\ndados_entrada = {dados_entrada}')
@@ -203,7 +212,6 @@ class ACS():
             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
             dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
         return dict_result
-
 
     def getParameterValues(**dados_entrada):
 
@@ -338,6 +346,7 @@ class ACS():
                             reboot = nbiRH.reboot(deviceGUID)
                             if nbiRH.msgTagExecution_03 == 'EXECUTED':
                                 print(' -- Reboot OK --')
+                                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}
                                 final_time = time.time()
                                 total_time = (final_time - ts)
                                 print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
@@ -347,41 +356,26 @@ class ACS():
                                 total_time = (final_time - ts)
                                 print(' -- Reboot NOK --')
                                 print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
+                                dict_result = {'obs': ' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- '}
                                 print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
-                            # if spv.startswith('org/apache/xml/serializer/TreeWalker'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: org/apache/xml/serializer/TreeWalker')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! ERRO TRANSPORT! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # elif spv.startswith('status=6,'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # else:
-                            #     print(' -- SetParameterValues OK --')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
                         else:
                             final_time = time.time()
                             total_time = (final_time - ts)
                             print(' -- FindDeviceBySerial NOK --')
                             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+                            dict_result = {'obs': ' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- '}
                             print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
                     except:
                         final_time = time.time()
                         total_time = (final_time - ts)
                         print(' -- WEBSERVICES NOK --')
+                        dict_result = {'obs': ' -- WEBSERVICES NOK --'}
                         print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
                 else:
                     final_time = time.time()
                     total_time = (final_time - ts)
                     print(' -- CONECTIVIDADE COM ACS NOK --')
+                    dict_result = {'obs': ' -- CONECTIVIDADE COM ACS NOK --'}
                     print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
 
             except:
@@ -391,7 +385,9 @@ class ACS():
             total_time = (final_time - ts)
             print(' -- Informações de Entrada NOK --')
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+            dict_result = {'obs': ' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- '}
             print('\n\n >>> Finalizando Reboot ACS - Tempo de Execução:', total_time, '\n\n')
+        return dict_result
 
     def setVoIP(**dados_entrada):
         #TODO: criar chamada no SDO
@@ -439,6 +435,7 @@ class ACS():
                             reboot = nbiRH.reboot(deviceGUID)
                             if nbiRH.msgTagExecution_03 == 'EXECUTED':
                                 print(' -- SeT VoIP OK --')
+                                dict_result = {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}
                                 final_time = time.time()
                                 total_time = (final_time - ts)
                                 print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
@@ -448,41 +445,27 @@ class ACS():
                                 total_time = (final_time - ts)
                                 print(' -- SeT VoIP NOK --')
                                 print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
+                                dict_result = {'obs': ' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- '}
                                 print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
-                            # if spv.startswith('org/apache/xml/serializer/TreeWalker'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: org/apache/xml/serializer/TreeWalker')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! ERRO TRANSPORT! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # elif spv.startswith('status=6,'):
-                            #     print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print(' -- SetParameterValues NOK --')
-                            #     print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            # else:
-                            #     print(' -- SetParameterValues OK --')
-                            #     final_time = time.time()
-                            #     total_time = (final_time - ts)
-                            #     print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                            
                         else:
                             final_time = time.time()
                             total_time = (final_time - ts)
                             print(' -- FindDeviceBySerial NOK --')
                             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+                            dict_result = {'obs': ' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- '}
                             print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
                     except:
                         final_time = time.time()
                         total_time = (final_time - ts)
                         print(' -- WEBSERVICES NOK --')
+                        dict_result = {'obs': ' -- WEBSERVICES NOK --'}
                         print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
                 else:
                     final_time = time.time()
                     total_time = (final_time - ts)
                     print(' -- CONECTIVIDADE COM ACS NOK --')
+                    dict_result = {'obs': ' -- CONECTIVIDADE COM ACS NOK --'}
                     print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
 
             except:
@@ -492,5 +475,6 @@ class ACS():
             total_time = (final_time - ts)
             print(' -- Informações de Entrada NOK --')
             print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+            dict_result = {'obs': ' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- '}
             print('\n\n >>> Finalizando SeT VoIP ACS - Tempo de Execução:', total_time, '\n\n')
-
+        return dict_result

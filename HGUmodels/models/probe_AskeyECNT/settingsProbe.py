@@ -257,61 +257,60 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         parameter = default_settings['Default_Settings']
 
         for value_parameter in gpv_get:
-            print('\nvalue parameter:', value_parameter['value'])
-            if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ['Main Wireless network’s Enabled']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value']:
+            print('\nvalue parameter:', value_parameter["value"])
+            if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable":
+                print("parameter:", parameter['Wifi 5']['Parameter']["Main Wireless network’s Enabled"]['Value'])
+                if value_parameter["value"] != parameter['Wifi 5']['Parameter']['Main Wireless network’s Enabled']['Value']:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
                     dict_result = {"Resultado_Probe": "OK",
                                    "obs": "Teste OK", "result": "passed"}
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Status']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value']:
+            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status":
+                print("parameter:", parameter["Wifi 5"]
+                      ["Parameter"]["Default Status"]["Value"])
+                if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Status"]["Value"]:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
                     dict_result = {"Resultado_Probe": "OK",
                                    "obs": "Teste OK", "result": "passed"}
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ["Main Wireless network’s SSID"]['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value']:
+            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID":
+                print("parameter:", parameter["Wifi 5"]["Parameter"]
+                      ["Main Wireless network’s SSID"]["Value"])
+                if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Main Wireless network’s SSID"]["Value"]:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
                     dict_result = {"Resultado_Probe": "OK",
                                    "obs": "Teste OK", "result": "passed"}
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Security type']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value']:
+            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType":
+                print("parameter:", parameter["Wifi 5"]
+                      ["Parameter"]["Default Security type"]["Value"])
+                if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Security type"]["Value"]:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
                     dict_result = {"Resultado_Probe": "OK",
                                    "obs": "Teste OK", "result": "passed"}
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value']:
+            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard":
+                print("parameter:", parameter["Wifi 5"]
+                      ["Parameter"]["Default Mode"]["Value"])
+                if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Mode"]["Value"]:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
                     dict_result = {"Resultado_Probe": "OK",
                                    "obs": "Teste OK", "result": "passed"}
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Channel']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value']:
+            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel":
+                print("parameter:", parameter["Wifi 5"]
+                      ["Parameter"]["Default Channel"]["Value"])
+                if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Channel"]["Value"]:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                 else:
@@ -323,7 +322,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {value_parameter['name']} não encontrado"}
 
         self._dict_result.update(dict_result)
-        print('\n', self._dict_result, '\n')
+        print("\n", self._dict_result, "\n")
         return self._dict_result
 
     # 10
