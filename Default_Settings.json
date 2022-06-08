@@ -166,6 +166,11 @@
                     "Additional Details":"{}",
                     "Comments":"{}",
                     "Value":"userid"
+                },
+                "ACS URL Management":{
+                    "Additional Details":"{}",
+                    "Comments":"{}",
+                    "Value":"http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
                 }
             }
         },
@@ -384,6 +389,11 @@
                     "Comments":"(XXXX = 04 last characters of WAN PPP MAC Address of Modem) - Ex: VIVOFIBRA-xxxxx",
                     "Value":"VIVOFIBRA-"
                 },
+                "Main Wireless network’s Enabled":{
+                    "Additional Details":"{}",
+                    "Comments":"",
+                    "Value":"true"
+                },
                 "Default Status":{
                     "Additional Details":"Enabled / Disabled",
                     "Comments":"{}",
@@ -399,7 +409,7 @@
                     "Comments":"{}",
                     "Value":"Brasil"
                 },
-                "Default Channel ":{
+                "Default Channel":{
                     "Additional Details":"{}",
                     "Comments":"{}",
                     "Value":"Auto"
@@ -863,6 +873,30 @@
                     "Additional Details":"{}",
                     "Comments":"{}",
                     "Value":"{}"
+                }
+            }
+        },
+        "ACS_aux":{
+            "Devices":{
+                "Askey_Broadcom":{
+                    "modelos": ["RTF3505VW-N1", "RTF3505VW-N2", "RTF3507VW-N1", "RTF3507VW-N2"],
+                    "oui": ["009096"],
+                    "manufacturer": ["Askey", "askey"]
+                },
+                "Askey_Econet":{
+                    "modelos": ["RTF8117VW", "RTF8115VW", "RTF8115VW-SV"],
+                    "oui": ["009096"],
+                    "manufacturer": ["Askey", "askey"]
+                },
+                "Mitra_Broadcom":{
+                    "modelos": ["GPT-2541GNAC-N1", "GPT-2541GNAC-N2"],
+                    "oui": ["b046fc"],
+                    "manufacturer": ["MitraStar", "mitrastar", "Mitrastar"]
+                },
+                "Mitra_Econet":{
+                    "modelos": ["GPT-2741GNAC", "GPT-2741GNAC-N1", "GPT-2741GNAC-N2", "GPT-2731GN2A4P", "GPT-2731GN2A4P-N2", "GPT-2741GNAC-N1-SV", "GPT-2741GNAC-N2-SV"],
+                    "oui": ["b046fc"],
+                    "manufacturer": ["MitraStar", "mitrastar", "Mitrastar"]
                 }
             }
         }
