@@ -160,6 +160,44 @@ class acs(Resource):
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+        
+        elif method == 'indexWifi24ghz':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.indexWifi24ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+        elif method == 'indexWifi5ghz':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.indexWifi5ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
 
 
         elif method == 'connectionRequestPort':
