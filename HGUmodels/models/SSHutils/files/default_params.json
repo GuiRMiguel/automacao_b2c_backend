@@ -1,0 +1,241 @@
+{
+    "server_magic": {
+        "url": {
+            "servidor_atualizacao": "http://cddlabs.ddns.net:13081/magic-tool/",
+            "servidor_licenca": "https://cddlabs.ddns.net:13443/"
+        }
+    },
+    "file_license": {
+        "arquivo_licenca": "licenca.db",
+        "seed_num": "429",
+        "id_usuario": "-1",
+        "debug": "-1"
+    },
+    "sqlite_path_mobile": "/data/data/br.com.vivo.magictool.dev/files/chaquopy/AssetFinder/app/files/",
+    "sqlite_path_note": "dataBase/sqlite/",
+    "app_info": {
+        "name": "",
+        "version": ""
+    },
+    "devices": {
+        "supported": {
+            "general": "[RTF3505VW-N1', 'RTF3505VW-N2', 'RTF3507VW-N1', 'RTF3507VW-N2', 'GPT-2741GNAC', 'GPT-2741GNAC-N1', 'GPT-2741GNAC-N2', 'GPT-2731GN2A4P', 'GPT-2731GN2A4P-N2', 'RTF8117VW', 'RTF8115VW', 'GPT-2541GNAC-N1', 'GPT-2541GNAC-N2']",
+            "askey_brcm_model": "['RTF3505VW-N1', 'RTF3505VW-N2', 'RTF3507VW-N1', 'RTF3507VW-N2']",
+            "askey_bcrm_fw": "['BR_SV_g000_R3505VWN1001_s35', 'BR_SV_g000_R3507VWN1001_s35', 'BR_SV_g000_R3505VWN1001_s36', 'BR_SV_g000_R3507VWN1001_s36', 'BR_SV_g000_R3505VWN1001_s36_Dev_r1020_r8870', 'BR_SV_g000_R3505VWN1001_s37', 'BR_SV_g000_R3505VWN1001_s28', 'BR_SV_g000_R3505VWN1001_s38']",
+            "mitra_ecnt_model": "['GPT-2741GNAC', 'GPT-2741GNAC-N1', 'GPT-2741GNAC-N2', 'GPT-2731GN2A4P', 'GPT-2731GN2A4P-N2']",
+            "mitra_ecnt_fw": "['VBR_g5.8_1.11(WVK.0)b29', 'VBR_g5.9_1.11(WVK.0)b30', 'VBR_g5.9_1.11(WVK.0)b31', 'VBR_g5.9_1.11(WVK.0)b31_11nRoaming', 'VBR_g5.9_1.11(WVK.0)b31putMethod, 'VBR_g5.9_1.11(WVK.0)b32', 'VBR_g7.5_1.11(WVK.0)b33']",
+            "askey_ecnt_model": "['RTF8117VW', 'RTF8115VW']",
+            "askey_ecnt_fw": "['BR_SV_g12.6_RTF_TEF001_V7.11.S9_V014', 'BR_SV_g12.6_RTF_TEF001_V7.15_V015', 'BR_SV_g12.6_RTF_TEF001_V7.11.S12_V015', 'BR_SG_g12.6_RTF_TEF001_V7.15_V015', 'BR_SG_g12.6_RTF_TEF001_V7.11.S12_V015', 'BR_SV_g12.6_RTF_TEF001_V7.17_V015', 'BR_SG_g12.6_RTF_TEF001_V7.17_V015', 'BR_SV_g12.6_RTF_TEF001_V7.20_V016']",
+            "mitra_brcm_model": "['GPT-2541GNAC-N1', 'GPT-2541GNAC-N2']",
+            "mitra_brcm_fw": "['VBR_g3.5_100VNZ0b33_1015', 'VBR_g7.5_1.11(WVK.0)b33', 'VBR_g7.6_100VNZ0b34', 'VBR_g7.7_100VNZ0b36']",
+            "hpna_devices": "['RTF3507VW-N1', 'RTF3507VW-N2', 'GPT-2731GN2A4P', 'GPT-2731GN2A4P-N1', 'GPT-2731GN2A4P-N2', 'RTF8117VW']"
+        },
+        "tests":{
+            "askey_brcm": {
+                "sua_conexao" : "enable",
+                "wan": "enable",
+                "lan": "enable",
+                "topologia": "enable",
+                "mapa_cobertura": "enable",
+                "voip": "disable",
+                "iptv": "disable",
+                "jiga": "disable",
+                "iot": "disable"
+            },
+            "mitra_ecnt": {
+                "sua_conexao" : "disable",
+                "wan": "disable",
+                "lan": "disable",
+                "topologia": "disable",
+                "mapa_cobertura": "disable",
+                "voip": "disable",
+                "iptv": "disable",
+                "jiga": "disable",
+                "iot": "disable"
+            },
+            "askey_ecnt": {
+                "sua_conexao" : "enable",
+                "wan": "disable",
+                "lan": "disable",
+                "topologia": "disable",
+                "mapa_cobertura": "enable",
+                "voip": "disable",
+                "iptv": "disable",
+                "jiga": "disable",
+                "iot": "disable"
+            },
+            "mitra_brcm": {
+                "sua_conexao" : "enable",
+                "wan": "disable",
+                "lan": "disable",
+                "topologia": "disable",
+                "mapa_cobertura": "disable",
+                "voip": "disable",
+                "iptv": "disable",
+                "jiga": "disable",
+                "iot": "disable"
+            }
+        },
+        "credentials": {
+            "user": "support"
+        }
+    },
+    "threshold": {
+        "5GHz": {
+            "rssi": {
+                "excellent": {
+                    "gte": -66
+                },
+                "acceptable": {
+                    "lte": -65,
+                    "gte": -73
+                },
+                "poor": {
+                    "lte": -72
+                }
+            },
+            "status": "on",
+            "channel_mode": ["auto"],
+            "bandwidth": ["80MHz", "80MHz(auto)"],
+            "authentication": ["wpa2-psk"],
+            "scs":["enabled"],
+            "ssid_hide": ["off"]
+        },
+        "2.4GHz": {
+            "rssi": {
+                "excellent": {
+                    "gte": -66
+                },
+                "acceptable": {
+                    "lte": -65,
+                    "gte": -73
+                },
+                "poor": {
+                    "lte": -72
+                }
+            },
+            "status": "on",
+            "channel_mode": ["auto"],
+            "bandwidth": ["20MHz"],
+            "authentication": ["wpa2-psk"],
+            "scs":["enabled"],
+            "ssid_hide": ["off"]
+        },
+        "smart_home": {
+            "qhop": ["enable"],
+            "roaming": ["enabled"],
+            "airfair": ["1"],
+            "beamforming": ["on"],
+            "maui": ["enabled"],
+            "bs": ["enabled"],
+            "repeater": [1],
+            "access": [1]
+        },
+        "channel": {
+            "utilization": {
+                "low": {
+                    "lte": 300
+                },
+                "medium": {
+                    "lte": 550,
+                    "gte": 300
+                },
+                "high": {
+                    "gte": 550
+                }
+            }
+        },
+        "phyrate": {
+            "downstream": {
+                "excellent": {
+                    "gte": 0.90
+                },
+                "acceptable": {
+                    "lte": 0.90,
+                    "gte": 0.75
+                },
+                "poor": {
+                    "lte": 0.75
+                }
+            },
+            "upstream": {
+                "excellent": {
+                    "gte": 0.90
+                },
+                "acceptable": {
+                    "lte": 0.90,
+                    "gte": 0.75
+                },
+                "poor": {
+                    "lte": 0.75
+                }
+            }
+        },
+        "latency": {
+            "downstream": {
+                "excellent": {
+                    "lte": 51
+                },
+                "acceptable": {
+                    "lte": 151,
+                    "gte": 50
+                },
+                "poor": {
+                    "gte": 150
+                }
+            }
+        },
+        "rssi_base_port": {
+            "excelente": {
+                "lte": -65,
+                "gte": -75
+            },
+            "acceptable": {
+                "lte": -74,
+                "gte": -78
+            },
+            "poor": {
+                "lte": -77
+            },
+            "abs": [-70]
+        },
+        "rssi_station": {
+            "excelente": {
+                "gte": -70
+            },
+            "acceptable": {
+                "lte": -70,
+                "gte": -76
+            },
+            "poor": {
+                "lte": -75
+            }
+        },
+        "gpon": {
+            "rx_power": -26.0,
+            "tx_power": 1.5,
+            "classe_bosa": "B+"
+
+        },
+        "inet": {
+            "status_iface": ["up"],
+            "ipv4": ["Connected", "CONNECTED"],
+            "ipv6": ["Connected", "CONNECTED"],
+            "vlan": ["600", "10"]
+        },
+        "dns": {
+            "wan_ipv4": ["200.204.0.10", "200.204.0.138", "200.175.89.139", "200.175.5.139", "187.50.250.115", "187.50.250.215"],
+            "wan_ipv6": ["2804:7f4:2002:1005::99", "2804:7f4:2002:1005::98", "2001:12e0:0:1025:a080::115", "2001:12e0:0:1025:a080::215"],
+            "lan_ipv4": ["192.168.15.1", "192.168.1.1", "192.168.25.1"]
+        },
+        "lan": {
+            "gateway": ["192.168.15.1", "192.168.1.1", "192.168.25.1"],
+            "server_dhcp": ["enable", "Enable", "ENABLE"]
+        },
+        "throughput": 0.6,
+        "rssi_geral": -70,
+        "gpon_power": -26
+    },
+    "result": "ok",
+    "exception": "ok"
+}

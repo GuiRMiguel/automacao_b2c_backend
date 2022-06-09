@@ -1,6 +1,7 @@
 import time, datetime
 import sys
 import requests
+from HGUmodels.models.SSHutils import infoDevices_utils
 from Setup.ACS import webRemoteHDM
 from Setup.ACS import webServiceImpl
 from Setup.ACS import webSDO
@@ -18,7 +19,7 @@ class acs:
         self.password = []
     
     # 4
-    def initialInformations(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
+    def initialInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
 
         dict_result = {
             "result": "failed",
@@ -28,9 +29,13 @@ class acs:
             "Probe#": "XXXXXXX", 
             "Description": "DUT pré configurado e acesso com conectividade ao HDM de Laboratório. Device Type já criado no HDM.", 
             "obs": None}
+        
+        print(password)
+        print(ip)
 
         dados_entrada = {
-            'serialnumber': serialnumber,
+            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
             'acsUsername': acsUsername,
