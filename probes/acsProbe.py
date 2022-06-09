@@ -29,9 +29,6 @@ class acs:
             "Probe#": "XXXXXXX", 
             "Description": "DUT pré configurado e acesso com conectividade ao HDM de Laboratório. Device Type já criado no HDM.", 
             "obs": None}
-        
-        print(password)
-        print(ip)
 
         dados_entrada = {
             'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
@@ -40,7 +37,9 @@ class acs:
             'IPACS': IPACS,
             'acsUsername': acsUsername,
             'acsPassword': acsPassword,
-            'portaACS': acsPort
+            'portaACS': acsPort,
+            'ip': ip,
+            'password': password
         }
 
         hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
