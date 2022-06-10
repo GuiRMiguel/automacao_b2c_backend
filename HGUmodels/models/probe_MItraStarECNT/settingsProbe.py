@@ -159,87 +159,101 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
     # 5
     def wifi2GHzInformations_5(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+            # GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameter = default_settings['Default_Settings']
 
-        # GET
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        parameter = default_settings['Default_Settings']
+            for value_parameter in gpv_get:
+                print('\nvalue parameter:', value_parameter['value'])
+                if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
+                    print('parameter:', parameter['Wifi 2.4']['Parameter']
+                        ['Main Wireless network’s Enabled']['Value'])
+                    print('1')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value'] and str(value_parameter['value']) != 'true':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
 
-        for value_parameter in gpv_get:
-            print('\nvalue parameter:', value_parameter['value'])
-            if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ['Main Wireless network’s Enabled']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Status']['Value'])
+                    print('2')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value'] and str(value_parameter['value']) != 'Disabled':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
+                    print('parameter:', parameter['Wifi 2.4']['Parameter']
+                        ["Main Wireless network’s SSID"]['Value'])
+                    print('3')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value'] and str(value_parameter['value']) != 'automacao_24':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Security type']['Value'])
+                    print('4')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value'] and str(value_parameter['value']) != '11i':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Mode']['Value'])
+                    print('5')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value'] and str(value_parameter['value']) != 'n':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Channel']['Value'])
+                    print('6')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value'] and str(value_parameter['value']) != 'None':
+                        
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
                 else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Status']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value']:
                     dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ["Main Wireless network’s SSID"]['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Security type']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Channel']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            else:
-                dict_result = {
-                    "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
+        except Exception as e:
+            dict_result = {'obs': f'{e}'}
 
         self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
@@ -334,44 +348,46 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-    # 10
+     # 10
     def setDHCP_10(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                    "type": "string",
+                    "value": "192.168.15.6"
+                }, {
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+                    "type": "string",
+                    "value": "192.168.15.150"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
-                "type": "string",
-                "value": "192.168.15.6"
-            }, {
-                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
-                "type": "string",
-                "value": "192.168.15.150"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
-            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != "192.168.15.6":
-            dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] != "192.168.15.150":
-            dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
-        else:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != "192.168.15.6":
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] != "192.168.15.150":
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+        except Exception as e:
+            dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
@@ -379,42 +395,44 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
     # 12
     def set2GHzWiFi_12(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                    "type": "string",
+                    "value": "automacao_24"
+                },
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                    "type": "string",
+                    "value": "vivo@12345678"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                "type": "string",
-                "value": "automacao_24"
-            },
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-                "type": "string",
-                "value": "vivo@12345678"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != 'automacao_24':
-            dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        else:
-            dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            else:
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+        except Exception as e:
+            dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
@@ -422,43 +440,126 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
     # 13
     def set5GHzWiFi_13(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                    "type": "string",
+                    "value": "automacao_24"
+                },
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "type": "string",
+                    "value": "vivo@12345678"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                "type": "string",
-                "value": "automacao_24"
-            },
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-                "type": "string",
-                "value": "vivo@12345678"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            print(dados_entrada)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != 'automacao_24':
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            else:
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
             dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        else:
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
+
+    # 15
+    def setPeriodicInterval_15(self, dados):
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                    "type": "unsignedInt",
+                    "value" : "600"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            print(dados_entrada)
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != '600':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
             dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
-        self._dict_result.update(dict_result)
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
+
+    # 17
+    def setAccessClass_17(self, dados):
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                "name" : "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                "type"  : "unsignedInt",
+                "value" : "service04"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+                ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            print(gpv_get)
+
+            if gpv_get[0]['value'] != 'service04':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado. (esperado: service04; obtido: {gpv_get[0]['value']})"}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            dict_result = {
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
@@ -773,7 +874,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            if gpv_get != {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}:
+            if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result

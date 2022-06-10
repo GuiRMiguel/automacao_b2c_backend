@@ -1,4 +1,5 @@
 from cmath import e
+from os import strerror
 from ..ACSutils import utils
 from audioop import lin2lin
 from gc import collect
@@ -195,7 +196,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
                     print('parameter:', parameter['Wifi 2.4']['Parameter']
                         ['Main Wireless network’s Enabled']['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value']:
+                    print('1')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value'] and str(value_parameter['value']) != 'true':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -205,7 +208,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
                     print('parameter:', parameter['Wifi 2.4']
                         ['Parameter']['Default Status']['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value']:
+                    print('2')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value'] and str(value_parameter['value']) != 'Disabled':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -215,7 +220,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
                     print('parameter:', parameter['Wifi 2.4']['Parameter']
                         ["Main Wireless network’s SSID"]['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value']:
+                    print('3')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value'] and str(value_parameter['value']) != 'automacao_24':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -225,7 +232,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
                     print('parameter:', parameter['Wifi 2.4']
                         ['Parameter']['Default Security type']['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value']:
+                    print('4')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value'] and str(value_parameter['value']) != '11i':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -235,7 +244,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
                     print('parameter:', parameter['Wifi 2.4']
                         ['Parameter']['Default Mode']['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value']:
+                    print('5')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value'] and str(value_parameter['value']) != 'n':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -245,7 +256,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
                     print('parameter:', parameter['Wifi 2.4']
                         ['Parameter']['Default Channel']['Value'])
-                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value']:
+                    print('6')
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value'] and str(value_parameter['value']) != '9':
+                        
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
@@ -550,12 +563,12 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
-            print(dados_entrada)
-
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            if gpv_get[0]['value'] != '600':
+            print(gpv_get)
+
+            if gpv_get[0]['value'] != 'service04':
                 dict_result = {
-                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado. (esperado: service04; obtido: {gpv_get[0]['value']})"}
             else:
                 dict_result = {"Resultado_Probe": "OK",
                             "obs": "Teste OK", "result": "passed"}
@@ -588,7 +601,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            if gpv_get != {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}:
+            if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
