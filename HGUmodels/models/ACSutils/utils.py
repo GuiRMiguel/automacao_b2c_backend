@@ -214,7 +214,7 @@ class ACS():
         return dict_result
 
     def getParameterValues(**dados_entrada):
-
+        print(dados_entrada)
         ts = time.time()
         start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 
