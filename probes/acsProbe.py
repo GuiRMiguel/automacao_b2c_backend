@@ -185,9 +185,66 @@ class acs:
             'ip': ip,
             'password': password
         }
-
         hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
         return hgu.set5GHzWiFi_13(dados_entrada)
+
+
+    # 15
+    def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setPeriodicInterval", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ip,
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        print(dados_entrada)
+        return hgu.setPeriodicInterval_15(dados_entrada)
+
+
+    # 17
+    def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ip,
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.setAccessClass_17(dados_entrada)
 
     #39
     def indexWifi24ghz(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):

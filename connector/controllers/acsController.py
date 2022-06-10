@@ -74,7 +74,6 @@ class acs(Resource):
             password = request.json['password']
             ip = request.json['ip']
 
-
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
             caderno = request.get_json()['caderno']
@@ -96,7 +95,6 @@ class acs(Resource):
             acsPort = request.json['portaACS']
             password = request.json['password']
             ip = request.json['ip']
-
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -120,7 +118,6 @@ class acs(Resource):
             password = request.json['password']
             ip = request.json['ip']
 
-
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
             caderno = request.get_json()['caderno']
@@ -142,7 +139,6 @@ class acs(Resource):
             acsPort = request.json['portaACS']
             password = request.json['password']
             ip = request.json['ip']
-
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -166,7 +162,6 @@ class acs(Resource):
             password = request.json['password']
             ip = request.json['ip']
 
-
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
             caderno = request.get_json()['caderno']
@@ -187,7 +182,6 @@ class acs(Resource):
             acsPort = request.json['portaACS']
             password = request.json['password']
             ip = request.json['ip']
-
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
