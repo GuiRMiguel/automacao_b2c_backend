@@ -246,6 +246,36 @@ class acs:
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.setAccessClass_17(dados_entrada)
 
+
+    # 43
+    def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ip,
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.checkIPv6Telefonica_43(dados_entrada)
+    
+
     #39
     def indexWifi24ghz(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
 
