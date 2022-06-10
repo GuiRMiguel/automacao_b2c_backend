@@ -71,6 +71,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -78,7 +81,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.wifi2GHzInformations(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.wifi2GHzInformations(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -91,6 +94,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -98,7 +104,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.wifi5GHzInformations(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.wifi5GHzInformations(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -111,6 +117,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -118,7 +127,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.setDHCP(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.setDHCP(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -131,6 +140,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -138,7 +150,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.set2GHzWiFi(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.set2GHzWiFi(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -151,6 +163,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -158,7 +173,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.set5GHzWiFi(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.set5GHzWiFi(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -170,6 +185,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -177,7 +195,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.indexWifi24ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.indexWifi24ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -189,6 +207,9 @@ class acs(Resource):
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
             acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -196,7 +217,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.indexWifi5ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo)
+            result = obj.indexWifi5ghz(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
@@ -208,6 +229,9 @@ class acs(Resource):
             IPACS = request.json['IPACS']
             acsUsername = request.json['acsUsername']
             acsPassword = request.json['acsPassword']
+            password = request.json['password']
+            ip = request.json['ip']
+
 
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
@@ -215,7 +239,7 @@ class acs(Resource):
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            result = obj.connectionRequestPort(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, modelo)
+            result = obj.connectionRequestPort(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, modelo, password, ip)
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)

@@ -3,3 +3,4 @@ Setup/Selenium/**
 **/__pycache__/**
 data/**
 *.pyc 
+**.pyc

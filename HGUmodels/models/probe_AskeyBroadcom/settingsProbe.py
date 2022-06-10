@@ -49,113 +49,130 @@ session = MainSession()
 
 class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
 
-    # 4
+   # 4
     def initialInformations_4(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                "InternetGatewayDevice.DeviceInfo.ModelName",
+                "InternetGatewayDevice.DeviceInfo.ProductClass",
+                "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
 
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
-            "InternetGatewayDevice.DeviceInfo.Manufacturer",
-            "InternetGatewayDevice.DeviceInfo.ModelName",
-            "InternetGatewayDevice.DeviceInfo.ProductClass",
-            # "InternetGatewayDevice.DeviceInfo.SerialNumber",
-            # "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
-            # "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                "InternetGatewayDevice.ManagementServer.URL",
+                "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-            "InternetGatewayDevice.ManagementServer.URL",
-            "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
-            "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+            # GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameter = default_settings['Default_Settings']
 
-        # GET
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        parameter = default_settings['Default_Settings']
+            for value_parameter in gpv_get:
+                print('\nvalue parameter:', value_parameter['value'])
+                if value_parameter['name'] == 'InternetGatewayDevice.DeviceInfo.ManufacturerOUI':
+                    print('parameter:', parameter['ACS_aux']
+                        ['Devices']['Askey_Broadcom']['oui'][0])
+                    if value_parameter['value'] != parameter['ACS_aux']['Devices']['Askey_Broadcom']['oui'][0]:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
 
-        for value_parameter in gpv_get:
-            print('\nvalue parameter:', value_parameter['value'])
-            if value_parameter['name'] == 'InternetGatewayDevice.DeviceInfo.ManufacturerOUI':
-                print('parameter:', parameter['ACS_aux']
-                      ['Devices']['Askey_Broadcom']['oui'][0])
-                if value_parameter['value'] != parameter['ACS_aux']['Devices']['Askey_Broadcom']['oui'][0]:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.Manufacturer":
+                    print('parameter:', parameter['ACS_aux']
+                        ['Devices']['Askey_Broadcom']['manufacturer'])
+                    if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['manufacturer']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ModelName":
+                    print('parameter:', parameter['ACS_aux']
+                        ['Devices']['Askey_Broadcom']['modelos'])
+                    if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['modelos']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ProductClass":
+                    print('parameter:', parameter['ACS_aux']
+                        ['Devices']['Askey_Broadcom']['modelos'])
+                    if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['modelos']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.URL":
+                    print('parameter:', parameter['CWMP (TR-069)']
+                        ['Parameter']['ACS URL Management']['Value'])
+                    if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ACS URL Management']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformEnable":
+                    print('parameter:', parameter['CWMP (TR-069)']
+                        ['Parameter']['ManagementServer.EnableCWMP']['Value'])
+                    if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ManagementServer.EnableCWMP']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformInterval":
+                    print('parameter:', parameter['CWMP (TR-069)']
+                        ['Parameter']['Periodic inform Interval']['Value'])
+                    if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['Periodic inform Interval']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.SerialNumber":
+                        if value_parameter['value'] != dados_entrada['serialnumber']:
+                            dict_result = {
+                                "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.SoftwareVersion":
+                        if value_parameter['value'] != dados_entrada['fmw_version']:
+                            dict_result = {
+                                "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    
+                elif value_parameter['name'] == "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress":
+                        if value_parameter['value'] != dados_entrada['ip']:
+                            dict_result = {
+                                "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+
+
                 else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.Manufacturer":
-                print('parameter:', parameter['ACS_aux']
-                      ['Devices']['Askey_Broadcom']['manufacturer'])
-                if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['manufacturer']:
                     dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ModelName":
-                print('parameter:', parameter['ACS_aux']
-                      ['Devices']['Askey_Broadcom']['modelos'])
-                if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['modelos']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ProductClass":
-                print('parameter:', parameter['ACS_aux']
-                      ['Devices']['Askey_Broadcom']['modelos'])
-                if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Broadcom']['modelos']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.URL":
-                print('parameter:', parameter['CWMP (TR-069)']
-                      ['Parameter']['ACS URL Management']['Value'])
-                if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ACS URL Management']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformEnable":
-                print('parameter:', parameter['CWMP (TR-069)']
-                      ['Parameter']['ManagementServer.EnableCWMP']['Value'])
-                if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ManagementServer.EnableCWMP']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformInterval":
-                print('parameter:', parameter['CWMP (TR-069)']
-                      ['Parameter']['Periodic inform Interval']['Value'])
-                if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['Periodic inform Interval']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            else:
-                dict_result = {
-                    "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
+        except Exception as e:
+            dict_result = {
+                            "obs": e}
         self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
-
-    # 5
+    
+     # 5
     def wifi2GHzInformations_5(self, dados):
-        # TODO: This function needs refactoring, zeep library not working, test crashing
-
         dados_gpv = {'GPV_Param': {'parameterNames': [
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
@@ -243,7 +260,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
 
     # 6
     def wifi5GHzInformations_6(self, dados):
-
         dados_gpv = {'GPV_Param': {'parameterNames': [
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
@@ -401,7 +417,7 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         dados_entrada = dados
 
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != 'automacao_24':
+        if gpv_get[0]['value'] != "automacao_24":
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
         elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
@@ -457,18 +473,17 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-    #39
+# 5
     def indexWifi24ghz_39(self, dados):
+        # TODO: This function needs refactoring, zeep library not working, test crashing
+
         dados_gpv = {'GPV_Param': {'parameterNames': [
-            
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-
-
         ]}}
         dados.update(dados_gpv)
         dados_entrada = dados
@@ -547,7 +562,7 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-    #40
+    # 6
     def indexWifi5ghz_40(self, dados):
         dados_gpv = {'GPV_Param': {'parameterNames': [
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
