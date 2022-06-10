@@ -306,7 +306,8 @@ class acs:
 
     #40
     def indexWifi5ghz(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
-
+        serial_number = infoDevices_utils.getInfoHgu(password, ip)
+        
         dict_result = {
             "result": "failed",
             "Resultado_Probe": "NOK", 
@@ -317,8 +318,8 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'serialnumber': serial_number['serialNumber'],
+            'fmw_version': serial_number['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
             'acsUsername': acsUsername,
@@ -332,6 +333,34 @@ class acs:
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.indexWifi5ghz_40(dados_entrada)
 
+    # 48
+    def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+        serial_number = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': serial_number['serialNumber'],
+            'fmw_version': serial_number['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ip,
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.rebootDevice_48(dados_entrada)
+    
 
     #414
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):

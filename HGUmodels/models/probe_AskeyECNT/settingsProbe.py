@@ -671,6 +671,18 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
+    #48
+    def rebootDevice_48(self, dados):
+        try:
+            dados_entrada = dados
+            reboot_device = utils.ACS.reboot(**dados_entrada)
+        
+            self._dict_result.update(reboot_device)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            return reboot_device
+
 
     def accessWizard_401(self, flask_username):
         try:
