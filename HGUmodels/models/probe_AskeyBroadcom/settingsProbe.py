@@ -650,7 +650,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         return self._dict_result
 
 
-<<<<<<< Updated upstream
     # 43
     def checkIPv6Telefonica_43(self, dados):
         try:
@@ -761,7 +760,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
 
         print('\n', self._dict_result, '\n')
         return self._dict_result
-=======
      #48
     def rebootDevice_48(self, dados):
         try:
@@ -773,7 +771,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             self._dict_result.update({"obs": f"{e}"})
         finally:
             return reboot_device
->>>>>>> Stashed changes
 
 
     def accessWizard_401(self, flask_username):

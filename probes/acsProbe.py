@@ -17,9 +17,9 @@ class acs:
         self.ip = []
         self.username = []
         self.password = []
-    
+
     # 4
-    def initialInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def initialInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -31,7 +31,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -48,7 +48,7 @@ class acs:
 
 
     # 5
-    def wifi2GHzInformations(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def wifi2GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -60,7 +60,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -77,7 +77,7 @@ class acs:
 
 
     # 6
-    def wifi5GHzInformations(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def wifi5GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -89,7 +89,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -106,7 +106,7 @@ class acs:
 
 
     # 10
-    def setDHCP(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def setDHCP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -118,7 +118,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -135,7 +135,7 @@ class acs:
 
 
     # 12
-    def set2GHzWiFi(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def set2GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -147,7 +147,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -163,7 +163,7 @@ class acs:
 
 
     # 13
-    def set5GHzWiFi(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def set5GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -175,7 +175,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -190,7 +190,7 @@ class acs:
 
 
     # 15
-    def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -202,7 +202,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -219,7 +219,7 @@ class acs:
 
 
     # 17
-    def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -231,7 +231,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -248,7 +248,7 @@ class acs:
 
 
     # 43
-    def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -260,7 +260,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -277,7 +277,7 @@ class acs:
     
 
     #39
-    def indexWifi24ghz(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def indexWifi24ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
         dict_result = {
             "result": "failed",
@@ -289,7 +289,7 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': infoDevices_utils.getInfoHgu(password, ip)['serialNumber'],
+            'serialnumber': serialnumber,
             'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
@@ -305,7 +305,7 @@ class acs:
         return hgu.indexWifi24ghz_39(dados_entrada)
 
     #40
-    def indexWifi5ghz(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def indexWifi5ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         serial_number = infoDevices_utils.getInfoHgu(password, ip)
         
         dict_result = {
@@ -334,7 +334,7 @@ class acs:
         return hgu.indexWifi5ghz_40(dados_entrada)
 
     # 48
-    def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip):
+    def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         serial_number = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
