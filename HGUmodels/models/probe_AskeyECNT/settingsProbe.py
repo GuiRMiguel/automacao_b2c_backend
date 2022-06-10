@@ -1,3 +1,4 @@
+from cmath import e
 from ..ACSutils import utils
 from audioop import lin2lin
 from gc import collect
@@ -160,12 +161,13 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                self._dict_result.update(dict_result)
         except Exception as e:
                 dict_result = {
                             "obs": e
                             }
+                self._dict_result.update(dict_result)
 
-        self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
@@ -434,43 +436,126 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     # 13
     def set5GHzWiFi_13(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                    "type": "string",
+                    "value": "automacao_24"
+                },
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "type": "string",
+                    "value": "vivo@12345678"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                "type": "string",
-                "value": "automacao_24"
-            },
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-                "type": "string",
-                "value": "vivo@12345678"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            print(dados_entrada)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != 'automacao_24':
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            else:
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
             dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        else:
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
+
+    # 15
+    def setPeriodicInterval_15(self, dados):
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name" : "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                    "type": "unsignedInt",
+                    "value" : "600"
+                    }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            print(dados_entrada)
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != '600':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
             dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
-        self._dict_result.update(dict_result)
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
+
+    # 17
+    def setAccessClass_17(self, dados):
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                "name" : "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                "type"  : "unsignedInt",
+                "value" : "service04"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+                ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            print(dados_entrada)
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get[0]['value'] != '600':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            dict_result = {
+                "obs": f'{e}'}
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
