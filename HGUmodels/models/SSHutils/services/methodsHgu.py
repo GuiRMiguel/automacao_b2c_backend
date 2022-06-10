@@ -6314,8 +6314,13 @@ class cliAskeyEcnt():
                     serial = ''
                     for i in serial_aux:
                         serial = serial + i
+                    serial = int(serial,16)
+                    serial = hex(serial + 1)
+                    serial = serial.replace('0x', '')
+                    serial = str(serial)
 
-                    info_hgu['serialNumber'] = serial
+
+                    info_hgu['serialNumber'] = serial.upper()
 
                 info_hgu['vendor'] = 'Askey'
             if img_active == '0':

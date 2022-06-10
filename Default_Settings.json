@@ -468,6 +468,11 @@
                     "Comments":"(XXXX = 04 last characters of WAN PPP MAC Address of Modem) - Ex: VIVOFIBRA-xxxxx-5G",
                     "Value":"VIVOFIBRA-"
                 },
+                "Main Wireless network’s Enabled":{
+                    "Additional Details":"{}",
+                    "Comments":"",
+                    "Value":"true"
+                },
                 "Default Status":{
                     "Additional Details":"Enabled / Disabled",
                     "Comments":"{}",
@@ -483,7 +488,7 @@
                     "Comments":"{}",
                     "Value":"Brasil"
                 },
-                "Default Channel ":{
+                "Default Channel":{
                     "Additional Details":"{}",
                     "Comments":"{}",
                     "Value":"Auto"
