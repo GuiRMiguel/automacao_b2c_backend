@@ -753,6 +753,118 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         return self._dict_result
 
 
+    # 43
+    def checkIPv6Telefonica_43(self, dados):
+        try:
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric",
+                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime",
+                ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get != {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
+
+            for value_parameter in gpv_get:
+                if value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                
+                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime":
+                    if value_parameter['value'] is None and value_parameter['value'] == '':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                else:
+                    dict_result = {
+                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                self._dict_result.update(dict_result)
+        except Exception as e:
+                dict_result = {
+                            "obs": e
+                            }
+                self._dict_result.update(dict_result)
+
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
+
     def accessWizard_401(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')

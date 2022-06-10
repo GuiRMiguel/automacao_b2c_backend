@@ -580,6 +580,10 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if gpv_get != {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
 
             for value_parameter in gpv_get:
                 if value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable":
