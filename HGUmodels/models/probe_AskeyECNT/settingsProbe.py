@@ -75,67 +75,67 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 print('\nvalue parameter:', value_parameter['value'])
                 if value_parameter['name'] == 'InternetGatewayDevice.DeviceInfo.ManufacturerOUI':
                     print('parameter:', parameter['ACS_aux']
-                        ['Devices']['Askey_Econet']['oui'][0])
+                          ['Devices']['Askey_Econet']['oui'][0])
                     if value_parameter['value'] != parameter['ACS_aux']['Devices']['Askey_Econet']['oui'][0]:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.Manufacturer":
                     print('parameter:', parameter['ACS_aux']
-                        ['Devices']['Askey_Econet']['manufacturer'])
+                          ['Devices']['Askey_Econet']['manufacturer'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['manufacturer']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ModelName":
                     print('parameter:', parameter['ACS_aux']
-                        ['Devices']['Askey_Econet']['modelos'])
+                          ['Devices']['Askey_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['modelos']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ProductClass":
                     print('parameter:', parameter['ACS_aux']
-                        ['Devices']['Askey_Econet']['modelos'])
+                          ['Devices']['Askey_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['modelos']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.URL":
                     print('parameter:', parameter['CWMP (TR-069)']
-                        ['Parameter']['ACS URL Management']['Value'])
+                          ['Parameter']['ACS URL Management']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ACS URL Management']['Value']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformEnable":
                     print('parameter:', parameter['CWMP (TR-069)']
-                        ['Parameter']['ManagementServer.EnableCWMP']['Value'])
+                          ['Parameter']['ManagementServer.EnableCWMP']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ManagementServer.EnableCWMP']['Value']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformInterval":
                     print('parameter:', parameter['CWMP (TR-069)']
-                        ['Parameter']['Periodic inform Interval']['Value'])
+                          ['Parameter']['Periodic inform Interval']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['Periodic inform Interval']['Value']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
@@ -149,7 +149,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     if value_parameter['value'] != dados_entrada['fmw_version']:
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                
+
                 elif value_parameter['name'] == "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress":
                     if value_parameter['value'] != dados_entrada['ip']:
                         dict_result = {
@@ -157,17 +157,17 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
                 self._dict_result.update(dict_result)
         except Exception as e:
-                dict_result = {
-                            "obs": e
-                            }
-                self._dict_result.update(dict_result)
+            dict_result = {
+                "obs": e
+            }
+            self._dict_result.update(dict_result)
 
         print('\n', self._dict_result, '\n')
         return self._dict_result
@@ -195,75 +195,75 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 print('\nvalue parameter:', value_parameter['value'])
                 if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
                     print('parameter:', parameter['Wifi 2.4']['Parameter']
-                        ['Main Wireless network’s Enabled']['Value'])
+                          ['Main Wireless network’s Enabled']['Value'])
                     print('1')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value'] and str(value_parameter['value']) != 'true':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
                     print('parameter:', parameter['Wifi 2.4']
-                        ['Parameter']['Default Status']['Value'])
+                          ['Parameter']['Default Status']['Value'])
                     print('2')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value'] and str(value_parameter['value']) != 'Disabled':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
                     print('parameter:', parameter['Wifi 2.4']['Parameter']
-                        ["Main Wireless network’s SSID"]['Value'])
+                          ["Main Wireless network’s SSID"]['Value'])
                     print('3')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value'] and str(value_parameter['value']) != 'automacao_24':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
                     print('parameter:', parameter['Wifi 2.4']
-                        ['Parameter']['Default Security type']['Value'])
+                          ['Parameter']['Default Security type']['Value'])
                     print('4')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Security type']['Value'] and str(value_parameter['value']) != '11i':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
                     print('parameter:', parameter['Wifi 2.4']
-                        ['Parameter']['Default Mode']['Value'])
+                          ['Parameter']['Default Mode']['Value'])
                     print('5')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value'] and str(value_parameter['value']) != 'n':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
                     print('parameter:', parameter['Wifi 2.4']
-                        ['Parameter']['Default Channel']['Value'])
+                          ['Parameter']['Default Channel']['Value'])
                     print('6')
                     if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value'] and str(value_parameter['value']) != '9':
-                        
+
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 else:
                     dict_result = {
@@ -297,63 +297,64 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             for value_parameter in gpv_get:
                 print('\nvalue parameter:', value_parameter["value"])
                 if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable":
-                    print("parameter:", parameter['Wifi 5']['Parameter']["Main Wireless network’s Enabled"]['Value'])
-                    if value_parameter["value"] != parameter['Wifi 5']['Parameter']['Main Wireless network’s Enabled']['Value']:
+                    print("parameter:", parameter['Wifi 5']['Parameter']
+                          ["Main Wireless network’s Enabled"]['Value'])
+                    if value_parameter["value"] != parameter['Wifi 5']['Parameter']['Main Wireless network’s Enabled']['Value'] and str(value_parameter["value"]) != '1':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status":
                     print("parameter:", parameter["Wifi 5"]
-                        ["Parameter"]["Default Status"]["Value"])
-                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Status"]["Value"]:
+                          ["Parameter"]["Default Status"]["Value"])
+                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Status"]["Value"] and str(value_parameter["value"]) != 'Up':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID":
                     print("parameter:", parameter["Wifi 5"]["Parameter"]
-                        ["Main Wireless network’s SSID"]["Value"])
-                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Main Wireless network’s SSID"]["Value"]:
+                          ["Main Wireless network’s SSID"]["Value"])
+                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Main Wireless network’s SSID"]["Value"] and str(value_parameter["value"]) != 'automacao_24':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType":
                     print("parameter:", parameter["Wifi 5"]
-                        ["Parameter"]["Default Security type"]["Value"])
-                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Security type"]["Value"]:
+                          ["Parameter"]["Default Security type"]["Value"])
+                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Security type"]["Value"] and str(value_parameter["value"]) != '11i':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard":
                     print("parameter:", parameter["Wifi 5"]
-                        ["Parameter"]["Default Mode"]["Value"])
-                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Mode"]["Value"]:
+                          ["Parameter"]["Default Mode"]["Value"])
+                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Mode"]["Value"] and str(value_parameter["value"]) != 'ac':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel":
                     print("parameter:", parameter["Wifi 5"]
-                        ["Parameter"]["Default Channel"]["Value"])
-                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Channel"]["Value"]:
+                          ["Parameter"]["Default Channel"]["Value"])
+                    if value_parameter["value"] != parameter["Wifi 5"]["Parameter"]["Default Channel"]["Value"] and str(value_parameter["value"]) != '36':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 else:
                     dict_result = {
@@ -402,7 +403,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
             else:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
         except Exception as e:
             dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
@@ -444,7 +445,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
             elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             else:
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
@@ -490,7 +491,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
             elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             else:
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
@@ -502,16 +503,16 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
     # 15
+
     def setPeriodicInterval_15(self, dados):
         try:
             dados_spv = {'SPV_Param': [
                 {
-                    "name" : "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                    "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
                     "type": "unsignedInt",
-                    "value" : "600"
-                    }]}
+                    "value": "600"
+                }]}
             dados.update(dados_spv)
             dados_entrada = dados
 
@@ -521,7 +522,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             # GET
             dados_gpv = {'GPV_Param': {'parameterNames': [
                 "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
-                ]}}
+            ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
             print(dados_entrada)
@@ -532,7 +533,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
             else:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {
@@ -541,15 +542,15 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
     # 17
+
     def setAccessClass_17(self, dados):
         try:
             dados_spv = {'SPV_Param': [
                 {
-                "name" : "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                "type"  : "unsignedInt",
-                "value" : "service04"
+                    "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                    "type": "unsignedInt",
+                    "value": "service04"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
@@ -560,7 +561,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             # GET
             dados_gpv = {'GPV_Param': {'parameterNames': [
                 "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
-                ]}}
+            ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
@@ -571,7 +572,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado. (esperado: service04; obtido: {gpv_get[0]['value']})"}
             else:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {
@@ -580,8 +581,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
     # 43
+
     def checkIPv6Telefonica_43(self, dados):
         try:
             # GET
@@ -596,7 +597,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin",
                 "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric",
                 "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime",
-                ]}}
+            ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
 
@@ -613,7 +614,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -621,7 +622,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -629,7 +630,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -637,7 +638,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -645,7 +646,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -653,7 +654,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
@@ -669,7 +670,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     if value_parameter['value'] is None and value_parameter['value'] == '':
                         dict_result = {
                             "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                
+
                 elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime":
                     if value_parameter['value'] is None and value_parameter['value'] == '':
                         dict_result = {
@@ -677,33 +678,32 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
                     else:
                         dict_result = {"Resultado_Probe": "OK",
-                                    "obs": "Teste OK", "result": "passed"}
+                                       "obs": "Teste OK", "result": "passed"}
 
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
                 self._dict_result.update(dict_result)
         except Exception as e:
-                dict_result = {
-                            "obs": e
-                            }
-                self._dict_result.update(dict_result)
+            dict_result = {
+                "obs": e
+            }
+            self._dict_result.update(dict_result)
 
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-    #48
+    # 48
     def rebootDevice_48(self, dados):
         try:
             dados_entrada = dados
             reboot_device = utils.ACS.reboot(**dados_entrada)
-        
+
             self._dict_result.update(reboot_device)
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
             return reboot_device
-
 
     def accessWizard_401(self, flask_username):
         try:
@@ -748,7 +748,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     Teste 402 e igual ao 401
     '''
 
-
     def accessPadrao_403(self):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -773,7 +772,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     '''
     Teste 404 e igual ao 403
     '''
-
 
     def accessRemoteHttp_405(self, flask_username):
 
@@ -854,7 +852,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     Teste 406 e igual ao 407. 406 Teste de telnet. Nao disponivel
     '''
 
-
     def accessRemoteSSH_407(self, flask_username):
         result = session.get_result_from_test(
             flask_username, 'accessRemoteHttp_405')
@@ -871,7 +868,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def accessRemoteTrustedIP_408(self, flask_username):
         result = session.get_result_from_test(
             flask_username, 'accessRemoteHttp_405')
@@ -886,7 +882,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({'obs': 'IP Address esta preenchido'})
 
         return self._dict_result
-
 
     def NTPServer_409(self):
         try:
@@ -935,7 +930,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({'obs': str(badHostKeyException)})
         finally:
             return self._dict_result
-
 
     def timeZone_410(self):
         try:
@@ -986,7 +980,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": str(badHostKeyException)})
         finally:
             return self._dict_result
-
 
     def checkACSSettings_411(self, flask_username):
 
@@ -1070,7 +1063,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 flask_username, 'checkACSSettings_411', json_saida411)
             return self._dict_result
 
-
     def validarDefaultUserACS_412(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 411 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1088,7 +1080,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"Username incorreto, retorno: {value}", "result": 'failed'})
         return self._dict_result
 
-
     def validarDefaultPasswordACS_413(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 411 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1105,7 +1096,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Password incorreta, retorno: {value}"})
         return self._dict_result
-
 
     def GPV_OneObjct_414(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
@@ -1165,7 +1155,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": "Periodic Infom esta desabilitado", "result": 'failed'})
         return self._dict_result
 
-
     def periodicInformInterval_416(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 411 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1182,7 +1171,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Periodic Inform Interval esta incorreto, retorno: {value}"})
         return self._dict_result
-
 
     def connectionRequestPort_417(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword):
         d = self.GPV_OneObjct_414(
@@ -1206,7 +1194,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 {"obs": "Teste 414 GPV_OneObjct Falhou!", "result": 'failed'})
             return self._dict_result
 
-
     def enableCwmp_418(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 411 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1222,7 +1209,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             else:
                 self._dict_result.update({"obs": "CWMP esta desabilitado"})
         return self._dict_result
-
 
     def userConnectionRequest_419(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 411 seja executado em conjunto
@@ -1242,7 +1228,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Connection Request Username incorreta, retorno: {value}"})
         return self._dict_result
-
 
     def checkWanInterface_420(self, flask_username):
 
@@ -1292,7 +1277,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 flask_username, 'checkWanInterface_420', dict_saida420)
             return self._dict_result
 
-
     def prioridadePPPoE_421(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1317,7 +1301,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"Teste incorreto, retorno: Type:{iface_type}, ACCESS:{cpe_config['ACCESS']} TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def tipoRedeInet_422(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -1341,7 +1324,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Teste incorreto, retorno: VLAN:{iface_type}, ACCESS:{cpe_config['ACCESS']} TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def checkNatSettings_423(self, flask_username):
 
@@ -1399,7 +1381,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 flask_username, 'checkNatSettings_423', dict_saida423)
             return self._dict_result
 
-
     def checkMulticastSettings_424(self, flask_username):
 
         try:
@@ -1449,7 +1430,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self.update_global_result_memory(
                 flask_username, 'checkMulticastSettings_424', dict_saida424)
             return self._dict_result
-
 
     def getFullConfig_425(self, flask_username):
 
@@ -2545,7 +2525,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             flask_username, 'getFullConfig_425', json_saida425)
         return self._dict_result
 
-
     def verificarSenhaPppDefaultFibra_426(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -2563,7 +2542,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retorno senha: {senha}'})
 
         return self._dict_result
-
 
     def checkWanInterface_x_427(self, flask_username, interface):
 
@@ -3142,7 +3120,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": e})
             return self._dict_result
 
-
     def validarDHCPv6Wan_428(self, flask_username):
         result = session.get_result_from_test(
             flask_username, 'checkWanInterface_x_427')
@@ -3158,7 +3135,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Addressing Type diferente de SLAAC, retorno {ans_428}"})
         return self._dict_result
-
 
     def checkLANSettings_429(self, flask_username):
         usuario = self._username
@@ -3421,7 +3397,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": exception})
             return self._dict_result
 
-
     def vivo_1_ADSL_vlanIdPPPoE_431(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3450,7 +3425,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def vivo_1_ADSL_vlanIdPPPoE_432(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3478,7 +3452,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def vivo_1_ADSL_vlanIdPPPoE_433(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 423 seja executado em conjunto
@@ -3509,7 +3482,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def vivo_1_usernamePppDefault_435(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3530,7 +3502,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         return self._dict_result
 
-
     def vivo_1_passwordPppDefault_436(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3550,7 +3521,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         if len(result) == 0:
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         return self._dict_result
-
 
     def checkWanInterface_x_437(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 427 seja executado em conjunto
@@ -3578,7 +3548,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def validarDHCPv6Wan_438(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 427 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3599,7 +3568,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def checkLANSettings_439(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 429 seja executado em conjunto
@@ -3622,7 +3590,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def vivo_2_ADSL_vlanIdPPPoE_441(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -3651,7 +3618,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def vivo_2_ADSL_vlanIdPPPoE_442(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -3682,7 +3648,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def vivo_2_ADSL_vlanIdPPPoE_443(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 423 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3712,7 +3677,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def vivo_2_usernamePppDefault_445(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3734,7 +3698,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         return self._dict_result
 
-
     def vivo_2_passwordPppDefault_446(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3755,7 +3718,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         if len(result) == 0:
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         return self._dict_result
-
 
     def validarDualStack_447(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 427 seja executado em conjunto
@@ -3783,7 +3745,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
 
-
     def validarDHCPv6Wan_448(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 427 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3806,7 +3767,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def prefixDelegationInet_449(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 429 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3828,7 +3788,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"REDE:{cpe_config['REDE']} | ACCESS:{cpe_config['ACCESS']} | TYPE:{cpe_config['TYPE']}"})
         return self._dict_result
-
 
     def vivo_1_vlanIdIptvVivo1_450(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -3859,7 +3818,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def vivo_1_prioridadeIptv_451(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3886,7 +3844,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             else:
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
-
 
     def vivo_1_validarNatIptv_452(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 423 seja executado em conjunto
@@ -3915,7 +3872,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
 
-
     def vivo_1_igmpIptv_453(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 424 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3943,7 +3899,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
 
-
     def vlanIdVodVivo2_454(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -3970,7 +3925,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             else:
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
-
 
     def vivo2_validarNatIPTV_455(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 e 423 seja executado em conjunto
@@ -4014,7 +3968,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
 
-
     def vivo_2_igmpVoD_456(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 424 seja executado em conjunto
         result = session.get_result_from_test(
@@ -4041,7 +3994,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             else:
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
-
 
     def vlanIdMulticastVivo2_457(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -4070,7 +4022,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": f"REDE:{cpe_config['REDE']}"})
         return self._dict_result
 
-
     def natMulticastVivo2_458(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 423 seja executado em conjunto
         result = session.get_result_from_test(
@@ -4094,7 +4045,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retorno Interface: {iface_type}'})
         return self._dict_result
 
-
     def checkIGMPVivo2_459(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 424 seja executado em conjunto
         result = session.get_result_from_test(
@@ -4117,7 +4067,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs":  f'Teste incorreto, retorno Interface: {iface_type}'})
         return self._dict_result
-
 
     def vivo1_vlanIdVoip_460(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -4167,7 +4116,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def vivo2_prioridadeVoip_461(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
         result = session.get_result_from_test(
@@ -4214,7 +4162,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update(
                 {"obs": f"Teste 461_1: {obs_result}, Teste 461_2: {obs_result2}"})
         return self._dict_result
-
 
     def vivo1_validarNatVoip_462(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 420 seja executado em conjunto
@@ -4301,7 +4248,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 {"obs": f"Teste 462_1: {obs_result1}, Teste 462_2: {obs_result2}"})
             return self._dict_result
 
-
     def vivo_1_igmpVoip_463(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 424 seja executado em conjunto
         result = session.get_result_from_test(
@@ -4346,7 +4292,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update(
                 {"obs": f"463_1: {obs_result}, 463_2: {obs_result2}"})
         return self._dict_result
-
 
     def checkLANDHCPSettings_x_464(self, flask_username, port='4'):
 
@@ -5233,7 +5178,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": e})
             return self._dict_result
 
-
     def poolDhcpLan_465(self, flask_username):
         result = session.get_result_from_test(
             flask_username, 'checkLANDHCPSettings_x_464')
@@ -5251,7 +5195,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update({"obs": 'IP Address Range NOK'})
         return self._dict_result
 
-
     def leaseTime_466(self, flask_username):
         result = session.get_result_from_test(
             flask_username, 'checkLANDHCPSettings_x_464')
@@ -5267,7 +5210,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno Lease Time: {ans_466}'})
         return self._dict_result
-
 
     def vendorIdIptvEnable_467(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -5359,7 +5301,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             flask_username, 'vendorIdIptvEnable_467', json_saida467)
         return self._dict_result
 
-
     def poolDhcpIptv_468(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 467 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5379,7 +5320,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retorno IP Address Range: {ip_inicio} | {ip_fim}'})
         return self._dict_result
 
-
     def igmpSnoopingLAN_469(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 429 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5397,7 +5337,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno IGMP Snooping: {iface_type.get("IGMP Snooping")}'})
         return self._dict_result
-
 
     def verificarWifi24SsidDefault_470(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -5417,7 +5356,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi24Habilitado_471(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5436,7 +5374,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi24Padrao_472(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5454,7 +5391,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retornoModo de Operação: {modo_ope}'})
 
         return self._dict_result
-
 
     def frequencyPlan_473(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -5508,7 +5444,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi24AutoChannel_474(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5526,7 +5461,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retorno Canal: {canal}'})
 
         return self._dict_result
-
 
     def verificarWifi24LarguraBanda_475(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -5546,7 +5480,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi24Seguranca_476(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5563,7 +5496,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retornoModo de Segurança: {seguranca}'})
         return self._dict_result
-
 
     def verificarWifi24PasswordDefault_477(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -5595,7 +5527,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def cipherModeDefault_478(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
         self.login_support()
@@ -5626,7 +5557,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 {"obs": f'Teste incorreto, retorno Encryption: {encryption_value}'})
 
         return self._dict_result
-
 
     def verificarWifi24WPS_479(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -5665,7 +5595,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi5Habilitado_481(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5683,7 +5612,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     {"obs": f'Teste incorreto, retorno Rede Wi-Fi Privada: {rede_pv}'})
         return self._dict_result
 
-
     def verificarWifi5Padrao_482(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5700,7 +5628,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno Modo de Operação: {modo_ope}'})
         return self._dict_result
-
 
     def frequencyPlan5GHz_483(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -5769,7 +5696,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi5AutoChannel_484(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5786,7 +5712,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno Canal: {canal}'})
         return self._dict_result
-
 
     def verificarWifi5LarguraBanda_485(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -5806,7 +5731,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi5Seguranca_486(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5823,7 +5747,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno Modo de Segurança: {seguranca}'})
         return self._dict_result
-
 
     def verificarWifi5PasswordDefault_487(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -5842,7 +5765,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": 'Teste incorreto, retorno Senha: NOK'})
         return self._dict_result
-
 
     def cipherModeDefault5GHz_488(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -5876,7 +5798,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def verificarWifi5WPS_489(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -5893,7 +5814,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f'Teste incorreto, retorno WPS: {wps}'})
         return self._dict_result
-
 
     def checkVoIPSettings_490(self, flask_username):
 
@@ -6411,7 +6331,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 flask_username, 'checkVoIPSettings_490', json_saida490)
             return self._dict_result
 
-
     def verificarDtmfMethod_491(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 490 seja executado em conjunto
         result = session.get_result_from_test(
@@ -6433,7 +6352,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 else:
                     self._dict_result.update({"obs": "DTMF Method não existe"})
         return self._dict_result
-
 
     def prioridadeCodec_0_493(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 490 seja executado em conjunto
@@ -6460,7 +6378,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                         {"obs": f"Teste incorreto, retorno Order: {prior_codec}"})
         return self._dict_result
 
-
     def prioridadeCodec_1_494(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 490 seja executado em conjunto
         result = session.get_result_from_test(
@@ -6484,7 +6401,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     self._dict_result.update(
                         {"obs": f"Teste incorreto, retorno Order: {prior_codec}"})
         return self._dict_result
-
 
     def checkNATALGSettings_495(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
@@ -6531,7 +6447,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": f'REDE: {rede})'})
             return self._dict_result
 
-
     def checkUPnP_497(self, flask_username):
         self._driver.get('http://' + self._address_ip + '/padrao')
         self.login_support()
@@ -6560,7 +6475,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def linkLocalType_498(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -6579,7 +6493,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         return self._dict_result
 
-
     def lanGlobalType_499(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(
@@ -6596,7 +6509,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(
                     {"obs": f"Teste incorreto, retorno LAN global identifier: {linkGlobal}"})
         return self._dict_result
-
 
     def prefixDelegationfromInet_500(self, flask_username):
         # TODO: Fazer logica no frontend para garantir que o teste 429 seja executado em conjunto
