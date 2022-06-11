@@ -20,207 +20,7 @@ class acs:
 
     # 4
     def initialInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "initialInformations", 
-            "Probe#": "XXXXXXX", 
-            "Description": "DUT pré configurado e acesso com conectividade ao HDM de Laboratório. Device Type já criado no HDM.", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.initialInformations_4(dados_entrada)
-
-
-    # 5
-    def wifi2GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "wifi2GHzInformations", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.wifi2GHzInformations_5(dados_entrada)
-
-
-    # 6
-    def wifi5GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "wifi5GHzInformations", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.wifi5GHzInformations_6(dados_entrada)
-
-
-    # 10
-    def setDHCP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "setDHCP", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.setDHCP_10(dados_entrada)
-
-
-    # 12
-    def set2GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "set2GHzWiFi", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        return hgu.set2GHzWiFi_12(dados_entrada)
-
-
-    # 13
-    def set5GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "set5GHzWiFi", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        return hgu.set5GHzWiFi_13(dados_entrada)
-
-
-    # 15
-    def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "setPeriodicInterval", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        print(dados_entrada)
-        return hgu.setPeriodicInterval_15(dados_entrada)
-
-
-    # 17
-    def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
             "Resultado_Probe": "NOK", 
@@ -231,14 +31,215 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
             'acsUsername': acsUsername,
             'acsPassword': acsPassword,
             'portaACS': acsPort,
-            'ip': ip,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.initialInformations_4(dados_entrada)
+
+
+    # 5
+    def wifi2GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.wifi2GHzInformations_5(dados_entrada)
+
+
+    # 6
+    def wifi5GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.wifi5GHzInformations_6(dados_entrada)
+
+
+    # 10
+    def setDHCP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.setDHCP_10(dados_entrada)
+
+
+    # 12
+    def set2GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        return hgu.set2GHzWiFi_12(dados_entrada)
+
+
+    # 13
+    def set5GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        return hgu.set5GHzWiFi_13(dados_entrada)
+
+
+    # 15
+    def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        print(dados_entrada)
+        return hgu.setPeriodicInterval_15(dados_entrada)
+
+
+    # 17
+    def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
             'password': password
         }
 
@@ -250,6 +251,7 @@ class acs:
     # 43
     def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
             "Resultado_Probe": "NOK", 
@@ -260,14 +262,14 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
             'acsUsername': acsUsername,
             'acsPassword': acsPassword,
             'portaACS': acsPort,
-            'ip': ip,
+            'ip': ssh_results['ip_addr'],
             'password': password
         }
 
@@ -278,64 +280,7 @@ class acs:
 
     #39
     def indexWifi24ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "wifi2GHzInformations", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serialnumber,
-            'fmw_version': infoDevices_utils.getInfoHgu(password, ip)['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.indexWifi24ghz_39(dados_entrada)
-
-    #40
-    def indexWifi5ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-        serial_number = infoDevices_utils.getInfoHgu(password, ip)
-        
-        dict_result = {
-            "result": "failed",
-            "Resultado_Probe": "NOK", 
-            "ControllerName": "acs", 
-            "ProbeName": "wifi2GHzInformations", 
-            "Probe#": "XXXXXXX", 
-            "Description": "", 
-            "obs": None}
-
-        dados_entrada = {
-            'serialnumber': serial_number['serialNumber'],
-            'fmw_version': serial_number['firmware'],
-            'GPV_Param': GPV_Param,
-            'IPACS': IPACS,
-            'acsUsername': acsUsername,
-            'acsPassword': acsPassword,
-            'portaACS': acsPort,
-            'ip': ip,
-            'password': password
-        }
-
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
-        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-        return hgu.indexWifi5ghz_40(dados_entrada)
-
-    # 48
-    def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
-        serial_number = infoDevices_utils.getInfoHgu(password, ip)
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
             "Resultado_Probe": "NOK", 
@@ -346,14 +291,70 @@ class acs:
             "obs": None}
 
         dados_entrada = {
-            'serialnumber': serial_number['serialNumber'],
-            'fmw_version': serial_number['firmware'],
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
             'GPV_Param': GPV_Param,
             'IPACS': IPACS,
             'acsUsername': acsUsername,
             'acsPassword': acsPassword,
             'portaACS': acsPort,
-            'ip': ip,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.indexWifi24ghz_39(dados_entrada)
+
+    #40
+    def indexWifi5ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.indexWifi5ghz_40(dados_entrada)
+
+    # 48
+    def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
             'password': password
         }
 

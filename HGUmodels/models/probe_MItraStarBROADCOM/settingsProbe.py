@@ -354,7 +354,6 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         return self._dict_result
 
     # 10
-
     def setDHCP_10(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
 
@@ -521,13 +520,12 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         return self._dict_result
 
     # 17
-
     def setAccessClass_17(self, dados):
         try:
             dados_spv = {'SPV_Param': [
                 {
                     "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                    "type": "unsignedInt",
+                    "type": "string",
                     "value": "service04"
                 }]}
             dados.update(dados_spv)
@@ -857,7 +855,8 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
-            return reboot_device
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
 
     # 43
     def checkIPv6Telefonica_43(self, dados):
