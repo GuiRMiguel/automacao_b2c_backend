@@ -565,8 +565,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
     # 39
     def indexWifi24ghz_39(self, dados):
-        # TODO: This function needs refactoring, zeep library not working, test crashing
-
+     
         dados_gpv = {'GPV_Param': {'parameterNames': [
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
@@ -574,11 +573,12 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+       
         ]}}
         dados.update(dados_gpv)
         dados_entrada = dados
@@ -586,7 +586,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         # GET
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
         parameter = default_settings['Default_Settings']
-
+        print(gpv_get)
         for value_parameter in gpv_get:
             print('\nvalue parameter:', value_parameter['value'])
             if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
@@ -718,7 +718,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
 
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
