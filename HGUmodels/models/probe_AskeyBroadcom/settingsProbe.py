@@ -362,9 +362,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         return self._dict_result
   
           
-
-    
-
     # 10
     def setDHCP_10(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
@@ -502,7 +499,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
     # 15
     def setPeriodicInterval_15(self, dados):
         try:
@@ -541,14 +537,13 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
     # 17
     def setAccessClass_17(self, dados):
         try:
             dados_spv = {'SPV_Param': [
                 {
                 "name" : "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                "type"  : "unsignedInt",
+                "type"  : "string",
                 "value" : "service04"
                 }]}
             dados.update(dados_spv)
@@ -579,7 +574,6 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
-
 
     # 43
     def checkIPv6Telefonica_43(self, dados):
@@ -988,12 +982,13 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         try:
             dados_entrada = dados
             reboot_device = utils.ACS.reboot(**dados_entrada)
-        
+
             self._dict_result.update(reboot_device)
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
-            return reboot_device
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
 
 
     def accessWizard_401(self, flask_username):

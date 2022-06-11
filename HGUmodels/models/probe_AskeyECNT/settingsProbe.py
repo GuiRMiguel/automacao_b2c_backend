@@ -504,7 +504,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
     # 15
-
     def setPeriodicInterval_15(self, dados):
         try:
             dados_spv = {'SPV_Param': [
@@ -543,14 +542,13 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
     # 17
-
     def setAccessClass_17(self, dados):
         try:
             dados_spv = {'SPV_Param': [
-                {
-                    "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                    "type": "unsignedInt",
-                    "value": "service04"
+            {
+                "name" : "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                "type"  : "string",
+                "value" : "service04"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
@@ -582,7 +580,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
     # 43
-
     def checkIPv6Telefonica_43(self, dados):
         try:
             # GET
@@ -703,7 +700,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
-            return reboot_device
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
 
     def accessWizard_401(self, flask_username):
         try:
