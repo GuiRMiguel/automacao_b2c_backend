@@ -375,7 +375,87 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             IP of the box and external (Two different sites) ex. google for 6 hours
         :return : A dict with the result of the test
         """
-        self._driver.get('http://ipv6-test.com/pingtest/')
+        try:
+            # # Entering on WiFi 5GHz settings and sign in
+            # self._driver.get('http://' + self._address_ip + '/')
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            # time.sleep(1)
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            # time.sleep(1)
+            # user_input = self._driver.find_element_by_id('txtUser')
+            # user_input.send_keys(self._username)
+            # pass_input = self._driver.find_element_by_id('txtPass')
+            # pass_input.send_keys(self._password)
+            # self._driver.find_element_by_id('btnLogin').click()
+            # time.sleep(3)
+            
+            # # Enabling 5GHz WiFi
+            # self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
+            # self._driver.find_element_by_id('btnBasSave').click()
+            # time.sleep(3)
+            # self._driver.switch_to_alert().accept()
+
+            # # Entering on WiFi 2.4GHz settings and sign in
+            # self._driver.get('http://' + self._address_ip + '/')
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            # time.sleep(1)
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            # time.sleep(4)
+            
+            # # Desabling 2.4GHz WiFi
+            # self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            # self._driver.find_element_by_id('btnBasSave').click()
+            # time.sleep(3)
+            # self._driver.switch_to_alert().accept()
+
+            # # Desabling other devices
+            # pwd = '4ut0m4c40'
+            # cmd = 'ls'
+            # subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            # subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            # subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            # subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            # subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            # subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            # subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            # subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            # time.sleep(15)
+
+            # Generating ping for 5GHz WiFi
+            # pwd = '4ut0m4c40'
+            # cmd = 'ls'
+            # subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+            # print('\n\npassou\n\n')
+            generating_ping = subprocess.Popen(['ping', 'google.com'])
+            time.sleep(10)
+            generating_ping.terminate()
+            time.sleep(2)
+            print(generating_ping)
+            
+        
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            self._driver.quit()
+            return self._dict_result
+        
 
 
     # 24
