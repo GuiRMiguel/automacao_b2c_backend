@@ -46,42 +46,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         """
         speed_test = "https://www.speedtest.net/"
         try:
-            # Entering on WiFi 2.4GHz settings and sign in
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
-            time.sleep(1)
-            user_input = self._driver.find_element_by_id('txtUser')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(3)
             
-            # Desabling 2.4GHz WiFi
-
-            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
-            self._driver.find_element_by_id('btnBasSave').click()
-            time.sleep(3)
-            self._driver.switch_to_alert().accept()
-            
-            # Desabling 5GHz WiFi
-            time.sleep(3)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
-            time.sleep(2)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[2]').click()
-            self._driver.find_element_by_id('btnBasSave').click()
-            time.sleep(3)
-            self._driver.switch_to_alert().accept()
-
-            self._driver.set_page_load_timeout(10)
-            try:
-                self._driver.execute_script("window.stop();")
-            except Exception as e:
-                print(e)
-                self._driver.get('http://' + self._address_ip + '/')
-
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
@@ -90,19 +55,31 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(5)
 
             # Executing a Speed Test
             try:
-                self._driver.get(speed_test)
-                time.sleep(10)
+                try:
+                    self._driver.get(speed_test)
+                    self._driver.set_load_page_timeout(10)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
+                except Exception as e:
+                    print(e)
+                    self._driver.get(speed_test)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(90)
                 download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
-                print('#####################################################################')
+                print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
-                print('#####################################################################')
+                print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
             
@@ -128,6 +105,109 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'uo']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
+    # 19
+    def checkSpeed5GHz_19(self, flask_username):
+        """
+            Check the transmission speed on the ethernet network cable
+        :return : A dict with the result of the test
+        """
+        speed_test = "https://www.speedtest.net/"
+        try:
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+            
+            # Desabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(5)
+
+            # Executing a Speed Test
+            try:
+                try:
+                    self._driver.get(speed_test)
+                    self._driver.set_load_page_timeout(10)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
+                except Exception as e:
+                    print(e)
+                    self._driver.get(speed_test)
+                time.sleep(5)
+                self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+                time.sleep(90)
+                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                print('\n\n#####################################################################')
+                print('Download Speed   -   ', download_speed)
+                print('Upload Speed     -   ', upload_speed)
+                print('#####################################################################\n\n')
+            except Exception as e:
+                print(e)
+            
+            # Verificar a velocidade contratada
+            down_speed_exp = 300
+            up_speed_exp = 300
+
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        
+            # Habling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'uo']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
 
 
         except Exception as exception:
