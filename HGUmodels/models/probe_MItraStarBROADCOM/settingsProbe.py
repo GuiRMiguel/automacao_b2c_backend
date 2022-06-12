@@ -361,11 +361,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             {
                 "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
                 "type": "string",
-                "value": "192.168.15.6"
+                "value": "192.168.18.6"
             }, {
                 "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
                 "type": "string",
-                "value": "192.168.15.150"
+                "value": "192.168.18.150"
             }]}
         dados.update(dados_spv)
         dados_entrada = dados
@@ -382,10 +382,10 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         dados_entrada = dados
 
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if gpv_get[0]['value'] != "192.168.15.6":
+        if gpv_get[0]['value'] != "192.168.18.6":
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] != "192.168.15.150":
+        elif gpv_get[1]['value'] != "192.168.18.150":
             dict_result = {
                 "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
         else:
@@ -568,7 +568,7 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
@@ -711,7 +711,7 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
 
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",

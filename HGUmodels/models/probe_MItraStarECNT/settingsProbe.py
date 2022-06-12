@@ -349,7 +349,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         print("\n", self._dict_result, "\n")
         return self._dict_result
 
-    # 10
+   # 10
     def setDHCP_10(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
         try:
@@ -357,11 +357,11 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 {
                     "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
                     "type": "string",
-                    "value": "192.168.15.6"
+                    "value": "192.168.17.6"
                 }, {
                     "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
                     "type": "string",
-                    "value": "192.168.15.150"
+                    "value": "192.168.17.150"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
@@ -378,15 +378,15 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            if gpv_get[0]['value'] != "192.168.15.6":
+            if gpv_get[0]['value'] != "192.168.17.6":
                 dict_result = {
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-            elif gpv_get[1]['value'] != "192.168.15.150":
+            elif gpv_get[1]['value'] != "192.168.17.150":
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
             else:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
         except Exception as e:
             dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
@@ -428,7 +428,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
             elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             else:
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
@@ -474,7 +474,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
             elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
                 dict_result = {"Resultado_Probe": "OK",
-                            "obs": "Teste OK", "result": "passed"}
+                               "obs": "Teste OK", "result": "passed"}
             else:
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
