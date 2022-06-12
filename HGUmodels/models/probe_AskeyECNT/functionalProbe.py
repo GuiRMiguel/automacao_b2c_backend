@@ -127,11 +127,11 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         """
         speed_test = "https://www.speedtest.net/"
         try:
-            # Entering on WiFi 2.4GHz settings and sign in
+            # Entering on WiFi 5GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
             time.sleep(1)
             user_input = self._driver.find_element_by_id('txtUser')
             user_input.send_keys(self._username)
@@ -139,6 +139,19 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             pass_input.send_keys(self._password)
             self._driver.find_element_by_id('btnLogin').click()
             time.sleep(3)
+            
+            # Enabling 5GHz WiFi
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+            self._driver.switch_to_alert().accept()
+
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(4)
             
             # Desabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()

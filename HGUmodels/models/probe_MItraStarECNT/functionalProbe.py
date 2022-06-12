@@ -125,13 +125,13 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         """
         speed_test = "https://www.speedtest.net/"
         try:
-            # Entering on WiFi 2.4GHz settings and sign in
+            # Entering on WiFi 5GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(3)
             self._driver.switch_to.frame("menufrm")
             self._driver.find_element_by_id('MLG_Menu_Settings').click()
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[4]/a/span').click()
             time.sleep(2)
             self._driver.switch_to.default_content()
             time.sleep(1)
@@ -143,6 +143,24 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
             time.sleep(1)
             login_button.click()
+            time.sleep(5)
+
+            # Enabling WiFi
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
+            time.sleep(8)
+
+            # Entering on WiFi 2.4GHz settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(3)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
             time.sleep(5)
 
             # Desabling WiFi

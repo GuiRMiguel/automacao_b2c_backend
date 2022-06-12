@@ -120,7 +120,29 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         """
         speed_test = "https://www.speedtest.net/"
         try:
-            # Entering on WiFi 2.4GHz settings and sign in
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            
+            # Enabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Entering on WiFi 2.4GHz
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
             #config / Internet
@@ -132,8 +154,6 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
-            self.admin_authentication_mitraStat()
-            time.sleep(2)
             
             # Desabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[2]').click()
