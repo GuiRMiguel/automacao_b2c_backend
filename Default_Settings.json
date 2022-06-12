@@ -891,7 +891,6 @@
                 "Askey_Econet":{
                     "modelos": ["RTF8117VW", "RTF8115VW", "RTF8115VW-SV"],
                     "oui": ["009096"],
-
                     "manufacturer": ["Askey", "askey"]
                 },
                 "Mitra_Broadcom":{
