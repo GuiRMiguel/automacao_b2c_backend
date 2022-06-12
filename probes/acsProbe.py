@@ -105,6 +105,35 @@ class acs:
         return hgu.wifi5GHzInformations_6(dados_entrada)
 
 
+    # 9
+    def lanConfiguration(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setAccessClass", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.lanConfiguration_9(dados_entrada)
+
+
     # 10
     def setDHCP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
@@ -278,7 +307,7 @@ class acs:
         return hgu.checkIPv6Telefonica_43(dados_entrada)
     
 
-    #39
+    # 39
     def indexWifi24ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -306,7 +335,8 @@ class acs:
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.indexWifi24ghz_39(dados_entrada)
 
-    #40
+
+    # 40
     def indexWifi5ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -333,6 +363,7 @@ class acs:
         hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.indexWifi5ghz_40(dados_entrada)
+
 
     # 48
     def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
@@ -363,7 +394,6 @@ class acs:
         return hgu.rebootDevice_48(dados_entrada)
     
 
-    #414
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
 
         dict_result = {
@@ -388,7 +418,6 @@ class acs:
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.GPV_OneObjct_414(dados_entrada)
 
-    #417
     def connectionRequestPort(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, model_name):
 
         dict_result = {
@@ -402,7 +431,6 @@ class acs:
 
         hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
         return hgu.connectionRequestPort_417(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
-
 
     def execCusFuncPingDiagnostics(self, serialnumber, IPACS, acsUsername, acsPassword, destAddress):
         print()

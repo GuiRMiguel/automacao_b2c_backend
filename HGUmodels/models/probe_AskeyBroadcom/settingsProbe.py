@@ -361,6 +361,39 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
   
+    # 9
+    def lanConfiguration_9(self, dados):
+        try:
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+               "InternetGatewayDevice.LANDevice.1.Hosts.Host."
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            # GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
+            
+            for value_parameter in gpv_get:
+                print(value_parameter)
+                if dados_entrada['ip'][:-2] not in value_parameter['value']:
+                    dict_result = {
+                                "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                else:
+                    dict_result = {"Resultado_Probe": "OK",
+                                        "obs": "Teste OK", "result": "passed"}
+                    self._dict_result.update(dict_result)
+                    return self._dict_result
+                    
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
           
     # 10
     def setDHCP_10(self, dados):
