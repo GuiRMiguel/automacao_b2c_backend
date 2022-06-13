@@ -879,6 +879,280 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
+    # 42
+    def checkObjectsTelefonica_42(self, dados):
+        try:
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.Enable",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.BackupConcentratorAddress",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.ConcentratorAddress",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.MaximumClients",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.SBCAddress",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.SIPServerAddress",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.Dsldiagd.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.Telnet.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.SyslogRemote.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.SyslogRemote.Host",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.SyslogRemote.Port"
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Debug.SyslogRemote.Severity",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                 "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.InternetService",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.VoipService",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.VodService",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.MulticastService",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.LAN",
+
+                # "InternetGatewayDevice.WANDevice.{i}.WANConnectionDevice.{i}.WANPPPConnection.{i}.X_VIVO_COM_BR_ExternalIPv6Address",
+                # "InternetGatewayDevice.WANDevice.{i}.WANConnectionDevice.{i}.WANPPPConnection.{i}.X_VIVO_COM_BR_IPv6CPEnable",
+                # "InternetGatewayDevice.LANDevice.{i}.LANHostConfigManagement.X_VIVO_COM_BR_RouterAdvertisementEnable",
+                # "InternetGatewayDevice.LANDevice.{i}.LANHostConfigManagement.X_VIVO_COM_BR_RouterAdvertisementPrefix",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.Enable",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.Status",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.Alias",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.DestIPPrefix",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.ForwardingPolicy",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.NextHop",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.Interface",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.Origin",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.ForwardingMetric",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.{i}.ExpirationTime",
+                
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Config",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.AdvancedLevel ",
+                
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
+                
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.LastChange",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.LevelNumberOfEntries",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.ChainNumberOfEntries",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Alias",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Name",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Description",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Order",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.PortMappingEnabled",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.DefaultPolicy",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.DefaultLogPolicy",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Alias",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Name",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Creator",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.RuleNumberOfEntries",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Status",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Order",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Alias",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Description",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Target",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.TargetChain",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Log",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.CreationDate",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.ExpiryDate",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceInterface",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceInterfaceExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceAllInterfaces",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestInterface",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestInterfaceExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestAllInterfaces",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.IPVersion",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestIP",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestMask",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestIPExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceIP",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceMask",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourceIPExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.Protocol",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.ProtocolExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestPort",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestPortRangeMax",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DestPortExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourcePort",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourcePortRangeMax",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.SourcePortExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DSCP",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Level.{i}.Chain.{i}.Rule.{i}.DSCPExclude",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DMZHostConfig.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.GPONSerialNumber",
+                # "InternetGatewayDevice.Services.VoiceService.{i}.VoiceProfile.{i}.SIP.ConferenceCallURI",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.DMZHostConfig.InternalClient",
+                # "InternetGatewayDevice:1.InternetGatewayDevice.LANDevice.{i}.WLANConfiguration.{i}.Alias",
+   
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            print(gpv_get)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
+
+            for value_parameter in gpv_get:
+                print('\nvalue parameter:', value_parameter['value'])
+                #"InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.Enable",
+                #"InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.BackupConcentratorAddress",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.Enable":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.BackupConcentratorAddress":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.ConcentratorAddress",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.MaximumClients",
+                # "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.SBCAddress",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.ConcentratorAddress":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.MaximumClients":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Hotspot.SBCAddress":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.WanMode":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                #  "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version":
+                    if value_parameter['name'] == None or value_parameter['name'] == "":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} com valor diferente do esperado."}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+
+        except Exception as e:
+            dict_result = {
+                "obs": e
+            }
+        self._dict_result.update(dict_result)
+
+        print('\n', self._dict_result, '\n')
+        return self._dict_result
+
     # 48
     def rebootDevice_48(self, dados):
         try:

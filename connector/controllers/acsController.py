@@ -259,6 +259,27 @@ class acs(Resource):
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+              
+        elif method == 'checkObjectsTelefonica':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.checkObjectsTelefonica(GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip, serialnumber)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
 
         elif method == 'rebootDevice':
             serialnumber = request.json['serialnumber']

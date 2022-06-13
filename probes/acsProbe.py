@@ -365,6 +365,35 @@ class acs:
         return hgu.indexWifi5ghz_40(dados_entrada)
 
 
+
+    # 42
+    def checkObjectsTelefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "checkObjectsTelefonica", 
+            "Probe#": "42", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.checkObjectsTelefonica_42(dados_entrada)
+
     # 48
     def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
