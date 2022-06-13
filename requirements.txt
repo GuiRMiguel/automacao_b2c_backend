@@ -78,6 +78,7 @@ multiping==1.1.2
 mysqlclient==2.1.0
 netifaces==0.10.4
 networkx==2.5.1
+ntplib==0.4.0
 numpy==1.19.5
 oauthlib==3.1.0
 olefile==0.46
@@ -129,6 +130,7 @@ selenium==3.141.0
 simple-websocket==0.5.2
 simplejson==3.16.0
 six==1.15.0
+speedtest==0.0.1
 SQLAlchemy==1.4.36
 systemd-python==234
 texttable==1.6.2
