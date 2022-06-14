@@ -96,11 +96,9 @@ class SDO:
             return e
 #
     def getParameterValue(self, OUI, productClass, protocol, serialNumber, object):
-        
         try:
             #object = 'InternetGatewayDevice.ManagementServer.PeriodicInformInterval'
             nbiDeviceId = {'OUI': OUI, 'productClass': productClass, 'protocol': protocol, 'serialNumber': serialNumber}
-            
             timeout = 30000
             nBIOptions = {'disableCaptureConstraint': 'true', 'executionTimeoutSeconds': '120',
                           'expirationTimeoutSeconds': '60',
@@ -108,7 +106,6 @@ class SDO:
                           'NBISingleDeviceOperationCallBackInfo': {'retry': 'false'},
                           'opaqueTransactionId': 'teste555', 'policyClass': 'policytest', 'priority': '100',
                           'replaceDeviceCachedDataRecord': 'false', 'updateCachedDataRecord': 'true'}
-            
             #getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=object, arg2=nBIOptions, arg3=timeout)
             # Exemplo de Request getParameterValues no SOAPUI - testado e validado
             """
@@ -155,6 +152,7 @@ class SDO:
             # getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), object), arg2=nBIOptions, arg3=timeout)
             getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=object, arg2=nBIOptions, arg3=timeout)
             self.msgTagExecution_GPV = 'EXECUTED'
+            #print(getParameterValue)
             return getParameterValue
         except TypeError:
             print("'NoneType' object is not iterable")
@@ -344,7 +342,7 @@ class SDO:
 
 
 
-    def changeVoIPPasswordAta(self, OUI, productClass, protocol, serialNumber, DirectoryNumber, AuthUserName, AuthPassword, ProxyServer, RegistrarServer, UserAgentDomain, OutboundProxy, phyReferenceList):
+    def setVoip(self, OUI, productClass, protocol, serialNumber, DirectoryNumber, AuthUserName, AuthPassword, ProxyServer, RegistrarServer, UserAgentDomain, OutboundProxy, phyReferenceList):
         # Custom function changeVoIPPassword -> FunctionCode = 10003
         # {"AuthPassword":"95305",
         #         "phyReferenceList":"1"}
@@ -374,17 +372,122 @@ class SDO:
                           'updateCachedDataRecord': 'true'}
             timeout = 30000
             #print(timeout)
-            changeVoIPPassword = self.client.service.executeFunction(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), input), arg2=numberExecuteFunction, arg3=nBIOptions,arg4=timeout)
-            print(changeVoIPPassword)
-            self.msgTagExecution_PingDiag = 'EXECUTED'
-            return changeVoIPPassword
-        except TypeError:
-            print('list index out of range')
+            setvoip = self.client.service.executeFunction(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), input), arg2=numberExecuteFunction, arg3=nBIOptions,arg4=timeout)
+            print(setvoip)
+            self.msgTagExecution_SetVoIP = 'EXECUTED'
+            return setvoip
+        except TypeError as e:
+            print(e)
         except:
             e = sys.exc_info()[1]
             print(e)
             print('PRINT DO EXCEPT = ' + str(e))
-            self.msgTagExecution_PingDiag_ERROR = 'ERROR'
-            self.msgErrorLog_PingDiag = str(e)
-            self.msgErrorDetail_PingDiag = 'ERROR_006-remoteHDM-ERROR AO EXECUTAR PingDiag'
+            self.msgTagExecution_SetVoIP_ERROR = 'ERROR'
+            self.msgErrorLog_SetVoIP = str(e)
+            self.msgErrorDetail_SetVoIP = 'ERROR_006-remoteHDM-ERROR AO EXECUTAR SetVoIP'
             return e
+
+
+    def cancelVoip(self, OUI, productClass, protocol, serialNumber, DirectoryNumber):
+        # Custom function cancelVoIP -> FunctionCode = 9540
+        input = str({
+            "directoryNumber": DirectoryNumber
+        })
+        try:
+            nbiDeviceId = {'OUI': OUI, 'productClass': productClass, 'protocol': protocol,
+                           'serialNumber': serialNumber}
+            numberExecuteFunction = 9540
+            nBIOptions = {'disableCaptureConstraint': 'true',
+                          'executionTimeoutSeconds': '180',
+                          'expirationTimeoutSeconds': '180',
+                          'failOnConnectionRequestFailure': 'true',
+                          'NBISingleDeviceOperationCallBackInfo': {'retry': 'false'},
+                          'opaqueTransactionId': 'teste555',
+                          'policyClass': 'policytest',
+                          'priority': '100',
+                          'replaceDeviceCachedDataRecord': 'false',
+                          'updateCachedDataRecord': 'true'}
+            timeout = 30000
+            #print(timeout)
+            cancelVoip = self.client.service.executeFunction(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), input), arg2=numberExecuteFunction, arg3=nBIOptions,arg4=timeout)
+            print(cancelVoip)
+            self.msgTagExecution_cancelVoip = 'EXECUTED'
+            return cancelVoip
+        except TypeError as e:
+            print(e)
+        except:
+            e = sys.exc_info()[1]
+            print(e)
+            print('PRINT DO EXCEPT = ' + str(e))
+            self.msgTagExecution_cancelVoip_ERROR = 'ERROR'
+            self.msgErrorLog_cancelVoip = str(e)
+            self.msgErrorDetail_cancelVoip = 'ERROR_006-remoteHDM-ERROR AO EXECUTAR cancelVoip'
+            return e
+
+
+    def runDownloadDiagnostics(self, OUI, productClass, protocol, serialNumber, file_size):
+        # Custom function Download Diagnostics -> FunctionCode = 9110
+        try:
+            nbiDeviceId = {'OUI': OUI, 'productClass': productClass, 'protocol': protocol,
+                           'serialNumber': serialNumber}
+            numberExecuteFunction = 9110
+            download_url = 'http://201.95.254.137/download/' + str(file_size)
+            nBIOptions = {'disableCaptureConstraint': 'true',
+                          'executionTimeoutSeconds': '600',
+                          'expirationTimeoutSeconds': '180',
+                          'failOnConnectionRequestFailure': 'true',
+                          'NBISingleDeviceOperationCallBackInfo': {'retry': 'false'},
+                          'opaqueTransactionId': 'teste555',
+                          'policyClass': 'policytest',
+                          'priority': '100',
+                          'replaceDeviceCachedDataRecord': 'false',
+                          'updateCachedDataRecord': 'true'}
+            timeout = 300000
+            #print(timeout)
+            download_diagnostics = self.client.service.executeFunction(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), download_url),arg2=numberExecuteFunction, arg3=nBIOptions,arg4=timeout)
+            # print(download_diagnostics)
+            self.msgTagExecution_download_diagnostics = 'EXECUTED'
+            return download_diagnostics
+        except TypeError as e:
+            print(e)
+        except:
+            e = sys.exc_info()[1]
+            print(e)
+            print('PRINT DO EXCEPT = ' + str(e))
+            self.msgTagExecution_download_diagnostics_ERROR = 'ERROR'
+            self.msgErrorLog_download_diagnostics = str(e)
+            self.msgErrorDetail_download_diagnostics = 'ERROR_006-remoteHDM-ERROR AO EXECUTAR download_diagnostics'
+
+
+    def runUploadDiagnostics(self, OUI, productClass, protocol, serialNumber, file_size):
+        # Custom function Upload Diagnostics -> FunctionCode = 9120
+        try:
+            nbiDeviceId = {'OUI': OUI, 'productClass': productClass, 'protocol': protocol,
+                           'serialNumber': serialNumber}
+            numberExecuteFunction = 9120
+            upload_url = 'http://201.95.254.137/upload_automacao/' + str(file_size)
+            nBIOptions = {'disableCaptureConstraint': 'true',
+                          'executionTimeoutSeconds': '600',
+                          'expirationTimeoutSeconds': '180',
+                          'failOnConnectionRequestFailure': 'true',
+                          'NBISingleDeviceOperationCallBackInfo': {'retry': 'false'},
+                          'opaqueTransactionId': 'teste555',
+                          'policyClass': 'policytest',
+                          'priority': '100',
+                          'replaceDeviceCachedDataRecord': 'false',
+                          'updateCachedDataRecord': 'true'}
+            timeout = 300000
+            #print(timeout)
+            upload_diagnostics = self.client.service.executeFunction(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), upload_url),arg2=numberExecuteFunction, arg3=nBIOptions,arg4=timeout)
+            # print(upload_diagnostics)
+            self.msgTagExecution_upload_diagnostics = 'EXECUTED'
+            return upload_diagnostics
+        except TypeError as e:
+            print(e)
+        except:
+            e = sys.exc_info()[1]
+            print(e)
+            print('PRINT DO EXCEPT = ' + str(e))
+            self.msgTagExecution_upload_diagnostics_ERROR = 'ERROR'
+            self.msgErrorLog_upload_diagnostics = str(e)
+            self.msgErrorDetail_upload_diagnostics = 'ERROR_006-remoteHDM-ERROR AO EXECUTAR download_diagnostics'

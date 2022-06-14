@@ -10,6 +10,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 #chrome_options.add_argument("start-maximized")
 chrome_options.add_argument("disable-infobars")
 chrome_options.add_argument("--disable-extensions")
+#chrome_options.add_argument("--remote-debugging-port=9222")
 
 
 class WebDriver:

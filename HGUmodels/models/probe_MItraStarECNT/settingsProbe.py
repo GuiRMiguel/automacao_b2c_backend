@@ -596,6 +596,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
+    # 18
+    def setVOIP_18(self, dados):
+        try:
+            dados_entrada = dados
+            set_voip = utils.ACS.setVoIP(**dados_entrada)
+
+            self._dict_result.update(set_voip)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+    # 19
+    def cancelVOIP_19(self, dados):
+        try:
+            dados_entrada = dados
+            set_voip = utils.ACS.cancelVoIP(**dados_entrada)
+
+            self._dict_result.update(set_voip)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
     # 39
     def indexWifi24ghz_39(self, dados):
      
@@ -1275,6 +1301,33 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             reboot_device = utils.ACS.reboot(**dados_entrada)
 
             self._dict_result.update(reboot_device)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
+    # 50
+    def firmwareUpgrade_50(self, dados):
+        try:
+            dados_entrada = dados
+            firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
+
+            self._dict_result.update(firmware_up)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+    # 51
+    def firmwareDowngrade_51(self, dados):
+        try:
+            dados_entrada = dados
+            firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
+
+            self._dict_result.update(firmware_up)
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:

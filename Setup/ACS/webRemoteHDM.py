@@ -61,7 +61,8 @@ class NRH:
     #
     #
     #
-    def createSingleFirmwareUpdateOperation(self, OUI, productClass, protocol, serialNumber, firmwareNameIn):
+    def firmwareUpdate(self, OUI, productClass, protocol, serialNumber, firmwareNameIn):
+        #createSingleFirmwareUpdateOperation
         deviceId = {'OUI': OUI, 'productClass': productClass, 'protocol': protocol, 'serialNumber': serialNumber}
         firmwareName = str(firmwareNameIn)
         timeout = int(300)
@@ -71,6 +72,7 @@ class NRH:
             self.msgTagExecution_01 = 'EXECUTED'
             self.msgErrorLog_01 = 'FIRMWARE UPDATE EXECUTADO COM SUCESSO'
             self.msgErrorDetail_01 = 'MSG_004-SUCESSO AO EXECUTAR FIMRWARE UPDATE'
+            return  self.firmwareAction
         except:
             e = sys.exc_info()[1]
             self.msgTagExecution_01 = 'ERROR'
@@ -106,8 +108,7 @@ class NRH:
             self.msgTagExecution_02 = 'EXECUTED'
             self.msgErrorLog_02 = 'SERIAL ENCONTRADO'
             self.msgErrorDetail_02 = 'MSG_006-SUCESSO AO EXECUTAR BUSCA DE INFORMACOES PELO SERIAL'
-        except Exception as erro:
-            print(erro)
+        except:
             e = sys.exc_info()[1]
             self.msgTagExecution_02 = 'ERROR'
             self.msgErrorLog_02 = str(e)

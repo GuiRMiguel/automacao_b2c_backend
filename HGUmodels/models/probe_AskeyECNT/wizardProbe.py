@@ -13,6 +13,8 @@ import json
 import requests
 import sys
 import pandas as pd
+from pyzbar.pyzbar import decode
+from PIL import Image
 from collections import namedtuple
 from ...config import TEST_NOT_IMPLEMENTED_WARNING
 from HGUmodels.utils import chunks
@@ -372,6 +374,12 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result
 
+
+    # 385
+    def qrCodeTest_385(self, flask_username):
+        data = decode(Image.open('data/qr-code-test.png'))
+        print(data[0][0])
+        return self._dict_result
 
     #386 mlv
     def statusWizardIptv_386(self, flask_username):

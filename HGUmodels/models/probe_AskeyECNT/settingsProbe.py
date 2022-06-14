@@ -613,6 +613,33 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
+    # 18
+    def setVOIP_18(self, dados):
+        try:
+            dados_entrada = dados
+            set_voip = utils.ACS.setVoIP(**dados_entrada)
+
+            self._dict_result.update(set_voip)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+    # 19
+    def cancelVOIP_19(self, dados):
+        try:
+            dados_entrada = dados
+            set_voip = utils.ACS.cancelVoIP(**dados_entrada)
+
+            self._dict_result.update(set_voip)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+
     #39
     def indexWifi24ghz_39(self, dados):
      
@@ -1180,25 +1207,26 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             # GET
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric",
-                "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime",
+                "InternetGatewayDevice.Layer3Forwarding."
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric",
+                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime",
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
-
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
+            print(gpv_get)
 
             for value_parameter in gpv_get:
                 if value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable":
@@ -1293,6 +1321,32 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             reboot_device = utils.ACS.reboot(**dados_entrada)
 
             self._dict_result.update(reboot_device)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+    # 50
+    def firmwareUpgrade_50(self, dados):
+        try:
+            dados_entrada = dados
+            firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
+
+            self._dict_result.update(firmware_up)
+        except Exception as e:
+            self._dict_result.update({"obs": f"{e}"})
+        finally:
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
+
+    # 51
+    def firmwareDowngrade_51(self, dados):
+        try:
+            dados_entrada = dados
+            firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
+
+            self._dict_result.update(firmware_up)
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:

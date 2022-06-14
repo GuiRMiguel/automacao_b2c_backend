@@ -327,6 +327,110 @@ class acs(Resource):
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
 
 
+        elif method == 'setVOIP':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+            set_voip = request.json['set_voip']
+
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.setVOIP(GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip, serialnumber, set_voip)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == 'cancelVOIP':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+            set_voip = request.json['set_voip']
+
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.cancelVOIP(GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip, serialnumber, set_voip)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == 'firmwareUpgrade':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+            set_voip = request.json['set_voip'],
+            versao_FW = request.json['versão_FW']
+            velocidade_link = request.json['velocidade_link']
+            firmware_file = request.json['firmware_file']
+
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.firmwareUpgrade(GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip, 
+            serialnumber, set_voip, versao_FW, velocidade_link, firmware_file)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == 'firmwareDowngrade':
+            serialnumber = request.json['serialnumber']
+            GPV_Param = request.json['GPV_Param']
+            IPACS = request.json['IPACS']
+            acsUsername = request.json['acsUsername']
+            acsPassword = request.json['acsPassword']
+            acsPort = request.json['portaACS']
+            password = request.json['password']
+            ip = request.json['ip']
+            set_voip = request.json['set_voip'],
+            versao_FW = request.json['versão_FW']
+            velocidade_link = request.json['velocidade_link']
+            firmware_file = request.json['firmware_file']
+
+
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            result = obj.firmwareDowngrade(GPV_Param, IPACS, acsUsername, acsPassword, acsPort, modelo, password, ip, 
+            serialnumber, set_voip, versao_FW, velocidade_link, firmware_file)
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
         elif method == 'checkIPv6Telefonica':
             serialnumber = request.json['serialnumber']
             GPV_Param = request.json['GPV_Param']

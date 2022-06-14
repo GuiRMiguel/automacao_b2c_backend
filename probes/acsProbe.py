@@ -277,6 +277,66 @@ class acs:
         return hgu.setAccessClass_17(dados_entrada)
 
 
+    # 18
+    def setVOIP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber, set_voip):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "setVOIP", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password,
+            'set_voip': set_voip
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.setVOIP_18(dados_entrada)
+
+
+    # 18
+    def cancelVOIP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber, set_voip):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "cancelVOIP", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password,
+            'set_voip': set_voip
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.cancelVOIP_19(dados_entrada)
+
+
     # 43
     def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
 
@@ -422,6 +482,74 @@ class acs:
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.rebootDevice_48(dados_entrada)
     
+
+    # 50
+    def firmwareUpgrade(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, 
+            serialnumber, set_voip, versao_FW, velocidade_link, firmware_file):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "firmwareUpgrade", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password,
+            'set_voip': set_voip,
+            'versao_FW': versao_FW,
+            'velocidade_link': velocidade_link,
+            'firmware_file': firmware_file
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.firmwareUpgrade_50(dados_entrada)
+
+
+    # 51
+    def firmwareDowngrade(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, 
+            serialnumber, set_voip, versao_FW, velocidade_link, firmware_file):
+        ssh_results = infoDevices_utils.getInfoHgu(password, ip)
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "firmwareDowngrade", 
+            "Probe#": "XXXXXXX", 
+            "Description": "", 
+            "obs": None}
+
+        dados_entrada = {
+            'serialnumber': ssh_results['serialNumber'],
+            'fmw_version': ssh_results['firmware'],
+            'GPV_Param': GPV_Param,
+            'IPACS': IPACS,
+            'acsUsername': acsUsername,
+            'acsPassword': acsPassword,
+            'portaACS': acsPort,
+            'ip': ssh_results['ip_addr'],
+            'password': password,
+            'set_voip': set_voip,
+            'versao_FW': versao_FW,
+            'velocidade_link': velocidade_link,
+            'firmware_file': firmware_file
+        }
+
+        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
+        return hgu.firmwareDowngrade_51(dados_entrada)
+
 
     def GPV_OneObjct(self, serialnumber, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name):
 

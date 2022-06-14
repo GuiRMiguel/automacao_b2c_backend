@@ -1369,6 +1369,29 @@ class gui:
                                      dict_result=dict_result)
         return hgu.execPingWizard_384(flask_username)
 
+
+    # 385
+    def qrCodeTest(self, ip, username, password, model_name, flask_username, **kwargs):
+        driver = WebDriver.get_driver()
+        dict_result = {"result":"failed",
+                        "Resultado_Probe": "NOK", 
+                        "ControllerName": "gui", 
+                        "ProbeName": "verifyDnsService", 
+                        "Probe#": "392", 
+                        "Description": "Erro na habilitacao do servico DNS", 
+                        "obs": None}
+
+        hgu = HGUModelFactory.getHGU(probe='wizardProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.qrCodeTest_385(flask_username)
+
+
     #386 mlv
     def statusWizardWifi(self, ip, username, password, model_name, flask_username, **kwargs):
         
