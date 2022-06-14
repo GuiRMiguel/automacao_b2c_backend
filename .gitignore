@@ -1,6 +1,6 @@
 venv/**
 Setup/Selenium/**
 **/__pycache__/**
-data/**
+# data/**
 *.pyc 
 **.pyc
