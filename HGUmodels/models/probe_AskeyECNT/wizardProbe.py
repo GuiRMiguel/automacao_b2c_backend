@@ -379,55 +379,150 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
     # 385
     def qrCodeTest_385(self, flask_username):
+        ssid_2g_exp = 'VIVO automacao 2GHz'
+        pass_2g_exp = 'vivo12345678910'
+
+        ssid_5g_exp = 'VIVO automacao 5GHz'
+        pass_5g_exp = 'vivo12345678910'
+
         try:
             # Entering on WiFi 2.4GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
-            time.sleep(1)
+            time.sleep(5)
             user_input = self._driver.find_element_by_id('txtUser')
             user_input.send_keys(self._username)
             pass_input = self._driver.find_element_by_id('txtPass')
             pass_input.send_keys(self._password)
             self._driver.find_element_by_id('btnLogin').click()
             time.sleep(3)
-            
-            # CHecking initial QR Code and changing Settings 2.4GHz WiFi
-            qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
-            with open('data/qr-code-askey-ecnt-2ghz.png', 'wb') as file:
-                file.write(qrCode_2g.screenshot_as_png)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(10)
+
+            # Enabling WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+
+            # Checking initial QR Code and changing Settings 2.4GHz WiFi
+            initial_qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/initial-qr-code-askey-ecnt-2ghz.png', 'wb') as file:
+                file.write(initial_qrCode_2g.screenshot_as_png)
+            time.sleep(3)
+            data = decode(Image.open('data/initial-qr-code-askey-ecnt-2ghz.png'))
+            initial_2g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\n##################################')
+            print('Valores iniciais QR Code 2.4GHz:')
+            print(initial_2g)
+            select = Select(self._driver.find_element_by_id('selAuthMode'))
+            select.select_by_visible_text('WPA2')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[6]/td[2]/input[1]').click()
+            time.sleep(1)
             input_ssid_2ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
-            input_password_2ghz = self._driver.finf_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            input_password_2ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
             input_ssid_2ghz.clear()
             time.sleep(1)
-            input_ssid_2ghz.send_keys('VIVO automacao 2GHz')
+            input_ssid_2ghz.send_keys(ssid_2g_exp)
             time.sleep(1)
             input_password_2ghz.clear()
             time.sleep(1)
-            input_password_2ghz.send_keys('vivo@123456789')
+            input_password_2ghz.send_keys(pass_2g_exp)
             time.sleep(1)
-            select = Select(self._driver.find_element_by_id('selAuthMode'))
-            select.select_by_visible_text('WEP')
-            time.sleep(1)
-            try:
-                self._driver.switch_to.alert.accept()
-            except Exception as e:
-                print(e)
             self._driver.find_element_by_id('btnBasSave').click()
             try:
                 self._driver.switch_to.alert.accept()
             except Exception as e:
-                print(e)
+                pass
+            time.sleep(30)
+
+            # Cheking the new QR Code
+            final_qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/final-qr-code-askey-ecnt-2ghz.png', 'wb') as file:
+                file.write(final_qrCode_2g.screenshot_as_png)
+            time.sleep(1)
+            data = decode(Image.open('data/final-qr-code-askey-ecnt-2ghz.png'))
+            result_2g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\nValores finais QR Code 2.4GHz:')
+            print(result_2g)
+            print('##################################\n')
+            time.sleep(5)
+           
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(4)
+
+            # Enabling WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+
+            # Checking initial QR Code and changing Settings 5GHz WiFi
+            initial_qrCode_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/initial-qr-code-askey-ecnt-5ghz.png', 'wb') as file:
+                file.write(initial_qrCode_5g.screenshot_as_png)
+            time.sleep(3)
+            data = decode(Image.open('data/initial-qr-code-askey-ecnt-5ghz.png'))
+            initial_5g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\n##################################')
+            print('Valores iniciais QR Code 5GHz:')
+            print(initial_5g)
+            select = Select(self._driver.find_element_by_id('selAuthMode'))
+            select.select_by_visible_text('WPA2')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[6]/td[2]/input[1]').click()
+            time.sleep(1)
+            input_ssid_5ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            input_password_5ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            input_ssid_5ghz.clear()
+            time.sleep(1)
+            input_ssid_5ghz.send_keys(ssid_5g_exp)
+            time.sleep(1)
+            input_password_5ghz.clear()
+            time.sleep(1)
+            input_password_5ghz.send_keys(pass_5g_exp)
+            time.sleep(1)
+            self._driver.find_element_by_id('btnBasSave').click()
+            try:
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                pass
+            time.sleep(30)
+
+            # Cheking the new QR Code
+            final_qrCode_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/final-qr-code-askey-ecnt-5ghz.png', 'wb') as file:
+                file.write(final_qrCode_5g.screenshot_as_png)
+            time.sleep(1)
+            data = decode(Image.open('data/final-qr-code-askey-ecnt-5ghz.png'))
+            result_5g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\nValores finais QR Code 5GHz:')
+            print(result_5g)
+            print('##################################\n')
+            time.sleep(5)
+
+            # Checking results:
+            if result_2g[1][2:] != ssid_2g_exp:
+                self._dict_result.update({'obs': f'O SSID do WiFi 2.4GHz não foi alterado corretamente (esperado: {ssid_2g_exp}; obtido: {result_2g[1][2:]})'})
+            elif result_2g[0][2:] != 'WPA':
+                self._dict_result.update({'obs': f'O modo de segurança do WiFi 2.4GHz não foi alterado corretamente (esperado: WPA; obtido: {result_2g[0][2:]})'})
+            elif result_2g[2][2:] != pass_2g_exp:
+                self._dict_result.update({'obs': f'A senha do WiFi 2.4GHz não foi alterada corretamente (esperado: {pass_2g_exp}; obtido: {result_2g[2][2:]})'})
+            
+            elif result_5g[1][2:] != ssid_5g_exp:
+                self._dict_result.update({'obs': f'O SSID do WiFi 5GHz não foi alterado corretamente (esperado: {ssid_5g_exp}; obtido: {result_5g[1][2:]})'})
+            elif result_5g[0][2:] != 'WPA':
+                self._dict_result.update({'obs': f'O modo de segurança do WiFi 5GHz não foi alterado corretamente (esperado: WPA; obtido: {result_5g[0][2:]})'})
+            elif result_5g[2][2:] != pass_5g_exp:
+                self._dict_result.update({'obs': f'A senha do WiFi 5GHz não foi alterada corretamente (esperado: {pass_5g_exp}; obtido: {result_5g[2][2:]})'})
+            else:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
 
         except Exception as e:
-            dict_result = {'obs': f'{e}'}
-            self._dict_result.update(dict_result)
-        data = decode(Image.open('data/qr-code-askey-ecnt-2ghz.png'))
-        print(data)
-        for i in data[0]:
-            print(str(i))
-            print(type(str(i)))
+            self._dict_result.update({'obs': f'{e}'})
+
         self._driver.quit()
         return self._dict_result
 
