@@ -5,6 +5,7 @@ from re import sub
 import re
 import time
 from datetime import datetime
+import urllib
 # from turtle import up
 # from tkinter.messagebox import NO
 from ..AskeyECNT import HGU_AskeyECNT
@@ -20,6 +21,7 @@ from ...config import TEST_NOT_IMPLEMENTED_WARNING
 from HGUmodels.utils import chunks
 from daos.mongo_dao import MongoConnSigleton
 from selenium.common.exceptions import InvalidSelectorException, NoSuchElementException, NoSuchFrameException
+from selenium.webdriver.support.ui import Select
 
 import paramiko
 from paramiko.ssh_exception import AuthenticationException, BadAuthenticationType, BadHostKeyException
@@ -377,9 +379,58 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
     # 385
     def qrCodeTest_385(self, flask_username):
-        data = decode(Image.open('data/qr-code-test.png'))
-        print(data[0][0])
+        try:
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
+            
+            # CHecking initial QR Code and changing Settings 2.4GHz WiFi
+            qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/qr-code-askey-ecnt-2ghz.png', 'wb') as file:
+                file.write(qrCode_2g.screenshot_as_png)
+            input_ssid_2ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            input_password_2ghz = self._driver.finf_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            input_ssid_2ghz.clear()
+            time.sleep(1)
+            input_ssid_2ghz.send_keys('VIVO automacao 2GHz')
+            time.sleep(1)
+            input_password_2ghz.clear()
+            time.sleep(1)
+            input_password_2ghz.send_keys('vivo@123456789')
+            time.sleep(1)
+            select = Select(self._driver.find_element_by_id('selAuthMode'))
+            select.select_by_visible_text('WEP')
+            time.sleep(1)
+            try:
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                print(e)
+            self._driver.find_element_by_id('btnBasSave').click()
+            try:
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                print(e)
+
+        except Exception as e:
+            dict_result = {'obs': f'{e}'}
+            self._dict_result.update(dict_result)
+        data = decode(Image.open('data/qr-code-askey-ecnt-2ghz.png'))
+        print(data)
+        for i in data[0]:
+            print(str(i))
+            print(type(str(i)))
+        self._driver.quit()
         return self._dict_result
+
 
     #386 mlv
     def statusWizardIptv_386(self, flask_username):
@@ -542,6 +593,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result 
             
 

@@ -1376,7 +1376,7 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "verifyDnsService", 
+                        "ProbeName": "qrCodeTest", 
                         "Probe#": "392", 
                         "Description": "Erro na habilitacao do servico DNS", 
                         "obs": None}

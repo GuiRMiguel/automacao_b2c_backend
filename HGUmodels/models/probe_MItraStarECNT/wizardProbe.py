@@ -4,6 +4,8 @@ from cgi import print_form
 from os import name
 import re
 import time
+from pyzbar.pyzbar import decode
+from PIL import Image
 # from jinja2 import pass_context
 #from typing import final
 import paramiko
@@ -363,6 +365,169 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    # 385
+    def qrCodeTest_385(self, flask_username):
+        ssid_2g_exp = 'VIVO automacao 2GHz'
+        pass_2g_exp = 'vivo12345678910'
+
+        ssid_5g_exp = 'VIVO automacao 5GHz'
+        pass_5g_exp = 'vivo12345678910'
+
+        try:
+            # Entering on WiFi 2.4GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(3)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[3]/a/span').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(5)
+
+            # Enabling WiFi
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+
+            # CHecking initial QR Code and changing Settings 2.4GHz WiFi
+            initial_qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/initial-qr-code-mitra-ecnt-2ghz.png', 'wb') as file:
+                file.write(initial_qrCode_2g.screenshot_as_png)
+            time.sleep(3)
+            data = decode(Image.open('data/initial-qr-code-mitra-ecnt-2ghz.png'))
+            initial_2g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\n##################################')
+            print('Valores iniciais QR Code 2.4GHz:')
+            print(initial_2g)
+            select = Select(self._driver.find_element_by_id('securityMode'))
+            select.select_by_visible_text('WPA2')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[6]/td[2]/input[1]').click()
+            time.sleep(1)
+            input_ssid_2ghz = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_password_2ghz = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
+            input_ssid_2ghz.clear()
+            time.sleep(1)
+            input_ssid_2ghz.send_keys(ssid_2g_exp)
+            time.sleep(1)
+            input_password_2ghz.clear()
+            time.sleep(1)
+            input_password_2ghz.send_keys(pass_2g_exp)
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_GVTSettings_WL_Basic_Save').click()
+            try:
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                pass
+            time.sleep(30)
+
+            # Cheking the new QR Code
+            final_qrCode_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/final-qr-code-mitra-ecnt-2ghz.png', 'wb') as file:
+                file.write(final_qrCode_2g.screenshot_as_png)
+            time.sleep(1)
+            data = decode(Image.open('data/final-qr-code-mitra-ecnt-2ghz.png'))
+            result_2g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\nValores finais QR Code 2.4GHz:')
+            print(result_2g)
+            print('##################################\n')
+            time.sleep(5)
+           
+            # Entering on WiFi 5GHz settings
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(3)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_id('MLG_Menu_Settings').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[4]/a/span').click()
+            time.sleep(5)
+
+            # Enabling WiFi
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+
+            # Checking initial QR Code and changing Settings 5GHz WiFi
+            initial_qrCode_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/initial-qr-code-mitra-ecnt-5ghz.png', 'wb') as file:
+                file.write(initial_qrCode_5g.screenshot_as_png)
+            time.sleep(3)
+            data = decode(Image.open('data/initial-qr-code-mitra-ecnt-5ghz.png'))
+            initial_5g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\n##################################')
+            print('Valores iniciais QR Code 5GHz:')
+            print(initial_5g)
+            select = Select(self._driver.find_element_by_id('securityMode_5G'))
+            select.select_by_visible_text('WPA2')
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[6]/td[2]/input[1]').click()
+            time.sleep(1)
+            input_ssid_5ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            input_password_5ghz = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            input_ssid_5ghz.clear()
+            time.sleep(1)
+            input_ssid_5ghz.send_keys(ssid_5g_exp)
+            time.sleep(1)
+            input_password_5ghz.clear()
+            time.sleep(1)
+            input_password_5ghz.send_keys(pass_5g_exp)
+            time.sleep(1)
+            self._driver.find_element_by_id('MLG_GVTSettings_5G_Basic_Save').click()
+            try:
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                pass
+            time.sleep(30)
+
+            # Cheking the new QR Code
+            final_qrCode_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[3]/div/canvas')
+            with open('data/final-qr-code-mitra-ecnt-5ghz.png', 'wb') as file:
+                file.write(final_qrCode_5g.screenshot_as_png)
+            time.sleep(1)
+            data = decode(Image.open('data/final-qr-code-mitra-ecnt-5ghz.png'))
+            result_5g = str(data[0][0])[7:-1].split(';')[0:3]
+            print('\nValores finais QR Code 5GHz:')
+            print(result_5g)
+            print('##################################\n')
+            time.sleep(5)
+
+            # Checking results:
+            if result_2g[0][2:] != ssid_2g_exp:
+                self._dict_result.update({'obs': f'O SSID do WiFi 2.4GHz não foi alterado corretamente (esperado: {ssid_2g_exp}; obtido: {result_2g[0][2:]})'})
+            elif result_2g[1][2:] != 'WPA':
+                self._dict_result.update({'obs': f'O modo de segurança do WiFi 2.4GHz não foi alterado corretamente (esperado: WPA; obtido: {result_2g[1][2:]})'})
+            elif result_2g[2][2:] != pass_2g_exp:
+                self._dict_result.update({'obs': f'A senha do WiFi 2.4GHz não foi alterada corretamente (esperado: {pass_2g_exp}; obtido: {result_2g[2][2:]})'})
+            
+            elif result_5g[0][2:] != ssid_5g_exp:
+                self._dict_result.update({'obs': f'O SSID do WiFi 5GHz não foi alterado corretamente (esperado: {ssid_5g_exp}; obtido: {result_5g[0][2:]})'})
+            elif result_5g[1][2:] != 'WPA':
+                self._dict_result.update({'obs': f'O modo de segurança do WiFi 5GHz não foi alterado corretamente (esperado: WPA; obtido: {result_5g[1][2:]})'})
+            elif result_5g[2][2:] != pass_5g_exp:
+                self._dict_result.update({'obs': f'A senha do WiFi 5GHz não foi alterada corretamente (esperado: {pass_5g_exp}; obtido: {result_5g[2][2:]})'})
+            else:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+        except Exception as e:
+            self._dict_result.update({'obs': f'{e}'})
+
+        self._driver.quit()
+        return self._dict_result
 
     #386 mlv
     def statusWizardIptv_386(self, flask_username):
