@@ -758,7 +758,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
 
-
+    #48
     def validiteDefaultModeAfterReset_48(self, flask_username):
         try:
             print("LOGGING /padrao")

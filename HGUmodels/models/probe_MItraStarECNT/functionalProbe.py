@@ -1648,6 +1648,391 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         finally:
             return self._dict_result
 
+    #48
+    def validiteDefaultModeAfterReset_48(self, flask_username):
+        try:
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
+
+            print("STARTING DOWNGRADE...")
+
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #Choice File
+            self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[2]/li[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraEcnt/BR_g5.9_1.11WVK_0_b31.bin')
+            time.sleep(5)
+            #Upload
+            self._driver.find_element_by_xpath('//*[@id="Upload_Id"]').click()
+            time.sleep(240)
+
+            #Testing Downgrade Admin
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #FW Version
+            dw_sw_version = self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[1]/li/font').text
+            print(dw_sw_version)
+
+            if dw_sw_version=='BR_g5.9_1.11(WVK.0)b31': 
+                downgrade = True
+            else:
+                downgrade = False
+            
+            print(downgrade)
+            
+            #Logout
+            self._driver.switch_to.default_content()
+            time.sleep(5) 
+            logout = self._driver.find_element_by_xpath('/html/body/div/div[1]/div/ul/li[3]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(logout).click().perform()
+            #Confirm Logout
+            confirm_logout = self._driver.find_element_by_xpath('/html/body/div[3]/div[3]/button[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(confirm_logout).click().perform()
+            
+            time.sleep(5)
+            print("...FINISHING DOWNGRADE")
+
+            def verificationAcsOnline():
+                self._driver.get('http://' + self._address_ip + '/')
+                time.sleep(2)
+                self._driver.switch_to.default_content
+                self._driver.switch_to.frame('menufrm')
+                self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
+                time.sleep(2)
+                self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a').click()
+                time.sleep(2)
+                self.admin_authentication_mitraStat()
+            
+
+                print('\n#############################################'
+                        '\n MENU >> STATUS'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS
+                ### ------------------------------------------ ###
+                self._driver.switch_to.frame('menufrm')
+                self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[1]/a/span').click()
+                time.sleep(2)
+                self._driver.switch_to.default_content()
+                self._driver.switch_to.frame('basefrm')
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> GPON'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > GPON
+                ### ------------------------------------------ ###
+                gpon = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/th/span').text
+                print(gpon)
+                divOptical = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[1]/div[1]').text
+                divOptical = divOptical.split("\n")
+                print(divOptical)
+                divOptRx = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[1]/div[2]').text
+                divOptRx = divOptRx.split("\n")
+                print(divOptRx)
+                divOptTx = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[1]/td[1]/div[3]').text
+                divOptTx = divOptTx.split("\n")
+                print(divOptTx)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> INTERNET'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > INTERNET
+                ### ------------------------------------------ ###
+                internet = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[3]/th/span').text
+                print(internet)
+                divPpp = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[3]/td[1]/div').text
+                divPpp = divPpp.split("\n")
+                print(divPpp)
+                detalhes_internet = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[3]/td[2]/a/span')
+                print(detalhes_internet.text)
+                detalhes_internet.click()
+                detalhes_IPv4_head = self._driver.find_element_by_link_text('IPv4').text
+                print(detalhes_IPv4_head)
+                detalhes_IPv4 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div[2]/div[1]')
+                time.sleep(1)
+                items_key_internet_ipv4 = detalhes_IPv4.find_elements_by_tag_name("li")
+                detalhes_IPv4_nome = []
+                for i in items_key_internet_ipv4:
+                    teste = i.text
+                    detalhes_IPv4_nome.append(teste)
+                print(detalhes_IPv4_nome)
+                detalhes_IPv4 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div[2]/div[2]')
+                items_key = detalhes_IPv4.find_elements_by_tag_name("li")
+                detalhes_IPv4_valor = []
+                for i in items_key:
+                    teste = i.text
+                    detalhes_IPv4_valor.append(teste)
+                print(detalhes_IPv4_valor)
+                time.sleep(2)
+                detalhes_IPv6 = self._driver.find_element_by_link_text('IPv6')
+                detalhes_IPv6.click()
+                time.sleep(1)
+                detalhes_IPv6_head = self._driver.find_element_by_link_text('IPv6').text
+                print(detalhes_IPv6_head)
+                detalhes_IPv6 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div[3]/div[1]')
+                time.sleep(1)
+                items_key = detalhes_IPv6.find_elements_by_tag_name("li")
+                detalhes_IPv6_nome = []
+                for item in items_key:
+                    teste = item.text
+                    detalhes_IPv6_nome.append(teste)
+                print(detalhes_IPv6_nome)
+                detalhes_IPv6 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div[3]/div[2]')
+                items_key = detalhes_IPv6.find_elements_by_tag_name("li")
+                detalhes_IPv6_valor = []
+                for item in items_key:
+                    teste = item.text
+                    detalhes_IPv6_valor.append(teste)
+                print(detalhes_IPv6_valor)
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> WIFI 2.4GHz'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > WIFI 2.4GHz
+                ### ------------------------------------------ ###
+                wifi_24 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[5]/th/span').text
+                print(wifi_24)
+                wifi_24_name = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[5]/td[1]/div').text
+                wifi_24_name = wifi_24_name.replace('\n',' ').split(' ')
+                print(wifi_24_name)
+                wifi_24_detalhes = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[5]/td[2]/a/span')
+                wifi_24_detalhes.click()
+                wifi_24_detalhes_info = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[6]/td[1]/div')
+                items_key = wifi_24_detalhes_info.find_elements_by_tag_name("li")
+                wifi_24_valor = []
+                for item in items_key:
+                    teste = item.text
+                    wifi_24_valor.append(teste)
+                print(wifi_24_valor)
+                wifi_24_detalhes_stations = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[6]/td[2]/div/textarea').get_attribute('value').strip('\n')
+                print(wifi_24_detalhes_stations)
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> WIFI 5GHz'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > WIFI 5GHz
+                ### ------------------------------------------ ###
+                wifi_5 = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[7]/th/span').text
+                print(wifi_5)
+                wifi_5_name = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[7]/td[1]/div').text
+                wifi_5_name = wifi_5_name.replace('\n', ' ').split(' ')
+                print(wifi_5_name)
+                wifi_5_detalhes = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[7]/td[2]/a')
+                wifi_5_detalhes.click()
+                wifi_5_detalhes_info = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[8]/td[1]/div')
+                items_key = wifi_5_detalhes_info.find_elements_by_tag_name("li")
+                wifi_5_valor = []
+                for item in items_key:
+                    teste = item.text
+                    wifi_5_valor.append(teste)
+                print(wifi_5_valor)
+                wifi_5_detalhes_stations = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[8]/td[2]/div/textarea').get_attribute('value').strip('\n')
+                wifi_5_detalhes_stations = wifi_5_detalhes_stations.split('\n')
+                print(wifi_5_detalhes_stations)
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> REDE LOCAL'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > REDE LOCAL
+                ### ------------------------------------------ ###
+                rede_local = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[11]/th/span').text
+                print(rede_local)
+                time.sleep(2)
+                rede_local_name = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[11]/td[1]').text
+                rede_local_name = rede_local_name.replace(' ', '')
+                rede_local_name = rede_local_name.split('\n')
+                rede_local_name_ok = {"LAN1": "NULL", "LAN2": "NULL", "LAN3": "NULL", "LAN4": "NULL"}
+                indexLAN = 0
+                index = 0
+                for i in rede_local_name:
+                    if i.startswith('LAN') == True:
+                        indexLAN = indexLAN + 1
+                        pos = 'LAN' + str(indexLAN)
+                    else:
+                        rede_local_name_ok[pos] = rede_local_name[index]
+                    index = index + 1
+                print(rede_local_name_ok)
+
+        
+                rede_local_detalhes = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[11]/td[2]/a')
+                rede_local_detalhes.click()
+                rede_local_stations = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[12]/td[2]/div/textarea').get_attribute('value')
+                rede_local_stations = rede_local_stations.split('\n')
+        
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> TV'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > TV
+                ### ------------------------------------------ ###
+                tv = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[13]/th/span').text
+                print(tv)
+                self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[13]/td[2]/a').click()
+                tv_info = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[14]/td[1]/div')
+                items_key = tv_info.find_elements_by_tag_name("li")
+                tv_valor = []
+                for item in items_key:
+                    teste = item.text
+                    # print(item.text)
+                    tv_valor.append(teste)
+                print(tv_valor)
+                tv_stations = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[14]/td[2]/div/textarea').get_attribute('value')
+                tv_stations = tv_stations.split('\n')
+                print(tv_stations)
+                time.sleep(2)
+                print('\n#############################################'
+                        '\n MENU >> STATUS >> TELEFONE'
+                        '\n#############################################\n')
+                ### ------------------------------------------ ###
+                ###         STATUS > TELEFONE
+                ### ------------------------------------------ ###
+                telefone = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[15]/th/span').text
+                print(telefone)
+                telefone_info_rede = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[15]/td[1]/div[1]').text
+                telefone_info_rede = telefone_info_rede.split('\n')
+                print(telefone_info_rede)
+                telefone_info_status = self._driver.find_element_by_xpath('/html/body/div/div[1]/table/tbody/tr[15]/td[1]/div[2]').text
+                telefone_info_status = telefone_info_status.split('\n')
+                print(telefone_info_status)
+                # telefone_stations = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[14]/td[2]/textarea').get_attribute('value')
+                # telefone_stations = telefone_stations.split('\n')
+                # print(telefone_stations)
+                # time.sleep(2)
+
+                print('\n\n\n == Criando JSON de saída... == ')
+                json_saida = {
+                                "Status":
+                                    {
+                                    internet:
+                                        {
+                                            divPpp[0]: divPpp[1],
+                                            detalhes_IPv4_head:
+                                                {
+                                                    detalhes_IPv4_nome[0]: detalhes_IPv4_valor[0]
+                                                },
+                                        },
+                                    wifi_24:
+                                        {
+                                            wifi_24_valor[0]: wifi_24_valor[1],
+                                            wifi_24_valor[2]: wifi_24_valor[3],
+                                            wifi_24_valor[4]: wifi_24_valor[5],
+                                            wifi_24_valor[6]: wifi_24_valor[7],
+                                            "Estações Conectadas:": wifi_24_detalhes_stations
+                                        },
+                                    wifi_5:
+                                        {
+                                            wifi_5_valor[0]: wifi_5_valor[1],
+                                            wifi_5_valor[2]: wifi_5_valor[3],
+                                            wifi_5_valor[4]: wifi_5_valor[5],
+                                            wifi_5_valor[6]: wifi_5_valor[7],
+                                            "Estações Conectadas:": wifi_5_detalhes_stations
+                                        },
+                                    telefone:
+                                        {
+                                            telefone_info_rede[0]: telefone_info_rede[1],
+                                            telefone_info_status[0]: telefone_info_status[1],
+                                        }
+                                    }
+                }
+                print("...FINISHING ACS ONLINE")
+                return json_saida
+            
+            json_saida_downgrade = verificationAcsOnline()
+            print(json_saida_downgrade)
+            print("<<<<<<<<<<<>>>>>>>>>>")
+            print("STARTING UPGRADE...")
+            
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
+
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #Choice File
+            self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[2]/li[2]/input').send_keys('/home/automacao/Projects/automacao_b2c_backend/data/mitraEcnt/BR_g5.9_1.11WVK_0_b32.bin')
+            time.sleep(5)
+            #Upload
+            self._driver.find_element_by_xpath('//*[@id="Upload_Id"]').click()
+            time.sleep(240)
+
+            #Testing Downgrade Admin
+            self._driver.get('http://' + self._address_ip + '/padrao')
+            self.login_support()
+            #Menu-Left
+            menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(menu_maintance).perform()
+            update_sw = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[2]/div/ul[5]/li[7]/a')
+            self._driver.implicitly_wait(10)
+            ActionChains(self._driver).move_to_element(update_sw).click().perform()
+            time.sleep(5)
+            # Iframe
+            iframe = self._driver.find_element_by_xpath('/html/body/div/div[2]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            #FW Version
+            up_sw_version = self._driver.find_element_by_xpath('/html/body/form/div[3]/div[2]/ul/li[1]/div[2]/ul[1]/li/font').text
+            print(up_sw_version)
+
+            if up_sw_version=='BR_g5.9_1.11(WVK.0)b32':
+                upgrade = True
+            else:
+                upgrade = False
+            
+            print(upgrade)
+            print("...FINISHING UPGRADE")
+            
+            json_saida_upgrade = verificationAcsOnline()
+            print(json_saida_upgrade)
+
+            try:
+                if downgrade and upgrade:
+                    self._dict_result.update({"obs": "Teste passou. Up/Down de FW ok.", "result":"passed", "Resultado_Probe": "OK"})
+
+                else:
+                    self._dict_result.update({"obs": f"Teste falhou.", "result":"passed", "Resultado_Probe": "OK"})
+            except UnexpectedAlertPresentException as e:                
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
+                self._driver.quit()
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
+  
 
     # 49
     def accessWebGui_49(self, flask_username):
