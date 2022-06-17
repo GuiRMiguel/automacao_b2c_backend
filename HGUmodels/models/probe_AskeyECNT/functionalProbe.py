@@ -503,7 +503,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
 
     # 25
-    def testStreaming_25(self, flask_username):
+    def testStreaming_25(self, flask_username) -> dict:
         """
             Play video connected to WiFi 2.4 and 5GHz for 1 hour (NetFlix and YouTube).
             Test with different equipment (PlayStation, Notebook, Cellular, etc...)
@@ -515,14 +515,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
             time.sleep(3)
-            time.sleep(3600)
+            time.sleep(10)
             self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
             time.sleep(3)
             progress_bar = self._driver.find_element_by_class_name('ytp-progress-bar')
             time_spent = int(progress_bar.get_attribute('aria-valuenow'))
-            print(time_spent)
             time.sleep(2)
-            if time_spent < 3599:
+            if time_spent < 9:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'Ocorreu algum erro na reprodução do vídeo'})
             else:

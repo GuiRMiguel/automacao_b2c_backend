@@ -417,6 +417,39 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             return self._dict_result
 
 
+    # 25
+    def testStreaming_25(self, flask_username) -> dict:
+        """
+            Play video connected to WiFi 2.4 and 5GHz for 1 hour (NetFlix and YouTube).
+            Test with different equipment (PlayStation, Notebook, Cellular, etc...)
+        :return : A dict with the result of the test
+        """
+        try:
+            # Making a request
+            self._driver.get('https://www.youtube.com/watch?v=dV_0KOMeejA&ab_channel=SamukaBoss')
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            time.sleep(3)
+            time.sleep(10)
+            self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            time.sleep(3)
+            progress_bar = self._driver.find_element_by_class_name('ytp-progress-bar')
+            time_spent = int(progress_bar.get_attribute('aria-valuenow'))
+            time.sleep(2)
+            if time_spent < 9:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Ocorreu algum erro na reprodução do vídeo'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            return self._dict_result
+
+
     # 27
     def useWhatsAPP_27(self, flask_username):
         """
