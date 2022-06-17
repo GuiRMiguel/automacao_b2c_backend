@@ -375,77 +375,124 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             IP of the box and external (Two different sites) ex. google for 6 hours
         :return : A dict with the result of the test
         """
+        #38ivk2u6
+
+        timeInSeconds = 60
         try:
-            # # Entering on WiFi 5GHz settings and sign in
-            # self._driver.get('http://' + self._address_ip + '/')
-            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            # time.sleep(1)
-            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
-            # time.sleep(1)
-            # user_input = self._driver.find_element_by_id('txtUser')
-            # user_input.send_keys(self._username)
-            # pass_input = self._driver.find_element_by_id('txtPass')
-            # pass_input.send_keys(self._password)
-            # self._driver.find_element_by_id('btnLogin').click()
-            # time.sleep(3)
+            # Entering on the interface settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').click()
+            time.sleep(1)
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(3)
             
-            # # Enabling 5GHz WiFi
-            # self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
-            # self._driver.find_element_by_id('btnBasSave').click()
-            # time.sleep(3)
-            # self._driver.switch_to_alert().accept()
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
 
-            # # Entering on WiFi 2.4GHz settings and sign in
-            # self._driver.get('http://' + self._address_ip + '/')
-            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            # time.sleep(1)
-            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
-            # time.sleep(4)
+            # Enabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Disabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            time.sleep(15)
+
+            # Executing the ping test 5GHz    
+            print('INICIANDO PING NO 5GHz')     
+            try:
+                response5GHz = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                lostPackets5GHz = int(response5GHz.split(',')[2].split('%')[0].strip())
+            except subprocess.CalledProcessError:
+                lostPackets5GHz = -1
+
+            if lostPackets5GHz > 0:
+                self._driver.quit()
+                self._dict_result.update({"obs": '% pacotes foram perdidos no 5GHz' % lostPackets5GHz})
+            elif lostPackets5GHz < 0:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Except do subprocess do ping 5GHz'})
             
-            # # Desabling 2.4GHz WiFi
-            # self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
-            # self._driver.find_element_by_id('btnBasSave').click()
-            # time.sleep(3)
-            # self._driver.switch_to_alert().accept()
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
 
-            # # Desabling other devices
-            # pwd = '4ut0m4c40'
-            # cmd = 'ls'
-            # subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
-
-            # subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            # subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            # subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-            # subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            # subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            # subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            # subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
-            # time.sleep(15)
-
-            # Generating ping for 5GHz WiFi
-            # pwd = '4ut0m4c40'
-            # cmd = 'ls'
-            # subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
-            # print('\n\npassou\n\n')
-            generating_ping = subprocess.Popen(['ping', 'google.com'])
-            time.sleep(10)
-            generating_ping.terminate()
-            time.sleep(2)
-            print(generating_ping)
+            # Disabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
             
-        
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Enabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
+            self._driver.find_element_by_id('btnBasSave').click()
+            time.sleep(3)
+
+            # Executing the ping test 2GHz     
+            print('INICIANDO PING NO 2.4GHz')      
+            try:
+                response2GHz = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                lostPackets2GHz = int(response2GHz.split(',')[2].split('%')[0].strip())
+            except subprocess.CalledProcessError:
+                lostPackets2GHz = -1
+
+
             # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            time.sleep(15)
+
+            if lostPackets2GHz > 0:
+                self._driver.quit()
+                self._dict_result.update({"obs": '% pacotes foram perdidos no 2.4GHz' % lostPackets2GHz})
+            elif lostPackets2GHz < 0:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Except do subprocess do ping 2.4GHz'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
 
 
         except Exception as exception:
