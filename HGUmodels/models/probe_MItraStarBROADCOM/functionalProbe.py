@@ -428,29 +428,190 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             Test with different equipment (PlayStation, Notebook, Cellular, etc...)
         :return : A dict with the result of the test
         """
+        timePlaying = 3600
+        wifiSSID = "VIVO automacao Mitra BROADCOM"
+        wifiPassword = "vivo12345678910"
         try:
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            
+            # Enabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[3]/td[2]/input')
+            pass_5g = self._driver._find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[4]/td[2]/input')
+            ssid_5g.clear()
+            time.sleep(1)
+            ssid_5g.send_keys(wifiSSID)
+            time.sleep(1)
+            pass_5g.clear()
+            time.sleep(1)
+            pass_5g.send_keys(wifiPassword)
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Entering on WiFi 2.4GHz
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            
+            # Desabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(15)
+
             # Making a request
             self._driver.get('https://www.youtube.com/watch?v=dV_0KOMeejA&ab_channel=SamukaBoss')
             time.sleep(3)
+            # self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            # time.sleep(3)
+            time.sleep(timePlaying)
             self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            time.sleep(5)
+            progress_bar = self._driver.find_element_by_class_name('ytp-progress-bar')
+            time_spent = int(progress_bar.get_attribute('aria-valuenow'))
+            time.sleep(2)
+            print('\n###################################')
+            print('-- Expected time: ', timePlaying, " --")
+            print('-- Time spent: ', time_spent, " --")
+            print('###################################')
+            if time_spent < timePlaying:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'Ocorreu algum erro na reprodução do vídeo'})
+                return self._dict_result
+
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            
+            # Disabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.implicitly_wait(10)
             time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]').click()
             time.sleep(10)
+
+            # Entering on WiFi 2.4GHz
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            
+            # Enabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            ssid_2g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            pass_2g = self._driver._find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            ssid_2g.clear()
+            time.sleep(1)
+            ssid_2g.send_keys(wifiSSID)
+            time.sleep(1)
+            pass_2g.clear()
+            time.sleep(1)
+            pass_2g.send_keys(wifiPassword)
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Making a request
+            self._driver.get('https://www.youtube.com/watch?v=dV_0KOMeejA&ab_channel=SamukaBoss')
+            time.sleep(3)
+            # self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
+            # time.sleep(3)
+            time.sleep(timePlaying)
             self._driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player').click()
             time.sleep(3)
             progress_bar = self._driver.find_element_by_class_name('ytp-progress-bar')
             time_spent = int(progress_bar.get_attribute('aria-valuenow'))
             time.sleep(2)
-            if time_spent < 9:
+            print('\n###################################')
+            print('-- Expected time: ', timePlaying, " --")
+            print('-- Time spent: ', time_spent, " --")
+            print('###################################')
+            if time_spent < timePlaying:
                 self._driver.quit()
                 self._dict_result.update({"obs": 'Ocorreu algum erro na reprodução do vídeo'})
+                return self._dict_result
             else:
-                self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            time.sleep(15)
+
         except Exception as exception:
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
         finally:
+            self._driver.quit()
             return self._dict_result
 
 
