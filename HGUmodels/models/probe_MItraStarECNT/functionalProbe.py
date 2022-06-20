@@ -411,7 +411,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             IP of the box and external (Two different sites) ex. google for 6 hours
         :return : A dict with the result of the test
         """
-        #5ab99b5e
+
         timeInSeconds = 10
         try:
             # Entering on WiFi 5GHz settings and sign in

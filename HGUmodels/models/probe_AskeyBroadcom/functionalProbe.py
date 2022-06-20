@@ -403,24 +403,23 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         try:
             # Entering on the interface settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
-            self.login_admin()
-            time.sleep(1)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
             time.sleep(1)
+            self.login_admin()
+            time.sleep(4)
             
             # Enabling 5GHz WiFi
+            self._driver.switch_to.frame("mainFrame")
             self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
             self._driver.implicitly_wait(10)
-            # pass_5g = str(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value'))
             try:
                 self._driver.find_element_by_id('btnBasSave').click()
                 self._driver.switch_to_alert().accept()
                 time.sleep(30)
             except:
-                # self._driver.find_element_by_id('btnBasSave').click()
                 time.sleep(30)
 
             # Entering on WiFi 2.4GHz settings and sign in
@@ -435,13 +434,11 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # Disabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
             self._driver.implicitly_wait(10)
-            # pass_2g = str(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value'))
             try:
                 self._driver.find_element_by_id('btnBasSave').click()
                 self._driver.switch_to_alert().accept()
                 time.sleep(30)
             except:
-                # self._driver.find_element_by_id('btnBasSave').click()
                 time.sleep(30)
 
             # Desabling other devices
@@ -458,7 +455,6 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
-
 
             # Executing the ping test 5GHz    
             print('INICIANDO PING NO 5GHz')     
