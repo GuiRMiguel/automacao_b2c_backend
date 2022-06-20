@@ -158,18 +158,27 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             # Desabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
+            ssid_2g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            pass_2g = self._driver._find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            wifiSSID = ssid_2g.get_attribute('value')
+            wifiPassword = pass_2g.get_attribute('value')
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
             time.sleep(10)
+
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
 
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
@@ -224,9 +233,10 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
@@ -268,6 +278,10 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             # Enabling 5GHz WiFi
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[3]/td[2]/input')
+            pass_5g = self._driver._find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[4]/td[2]/input')
+            wifiSSID = ssid_5g.get_attribute('value')
+            wifiPassword = pass_5g.get_attribute('value')
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]/span').click()
             time.sleep(10)
@@ -292,14 +306,19 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
             time.sleep(10)
 
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
+
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
@@ -354,9 +373,10 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
@@ -484,14 +504,19 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
             time.sleep(10)
 
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
+
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
@@ -597,14 +622,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
-            time.sleep(15)
 
         except Exception as exception:
             print(exception)

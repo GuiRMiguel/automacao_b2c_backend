@@ -97,15 +97,16 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
-            # Habling other devices
+            # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'uo']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
@@ -164,15 +165,24 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             # Enabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
             time.sleep(1)
+            ssid_2g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            pass_2g = self._driver._find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            wifiSSID = ssid_2g.get_attribute('value')
+            wifiPassword = pass_2g.get_attribute('value')
             self._driver.find_element_by_id('btnBasSave').click()
             time.sleep(3)
             self._driver.switch_to_alert().accept()
+
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
 
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
@@ -230,6 +240,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
@@ -271,6 +282,11 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             
             # Enabling 5GHz WiFi
             self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
+            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            wifiSSID = ssid_5g.get_attribute('value')
+            wifiPassword = pass_5g.get_attribute('value')
+            time.sleep(1)
             self._driver.find_element_by_id('btnBasSave').click()
             time.sleep(3)
             self._driver.switch_to_alert().accept()
@@ -288,11 +304,16 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(3)
             self._driver.switch_to_alert().accept()
 
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
+
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
@@ -350,6 +371,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
@@ -417,13 +439,14 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             time.sleep(15)
 
             # Executing the ping test 5GHz    
@@ -475,14 +498,14 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            time.sleep(15)
 
             if lostPackets2GHz > 0:
                 self._driver.quit()
@@ -503,7 +526,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.quit()
             return self._dict_result
         
-
 
     # 24
     def testICMPv6_24(self, flask_username):
@@ -605,18 +627,23 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_id('btnBasSave').click()
             time.sleep(3)
 
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
+
             # Desabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             time.sleep(15)
 
             # Making a request
@@ -712,14 +739,14 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            time.sleep(15)
 
         except Exception as exception:
             print(exception)
