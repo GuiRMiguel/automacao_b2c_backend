@@ -1,3 +1,4 @@
+from itertools import count
 from pickle import FALSE, TRUE
 import re
 import time
@@ -36,6 +37,73 @@ config_collection = mongo_conn.get_collection()
 
 
 class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
+
+
+    # 2
+    def twoSecondsSwitchTwentyTimes_2(self, dados_entrada) -> dict:
+        """
+            Turn off the device switch 20 times with an interval of 2 seconds. 
+            After PPPoE synchronization and authentication, validate if it is online 
+            in the ACS (Online in the CSC or respond to the HDM check device).
+        :return : A dict with the result of the test
+        """
+
+        try:
+            count = 0
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])
+            time.sleep(8)
+            proc = subprocess.Popen(['ping', 'google.com'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            def checkConnection():
+                if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readlines()):
+                    print('checkConnection ', str(proc.stdout.readlines()))
+                    return False
+                else:
+                    print('checkConnection ', str(proc.stdout.readlines()))
+                    return True
+
+            while count < int(dados_entrada['repeticoes']):
+                print('\n\ncount:', count)
+                if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readline()):
+                    print('1 sumiu')
+
+                elif proc.stdout.readline() == "":
+                    print('2 sumiu')
+
+                elif proc.stdout.readline() is None:
+                    print('3 sumiu')
+
+                print(str(proc.stdout.readline()))
+                count += 1
+                # if '64 bytes from 2800:3f0:4001:' in str(proc.stdout.readline()):
+                #     conn = False
+                #     time.sleep(2)
+                #     subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
+                #     while conn is False:
+                #         time.sleep(8)
+                #         print(str(proc.stdout.readlines()))
+                #         time.sleep(1)
+                #         conn = checkConnection()
+                #         print('conn: ', conn)
+                #     else:
+                #         conn = checkConnection()
+                #         count += 1
+                # else:
+                #     time.sleep(1)
+                #     if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readline()):
+                #         print('No connection\n')
+                #     else:
+                #         pass
+
+            return {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
+                    "Description": "Acionar equipamento via rele", "URL": 'url', "Resultado": "200_OK"}
+        except Exception as e:
+            print(e)
+            return {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
+                    "Description": "Acionar equipamento via rele", "URL": 'url', "Resultado": "Erro no envio do comando para o arduino."}
 
 
     # 17

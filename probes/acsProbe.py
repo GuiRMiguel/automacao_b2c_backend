@@ -42,7 +42,10 @@ class acs:
             'password': password
         }
 
-        hgu = HGUModelFactory.getHGU(probe='settingsProbe', model_name=model_name, dict_result=dict_result)
+        hgu = HGUModelFactory.getHGU(
+            probe='settingsProbe', 
+            model_name=model_name, 
+            dict_result=dict_result)
         # print(serialnumber, GPV_Param, IPACS, acsUsername, acsPassword)
         return hgu.initialInformations_4(dados_entrada)
 
