@@ -10,6 +10,7 @@ import json
 from json import JSONEncoder
 from HGUmodels.factory import HGUModelFactory
 from webdriver.webdriver import WebDriver
+import time
 
 
 class atuadores:
@@ -20,7 +21,7 @@ class atuadores:
         self.password = []
 
 
-    def twoSecondsSwitchTwentyTimes(self, ip_arduino, rele, tempo_desligado, tempo_ligado, repeticoes, model_name):
+    def twoSecondsSwitchTwentyTimes(self, ip_arduino, rele, model_name):
         dict_result = {
             "result": "failed",
             "Resultado_Probe": "NOK", 
@@ -33,9 +34,6 @@ class atuadores:
         dados_entrada = {
             'ip_arduino': ip_arduino,
             'rele': rele,
-            'tempo_desligado': tempo_desligado,
-            'tempo_ligado': tempo_ligado,
-            'repeticoes': repeticoes
         }
 
         hgu = HGUModelFactory.getHGU(
@@ -51,11 +49,11 @@ class atuadores:
             url = 'http://' + ip_arduino + "/_ligaDesliga_" + str(rele) + '_' + str(tempo_ligado) + '_' + str(
                 tempo_desligado) + '_' + str(repeticoes)
             requests.get(url, timeout=30)
-            return {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
-                    "Description": "Acionar equipamento via rele", "URL": url, "Resultado": "200_OK"}
+            return [0, {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
+                    "Description": "Acionar equipamento via rele", "URL": url, "Resultado": "200_OK"}]
         except:
-            return {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
-                    "Description": "Acionar equipamento via rele", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}
+            return [-1, {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
+                    "Description": "Acionar equipamento via rele", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}]
 
     def arduinoPressionaSimultaneo(self, ip_arduino, rele1, rele2, rele3, tempo):
         # Para hard reset, por exemplo.
@@ -63,12 +61,12 @@ class atuadores:
             url = 'http://' + ip_arduino + "/_pressSimult_" + str(rele1) + '_' + str(rele2) + '_' + str(rele3) + '_' + str(tempo)
             requests.get(url, timeout=5)
 
-            return {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoPressionaSimultaneo", "Probe#": "XX",
-                    "Description": "Acionar até três botôes simultaneamente.", "URL": url, "Resultado": "200_OK"}
+            return [0, {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoPressionaSimultaneo", "Probe#": "XX",
+                    "Description": "Acionar até três botôes simultaneamente.", "URL": url, "Resultado": "200_OK"}]
 
         except:
-            return {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoPressionaSimultaneo", "Probe#": "XX",
-                    "Description": "Acionar até três botôes simultaneamente.", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}
+            return [-1, {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoPressionaSimultaneo", "Probe#": "XX",
+                    "Description": "Acionar até três botôes simultaneamente.", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}]
 
     def arduinoMedeFreqIntermitenciaLED(self, ip_arduino,portaAnalogica,medirTempoMax):
         # Verifica a frequencia que o LED está alternando (entre aceso e apagado).
@@ -86,11 +84,11 @@ class atuadores:
             mediaTempoOn = mediaTempoOn.strip()
             mediaTempoOff = mediaTempoOff.strip()
 
-            return {"Resultado_Probe": cmd_status, "ControllerName": "atuadores", "ProbeName": "arduinoMedeFreqIntermitenciaLED", "Probe#": "XX",
-                    "Description": "Mede a frequência em que o LED está alternando.", "URL": url, "mediaTempoOn": mediaTempoOn, "mediaTempoOff": mediaTempoOff, "Resultado": "200_OK"}
+            return [0, {"Resultado_Probe": cmd_status, "ControllerName": "atuadores", "ProbeName": "arduinoMedeFreqIntermitenciaLED", "Probe#": "XX",
+                    "Description": "Mede a frequência em que o LED está alternando.", "URL": url, "mediaTempoOn": mediaTempoOn, "mediaTempoOff": mediaTempoOff, "Resultado": "200_OK"}]
         except:
-            return {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoMedeFreqIntermitenciaLED", "Probe#": "XX",
-                    "Description": "Mede a frequência em que o LED está alternando.", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}
+            return [-1, {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoMedeFreqIntermitenciaLED", "Probe#": "XX",
+                    "Description": "Mede a frequência em que o LED está alternando.", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}]
 
     def arduinoMedeTempoIntermitenciaLED(self, ip_arduino,portaAnalogica,tempoEsperado,tempoTolerancia):
         # Verifica o tempo que o LED permanece alternando (entre aceso e apagado).
@@ -114,11 +112,11 @@ class atuadores:
                 Resultado_Probe_Detalhe = cmd_detalhe
                 TempoIntermitencia = ""
 
-            return {"Resultado_Probe": cmd_status, "Resultado_Probe_Detalhe": Resultado_Probe_Detalhe, "TempoIntermitencia": TempoIntermitencia, "ControllerName": "atuadores", "ProbeName": "arduinoMedeTempoIntermitenciaLED", "Probe#": "XX",
-                    "Description": "Mede o tempo que o LED permanece intermitente (piscando)", "URL": url, "Resultado": "200_OK"}
+            return [0, {"Resultado_Probe": cmd_status, "Resultado_Probe_Detalhe": Resultado_Probe_Detalhe, "TempoIntermitencia": TempoIntermitencia, "ControllerName": "atuadores", "ProbeName": "arduinoMedeTempoIntermitenciaLED", "Probe#": "XX",
+                    "Description": "Mede o tempo que o LED permanece intermitente (piscando)", "URL": url, "Resultado": "200_OK"}]
         except:
-            return {"Resultado_Probe": "NOK", "Resultado_Probe_Detalhe": "", "TempoIntermitencia": "", "ControllerName": "atuadores", "ProbeName": "arduinoMedeTempoIntermitenciaLED", "Probe#": "XX",
-                    "Description": "Mede o tempo que o LED permanece intermitente (piscando)", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}
+            return [-1, {"Resultado_Probe": "NOK", "Resultado_Probe_Detalhe": "", "TempoIntermitencia": "", "ControllerName": "atuadores", "ProbeName": "arduinoMedeTempoIntermitenciaLED", "Probe#": "XX",
+                    "Description": "Mede o tempo que o LED permanece intermitente (piscando)", "URL": url, "Resultado": "Erro no envio do comando para o arduino."}]
 
     def reguaAPCLigaDesliga(self, ip_regua, tomada, comando):
         # Comandos relativos à regua da APC, utilizada no cenário IPTV (mesmo modelo da utilizada no Witbe)
@@ -150,11 +148,11 @@ class atuadores:
                 outlets[tomada] = varBinds[0][1]
                 status_tomada = outlet_state[varBinds[0][1]]
 
-            return {"Resultado_Probe": "OK", "tomada": tomada, "comando": comando, "status_tomada": status_tomada, "ControllerName": "atuadores", "ProbeName": "reguaAPCLigaDesliga", "Probe#": "XX",
-                    "Description": "Atua na régua elétrica.", "Resultado": "200_OK"}
+            return [0, {"Resultado_Probe": "OK", "tomada": tomada, "comando": comando, "status_tomada": status_tomada, "ControllerName": "atuadores", "ProbeName": "reguaAPCLigaDesliga", "Probe#": "XX",
+                    "Description": "Atua na régua elétrica.", "Resultado": "200_OK"}]
         except:
-            return {"Resultado_Probe": "NOK", "tomada": tomada, "comando": comando, "status_tomada": status_tomada, "ControllerName": "atuadores", "ProbeName": "reguaAPCLigaDesliga", "Probe#": "XX",
-                    "Description": "Atua na régua elétrica.", "Resultado": "Erro no envio do comando para a régua APC."}
+            return [-1, {"Resultado_Probe": "NOK", "tomada": tomada, "comando": comando, "status_tomada": status_tomada, "ControllerName": "atuadores", "ProbeName": "reguaAPCLigaDesliga", "Probe#": "XX",
+                    "Description": "Atua na régua elétrica.", "Resultado": "Erro no envio do comando para a régua APC."}]
 
 
     def irtransComando(self, stbID, comando):

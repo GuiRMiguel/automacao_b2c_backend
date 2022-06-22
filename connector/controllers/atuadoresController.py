@@ -17,48 +17,34 @@ class atuadores(Resource):
         obj = atuadoresProbe.atuadores()
         print(method)
 
-        if method == "arduinoReguaLigaDesliga":
+
+        if method == "twoSecondsSwitchTwentyTimes":
             test_battery_id = request.get_json()['test_battery_id']
             modelo = request.get_json()['modelo']
             caderno = request.get_json()['caderno']
             test_num = request.get_json()['test_num']
             test_name = request.get_json()['test_name']
 
-            selectRele = configRele.models[modelo]['power']
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
 
-            ip_arduino = configAtuadores.reles[selectRele]['ip_arduino']
-            rele = configAtuadores.reles[selectRele]['rele']
-            tempo_desligado = configAtuadores.reles[selectRele]['tempo_desligado']
-            tempo_ligado = configAtuadores.reles[selectRele]['tempo_ligado']
-            repeticoes = configAtuadores.reles[selectRele]['repeticoes']
+            rele = configAtuadores.atuadores['model'][modelo]['power']
 
-            result = obj.arduinoReguaLigaDesliga(ip_arduino,rele,tempo_desligado,tempo_ligado,repeticoes, modelo)
+            result = obj.twoSecondsSwitchTwentyTimes(ip_arduino, rele, modelo)
             print('\nresult:', result, '\n')
             test_result = result['result']
             ans = {'test_result': result}
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
 
 
-        elif method == "twoSecondsSwitchTwentyTimes":
-            test_battery_id = request.get_json()['test_battery_id']
-            modelo = request.get_json()['modelo']
-            caderno = request.get_json()['caderno']
-            test_num = request.get_json()['test_num']
-            test_name = request.get_json()['test_name']
-
-            selectRele = configRele.models[modelo]['power']
-
-            ip_arduino = configAtuadores.reles[selectRele]['ip_arduino']
-            rele = configAtuadores.reles[selectRele]['rele']
-            tempo_desligado = configAtuadores.reles[selectRele]['tempo_desligado']
-            tempo_ligado = configAtuadores.reles[selectRele]['tempo_ligado']
-            repeticoes = configAtuadores.reles[selectRele]['repeticoes']
-
-            result = obj.twoSecondsSwitchTwentyTimes(ip_arduino, rele, tempo_desligado, tempo_ligado, repeticoes, modelo)
-            print('\nresult:', result, '\n')
-            test_result = result['result']
-            ans = {'test_result': result}
-            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+        elif method == "arduinoReguaLigaDesliga":
+            ip_arduino = request.json['ip_arduino']
+            rele = request.json['rele']
+            tempo_desligado = request.json['tempo_desligado']
+            tempo_ligado = request.json['tempo_ligado']
+            repeticoes = request.json['repeticoes']
+            obj = atuadoresProbe.atuadores()
+            ans = obj.arduinoReguaLigaDesliga(ip_arduino,rele,tempo_desligado,tempo_ligado,repeticoes)
+            return jsonify(ans)
             
 
         elif method == "arduinoPressionaSimultaneo":

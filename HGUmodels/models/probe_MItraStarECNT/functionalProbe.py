@@ -26,6 +26,7 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from HGUmodels.main_session import MainSession
 
 from HGUmodels import wizard_config
+from probes.atuadoresProbe import atuadores
 
 session = MainSession()
 
@@ -34,6 +35,43 @@ config_collection = mongo_conn.get_collection()
 
 
 class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
+
+
+    # 2
+    def twoSecondsSwitchTwentyTimes_2(self, dados_entrada) -> dict:
+        """
+            Turn off the device switch 20 times with an interval of 2 seconds. 
+            After PPPoE synchronization and authentication, validate if it is online 
+            in the ACS (Online in the CSC or respond to the HDM check device).
+        :return : A dict with the result of the test
+        """
+        number_of_cicles = 20
+        timeInSeconds = 10
+        try:
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(dados_entrada['ip_arduino'], dados_entrada['rele'], dados_entrada['tempo_desligado'], dados_entrada['tempo_ligado'], number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(60)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', '192.168.15.1'], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(5)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
+                else:
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(atuadores.arduinoReguaLigaDesliga(dados_entrada['ip_arduino'], dados_entrada['rele'], dados_entrada['tempo_desligado'], dados_entrada['tempo_ligado'], number_of_cicles)[1])
+            
+            return self._dict_result
+        
+        except Exception as e:
+            print(e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
     
 
     # 17

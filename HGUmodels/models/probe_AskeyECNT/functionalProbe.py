@@ -29,6 +29,7 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from HGUmodels.main_session import MainSession
 
 from HGUmodels import wizard_config
+from probes.atuadoresProbe import atuadores
 
 session = MainSession()
 
@@ -47,63 +48,35 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             in the ACS (Online in the CSC or respond to the HDM check device).
         :return : A dict with the result of the test
         """
-
+        number_of_cicles = 20
+        timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
         try:
-            count = 0
-            pwd = '4ut0m4c40'
-            cmd = 'ls'
-            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])
-            time.sleep(8)
-            proc = subprocess.Popen(['ping', 'google.com'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            
-            def checkConnection():
-                if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readlines()):
-                    print('checkConnection ', str(proc.stdout.readlines()))
-                    return False
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(60)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', '192.168.15.1'], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(5)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
                 else:
-                    print('checkConnection ', str(proc.stdout.readlines()))
-                    return True
-
-            while count < int(dados_entrada['repeticoes']):
-                print('\n\ncount:', count)
-                if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readline()):
-                    print('1 sumiu')
-
-                elif proc.stdout.readline() == "":
-                    print('2 sumiu')
-
-                elif proc.stdout.readline() is None:
-                    print('3 sumiu')
-
-                print(str(proc.stdout.readline()))
-                count += 1
-                # if '64 bytes from 2800:3f0:4001:' in str(proc.stdout.readline()):
-                #     conn = False
-                #     time.sleep(2)
-                #     subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
-                #     while conn is False:
-                #         time.sleep(8)
-                #         print(str(proc.stdout.readlines()))
-                #         time.sleep(1)
-                #         conn = checkConnection()
-                #         print('conn: ', conn)
-                #     else:
-                #         conn = checkConnection()
-                #         count += 1
-                # else:
-                #     time.sleep(1)
-                #     if '64 bytes from 2800:3f0:4001:' not in str(proc.stdout.readline()):
-                #         print('No connection\n')
-                #     else:
-                #         pass
-
-            return {"Resultado_Probe": "OK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
-                    "Description": "Acionar equipamento via rele", "URL": 'url', "Resultado": "200_OK"}
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            return self._dict_result
+        
         except Exception as e:
             print(e)
-            return {"Resultado_Probe": "NOK", "ControllerName": "atuadores", "ProbeName": "arduinoReguaLigaDesliga", "Probe#": "XX",
-                    "Description": "Acionar equipamento via rele", "URL": 'url', "Resultado": "Erro no envio do comando para o arduino."}
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
 
 
     # 17
