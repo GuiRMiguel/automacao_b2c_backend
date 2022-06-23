@@ -1,11 +1,11 @@
 from flask_restful import Resource
-from probes import atuadoresProbe
 from flask import jsonify, request
 import requests
 from connector.controllers import configAtuadores
 
 from daos.mongo_dao import MongoConnSigleton
-
+from probes import atuadoresProbe
+import HGUmodels.models.Atuadoresutils.utils
 mongo_conn = MongoConnSigleton()
 
 
@@ -13,7 +13,6 @@ class atuadores(Resource):
 
     def post(self, method):
 
-        obj = atuadoresProbe.atuadores()
         print(method)
 
 
@@ -26,8 +25,9 @@ class atuadores(Resource):
 
             ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
 
-            rele = configAtuadores.atuadores['HGU']['model'][modelo]['power']
+            rele = configAtuadores.atuadores['arduino_01']['HGU']['model'][modelo]['power']
 
+            obj = atuadoresProbe.tests()
             result = obj.twoSecondsSwitchTwentyTimes(ip_arduino, rele, modelo)
             print('\nresult:', result, '\n')
             test_result = result['result']
@@ -41,7 +41,7 @@ class atuadores(Resource):
             tempo_desligado = request.json['tempo_desligado']
             tempo_ligado = request.json['tempo_ligado']
             repeticoes = request.json['repeticoes']
-            obj = atuadoresProbe.atuadores()
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             ans = obj.arduinoReguaLigaDesliga(ip_arduino,rele,tempo_desligado,tempo_ligado,repeticoes)
             return jsonify(ans)
             
@@ -52,14 +52,16 @@ class atuadores(Resource):
             rele2 = request.json['rele2']
             rele3 = request.json['rele3']
             tempo = request.json['tempo']
-            
+
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             ans = obj.arduinoPressionaSimultaneo(ip_arduino,rele1,rele2,rele3,tempo)
             
         elif method == "arduinoMedeFreqIntermitenciaLED":
             ip_arduino = request.json['ip_arduino']
             portaAnalogica = request.json['portaAnalogica']
             medirTempoMax = request.json['medirTempoMax']
-            
+
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             ans = obj.arduinoMedeFreqIntermitenciaLED(ip_arduino,portaAnalogica,medirTempoMax)
             
         elif method == "arduinoMedeTempoIntermitenciaLED":
@@ -68,6 +70,7 @@ class atuadores(Resource):
             tempoEsperado = request.json['tempoEsperado']
             tempoTolerancia = request.json['tempoTolerancia']
             
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             ans = obj.arduinoMedeTempoIntermitenciaLED(ip_arduino,portaAnalogica,tempoEsperado,tempoTolerancia)
             
         elif method == "reguaAPCLigaDesliga":
@@ -79,6 +82,7 @@ class atuadores(Resource):
             tomada = request.json['tomada']
             comando = request.json['comando']
             
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             ans = obj.reguaAPCLigaDesliga(ip_regua,tomada,comando)
 
         else:

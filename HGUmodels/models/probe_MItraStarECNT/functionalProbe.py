@@ -26,7 +26,8 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from HGUmodels.main_session import MainSession
 
 from HGUmodels import wizard_config
-# from probes.atuadoresProbe import atuadores
+from HGUmodels.models.Atuadoresutils.utils import atuadores
+
 
 session = MainSession()
 
@@ -45,10 +46,13 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             in the ACS (Online in the CSC or respond to the HDM check device).
         :return : A dict with the result of the test
         """
+        
         number_of_cicles = 20
         timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
         try:
-            ligaDesliga = atuadores.arduinoReguaLigaDesliga(dados_entrada['ip_arduino'], dados_entrada['rele'], dados_entrada['tempo_desligado'], dados_entrada['tempo_ligado'], number_of_cicles)
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
             if ligaDesliga[0] == 0:
                 time.sleep(60)
                 hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', '192.168.15.1'], stderr=subprocess.STDOUT, universal_newlines=True)
@@ -64,12 +68,12 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 else:
                     self._dict_result.update({'obs': 'HGU não retornou a conexão'})
             elif ligaDesliga[0] == -1:
-                self._dict_result.update(atuadores.arduinoReguaLigaDesliga(dados_entrada['ip_arduino'], dados_entrada['rele'], dados_entrada['tempo_desligado'], dados_entrada['tempo_ligado'], number_of_cicles)[1])
+                self._dict_result.update(ligaDesliga[1])
             
             return self._dict_result
         
         except Exception as e:
-            print(e)
+            print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result
     

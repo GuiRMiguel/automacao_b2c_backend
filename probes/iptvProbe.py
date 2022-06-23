@@ -1,6 +1,6 @@
 from probes import cliProbe
 from probes import tsharkProbe
-from probes import atuadoresProbe
+import HGUmodels.models.Atuadoresutils.utils
 from probes import opencvProbe
 from scapy.utils import RawPcapReader
 from scapy.layers.l2 import Ether
@@ -158,7 +158,7 @@ class iptv:
             time.sleep(2)
             print("Captura iniciada")
     
-            obj = atuadoresProbe.atuadores()
+            obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
             obj.reguaAPCLigaDesliga(self.ip_re, cenario, "desliga")
             print("STB desligado")
     
@@ -288,7 +288,7 @@ class iptv:
 
             if (evento == "bootEletricoSTB"):
                 # reinicia STB eletricamente
-                obj = atuadoresProbe.atuadores()
+                obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
                 obj.reguaAPCLigaDesliga(self.ip_re, (int(elementoId) + 1), "desliga")
                 print("STB " + elementoId + " desligado")
 
@@ -305,7 +305,7 @@ class iptv:
                             "Description": "Mede tempo para o serviço voltar a funcionar mediante a um evemto (exemplo, queda de energia).",
                             "Resultado": "Teste não iniciado. Serviço não está Ok no STB."}
 
-                obj = atuadoresProbe.atuadores()
+                obj = HGUmodels.models.Atuadoresutils.utils.atuadores()
                 obj.reguaAPCLigaDesliga(self.ip_re, (int(cenario) + 5), "desliga")
                 print("HGU " + cenario + " desligado")
 
