@@ -13,8 +13,7 @@ from webdriver.webdriver import WebDriver
 import time
 
 
-class atuadores:
-
+class tests:
     def __init__(self):
         self.ip = []
         self.username = []
@@ -43,6 +42,8 @@ class atuadores:
 
         return hgu.twoSecondsSwitchTwentyTimes_2(dados_entrada)
 
+
+class atuadores:
 
     def arduinoReguaLigaDesliga(self, ip_arduino, rele, tempo_desligado, tempo_ligado, repeticoes):
         try:

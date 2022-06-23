@@ -3,7 +3,6 @@ from probes import atuadoresProbe
 from flask import jsonify, request
 import requests
 from connector.controllers import configAtuadores
-from connector.controllers import configRele
 
 from daos.mongo_dao import MongoConnSigleton
 

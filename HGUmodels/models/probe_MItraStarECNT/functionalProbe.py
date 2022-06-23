@@ -26,7 +26,7 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from HGUmodels.main_session import MainSession
 
 from HGUmodels import wizard_config
-from probes.atuadoresProbe import atuadores
+# from probes.atuadoresProbe import atuadores
 
 session = MainSession()
 
