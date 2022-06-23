@@ -27,7 +27,7 @@ class atuadores(Resource):
 
             ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
 
-            rele = configAtuadores.atuadores['model'][modelo]['power']
+            rele = configAtuadores.atuadores['HGU']['model'][modelo]['power']
 
             result = obj.twoSecondsSwitchTwentyTimes(ip_arduino, rele, modelo)
             print('\nresult:', result, '\n')
