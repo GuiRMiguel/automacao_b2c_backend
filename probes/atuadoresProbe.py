@@ -28,9 +28,9 @@ class tests:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "twoSecondsSwitchTwentyTimes", 
             "Probe#": "XXXXXXX", 
-            "Description": "", 
+            "Description": "Desligar 20 vezes o interruptor do dispositivo com intervalo de 2 segundos", 
             "obs": None}
 
         dados_entrada = {
@@ -52,9 +52,9 @@ class tests:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "ONTSwitchFiftyTimes", 
             "Probe#": "XXXXXXX", 
-            "Description": "", 
+            "Description": "Desligar 50 vezes o interruptor da ONT sequencialmente", 
             "obs": None}
 
         dados_entrada = {
@@ -76,9 +76,9 @@ class tests:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "twoSecondsSwitchTwentyTimesONT", 
             "Probe#": "XXXXXXX", 
-            "Description": "", 
+            "Description": "Desligar 20 vezes o interruptor da ONT com intervalo de 2 segundos", 
             "obs": None}
 
         dados_entrada = {
@@ -92,4 +92,55 @@ class tests:
             dict_result=dict_result)
 
         return hgu.twoSecondsSwitchTwentyTimesONT_4(dados_entrada)
+
+
+    # 5
+    def STBSwitchFiftyTimes(self, ip_arduino, rele, model_name):
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "STBSwitchFiftyTimes", 
+            "Probe#": "XXXXXXX", 
+            "Description": "Desligar 50 vezes o interruptor da STB sequencialmente", 
+            "obs": None}
+
+        dados_entrada = {
+            'ip_arduino': ip_arduino,
+            'rele': rele,
+        }
+
+        hgu = HGUModelFactory.getHGU(
+            probe='functionalProbe', 
+            model_name=model_name, 
+            dict_result=dict_result)
+
+        return hgu.STBSwitchFiftyTimes_5(dados_entrada)
+
+
+    # 6
+    def twoSecondsSwitchTwentyTimesSTB(self, ip_arduino, rele, model_name):
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "twoSecondsSwitchTwentyTimesSTB", 
+            "Probe#": "XXXXXXX", 
+            "Description": "Desligar 20 vezes o interruptor da STB sequencialmente", 
+            "obs": None}
+
+        dados_entrada = {
+            'ip_arduino': ip_arduino,
+            'rele': rele,
+        }
+
+        hgu = HGUModelFactory.getHGU(
+            probe='functionalProbe', 
+            model_name=model_name, 
+            dict_result=dict_result)
+
+        return hgu.twoSecondsSwitchTwentyTimesSTB_6(dados_entrada)
+
+
+    
 
