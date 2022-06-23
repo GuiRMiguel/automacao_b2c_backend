@@ -48,19 +48,37 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             in the ACS (Online in the CSC or respond to the HDM check device).
         :return : A dict with the result of the test
         """
+        
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(15)
+        
+        ip_device = '192.168.15.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
         timeActivate = 2500
+        sleepHGU = 60
+        sleepEthernet = 5
         try:
             ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
             if ligaDesliga[0] == 0:
-                time.sleep(60)
-                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', '192.168.15.1'], stderr=subprocess.STDOUT, universal_newlines=True)
+                time.sleep(sleepHGU)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', ip_device], stderr=subprocess.STDOUT, universal_newlines=True)
                 hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
                 if hguLostPackets == 0:
-                    time.sleep(5)
+                    time.sleep(sleepEthernet)
                     googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
                     googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
                     if googleLostPackets == 0:
@@ -72,9 +90,207 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             elif ligaDesliga[0] == -1:
                 self._dict_result.update(ligaDesliga[1])
             
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
             return self._dict_result
         
         except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
+    # 3
+    def ONTSwitchFiftyTimes_3(self, dados_entrada) -> dict:
+        """
+            Turn off the ONT switch 50 times sequentially
+        :return : A dict with the result of the test
+        """
+        
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(15)
+        
+        ip_device = '192.168.15.1'
+        number_of_cicles = 20
+        timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
+        sleepHGU = 60
+        sleepEthernet = 5
+        try:
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(sleepHGU)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', ip_device], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(sleepEthernet)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
+                else:
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+    
+
+    # 4
+    def twoSecondsSwitchTwentyTimesONT_4(self, dados_entrada) -> dict:
+        """
+            Turn off the ONT switch 20 times with an interval of 2 seconds
+        :return : A dict with the result of the test
+        """
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(15)
+        
+        ip_device = '192.168.15.1'
+        number_of_cicles = 20
+        timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
+        sleepHGU = 60
+        sleepEthernet = 5
+        try:
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(sleepHGU)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', ip_device], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(sleepEthernet)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
+                else:
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result

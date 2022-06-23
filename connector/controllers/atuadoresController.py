@@ -35,6 +35,44 @@ class atuadores(Resource):
             mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
 
 
+        elif method == "ONTSwitchFiftyTimes":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['devices']['ONT']['power']
+
+            obj = atuadoresProbe.tests()
+            result = obj.ONTSwitchFiftyTimes(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == "twoSecondsSwitchTwentyTimesONT":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['devices']['ONT']['power']
+
+            obj = atuadoresProbe.tests()
+            result = obj.twoSecondsSwitchTwentyTimesONT(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
         elif method == "arduinoReguaLigaDesliga":
             ip_arduino = request.json['ip_arduino']
             rele = request.json['rele']

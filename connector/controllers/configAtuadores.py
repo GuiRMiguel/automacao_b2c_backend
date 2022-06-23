@@ -32,9 +32,11 @@ atuadores = {
 
         'devices': {
             'regua': '',
+            
             'STB': {
                 'power': ''
             },
+            
             'ONT': {
                 'power': ''
             }
