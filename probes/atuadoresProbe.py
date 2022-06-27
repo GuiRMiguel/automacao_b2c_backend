@@ -21,6 +21,30 @@ class tests:
         self.username = []
         self.password = []
 
+    # 1
+    def sequentialSwitchFiftyTimes(self, ip_arduino, rele, model_name):
+        dict_result = {
+            "result": "failed",
+            "Resultado_Probe": "NOK", 
+            "ControllerName": "acs", 
+            "ProbeName": "sequentialSwitchFiftyTimes", 
+            "Probe#": "XXXXXXX", 
+            "Description": "Desligar 50 vezes o interruptor do dispositivo com intervalo de 2 segundos sequenciais", 
+            "obs": None}
+
+        dados_entrada = {
+            'ip_arduino': ip_arduino,
+            'rele': rele,
+        }
+
+        hgu = HGUModelFactory.getHGU(
+            probe='functionalProbe', 
+            model_name=model_name, 
+            dict_result=dict_result)
+
+        return hgu.sequentialSwitchFiftyTimes_1(dados_entrada)
+
+
 
     # 2
     def twoSecondsSwitchTwentyTimes(self, ip_arduino, rele, model_name):
