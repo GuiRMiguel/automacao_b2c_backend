@@ -8,6 +8,7 @@ import json
 import requests
 import sys
 import pandas as pd
+import paramiko
 from collections import namedtuple
 from ...config import TEST_NOT_IMPLEMENTED_WARNING
 from HGUmodels.utils import chunks
@@ -929,6 +930,101 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
+    # 30
+    def useDMZ_30(self, flask_username):
+        """
+            Turn on DMZ
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+
+            # Entering on DMZ Section
+            self._driver.find_element_by_id('tabtitle-3').click()
+            time.sleep(1)
+
+            # Turn on DMZ
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[5]/form/table/tbody/tr[2]/td[2]/input[1]').click()
+            time.sleep(3)
+
+            # Get IP Data
+            ipSelected = ''
+            try:
+                ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
+
+                for ipItem in ipsResponse:
+                    if "192.168.18" in ipItem:
+                        ipSelected = ipItem
+    
+            except subprocess.CalledProcessError:
+                lostPackets5GHz = -1
+
+            # Get IP Input
+            ipInput = self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[3]/td[2]/input')
+            time.sleep(1)
+            ipInput.send_keys(ipSelected)
+            time.sleep(2)
+
+            # Confirm changes
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[5]/form/table/tbody/tr[4]/td/a[2]/span').click()
+            time.sleep(10)
+            iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+            self._driver.switch_to.frame(iframe)
+            self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[2]/td/a[1]/span').click()
+            time.sleep(120)
+            
+            publicIp = subprocess.check_output(['wget', '-qO-', 'http://ipecho.net/plain'], stderr=subprocess.STDOUT, universal_newlines=True)
+
+            sshClient = paramiko.SSHClient()
+            sshClient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            # -- Atualizar o IP, username e password -- #
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            
+            sshClient.connect('192.168.18.6', port=22, username='automacao', password='4ut0m4c40', timeout=3)
+
+            stdin, stdout, stderr = sshClient.exec_command('telnet ' + str(publicIp) + ' 11002')
+
+            endtime = time.time() + 30
+            while not stdout.channel.eof_received:
+                time.sleep(1)
+                if time.time() > endtime:
+                    stdout.channel.close()
+                    break
+            
+            output = str(stdout.read())
+
+            if output.find('Trying'):
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'It was not possible to connect'})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            self._driver.quit()
             return self._dict_result
 
 
