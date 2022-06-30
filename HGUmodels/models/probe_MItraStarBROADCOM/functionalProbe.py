@@ -542,6 +542,396 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result
 
+
+    # 7
+    def reguaSwitchFiftyTimes_7(self, dados_entrada) -> dict:
+        """
+            Turn off the scale switch 50 times sequentially
+        :return : A dict with the result of the test
+        """
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(15)
+        
+        ip_device = '192.168.18.1'
+        number_of_cicles = 50
+        timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
+        sleepHGU = 60
+        sleepEthernet = 5
+        try:
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(sleepHGU)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', ip_device], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(sleepEthernet)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
+                else:
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
+    # 8
+    def twoSecondsSwitchTwentyTimesRegua_8(self, dados_entrada) -> dict:
+        """
+            Turn off the scale switch 20 times sequentially
+        :return : A dict with the result of the test
+        """
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(15)
+        
+        ip_device = '192.168.18.1'
+        number_of_cicles = 20
+        timeInSeconds = 10
+        timeDeactivate = 500
+        timeActivate = 2500
+        sleepHGU = 60
+        sleepEthernet = 5
+        try:
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                time.sleep(sleepHGU)
+                hguResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', ip_device], stderr=subprocess.STDOUT, universal_newlines=True)
+                hguLostPackets = int(hguResponse.split(',')[2].split('%')[0].strip())
+                if hguLostPackets == 0:
+                    time.sleep(sleepEthernet)
+                    googleResponse = subprocess.check_output(['ping', '-w', str(timeInSeconds), '-q', 'google.com'], stderr=subprocess.STDOUT, universal_newlines=True)
+                    googleLostPackets = int(googleResponse.split(',')[2].split('%')[0].strip())
+                    if googleLostPackets == 0:
+                        self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                    else:
+                        self._dict_result.update({'obs': 'Conexão com a internet falhou'})
+                else:
+                    self._dict_result.update({'obs': 'HGU não retornou a conexão'})
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
+    # 26
+    def WPS2GHzFiveSeconds_26(self, dados_entrada) -> dict:
+        """
+            Press the WPS 2.4GHz button for 5 seconds to pair with the device
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            
+            # Disabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Entering on WiFi 2.4GHz
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            
+            # Enabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Desabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(15)
+            
+
+            number_of_cicles = 1
+            timeDeactivate = 5500
+            timeActivate = 500
+
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
+    # 28
+    def WPS5GHzFiveSeconds_28(self, dados_entrada) -> dict:
+        """
+            Press the WPS 2.4GHz button for 5 seconds to pair with the device
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on WiFi 5GHz settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[4]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            self.admin_authentication_mitraStat()
+            time.sleep(2)
+            
+            # Enabling 5GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[1]/td[2]/input[1]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[4]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Entering on WiFi 2.4GHz
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[3]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            
+            # Disabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[2]').click()
+            self._driver.implicitly_wait(10)
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[3]/form/table/tbody/tr[9]/td/a[2]/span').click()
+            time.sleep(10)
+
+            # Disabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(15)
+
+            number_of_cicles = 1
+            timeDeactivate = 5500
+            timeActivate = 500
+
+            ligaDesliga = atuadores.arduinoReguaLigaDesliga(self, dados_entrada['ip_arduino'], dados_entrada['rele'], timeDeactivate, timeActivate, number_of_cicles)
+            if ligaDesliga[0] == 0:
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+                
+            elif ligaDesliga[0] == -1:
+                self._dict_result.update(ligaDesliga[1])
+            
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            return self._dict_result
+        
+        except Exception as e:
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            print('Exception: ', e)
+            self._dict_result.update({'obs': f'{e}'})
+            return self._dict_result
+
+
     # 17
     def checkSpeedEthernetCable_17(self, flask_username):
         """

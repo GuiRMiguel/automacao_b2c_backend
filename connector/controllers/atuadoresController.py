@@ -120,10 +120,86 @@ class atuadores(Resource):
 
             ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
 
-            rele = configAtuadores.atuadores['arduino_01']['devices']['ONT']['power']
+            rele = configAtuadores.atuadores['arduino_01']['devices']['STB']['power']
 
             obj = atuadoresProbe.tests()
             result = obj.twoSecondsSwitchTwentyTimesSTB(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == "reguaSwitchFiftyTimes":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['devices']['regua']
+
+            obj = atuadoresProbe.tests()
+            result = obj.reguaSwitchFiftyTimes(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == "twoSecondsSwitchTwentyTimesRegua":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['devices']['regua']
+
+            obj = atuadoresProbe.tests()
+            result = obj.twoSecondsSwitchTwentyTimesRegua(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == "WPS2GHzFiveSeconds":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['HGU']['model'][modelo]['WPS']
+
+            obj = atuadoresProbe.tests()
+            result = obj.WPS2GFiveSeconds(ip_arduino, rele, modelo)
+            print('\nresult:', result, '\n')
+            test_result = result['result']
+            ans = {'test_result': result}
+            mongo_conn.update_one_test_by_id(test_battery_id, caderno, test_name, test_num, test_result, result)
+
+
+        elif method == "WPS5GHzFiveSeconds":
+            test_battery_id = request.get_json()['test_battery_id']
+            modelo = request.get_json()['modelo']
+            caderno = request.get_json()['caderno']
+            test_num = request.get_json()['test_num']
+            test_name = request.get_json()['test_name']
+
+            ip_arduino = configAtuadores.atuadores['arduino_01']['ip_arduino']
+
+            rele = configAtuadores.atuadores['arduino_01']['HGU']['model'][modelo]['WPS']
+
+            obj = atuadoresProbe.tests()
+            result = obj.WPS5GHzFiveSeconds(ip_arduino, rele, modelo)
             print('\nresult:', result, '\n')
             test_result = result['result']
             ans = {'test_result': result}
