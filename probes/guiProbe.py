@@ -222,6 +222,28 @@ class gui:
         return hgu.useWhatsAPP_27(flask_username)
 
 
+    # 30
+    def useDMZ(self, ip, username, password, flask_username, model_name, **kwargs):
+        driver = WebDriver.get_driver()
+
+        dict_result =  {"result":'failed', 
+                        "obs":None,
+                        "Resultado_Probe": "NOK", 
+                        "ProbeName": "useDMZ", 
+                        "Probe#": "XXXXXX", 
+                        "Description": "Testar funcionalidade de DDNS e acesso remoto a camera IP e validar acessando de outro terminal.Validar via servidor FTP" 
+                       }
+
+        hgu = HGUModelFactory.getHGU(probe='functionalProbe',
+                                     address_ip=ip, 
+                                     model_name=model_name, 
+                                     username=username, 
+                                     password=password, 
+                                     driver=driver, 
+                                     dict_result=dict_result)
+
+        return hgu.useDMZ_30(flask_username)
+
     # 33
     def swapWiFiChannelandBandwidth(self, ip, username, password, flask_username, model_name, **kwargs):
         driver = WebDriver.get_driver()

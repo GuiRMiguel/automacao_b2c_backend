@@ -4,6 +4,7 @@ import re
 import time
 import subprocess
 from datetime import datetime
+import paramiko
 # from types import Nonetype
 #from tkinter.tix import Select
 from ..AskeyECNT import HGU_AskeyECNT
@@ -909,7 +910,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             IP of the box and external (Two different sites) ex. google for 6 hours
         :return : A dict with the result of the test
         """
-        #38ivk2u6
 
         timeInSeconds = 60
         try:
@@ -1337,6 +1337,96 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  
+
+    #30
+    def useDMZ_30(self, flask_username):
+        """
+            Turn on DMZ
+        :return : A dict with the result of the test
+        """
+        try:
+            self._driver.get('http://' + self._address_ip + '/')
+            user_input = self._driver.find_element_by_id('txtUser')
+            user_input.send_keys(self._username)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            self._driver.find_element_by_id('btnLogin').click()
+            time.sleep(1)
+            
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Entering on Local Network
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Entering on DMZ Section
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
+            time.sleep(1)
+
+            # Turn on DMZ
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+
+            # Get IP Input
+            ipInput = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[3]/td[2]/input')
+            
+            # Get IP Data
+            ipSelected = ''
+            try:
+                ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
+
+                for ipItem in ipsResponse:
+                    if(ipItem.find('.15.')):
+                        ipSelected = ipItem
+    
+            except subprocess.CalledProcessError:
+                lostPackets5GHz = -1
+            
+            ipInput.send_keys(ipSelected)
+
+            # Confirm changes
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[4]/td/a[2]').click()
+            time.sleep(4)
+            
+            publicIp = subprocess.check_output(['wget', '-qO-', 'http://ipecho.net/plain'], stderr=subprocess.STDOUT, universal_newlines=True)
+
+            sshClient = paramiko.SSHClient()
+            sshClient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            # -- Atualizar o IP, username e password -- #
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            
+            sshClient.connect('192.168.15.2', port=22, username='automacao', password='4ut0m4c40', timeout=3)
+
+            stdin, stdout, stderr = sshClient.exec_command('telnet ' + str(publicIp) + ' 11002')
+
+            endtime = time.time() + 30
+            while not stdout.channel.eof_received:
+                time.sleep(1)
+                if time.time() > endtime:
+                    stdout.channel.close()
+                    break
+            
+            output = str(stdout.read())
+
+            if output.find('Trying'):
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'It was not possible to connect'})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            self._driver.quit()
+            return self._dict_result
 
     #32
     def UpgradeDowngradeFirmware_32(self, flask_username):
