@@ -1202,22 +1202,12 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
-    # 43
+   # 43
     def checkIPv6Telefonica_43(self, dados):
         try:
             # GET
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.Layer3Forwarding."
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric",
-                # "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime",
+                "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable",
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
@@ -1226,84 +1216,59 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
-            print(gpv_get)
 
             for value_parameter in gpv_get:
-                if value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Enable":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                print(value_parameter)
+                if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable":
+                    if value_parameter['value'] == '1':
+                        print('oi -1')
+                        dict_object = {'SPV_Param': [
+                           {
+                            'name': 'InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable',
+                            'type': 'boolean',
+                            'value': '0'
+                            }]}
+                        dados.update(dict_object)
+                        spv_dados_entrada = dados
+                        print(spv_dados_entrada)
+                        print('oi - 2')
+                        spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
+                        new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+                        for new_value_parameter in new_gpv_get:
+                            if new_value_parameter['value'] =='0':
+                                dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+                            else:
+                                dict_result = {
+                                    "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    elif value_parameter['value'] == '0':
+                        print('oi -11')
+                        dict_object = {'SPV_Param': [
+                            {
+                            'name': 'InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable',
+                            'type': 'boolean',
+                            'value': '1'
+                            }]}
+                        dados.update(dict_object)
+                        spv_dados_entrada = dados
+                        print(spv_dados_entrada)
+                        print('oi - 12')
+                        spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
+                        new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+                        for new_value_parameter in new_gpv_get:
+                            if new_value_parameter['value'] =='1':
+                                dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+                            else:
+                                dict_result = {
+                                    "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                                    
                     else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Status":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
                         dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Alias":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.DestIPPrefix":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingPolicy":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.NextHop":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Interface":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.Origin":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ForwardingMetric":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-
-                elif value_parameter['name'] == "InternetGatewayDevice.Layer3Forwarding.X_VIVO_COM_BR_IPv6Forwarding.1.ExpirationTime":
-                    if value_parameter['value'] is None and value_parameter['value'] == '':
-                        dict_result = {
-                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-
-                    else:
-                        dict_result = {"Resultado_Probe": "OK",
-                                       "obs": "Teste OK", "result": "passed"}
-
+                            "obs": f"Objeto não encontrado"}
                 else:
                     dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                        "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
                 self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {
@@ -1313,6 +1278,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         print('\n', self._dict_result, '\n')
         return self._dict_result
+
 
     # 48
     def rebootDevice_48(self, dados):

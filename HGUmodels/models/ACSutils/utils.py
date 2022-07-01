@@ -11,7 +11,7 @@ import json
 from json import JSONEncoder
 from HGUmodels.models.SSHutils import infoDevices_utils
 
-dict_result = dict
+dict_result = dict()
 
 class MyEncoder(JSONEncoder):
     def default(self, o):

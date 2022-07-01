@@ -26,6 +26,8 @@ from HGUmodels.main_session import MainSession
 from HGUmodels import wizard_config
 from HGUmodels.models.Atuadoresutils.utils import atuadores
 
+import paramiko
+
 session = MainSession()
 
 mongo_conn = MongoConnSigleton(db='config', collection='cpe_config')
@@ -1718,6 +1720,95 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
+
+
+    #30
+    def useDMZ_30(self, flask_username):
+        """
+            Turn on DMZ
+        :return : A dict with the result of the test
+        """
+        try:
+            # Entering on the interface settings and sign in
+            self._driver.get('http://' + self._address_ip + '/')
+            self.login_admin()
+            time.sleep(5)
+            self._driver.switch_to.frame('mainFrame')
+                    
+            # Entering on Config menu
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Entering on Local Network
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
+            time.sleep(1)
+
+            # Entering on DMZ Section
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
+            time.sleep(1)
+
+            # Turn on DMZ
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+
+            # Get IP Input
+            ipInput = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[3]/td[2]/input')
+            
+            # Get IP Data
+            ipSelected = ''
+            try:
+                ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
+                for ipItem in ipsResponse:
+                    if'192.168.16.' in ipItem:
+                        ipSelected = ipItem
+    
+            except subprocess.CalledProcessError:
+                lostPackets5GHz = -1
+            
+            ipInput.send_keys(ipSelected)
+
+            # Confirm changes
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[4]/td/a[2]').click()
+            time.sleep(4)
+            
+            publicIp = subprocess.check_output(['wget', '-qO-', 'http://ipecho.net/plain'], stderr=subprocess.STDOUT, universal_newlines=True)
+
+            sshClient = paramiko.SSHClient()
+            sshClient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            # -- Atualizar o IP, username e password -- #
+            # ----------------------------------------- #
+            # ----------------------------------------- #
+            
+            sshClient.connect('192.168.16.3', port=22, username='automacao', password='4ut0m4c40', timeout=3)
+
+            stdin, stdout, stderr = sshClient.exec_command('telnet ' + str(publicIp) + ' 11002')
+
+            endtime = time.time() + 30
+            while not stdout.channel.eof_received:
+                time.sleep(1)
+                if time.time() > endtime:
+                    stdout.channel.close()
+                    break
+            
+            output = str(stdout.read())
+
+            if output.find('Trying'):
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'It was not possible to connect'})
+
+        except Exception as exception:
+            print(exception)
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
+        finally:
+            self._driver.quit()
+            return self._dict_result
+
 
 
     # 33 -> Check why the 2.4GHz and 5GHz WiFi channels aren't changing on status page
