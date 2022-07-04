@@ -654,11 +654,11 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
             time.sleep(2)
-            
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
-            # Enabling DMZ
-            self._driver.find_element_by_xpath('//*[@id="tab-03"]/table/tbody/tr[2]/td[2]/input[1]').click()
-            
+            # Enabling DMZ            
+            #self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+            time.sleep(3)
+            print(3)
             self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
             self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.16.30')
             self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
@@ -679,7 +679,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         finally:
             return self._dict_result  
   
-    #395 mlv
+    #395
     def configUpnpViaWizard_395(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -715,7 +715,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         finally:
             return self._dict_result  
 
-    #396 mlv
+    #396
     def configDdnsViaWizard_396(self, flask_username):
         """
             Provides DDnS Settings
@@ -731,9 +731,12 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
-            time.sleep(2)
+            time.sleep(4)
             # Sentting DDnS
+            
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[5]/a').click() #DDNS
+            #self._driver.switch_to.default_content()
+            time.sleep(4)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[1]').click()
             select = Select(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[3]/td[2]/select'))
             select.select_by_visible_text('No-IP')
@@ -768,7 +771,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             return self._dict_result 
 
 
-    #397 mlv
+    #397 
     def configIpDhcpViaWizard_397(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')

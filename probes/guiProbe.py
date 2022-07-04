@@ -1621,7 +1621,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.configUpnpViaWizard_395(flask_username)
 
-    #396 mlv
+    #396
     def configDdnsViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
@@ -1641,7 +1641,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.configDdnsViaWizard_396(flask_username)
     
-    #397 mlv
+    #397
     def configIpDhcpViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
@@ -1738,8 +1738,8 @@ class gui:
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "testeSite", 
-                        "Probe#": "44", 
-                        "Description": "Abrir URL", 
+                        "Probe#": "399", 
+                        "Description": "Abrir URLs", 
                         "obs": None}
 
         hgu = HGUModelFactory.getHGU(probe='wizardProbe',
