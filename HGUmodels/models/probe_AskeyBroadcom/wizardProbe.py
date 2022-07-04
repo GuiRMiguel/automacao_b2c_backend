@@ -569,7 +569,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             
         return self._dict_result
 
-    #391 HPNA mlv
+    #391
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -640,7 +640,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         finally:
             return self._dict_result 
 
-    #393 mlv
+    #393
     def createDmzViaWizard_393(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')

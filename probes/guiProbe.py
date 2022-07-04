@@ -1263,7 +1263,7 @@ class gui:
                                      dict_result=dict_result)
         return hgu.checkPPPoEStatus_380(flask_username)
 
-    # 381 #mlv
+    # 381
     def checkPPPoELoginToConfigWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
@@ -1399,8 +1399,8 @@ class gui:
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "qrCodeTest", 
-                        "Probe#": "392", 
-                        "Description": "Erro na habilitacao do servico DNS", 
+                        "Probe#": "385", 
+                        "Description": "Erro na leitura do QRcode.", 
                         "obs": None}
 
         hgu = HGUModelFactory.getHGU(probe='wizardProbe',
@@ -1414,14 +1414,14 @@ class gui:
         return hgu.qrCodeTest_385(flask_username)
 
 
-    #386 mlv
+    #386
     def statusWizardWifi(self, ip, username, password, model_name, flask_username, **kwargs):
         
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "ProbeName": "statusWizardWifi", 
+                        "Probe#": "386", 
                         "Description": "Mostrar corretamente o Status do WI-FI 2.4GHz caso possua esse serviço.", 
                         "obs": None}
 
@@ -1439,8 +1439,8 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "ProbeName": "statusWizardInet", 
+                        "Probe#": "387", 
                         "Description": "Mostra corretamente o status PPP no índice", 
                         "obs": None}
 
@@ -1459,8 +1459,8 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "ProbeName": "registerWizardVoip", 
+                        "Probe#": "388", 
                         "Description": "Mostrar corretamente as Estatísticas de VoIP caso possua esse serviço.", 
                         "obs": None}
 
@@ -1479,8 +1479,8 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "ProbeName": "statusWizardIptv", 
+                        "Probe#": "389", 
                         "Description": "Mostrar corretamente o Status de TV caso possua esse serviço.", 
                         "obs": None}
 
@@ -1499,8 +1499,8 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "ProbeName": "statusWizardVoip", 
+                        "Probe#": "390", 
                         "Description": "Informações sobre a conta SIP no Indice caso possua esse serviço.", 
                         "obs": None}
 
@@ -1521,7 +1521,7 @@ class gui:
             "Resultado_Probe": "NOK", 
             "ControllerName": "gui", 
             "ProbeName": "statusWizardHpna", 
-            "Probe#": "350", 
+            "Probe#": "391", 
             "Description": "Mostra corretamente o status HPNA no índice", 
             "obs": None
             }
@@ -1559,7 +1559,7 @@ class gui:
         
 
 
-    #393 mlv
+    #393
     def createDmzViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
@@ -1579,15 +1579,15 @@ class gui:
                                      dict_result=dict_result)
         return hgu.createDmzViaWizard_393(flask_username)
 
-    #394 mlv
+    #394
     def configFirewallViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "createDmzViaWizard", 
-                        "Probe#": "393", 
-                        "Description": "Erro de criacao de uma DMZ pelo usuario.", 
+                        "Probe#": "394", 
+                        "Description": "Firewall.", 
                         "obs": None}
                         
         hgu = HGUModelFactory.getHGU(probe='wizardProbe',
@@ -1601,7 +1601,7 @@ class gui:
 
 
 
-      #395 mlv
+      #395
     def configUpnpViaWizard(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
@@ -2094,7 +2094,7 @@ class gui:
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "getFullConfig", 
-                        "Probe#": "350", 
+                        "Probe#": "425", 
                         "Description": "Coleta as informações da página WebGUI", 
                         "obs": None}
 
