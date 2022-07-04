@@ -1270,7 +1270,7 @@ class gui:
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "checkPPPoELoginToConfigWizard", 
-                        "Probe#": "146", 
+                        "Probe#": "381", 
                         "Description": "Verifica se o usuario esta logado para editar configuracoes no Wizard", 
                         "obs": None}
                         
