@@ -189,19 +189,22 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('//*[@id="txtPassword"]').clear()
             self._driver.find_element_by_xpath('//*[@id="txtPassword"]').send_keys('vivo')
             self._driver.find_element_by_xpath('//*[@id="btnSave"]').click()
-            #try:
-            time.sleep(10)
-            print(self._driver.find_element_by_xpath('//*[@id="lbl_msg"]/font').text)
-            if self._driver.find_element_by_xpath('//*[@id="lbl_msg"]/font').text != 'Conectado':
-                self._dict_result.update({"obs": f"Teste passou. Usuario nao conectado.", "result":"passed", "Resultado_Probe": "OK"})
-            else:
-                self._dict_result.update({"obs": "Teste falhou, Usuario aceito"})
-        except UnexpectedAlertPresentException as e:
-            time.sleep(2)
-            self._dict_result.update({"obs": f".{e}", "result":"passed", "Resultado_Probe": "OK"})
-        finally:
+            try:
+                time.sleep(22)
+                if self._driver.find_element_by_xpath('//*[@id="lbl_msg"]/font').text == None:
+                    self._dict_result.update({"obs": "Teste falhou, Usuario aceito"})
+                else:
+                    self._dict_result.update({"obs": f"Teste correto, usuario nao foi aceito", "result":"passed", "Resultado_Probe": "OK"})
+
+            except UnexpectedAlertPresentException as e:
+                time.sleep(2)
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            finally:
                 self._driver.quit()
-                return self._dict_result  
+        except Exception as e:
+            self._dict_result.update({"obs": e})
+        finally:
+            return self._dict_result  
         
 
     def connectWizardhttps_379(self,flask_username):
