@@ -35,6 +35,9 @@ config_collection = mongo_conn.get_collection()
 dict_test_result_memory = {}
 
 class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
+
+    
+    # 373
     def accessWizard_373(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 401 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'accessWizard_401')
@@ -49,7 +52,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
                 self._dict_result.update({"obs": f"Teste incorreto, retorno: {ans_500}"})
         return self._dict_result
 
-
+    
+    # 374
     def logoutWizard_374(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -74,7 +78,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
-
+   
+    # 375
     def checkRedeGpon_375(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -110,7 +115,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self.update_global_result_memory(flask_username, 'checkRedeGpon_375', dict_saida)
             return self._dict_result
 
-
+   
+    # 376
     def changePPPoESettingsWrong_376(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -139,7 +145,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         finally:
             return self._dict_result 
 
-
+   
+    # 377
     def changePPPoESettingsWrong_377(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -185,7 +192,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         finally:
             return self._dict_result  
 
-    #378 #mlv
+   
+    # 378 #mlv
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -196,54 +204,72 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a/span').click()
             time.sleep(5)
             self.admin_authentication_mitraStat()
-            time.sleep(1)
+            time.sleep(3)
+            try:
+                self._driver.switch_to.default_content()
+                self._driver.switch_to.frame('basefrm')
+                time.sleep(3)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                self._driver.switch_to.frame(iframe)
+                time.sleep(1)
+                self._driver.find_element_by_id('MLG_Come_Back_button').click()
+                time.sleep(15)
+            except Exception as e:
+                print(e)
+                time.sleep(2)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').clear()
+            time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').send_keys('cliente@cliente')
+            time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="RN_Password"]').clear()
+            time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="RN_Password"]').send_keys('vivo')
-            self._driver.find_element_by_xpath('//*[@id="PPPOE_Account_Save"]').click()
+            time.sleep(1)
+            self._driver.find_element_by_id('PPPOE_Account_Save').click()
             time.sleep(25)
 
             try: 
+                self._driver.switch_to.default_content()
+                self._driver.switch_to.frame('basefrm') 
                 iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
                 self._driver.switch_to.frame(iframe)
                 print(self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[1]/td/font/span').text)
+                if self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[1]/td/font/span').text == "Erro 691 - Provedor":    
+                    self._dict_result.update({"obs": "Acesso Negado", "result":"passed", "Resultado_Probe": "OK"})
+                time.sleep(2)
                 self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a/span').click()
-                #if self._driver.find_element_by_xpath('//*[@id="MLG_Pop_Fail_691_Title"]/span').text() == "Erro 691 - Provedor":    
-                    #self._dict_result.update({"obs": "Acesso Negado", "result":"passed", "Resultado_Probe": "OK"})
-            
-
-                time.sleep(5)
-            except:
-                self._dict_result.update({"obs": "Teste falhou"})
-                time.sleep(1)
-                # Deixando o valor padrao de volta
-                self._driver.switch_to.default_content()
-                self._driver.switch_to.frame('basefrm')
-                self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').clear()
-                self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').send_keys('cliente@cliente')
-                self._driver.find_element_by_xpath('//*[@id="RN_Password"]').clear()
-                self._driver.find_element_by_xpath('//*[@id="RN_Password"]').send_keys('cliente')
-                self._driver.find_element_by_xpath('//*[@id="PPPOE_Account_Save"]').click()
-
-            self._driver.quit()
+                time.sleep(15)
+            except Exception as e:
+                if "/html/body/div[3]/div/div[1]/div/iframe" in str(e):
+                    self._dict_result.update({"obs": "Mensagem de erro não apresentada", "result": "NOK"})
+                    time.sleep(1)
+                    # Deixando o valor padrao de volta
+                    self._driver.switch_to.default_content()
+                    self._driver.switch_to.frame('basefrm')
+                    self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').clear()
+                    self._driver.find_element_by_xpath('//*[@id="RN_UserName"]').send_keys('cliente@cliente')
+                    self._driver.find_element_by_xpath('//*[@id="RN_Password"]').clear()
+                    self._driver.find_element_by_xpath('//*[@id="RN_Password"]').send_keys('cliente')
+                    self._driver.find_element_by_xpath('/html/body/form/div/div[1]/div[1]/table/tfoot/tr/td/a[2]/span').click()
+                    time.sleep(25)
         except Exception as e:
-            self._dict_result.update({"obs": e})
+            self._dict_result.update({"obs": e, "result": "failed"})
         finally:
+            self._driver.quit()
             return self._dict_result  
 
-
-    # Algumas vezes a conexão é realizada, outras vezes fica na tela de conexão sem evolução
+    
+    # 379
     def connectWizardhttps_379(self,flask_username):
         try:
             try:
-                self._driver.set_page_load_timeout(3)
+                self._driver.set_page_load_timeout(10)
                 self._driver.get('https://' + self._address_ip + '/')
-                self._dict_result.update({"obs": "Acesso via HTTPS OK", "result":"passed", "Resultado_Probe": "OK"})
+                self._dict_result.update({"obs": "Acesso via HTTPS OK", "result":"NOK", "Resultado_Probe": "NOK"})
             except:
-                self._dict_result.update({"obs": "Nao foi possivel acessar via HTTPS"})
+                self._dict_result.update({"obs": "Nao foi possivel acessar via HTTPS", "result":"passed", "Resultado_Probe": "OK"})
 
         except NoSuchElementException as exception:
             self._dict_result.update({"obs": exception})
@@ -256,6 +282,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             return self._dict_result
 
 
+    # 380
     def checkPPPoEStatus_380(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -284,6 +311,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
+  
     #381 mlv
     def getFullConfig_381(self, flask_username):
         try:
@@ -297,7 +325,6 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
             time.sleep(1)
             login_button.click()
-            self._driver.quit()
             
             self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
             dict_saida = {"Resultado_Probe": "NOK"}
@@ -306,11 +333,11 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             dict_saida = {"Resultado_Probe": "OK"}
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
+            self._driver.quit()
             return self._dict_result
 
-
-
-
+ 
+    # 382
     def getFullConfig_382(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -325,6 +352,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
                 self._dict_result.update({"obs": f"Teste incorreto, retorno Idioma: {idioma}"})
         return self._dict_result
 
+
+    # 384
     def execPingWizard_384(self, flask_username):
         destino = '8.8.8.8',
         tentativas = "1"
@@ -366,6 +395,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
+ 
     # 385
     def qrCodeTest_385(self, flask_username):
         ssid_2g_exp = 'VIVO automacao 2GHz'
@@ -529,7 +559,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         self._driver.quit()
         return self._dict_result
 
-    #386 mlv
+
+    # 386 mlv
     def statusWizardIptv_386(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -548,6 +579,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
 
 
+    # 387
     # como fazer wizard config consistente entre os modelos?
     def statusWizardInet_387(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -572,6 +604,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
 
 
+    # 388
     def registerWizardVoip_388(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -580,13 +613,14 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         else:
             ifaceVoip = result['Status']['Telefone']['Rede:']
             registerVoIP = result['Status']['Telefone']['Telefone:']
-            if ifaceVoip == 'Disponível' and (registerVoIP != 'Não Registrado' or registerVoIP == ''):
+            if ifaceVoip == 'Disponível' and (registerVoIP != 'Não Registrado' or registerVoIP != ''):
                 self._dict_result.update({"obs": f"Rede: Disponível | Telefone: {registerVoIP}", "result":"passed", "Resultado_Probe": "OK"})
             else:
-                self._dict_result.update({"obs": f"Teste incorreto, retorno Rede: Disponível | Telefone: {registerVoIP}"})
+                self._dict_result.update({"obs": f"Teste incorreto, retorno Rede: {ifaceVoip} | Telefone: {registerVoIP}", 'result': 'NOK'})
         return self._dict_result
-        
 
+
+    # 389
     # como fazer wizard config consistente entre os modelos?
     def statusWizardIptv_389(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -608,6 +642,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
 
 
+    # 390
     # como fazer wizard config consistente entre os modelos?
     def statusWizardVoip_390(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -617,6 +652,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         else:
             status = result['Status']['Telefone']
             voip = wizard_config.VOIP
+            print('\n\nstatus:', set(status), '\nvoip:', set(voip), '\n\n')
             if set(status) == set(voip):
                 self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
             else:
@@ -733,6 +769,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.switch_to.default_content()
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
+            time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[3]/a').click()
             # Entering IP Address
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[2]/div/table/tbody/tr[2]/td[2]/input[1]').click()
@@ -820,6 +857,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-4').click()
+            time.sleep(3)
             # Enabling UPnP Settings and Saving
             self._driver.find_element_by_xpath('//*[@id="UPnP_form"]/table/tbody/tr[2]/td[2]/input[1]').click()
             self._driver.find_element_by_id('MLG_UPnP_Save').click()
@@ -838,7 +876,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             return self._dict_result 
 
     
-    #396 mlv
+    # 396 mlv
     def configDdnsViaWizard_396(self, flask_username) -> dict:
         """
             Provides DDnS Settings
@@ -870,6 +908,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-5').click()
+            time.sleep(3)
             self._driver.find_element_by_xpath('//*[@id="tab-05"]/table/tbody/tr[2]/td[2]/input[1]').click()
             select = Select(self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[3]/td[2]/select'))
             select.select_by_visible_text('No-IP')
@@ -891,12 +930,12 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             try:
                 time.sleep(8)
                 # Check on the frontend for the text fields that remains available even when DDnS is disable
-                if self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[4]/td[2]/input').is_enable != True:
+                if self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[3]/div/table/tbody/tr[4]/td[2]/input').is_enabled != True:
                     self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
-                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
+                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"NOK", "Resultado_Probe": "NOK"})
             except UnexpectedAlertPresentException as e:                
-                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"failed", "Resultado_Probe": "OK"})
             finally:
                 self._driver.quit()
         except Exception as e:
@@ -932,7 +971,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(1)
             login_button.click()
             # Entering DHCP Settings
-            time.sleep(50000)
+            time.sleep(5)
             self._driver.switch_to.default_content()
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
@@ -968,6 +1007,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             return self._dict_result  
 
 
+    # 399
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
         site2 = f'http://{self._address_ip}/instalador'
@@ -1022,6 +1062,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
 
 
+    # 21
     def checkBridgeMode_21(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -1048,7 +1089,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
-    
+
+    # 36
     def checkRedeGpon_36(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 375 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'checkRedeGpon_375')
@@ -1063,7 +1105,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
     
         return self._dict_result
 
-    
+
+    # 79
     def accessPadrao_79(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -1078,7 +1121,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.quit()
             return self._dict_result
 
-# 
+
+    # 146
     def checkPPPoEStatus_146(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
