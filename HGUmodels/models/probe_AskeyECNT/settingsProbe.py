@@ -2047,28 +2047,15 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
     def getFullConfig_425(self, flask_username):
 
-        self._driver.get('http://' + self._address_ip + '/')
-        link = self._driver.find_element_by_xpath(
-            '/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a')
-        link.click()
-        time.sleep(1)
-        link = self._driver.find_element_by_xpath(
-            '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a')
-        link.click()
-        time.sleep(1)
-
         self._driver.get('http://' + self._address_ip + '/login.asp')
 
-        self._driver.switch_to.default_content()
-        user_input = self._driver.find_element_by_xpath(
-            '/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+        user_input = self._driver.find_element_by_id('txtUser')
         user_input.send_keys(self._username)
         pass_input = self._driver.find_element_by_id('txtPass')
         pass_input.send_keys(self._password)
-        login_button = self._driver.find_element_by_id('btnLogin')
-        time.sleep(1)
-        login_button.click()
-        time.sleep(1)
+        self._driver.find_element_by_id('btnLogin').click()
+        time.sleep(3)
+        
         print('\n#############################################'
               '\n MENU >> STATUS'
               '\n#############################################\n')
@@ -2248,7 +2235,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 rede_local_name_ok[pos] = rede_local_name[index]
             index = index + 1
         print(rede_local_name_ok)
-
         # print('lista de entrada = ' + str(rede_local_name))
         # print('tamanho = '+ str(len(rede_local_name))+'\n')
         # a = 0
@@ -2349,6 +2335,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         # CONFIGURAÇÕES > REDE LOCAL
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
+        time.sleep(1)
         config_redelocal = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a')
         config_redelocal.click()
@@ -2459,6 +2448,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         # CONFIGURAÇÕES > WIFI 2.4GHz
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
+        time.sleep(1)
         config_wifi24 = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a')
         print(config_wifi24.text)
@@ -2620,6 +2612,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         # CONFIGURAÇÕES > WIFI 5GHz
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
+        time.sleep(1)
         config_wifi5 = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a')
         print(config_wifi5.text)
@@ -2774,6 +2769,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         ###         CONFIGURAÇÕES > FIREWALL
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
+        time.sleep(1)
         config_firewall = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[6]/a')
         print(config_firewall.text)
@@ -2816,6 +2814,9 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         # CONFIGURAÇÕES > MODO DA WAN
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
+        time.sleep(1)
         config_modowan = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[7]/a')
         print(config_modowan.text)
@@ -2845,6 +2846,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         ###         CONFIGURAÇÕES > IDIOMA
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
         gerenciamento = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a')
         print(gerenciamento.text)
@@ -2877,6 +2880,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         # CONFIGURAÇÕES > SOBRE O DISPOSITIVO
         ### ------------------------------------------ ###
+        config = self._driver.find_element_by_link_text(
+            'Configurações').click()
         sobre = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a')
         print(sobre.text)

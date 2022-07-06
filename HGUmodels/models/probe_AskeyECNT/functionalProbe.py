@@ -1772,12 +1772,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
 
                 for ipItem in ipsResponse:
-                    if(ipItem.find('.15.')):
+                    if '192.168.15' in ipItem:
                         ipSelected = ipItem
     
             except subprocess.CalledProcessError:
                 lostPackets5GHz = -1
             
+            ipInput.clear()
             ipInput.send_keys(ipSelected)
 
             # Confirm changes
