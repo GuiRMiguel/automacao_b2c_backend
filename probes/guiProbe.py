@@ -46,7 +46,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "checkSpeedEthernetCable", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "17", 
                         "Description": "Verificar a velocidade de transmissao no cabo de rede Ethernet" 
                        }
 
@@ -69,7 +69,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "checkSpeed2GHz", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "18", 
                         "Description": "Verificar a velocidade de transmissao no WiFi 2.4GHz" 
                        }
 
@@ -92,7 +92,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "checkSpeed5GHz", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "19", 
                         "Description": "Verificar a velocidade de transmissao no WiFi 5GHz" 
                        }
 
@@ -138,7 +138,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "uninterruptedPing", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "23", 
                         "Description": "Gerar ping (IPv4 e IPv6) de maquinas conectadas via WiFi (2.4 e 5GHz) para o IP da caixa e externo (Dois sites distintos) ex. google por 6 horas" 
                        }
 
@@ -161,7 +161,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "testICMPv6", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "24", 
                         "Description": "Efetuar teste de ICMPv6 na página http://ipv6-test.com/" 
                        }
 
@@ -184,7 +184,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "testStreaming", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "25", 
                         "Description": "Rodar video conectado no WiFi 2.4 e 5GHz por 1 hora (NetFlix e YouTube). Fazer o teste com equipamentos distintos (PlayStation, Notebook, Celular e etc...)" 
                        }
 
@@ -207,7 +207,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "useWhatsAPP", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "27", 
                         "Description": "Utilizar o aplicativo WPSApp,Utilizar o aplicativo WPSApp (disponível na Play Store) para fechar uma conexão WiFi via WPS" 
                        }
 
@@ -230,7 +230,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "useDMZ", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "30", 
                         "Description": "Testar funcionalidade de DDNS e acesso remoto a camera IP e validar acessando de outro terminal.Validar via servidor FTP" 
                        }
 
@@ -252,7 +252,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "swapWiFiChannelandBandwidth", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "33", 
                         "Description": "Trocar os canais do 2.4GHz e 5GHz, largura de banda e observar se foi alterado no device" 
                        }
 
@@ -275,7 +275,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "acsURL", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "44", 
                         "Description": "Validar a URL de ACS do dispositivo para saber qual Plataforma está direcionado o device. (WAN desconectada)" 
                        }
 
@@ -298,7 +298,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "performWiFiSetup", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "46", 
                         "Description": "Realizar configurações WiFi utilizando caracteres especiais (Ex.: !@#$%&<>)" 
                        }
 
@@ -321,7 +321,7 @@ class gui:
                         "obs":None,
                         "Resultado_Probe": "NOK", 
                         "ProbeName": "accessWebGui", 
-                        "Probe#": "XXXXXX", 
+                        "Probe#": "49", 
                         "Description": "Utilizar o endereço http://1.1.1.1/ para acessar a Web Gui do dispositivo em teste" 
                        }
 

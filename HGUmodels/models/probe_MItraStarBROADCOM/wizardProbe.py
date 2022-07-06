@@ -89,7 +89,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
 
-#378
+#378 #mlv
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -207,13 +207,13 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(10)
+            time.sleep(2)
+            time.sleep(5)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("basefrm")
             time.sleep(5)
             login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]/span')
-            time.sleep(3)
-            dict_saida = {"Teste falhou."}
+            time.sleep(1)
             if login_button.click() == None:
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
                 dict_saida = {"Resultado_Probe": "OK"}
@@ -426,7 +426,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         return self._dict_result
 
         
-    #391
+    #391 HPNA mlv
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -535,19 +535,18 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
             self.admin_authentication_mitraStat()
-            time.sleep(3)
+            time.sleep(2)
             # Entering DMZ Settings
             time.sleep(5)
             self._driver.switch_to.default_content()
-            time.sleep(4)
+            time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-3').click()
-            time.sleep(5)
             # Entering IP Address
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[5]/form/table/tbody/tr[2]/td[2]/input[1]').click()
             input_ip = self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[3]/td[2]/input')
             input_ip.clear()
-            input_ip.send_keys('192.168.18.49')
+            input_ip.send_keys('192.168.17.49')
             self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[4]/td/a[2]/span').click()
             time.sleep(5)
             # Switch to iframe
@@ -555,17 +554,17 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.frame(iframe)
             self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[2]/td/a[1]/span').click()
             # Entering againg on settings
-            time.sleep(120)
+            time.sleep(105)
             self._driver.get('http://' + self._address_ip + '/')
-            time.sleep(4)
+            time.sleep(1)
             # config / Internet
             self._driver.switch_to.default_content()
-            time.sleep(4)
+            time.sleep(1)
             self._driver.switch_to.frame("menufrm")
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
-            time.sleep(3)
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(4)
+            time.sleep(2)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
@@ -574,7 +573,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             # Entering DMZ Settings
             time.sleep(5)
             self._driver.switch_to.default_content()
-            time.sleep(3)
+            time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-3').click()
 
@@ -622,7 +621,6 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-4').click()
-            time.sleep(5)
             # Enabling UPnP Settings and Saving
             self._driver.find_element_by_xpath('//*[@id="tab-04"]/form/table/tbody/tr[2]/td[2]/input[1]').click()
             self._driver.find_element_by_xpath('//*[@id="tab-04"]/form/table/tbody/tr[3]/td/a[2]/span').click()
@@ -668,7 +666,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-5').click()
-            time.sleep(2)
+            time.sleep(5)
             # Sentting DDnS
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[2]/td[2]/input[1]').click()
             select = Select(self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[7]/form/table/tbody/tr[3]/td[2]/select'))
