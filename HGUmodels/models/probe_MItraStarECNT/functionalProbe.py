@@ -548,6 +548,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result
 
+
     # 17
     def checkSpeedEthernetCable_17(self, flask_username):
         """
@@ -574,18 +575,21 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             # Executing a Speed Test
             try:
                 try:
+                    self._driver.set_page_load_timeout(15)
                     self._driver.get(speed_test)
-                    self._driver.set_load_page_timeout(10)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
                 time.sleep(5)
-                self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+                self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
@@ -607,7 +611,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
-            # Habling other devices
+            # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
@@ -624,7 +628,10 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         except Exception as exception:
             print(exception)
             self._driver.quit()
-            self._dict_result.update({"obs": str(exception)})
+            if 'download_speed' in str(e):
+                self._dict_result.update({"obs": 'Página speedtest.net não carregou corretamente'})
+            else:
+                self._dict_result.update({"obs": str(exception)})
         finally:
             return self._dict_result
 
@@ -682,7 +689,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
             ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
-            pass_2g = self._driver._find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
+            pass_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
             wifiSSID = ssid_2g.get_attribute('value')
             wifiPassword = pass_2g.get_attribute('value')
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
@@ -714,48 +721,45 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                     self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
-                    self._driver.execute_script("window.stop();")
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
-                finally:
-                    self._driver.execute_script("window.stop();")
-                    time.sleep(2)
-                    self._driver.get(speed_test)
-                time.sleep(15)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                self._driver.implicitly_wait(10)
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
-                # Verificar a velocidade contratada
-                down_speed_exp = 300
-                up_speed_exp = 300
-
-                if download_speed < 0.8*down_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
-                elif upload_speed < 0.8*up_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
-                else:
-                    self._driver.quit()
-                    self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
             except Exception as e:
                 print(e)
-                self._dict_result.update({"obs": str(e)})
+            
+            # Verificar a velocidade contratada
+            down_speed_exp = 300
+            up_speed_exp = 300
+
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
             # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
@@ -808,7 +812,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
             ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
-            pass_5g = self._driver._find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
             wifiSSID = ssid_5g.get_attribute('value')
             wifiPassword = pass_5g.get_attribute('value')
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
@@ -858,48 +862,45 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                     self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
-                    self._driver.execute_script("window.stop();")
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
-                finally:
-                    self._driver.execute_script("window.stop();")
-                    time.sleep(2)
-                    self._driver.get(speed_test)
-                time.sleep(15)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                self._driver.implicitly_wait(10)
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
-                # Verificar a velocidade contratada
-                down_speed_exp = 300
-                up_speed_exp = 300
-
-                if download_speed < 0.8*down_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
-                elif upload_speed < 0.8*up_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
-                else:
-                    self._driver.quit()
-                    self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
             except Exception as e:
                 print(e)
-                self._dict_result.update({"obs": str(e)})
+            
+            # Verificar a velocidade contratada
+            down_speed_exp = 300
+            up_speed_exp = 300
+
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
             # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
@@ -952,8 +953,16 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            wifiSSID = ssid_5g.get_attribute('value')
+            wifiPassword = pass_5g.get_attribute('value')
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]').click()
             time.sleep(8)
+
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
 
             # Entering on WiFi 2.4GHz settings
             self._driver.get('http://' + self._address_ip + '/')
@@ -1036,8 +1045,16 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
+            ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
+            pass_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
+            wifiSSID = ssid_2g.get_attribute('value')
+            wifiPassword = pass_2g.get_attribute('value')
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
             time.sleep(10)
+
+            # Enabling WiFi
+            subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
+            time.sleep(20)
 
             # Executing the ping test 2GHz     
             print('INICIANDO PING NO 2.4GHz')      
@@ -1094,9 +1111,16 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+            # subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(15)
+
 
             # Desabling Firewall
             pwd = '4ut0m4c40'
@@ -1118,10 +1142,40 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             else:
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         except Exception as exception:
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         finally:
             return self._dict_result
 
@@ -1164,7 +1218,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
             ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
-            pass_5g = self._driver._find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
+            pass_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input')
             ssid_5g.clear()
             ssid_5g.send_keys(wifiSSID)
             pass_5g.clear()
@@ -1272,7 +1326,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(10)
             ssid_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[3]/td[2]/input')
-            pass_2g = self._driver._find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
+            pass_2g = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[4]/td[2]/input[1]')
             ssid_2g.clear()
             ssid_2g.send_keys(wifiSSID)
             pass_2g.clear()
