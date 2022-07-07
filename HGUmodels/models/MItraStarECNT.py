@@ -44,7 +44,7 @@ class HGU_MItraStarECNT(HGUModelInterface):
         time.sleep(1)
         self._driver.switch_to.frame("basefrm")
         user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
-        user_input.send_keys(self._username)
+        user_input.send_keys("admin")
         pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
         pass_input.send_keys(self._password)
         login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
