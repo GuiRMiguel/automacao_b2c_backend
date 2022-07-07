@@ -566,6 +566,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up'])   #17
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
@@ -632,6 +633,21 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._dict_result.update({"obs": 'Página speedtest.net não carregou corretamente'})
             else:
                 self._dict_result.update({"obs": str(exception)})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         finally:
             return self._dict_result
 
@@ -772,6 +788,21 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
+            
+            #  Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         finally:
             self._driver.quit()
             return self._dict_result
@@ -913,6 +944,21 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
+
+            #  Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         finally:
             return self._dict_result
 
@@ -1415,7 +1461,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result
 
 
-    #29
+    # 29
     def changeIPDhcpViaWizard_29(self, flask_username):
         try:
             # Entering on local lan settings and sign in
@@ -1431,12 +1477,13 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
-            user_input.send_keys(self._username)
+            user_input.send_keys('admin')
             pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
             pass_input.send_keys(self._password)
             login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
             time.sleep(1)
             login_button.click()
+            time.sleep(5)
             
             #Click DHCP
             time.sleep(5)
@@ -1489,7 +1536,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result  
 
 
-    #30
+    # 30
     def useDMZ_30(self, flask_username):
         """
             Turn on DMZ
@@ -1548,13 +1595,21 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             ipInput.clear()
             ipInput.send_keys(ipSelected)
 
-            # Confirm changes
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[2]/div/table/tbody/tr[4]/td/a[2]').click()
-            time.sleep(4)
-            self._driver.switch_to.frame(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/div/iframe'))
-            time.sleep(3)
-            self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a[1]').click()
-            time.sleep(110)
+            try:
+                # Confirm changes
+                self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[2]/div/table/tbody/tr[4]/td/a[2]').click()
+                time.sleep(4)
+                self._driver.switch_to.frame(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/div/iframe'))
+                time.sleep(3)
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a[1]').click()
+                time.sleep(60)
+                print('\n-- Send command --\n')
+                time.sleep(60)
+                self._driver.get('http://' + self._address_ip + '/')
+                time.sleep(3)
+            except Exception as e:
+                print(e)
+                self._driver.get('http://' + self._address_ip + '/')
 
             publicIp = subprocess.check_output(['wget', '-qO-', 'http://ipecho.net/plain'], stderr=subprocess.STDOUT, universal_newlines=True)
 
@@ -1629,9 +1684,9 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
-            self._driver.implicitly_wait(10)
+            self._driver.implicitly_wait(20)
             self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
-            time.sleep(8)
+            time.sleep(30)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("menufrm")
             self._driver.implicitly_wait(10)
@@ -1646,7 +1701,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[1]/td[2]/input[1]').click()
             self._driver.implicitly_wait(20)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div[3]/form/table/tbody/tr[7]/td/a[2]/span').click()
-            time.sleep(15)
+            time.sleep(30)
 
             # Entering on WiFi 2.4GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
@@ -1725,7 +1780,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result
 
     
-    #32
+    # 32
     def UpgradeDowngradeFirmware_32(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -1855,8 +1910,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             return self._dict_result  
 
 
-
-
     # 44
     def acsURL_44(self, flask_username):
         """
@@ -1869,7 +1922,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[1]/input').send_keys("support")
             self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[2]/input[3]').send_keys(self._password)
             self._driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/div/ul/li[1]/div/form/fieldset/ul/li[4]/input').click()
-            time.sleep(3)
+            time.sleep(15)
 
             # Entering on TR-069 Settings
             menu_maintance = self._driver.find_element_by_xpath('/html/body/div/div[4]/div[1]/div/div[2]/ul/li[6]/span[2]')
@@ -2703,7 +2756,8 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
         finally:
             return self._dict_result
 
-    #48
+
+    # 48
     def validiteDefaultModeAfterReset_48(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -2771,14 +2825,23 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             def verificationAcsOnline():
                 self._driver.get('http://' + self._address_ip + '/')
                 time.sleep(2)
-                self._driver.switch_to.default_content
+                try:
+                    self.admin_authentication_mitraStat()
+                except Exception as e:
+                    print(e)
+                time.sleep(5)
+                self._driver.switch_to.default_content()
+                time.sleep(1)
                 self._driver.switch_to.frame('menufrm')
+                time.sleep(1)
                 self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
                 time.sleep(2)
                 self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a').click()
                 time.sleep(2)
-                self.admin_authentication_mitraStat()
-            
+                try:
+                    self.admin_authentication_mitraStat()
+                except Exception as e:
+                    print(3)
 
                 print('\n#############################################'
                         '\n MENU >> STATUS'
@@ -3144,6 +3207,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             iframe = self._driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/iframe')
             print(iframe)
             self._driver.switch_to.frame(iframe)
+            time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="MLG_Pop_Reset_Yes"]').click()
             time.sleep(300)
 

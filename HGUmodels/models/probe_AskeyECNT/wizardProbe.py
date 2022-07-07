@@ -59,14 +59,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 374
     def logoutWizard_374(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self.login_support()
-            time.sleep(2)
+            self.doLogin()
             try:
                 self._driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/a').click()
                 self._dict_result.update({"obs": "Logout efetuado com sucesso", "result":"passed", "Resultado_Probe": "OK"})
@@ -82,17 +75,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 375
     def checkRedeGpon_375(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
             time.sleep(1)
             gpon = self._driver.find_element_by_xpath('//*[@id="status"]/tbody/tr[1]/th/span').text
@@ -128,21 +111,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 376
     def changePPPoESettingsWrong_376(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             config = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
             time.sleep(1)
             config_internet = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
@@ -166,21 +135,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 377
     def changePPPoESettingsWrong_377(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             config = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
             time.sleep(1)
             config_internet = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
@@ -211,21 +166,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     #378 #mlv
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             config = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
             time.sleep(1)
             config_internet = self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
@@ -294,7 +235,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             print(dict_saida)
             self._dict_result.update({"obs": dict_saida, "result":"passed", "Resultado_Probe": "OK"})
         except NoSuchElementException as exception:
-            self._dict_result.update({"obs": exception})
+            self._dict_result.update({"obs": 'É necessário fazer o login para visualizar o status.'})
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
@@ -304,6 +245,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
     #381 mlv
     def getFullConfig_381(self, flask_username):
+        dict_saida = {}
         try:
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
@@ -314,11 +256,11 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
             self._driver.quit()
             
-            self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
             dict_saida = {"Resultado_Probe": "NOK"}
+            self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
         except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
             dict_saida = {"Resultado_Probe": "OK"}
+            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
 
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
@@ -346,16 +288,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         destino = '8.8.8.8',
         tentativas = "1"
         try:
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/ul/li[6]/a').click()
@@ -387,14 +320,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
         try:
             # Entering on WiFi 2.4GHz settings and sign in
-            self._driver.get('http://' + self._address_ip + '/')
-            time.sleep(5)
-            user_input = self._driver.find_element_by_id('txtUser')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(3)
+            self.doLogin()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
@@ -619,7 +545,6 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
     
-
     #391 HPNA mlv
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
@@ -641,17 +566,10 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 392
     def verifyDnsService_392(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
+            self.doLogin()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(1)
-            user_input = self._driver.find_element_by_id('txtUser')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(1)
             # Enabling DNS
             self._driver.find_element_by_id('radDhcpDnsEn1').click()
             # Entering primary DNS
@@ -695,23 +613,13 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     #393 mlv
     def createDmzViaWizard_393(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
+            self.doLogin()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
+            time.sleep(2)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
             self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
             self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
@@ -734,68 +642,16 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
     
 
-    #394 mlv
-    def configFirewallViaWizard_394(self, flask_username):
-        try:
-            self._driver.get('http://' + self._address_ip + '/')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[6]/a')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(5)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
-            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
-            self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
-            time.sleep(5)
-
-            try:
-                time.sleep(8)
-                if self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').text != 'Please, type a valid IP address.':
-                    self._dict_result.update({"obs": f"Criacao de DMZ realizada com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
-                else:
-                    self._dict_result.update({"obs": f"Erro de criacao de DMZ.", "result":"passed", "Resultado_Probe": "NOK"})
-            except UnexpectedAlertPresentException as e:                
-                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
-        except Exception as e:
-            self._dict_result.update({"obs": e})
-        finally:
-            return self._dict_result  
-
-
     #395 mlv
     def configUpnpViaWizard_395(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
+            self.doLogin()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[4]/a').click()
+            time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="radUpnpEn1"]').click()
             #self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
             #self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.15.30')
@@ -822,24 +678,14 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         :return : A dict with the result of the test
         """
         try:
-            self._driver.get('http://' + self._address_ip + '/')
+            self.doLogin()
+            # Sentting DDnS
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
-            # Entering on Wizard
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
-            # Sentting DDnS
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[5]/a').click() #DDNS
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[7]/table/tbody/tr[2]/td[2]/input[1]').click()
             user_field = self._driver.find_element_by_xpath('//*[@id="idDdnsUsername"]')
             user_field.clear()
@@ -875,22 +721,11 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     #397 mlv
     def configIpDhcpViaWizard_397(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
+            self.doLogin()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[2]/a').click()
             time.sleep(1)
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(2)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[1]/a').click() #DHCP
             time.sleep(1)
             print('passou aqui 1')
@@ -955,8 +790,6 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         try:
             self._driver.get(site1)
             time.sleep(5)
-            self._driver.switch_to.frame('mainFrame')
-            time.sleep(5)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
             resultado1 = 'ok'
@@ -1002,16 +835,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 21
     def checkBridgeMode_21(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/login.asp')
-            self._driver.switch_to.default_content()
-            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_id('txtPass')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_id('btnLogin')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+            self.doLogin()
             self._driver.find_element_by_link_text('Configurações').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[7]/a').click()
@@ -1169,3 +993,13 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         finally:
             self._driver.quit()
             return self._dict_result
+
+    def doLogin(self):
+        self._driver.get('http://' + self._address_ip + '/login.asp')
+
+        user_input = self._driver.find_element_by_id('txtUser')
+        user_input.send_keys(self._username)
+        pass_input = self._driver.find_element_by_id('txtPass')
+        pass_input.send_keys(self._password)
+        self._driver.find_element_by_id('btnLogin').click()
+        time.sleep(3)

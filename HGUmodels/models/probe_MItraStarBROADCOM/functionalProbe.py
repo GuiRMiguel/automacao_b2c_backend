@@ -120,6 +120,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result
 
+
     # 2
     def twoSecondsSwitchTwentyTimes_2(self, dados_entrada) -> dict:
         """
@@ -975,7 +976,10 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 lostPackets5GHz = -1
 
             # Get IP Input
+            print(ipSelected)
             ipInput = self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[3]/td[2]/input')
+            time.sleep(1)
+            ipInput.clear()
             time.sleep(1)
             ipInput.send_keys(ipSelected)
             time.sleep(2)
@@ -986,7 +990,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
             self._driver.switch_to.frame(iframe)
             self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[2]/td/a[1]/span').click()
-            time.sleep(120)
+            time.sleep(180)
             
             publicIp = subprocess.check_output(['wget', '-qO-', 'http://ipecho.net/plain'], stderr=subprocess.STDOUT, universal_newlines=True)
 
@@ -1044,6 +1048,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
@@ -1052,18 +1057,21 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             # Executing a Speed Test
             try:
                 try:
+                    self._driver.set_page_load_timeout(15)
                     self._driver.get(speed_test)
-                    self._driver.set_load_page_timeout(10)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
                 time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
@@ -1085,7 +1093,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
-            # Habling other devices
+            # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
@@ -1187,41 +1195,37 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                     self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
-                    self._driver.execute_script("window.stop();")
-                    self._driver.set_page_load_timeout(15)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
-                finally:
-                    self._driver.execute_script("window.stop();")
-                    time.sleep(2)
-                    self._driver.get(speed_test)
-                time.sleep(15)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                self._driver.implicitly_wait(10)
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
-                # Verificar a velocidade contratada
-                down_speed_exp = 300
-                up_speed_exp = 300
-
-                if download_speed < 0.8*down_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
-                elif upload_speed < 0.8*up_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
-                else:
-                    self._driver.quit()
-                    self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
             except Exception as e:
                 print(e)
-                self._dict_result.update({"obs": str(e)})
+            
+            # Verificar a velocidade contratada
+            down_speed_exp = 300
+            up_speed_exp = 300
+
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
             # Enabling other devices
             pwd = '4ut0m4c40'
@@ -1327,41 +1331,37 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                     self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
-                    self._driver.execute_script("window.stop();")
-                    self._driver.set_page_load_timeout(15)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
-                finally:
-                    self._driver.execute_script("window.stop();")
-                    time.sleep(2)
-                    self._driver.get(speed_test)
-                time.sleep(15)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                self._driver.implicitly_wait(10)
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[4]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
-                # Verificar a velocidade contratada
-                down_speed_exp = 300
-                up_speed_exp = 300
-
-                if download_speed < 0.8*down_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
-                elif upload_speed < 0.8*up_speed_exp:
-                    self._driver.quit()
-                    self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
-                else:
-                    self._driver.quit()
-                    self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
             except Exception as e:
                 print(e)
-                self._dict_result.update({"obs": str(e)})
+            
+            # Verificar a velocidade contratada
+            down_speed_exp = 300
+            up_speed_exp = 300
+
+            if download_speed < 0.8*down_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Download está abaixo do esperado'})
+            elif upload_speed < 0.8*up_speed_exp:
+                self._driver.quit()
+                self._dict_result.update({"obs": 'A velocidade de Upload está abaixo do esperado'})
+            else:
+                self._driver.quit()
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
         
             # Enabling other devices
             pwd = '4ut0m4c40'
@@ -1382,12 +1382,27 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
         finally:
             self._driver.quit()
             return self._dict_result
 
 
-# 23
+    # 23
     def uninterruptedPing_23(self, flask_username):
         """
             Generate ping (IPv4 and IPv6) from machines connected via WiFi (2.4 and 5GHz) to the 
@@ -1550,8 +1565,6 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
         
-
-
 
     # 24
     def testICMPv6_24(self, flask_username):
@@ -2049,20 +2062,15 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             # #Testing Downgrade 
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(5)
             self.login_support()
-            #Menu-Left
-            self._driver.switch_to.default_content()
-            self._driver.switch_to.frame('menufrm')
-            #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
-            #Update Software
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
+            time.sleep(5)
 
+            # Checking Firmware Version
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('basefrm')
-            
+            time.sleep(1)
             dw_sw_version = self._driver.find_element_by_xpath('/html/body/blockquote/form/b/table/tbody/tr[4]/td[2]').text
             print(dw_sw_version)
 
@@ -2106,17 +2114,11 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             # #Testing Downgrade 
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(5)
             self.login_support()
-            #Menu-Left
-            self._driver.switch_to.default_content()
-            self._driver.switch_to.frame('menufrm')
-            #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
-            #Update Software
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
+            time.sleep(5)
 
+            # Checking FIrmware Version
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             
@@ -2521,7 +2523,9 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             # Entering on 2.4GHz Settings
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('menufrm')
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[50]/table/tbody/tr/td/a').click()
             self._driver.implicitly_wait(10)
 
@@ -2906,14 +2910,19 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         finally:
             return self._dict_result
 
+
     #48
     def validiteDefaultModeAfterReset_48(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(5)
             self.login_support()
+            time.sleep(5)
             #Menu-Left
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('menufrm')
+            time.sleep(1)
             #Management
             self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[71]/table/tbody/tr/td/a').click()
             self._driver.implicitly_wait(5)
@@ -2931,19 +2940,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
             time.sleep(240)
 
-            # #Testing Downgrade 
+            # Entering on Advanced interface
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(5)
             self.login_support()
-            #Menu-Left
-            self._driver.switch_to.default_content()
-            self._driver.switch_to.frame('menufrm')
-            #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
-            #Update Software
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
+            time.sleep(5)
 
+            # Checking Firmware Version
+            print('-- Advanced Interface --')
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             
@@ -3285,24 +3289,19 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/blockquote/form/p/input').click()
             time.sleep(240)
 
-            # #Testing Downgrade 
+            # Entering on Advanced interface
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(5)
             self.login_support()
-            #Menu-Left
-            self._driver.switch_to.default_content()
-            self._driver.switch_to.frame('menufrm')
-            #Management
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[2]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
-            #Update Software
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td/div[3]/table/tbody/tr/td/a/span').click()
-            self._driver.implicitly_wait(5)
+            time.sleep(5)
 
+            # Checking Firmware Version
+            print('-- Advanced Interface --')
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             
             up_sw_version = self._driver.find_element_by_xpath('/html/body/blockquote/form/b/table/tbody/tr[4]/td[2]').text
-            print(up_sw_version)
+            print(dw_sw_version)
 
             if up_sw_version=='BR_g3.5_100VNZ0b33':
                 upgrade = True
@@ -3387,7 +3386,9 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             time.sleep(300)
             #Verify serial number and MAC
             self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(5)
             self._driver.switch_to.frame('menufrm')
+            time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
             time.sleep(3)
             try:
@@ -3413,6 +3414,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             try:
                 #Login
+                print('\n-- Login --\n')
                 self._driver.get('http://' + self._address_ip + '/')
                 time.sleep(1)
                 # Management / Restart
@@ -3431,6 +3433,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 loginVivo = 'falhou'
 
             try:
+                print('\n-- GET Site 1 --\n')
                 self._driver.get(site1)
                 time.sleep(5)
                 self._driver.switch_to.frame('mainFrame')
@@ -3443,6 +3446,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 resultado1 = 'falhou'
             
             try:
+                print('\n-- GET Site 2 --\n')
                 self._driver.get(site2)
                 time.sleep(2)
                 self._driver.switch_to.default_content()
@@ -3575,9 +3579,9 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             time.sleep(8)  ### Tempo para recarregar a página após salvar as configs
 
         def change_password_back(driver, user, old_password, new_password):
-            print("ola back 1")
+            # print("ola back 1")
             open_change_password(driver)
-            print("ola back 2")
+            # print("ola back 2")
             print(' == Autenticando == ')
             admin_authentication(self._driver, user, new_password)
             time.sleep(5)
@@ -3622,6 +3626,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
             finally:
                 print(' == Fim do teste == ')
+                self._driver.quit()
                 return self._dict_result
 
 
