@@ -958,25 +958,28 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # Executing a Speed Test
             try:
                 try:
+                    self._driver.set_page_load_timeout(15)
                     self._driver.get(speed_test)
-                    self._driver.set_load_page_timeout(10)
+                    self._driver.execute_script("window.stop();")
+                    self._driver.get(speed_test)
                     self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
                 time.sleep(5)
-                self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
+                self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
-                print('#####################################################################')
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
+                print('\n\n#####################################################################')
                 print('Download Speed   -   ', download_speed)
                 print('Upload Speed     -   ', upload_speed)
-                print('#####################################################################')
+                print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
-            
+
             # Habling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
@@ -1023,7 +1026,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # Entering on WiFi 5GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             self.login_admin()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
@@ -1047,10 +1050,10 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
+            time.sleep(2)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
             time.sleep(1)
-            
+            print(1)
             # Disabling 2.4GHz WiFi
             self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
             self._driver.implicitly_wait(10)
@@ -1058,6 +1061,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             pass_2g = self._driver._find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
             wifiSSID = ssid_2g.get_attribute('value')
             wifiPassword = pass_2g.get_attribute('value')
+            print(2)
             # pass_2g = str(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value'))
             try:
                 self._driver.find_element_by_id('btnBasSave').click()
@@ -1066,7 +1070,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             except:
                 # self._driver.find_element_by_id('btnBasSave').click()
                 time.sleep(30)
-
+            print(3)
             # Enabling WiFi
             subprocess.run(["nmcli", "dev", "wifi", "con", f"{wifiSSID}", "password", f"{wifiPassword}"])
             time.sleep(20)
@@ -1164,20 +1168,24 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # Entering on WiFi 5GHz settings and sign in
             self._driver.get('http://' + self._address_ip + '/')
             self.login_admin()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
-            time.sleep(1)
-            
+            time.sleep(5)
+            print(1)
             # Enabling 5GHz WiFi
-            self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
-            self._driver.implicitly_wait(10)
-            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input')
-            pass_5g = self._driver._find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/input[1]').click()
+            #self._driver.implicitly_wait(10)
+            time.sleep(10)
+            ssid_5g = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[3]/td[2]/input').text
+            time.sleep(2)
+            pass_5g = self._driver._find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').text
+            print(2.1)
             wifiSSID = ssid_5g.get_attribute('value')
             wifiPassword = pass_5g.get_attribute('value')
+            print(2)
             try:
                 self._driver.find_element_by_id('btnBasSave').click()
                 self._driver.switch_to_alert().accept()
@@ -1476,6 +1484,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.get('http://ipv6-test.com/')
             time.sleep(3)
             icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
+            
             self._driver.implicitly_wait(10)
             icmpv6_status = icmpv6_status.text
             time.sleep(3)
@@ -1751,6 +1760,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
 
             # Get IP Input
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[3]/td[2]/input').clear()
             ipInput = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[3]/td[2]/input')
             
             # Get IP Data

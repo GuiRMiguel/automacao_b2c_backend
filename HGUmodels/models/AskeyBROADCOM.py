@@ -34,7 +34,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
         try:
             if self._driver.find_element_by_xpath('//*[@id="status"]/tbody/tr[1]/th/span').text == 'GPON':
                 self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
-                time.sleep(1)
+                time.sleep(4)
                 self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
         except:
             pass

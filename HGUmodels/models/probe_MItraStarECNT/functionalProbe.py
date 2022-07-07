@@ -3145,7 +3145,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             print(iframe)
             self._driver.switch_to.frame(iframe)
             self._driver.find_element_by_xpath('//*[@id="MLG_Pop_Reset_Yes"]').click()
-            time.sleep(100)
+            time.sleep(300)
 
             self._driver.set_page_load_timeout(10)
             try:
@@ -3154,97 +3154,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 print(e)
                 self._driver.get('http://' + self._address_ip + '/')
 
-            #Verify serial number and MAC
-            # Desabling other devices
-            pwd = '4ut0m4c40'
-            cmd = 'ls'
-            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
-
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
-            time.sleep(10)
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up'])
-            print("sub processos feitos")
-            #Enter IP-reset
-            time.sleep(10)
-
-            self._driver.get('http://192.168.15.1/')
-            time.sleep(5)
-            self._driver.switch_to.frame("menufrm")
-            self._driver.find_element_by_id('MLG_Menu_Settings').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[2]/a/span').click()
-            time.sleep(2)
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("basefrm")
-            user_input = self._driver.find_element_by_xpath('//*[@id="Loginuser"]')
-            user_input.send_keys(self._username)
-            pass_input = self._driver.find_element_by_xpath('//*[@id="LoginPassword"]')
-            pass_input.send_keys(self._password)
-            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
-            time.sleep(1)
-            login_button.click()
-            
-            #Click DHCP
-            time.sleep(5)
-            self._driver.switch_to.default_content()
-            time.sleep(1)
-            self._driver.switch_to.frame("basefrm")
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(2)
-            #Changing IP
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('17')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[3]/td[2]/input[4]').send_keys('1')
-            time.sleep(2)
-            #Changing address range
-            #range-1
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('17')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[5]/td[2]/input[4]').send_keys('2')
-            time.sleep(3)
-            #renge-2
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[3]').send_keys('17')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[6]/td/input[4]').send_keys('200')
-            
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[1]/tbody/tr[11]/td[2]/a[2]/span').click() 
-
-            self._driver.set_page_load_timeout(10)
-            try:
-                self._driver.execute_script("window.stop();")
-            except Exception as e:
-                print(e)
-                self._driver.get('http://' + self._address_ip + '/')
-
-            #Verify serial number and MAC
-            # Desabling other devices
-            pwd = '4ut0m4c40'
-            cmd = 'ls'
-            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
-
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up'])
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
-            time.sleep(10)
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up'])
-            print("sub processos feitos 2")
-            time.sleep(10)
 
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.switch_to.frame("menufrm")
