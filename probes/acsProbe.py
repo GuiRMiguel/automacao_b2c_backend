@@ -25,7 +25,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "initialInformations", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -57,7 +57,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "wifi2GHzInformations", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -86,7 +86,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "wifi5GHzInformations", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -115,7 +115,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "lanConfiguration", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -144,7 +144,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "setDHCP", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -173,7 +173,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "set2GHzWiFi", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -201,7 +201,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "set5GHzWiFi", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -229,7 +229,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "setPeriodicInterval", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -348,7 +348,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "checkIPv6Telefonica", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -377,7 +377,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "indexWifi24ghz", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -406,7 +406,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "indexWifi5ghz", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}
@@ -464,7 +464,7 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-            "ProbeName": "setAccessClass", 
+            "ProbeName": "rebootDevice", 
             "Probe#": "XXXXXXX", 
             "Description": "", 
             "obs": None}

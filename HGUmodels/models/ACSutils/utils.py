@@ -255,6 +255,7 @@ class ACS():
                             gpv = nbiSDO.getParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['GPV_Param'])
                             if gpv != None:
                                 GPV_1 = json.dumps(gpv, cls=MyEncoder)
+                                # print(type(gpv))
                                 print(' -- GetParameterValues OK --')
                                 final_time = time.time()
                                 total_time = (final_time - ts)
@@ -291,8 +292,9 @@ class ACS():
                     dict_result = {"obs": "CONECTIVIDADE COM ACS NOK"}
 
 
-            except:
+            except Exception as exception:
                 e = sys.exc_info()[1]
+                dict_result = {"obs": f"{exception}"}
         else:
             final_time = time.time()
             total_time = (final_time - ts)

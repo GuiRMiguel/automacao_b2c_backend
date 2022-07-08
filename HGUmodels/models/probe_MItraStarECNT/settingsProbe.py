@@ -61,7 +61,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             for value_parameter in gpv_get:
                 print('\nvalue parameter:', value_parameter['value'])
                 if value_parameter['name'] == 'InternetGatewayDevice.DeviceInfo.ManufacturerOUI':
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                         ['Devices']['Mitra_Econet']['oui'][0])
                     if value_parameter['value'] != parameter['ACS_aux']['Devices']['Mitra_Econet']['oui'][0]:
                         dict_result = {
@@ -71,7 +71,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.Manufacturer":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                         ['Devices']['Mitra_Econet']['manufacturer'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Mitra_Econet']['manufacturer']:
                         dict_result = {
@@ -81,7 +81,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ModelName":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                         ['Devices']['Mitra_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Mitra_Econet']['modelos']:
                         dict_result = {
@@ -91,7 +91,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ProductClass":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                         ['Devices']['Mitra_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Mitra_Econet']['modelos']:
                         dict_result = {
@@ -101,7 +101,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.URL":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                         ['Parameter']['ACS URL Management']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ACS URL Management']['Value']:
                         dict_result = {
@@ -111,7 +111,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformEnable":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                         ['Parameter']['ManagementServer.EnableCWMP']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ManagementServer.EnableCWMP']['Value']:
                         dict_result = {
@@ -121,7 +121,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                     "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformInterval":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                         ['Parameter']['Periodic inform Interval']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['Periodic inform Interval']['Value']:
                         dict_result = {
@@ -457,15 +457,19 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            print("\n\nGPV_GET: ", gpv_get, "\n\n")
             if gpv_get[0]['value'] != 'automacao_24':
+                print('\nExpected Value: ', 'automacao_24', '\nValue Obtained: ', gpv_get[0]['value'], '\n')
                 dict_result = {
-                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente"}
+            elif gpv_get[1]['value'] != "vivo@12345678" or gpv_get[1]['value'] is None:
+                print('\nExpected Value: ', 'vivo@12345678', '\nValue Obtained: ', gpv_get[1]['value'], '\n')
+                ddict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} obteve um valor diferente"}
+            else:
                 dict_result = {"Resultado_Probe": "OK",
                                "obs": "Teste OK", "result": "passed"}
-            else:
-                dict_result = {
-                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+
         except Exception as e:
             dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
@@ -504,14 +508,18 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if gpv_get[0]['value'] != 'automacao_24':
+                print('\nExpected Value: ', 'automacao_24', '\nValue Obtained: ', gpv_get[0]['value'], '\n')
                 dict_result = {
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-                dict_result = {"Resultado_Probe": "OK",
-                               "obs": "Teste OK", "result": "passed"}
-            else:
+            elif gpv_get[1]['value'] != "vivo@12345678" or gpv_get[1]['value'] is None:
+                print('\nExpected Value: ', 'vivo@12345678', '\nValue Obtained: ', gpv_get[1]['value'], '\n')
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+                
+            else:
+                print("\n\nGPV_GET:\n", gpv_get, "\n\n")
+                dict_result = {"Resultado_Probe": "OK",
+                               "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {
@@ -1272,7 +1280,6 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         finally:
             print('\n', self._dict_result, '\n')
             return self._dict_result
-
 
     # 50
     def firmwareUpgrade_50(self, dados):
@@ -2802,7 +2809,6 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         self._dict_result.update({'result':'failed',"obs": TEST_NOT_IMPLEMENTED_WARNING})
         return self._dict_result
 
-    
 
     def checkWanInterface_x_427(self, flask_username, interface):
         try:

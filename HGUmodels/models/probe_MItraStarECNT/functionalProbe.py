@@ -1159,7 +1159,7 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
 
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            # subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up'])   #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
@@ -1168,26 +1168,35 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             time.sleep(15)
 
 
+            
             # Desabling Firewall
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
             subprocess.run(['sudo', 'systemctl', 'stop', 'firewalld'])
+            subprocess.run(['sudo', 'ufw', 'disable'])
 
             # Making a request
             self._driver.get('http://ipv6-test.com/')
             time.sleep(3)
-            icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
-            self._driver.implicitly_wait(10)
-            icmpv6_status = icmpv6_status.text
-            time.sleep(3)
+            try:
+                icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
+                self._driver.implicitly_wait(10)
+                icmpv6_status = icmpv6_status.text
 
-            if icmpv6_status != 'Reachable':
+                if icmpv6_status != 'Reachable':
+                    self._driver.quit()
+                    self._dict_result.update({'result': 'NOK' ,"obs": 'O ICMP não está acessível'})
+                else:
+                    self._driver.quit()
+                    self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+
+            except Exception as e:
+                print(e)
                 self._driver.quit()
                 self._dict_result.update({"obs": 'O ICMP não está acessível'})
-            else:
-                self._driver.quit()
-                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
+            time.sleep(3)
+
 
             # Enabling other devices
             pwd = '4ut0m4c40'
@@ -1202,11 +1211,16 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
+            # Enabling Firewall
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+            subprocess.run(['sudo', 'systemctl', 'enable', 'firewalld'])
+            subprocess.run(['sudo', 'systemctl', 'start', 'firewalld'])
 
         except Exception as exception:
             print(exception)
-            self._driver.quit()
-            self._dict_result.update({"obs": str(exception)})
 
             # Enabling other devices
             pwd = '4ut0m4c40'
@@ -1221,6 +1235,9 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            
+            self._driver.quit()
+            self._dict_result.update({"obs": str(exception)})
 
         finally:
             return self._dict_result

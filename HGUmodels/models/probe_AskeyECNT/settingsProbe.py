@@ -69,12 +69,16 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
                 print('\nvalue parameter:', value_parameter['value'])
                 if value_parameter['name'] == 'InternetGatewayDevice.DeviceInfo.ManufacturerOUI':
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                           ['Devices']['Askey_Econet']['oui'][0])
                     if value_parameter['value'] != parameter['ACS_aux']['Devices']['Askey_Econet']['oui'][0]:
                         dict_result = {
@@ -84,7 +88,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.Manufacturer":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                           ['Devices']['Askey_Econet']['manufacturer'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['manufacturer']:
                         dict_result = {
@@ -94,7 +98,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ModelName":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                           ['Devices']['Askey_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['modelos']:
                         dict_result = {
@@ -104,7 +108,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.DeviceInfo.ProductClass":
-                    print('parameter:', parameter['ACS_aux']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['ACS_aux']
                           ['Devices']['Askey_Econet']['modelos'])
                     if value_parameter['value'] not in parameter['ACS_aux']['Devices']['Askey_Econet']['modelos']:
                         dict_result = {
@@ -114,7 +118,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.URL":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                           ['Parameter']['ACS URL Management']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ACS URL Management']['Value']:
                         dict_result = {
@@ -124,7 +128,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformEnable":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                           ['Parameter']['ManagementServer.EnableCWMP']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['ManagementServer.EnableCWMP']['Value']:
                         dict_result = {
@@ -134,7 +138,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                        "obs": "Teste OK", "result": "passed"}
 
                 elif value_parameter['name'] == "InternetGatewayDevice.ManagementServer.PeriodicInformInterval":
-                    print('parameter:', parameter['CWMP (TR-069)']
+                    print('\nparameter name: ', value_parameter['name'], '\nparameter:', parameter['CWMP (TR-069)']
                           ['Parameter']['Periodic inform Interval']['Value'])
                     if value_parameter['value'] != parameter['CWMP (TR-069)']['Parameter']['Periodic inform Interval']['Value']:
                         dict_result = {
@@ -189,6 +193,10 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -475,14 +483,16 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if gpv_get[0]['value'] != 'automacao_24':
+                print('\nExpected Value: ', 'automacao_24', '\nValue Obtained: ', gpv_get[0]['value'], '\n')
                 dict_result = {
-                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                    "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente"}
+            elif gpv_get[1]['value'] != "vivo@12345678" or gpv_get[1]['value'] is None:
+                print('\nExpected Value: ', 'vivo@12345678', '\nValue Obtained: ', gpv_get[1]['value'], '\n')
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} obteve um valor diferente"}
+            else:
                 dict_result = {"Resultado_Probe": "OK",
                                "obs": "Teste OK", "result": "passed"}
-            else:
-                dict_result = {
-                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
         except Exception as e:
             dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
@@ -521,14 +531,16 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if gpv_get[0]['value'] != 'automacao_24':
+                print('\nExpected Value: ', 'automacao_24', '\nValue Obtained: ', gpv_get[0]['value'], '\n')
                 dict_result = {
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
             elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-                dict_result = {"Resultado_Probe": "OK",
-                               "obs": "Teste OK", "result": "passed"}
-            else:
+                print('\nExpected Value: ', 'vivo@12345678 or "None"', '\nValue Obtained: ', gpv_get[1]['value'])
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                               "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {
@@ -639,8 +651,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             print('\n', self._dict_result, '\n')
             return self._dict_result
 
-
-    #39
+    # 39
     def indexWifi24ghz_39(self, dados):
      
         dados_gpv = {'GPV_Param': {'parameterNames': [
@@ -662,6 +673,10 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         # GET
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
         parameter = default_settings['Default_Settings']
         print(gpv_get)
         for value_parameter in gpv_get:
@@ -806,6 +821,10 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         # GET
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
         parameter = default_settings['Default_Settings']
 
         for value_parameter in gpv_get:
@@ -1201,8 +1220,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-
-   # 43
+    # 43
     def checkIPv6Telefonica_43(self, dados):
         try:
             # GET
@@ -1278,7 +1296,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
 
         print('\n', self._dict_result, '\n')
         return self._dict_result
-
 
     # 48
     def rebootDevice_48(self, dados):
