@@ -622,6 +622,29 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             dict_result = {
                 "obs": f'{e}'}
             self._dict_result.update(dict_result)
+        
+        # Set default value
+        dados_spv = {'SPV_Param': [
+            {
+                "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                "type": "string",
+                "value": "service05"
+            }]}
+        dados.update(dados_spv)
+        dados_entrada = dados
+
+        # SET
+        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+        # GET
+        dados_gpv = {'GPV_Param': {'parameterNames': [
+            "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+        ]}}
+        dados.update(dados_gpv)
+        dados_entrada = dados
+        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        print(gpv_get)
+        
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
