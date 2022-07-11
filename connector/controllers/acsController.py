@@ -387,7 +387,7 @@ class acs(Resource):
             set_voip = request.json['set_voip'],
             versao_FW = request.json['versão_FW']
             velocidade_link = request.json['velocidade_link']
-            firmware_file = request.json['firmware_file']
+            firmware_file = request.json['firmware_file_up']
 
 
             test_battery_id = request.get_json()['test_battery_id']
@@ -415,7 +415,7 @@ class acs(Resource):
             set_voip = request.json['set_voip'],
             versao_FW = request.json['versão_FW']
             velocidade_link = request.json['velocidade_link']
-            firmware_file = request.json['firmware_file']
+            firmware_file = request.json['firmware_file_down']
 
 
             test_battery_id = request.get_json()['test_battery_id']

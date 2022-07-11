@@ -978,7 +978,7 @@ class ACS():
                                 print(' -- Firmware Update OK --')
                                 print(' -- Executando SSH para verificar a versão do Firmware -- ')
                                 ssh_results = infoDevices_utils.getInfoHgu(dados_entrada['password'], dados_entrada['ip'])
-                                if ssh_results['firmware'] == dados_entrada['firmware_file']:
+                                if  dados_entrada['firmware_file'] in ssh_results['firmware']:
                                     final_time = time.time()
                                     total_time = (final_time - ts)
                                     print('\n\n >>> Finalizando Firmware Update ACS - Tempo de Execução:', total_time, '\n\n')
