@@ -486,7 +486,7 @@ class gui:
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
-                        "ProbeName": "pingDifferNetwork", 
+                        "ProbeName": "connectFakeWizard", 
                         "Probe#": "68", 
                         "Description": "Pingar rede diferente", 
                         "obs": None}

@@ -3150,12 +3150,11 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
     def changeIPDhcpViaWizard_29(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
-        
             self.login_admin()
-            time.sleep(1)
+            time.sleep(5)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
@@ -3194,20 +3193,12 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('16')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').send_keys('204')
 
-            if self._driver.find_element_by_xpath('//*[@id="btnDhcpSave"]/span').click():
-                varOk = 'ok'
-
-            
-            try:
-                if varOk == 'ok':
-                    self._dict_result.update({"obs": f"Alterar range de IP do DHCP.", "result":"passed", "Resultado_Probe": "OK"})
-                else:
-                    self._dict_result.update({"obs": f"Erro ao associar alterar range do IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
-            except UnexpectedAlertPresentException as e:                
-                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[11]/td[2]/a[2]').click()
+            self._dict_result.update({"obs": f"Alterar range de IP do DHCP.", "result":"passed", "Resultado_Probe": "OK"})
+                
         except Exception as e:
+            self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            self._driver.quit()
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  

@@ -17,6 +17,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
 
 
     def login_admin(self):
+        time.sleep(10)
         self._driver.switch_to.frame('mainFrame')
         self.check_before_login()
         time.sleep(8)
