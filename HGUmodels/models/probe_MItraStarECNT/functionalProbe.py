@@ -210,7 +210,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             self._dict_result.update({'obs': f'{e}'})
             return self._dict_result
 
-
     # 3
     def ONTSwitchFiftyTimes_3(self, dados_entrada) -> dict:
         """

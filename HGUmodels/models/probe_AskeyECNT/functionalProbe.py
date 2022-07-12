@@ -960,6 +960,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
@@ -967,7 +968,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
-            time.sleep(5)
+            time.sleep(15)
 
             # Executing a Speed Test
             try:
@@ -1090,7 +1091,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
@@ -1221,7 +1222,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
@@ -1455,7 +1456,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
-
 
             # Desabling Firewall
             pwd = '4ut0m4c40'
