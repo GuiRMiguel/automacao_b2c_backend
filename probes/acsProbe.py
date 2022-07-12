@@ -25,13 +25,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "initialInformations", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "4", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -62,13 +57,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "wifi2GHzInformations", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "5", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -96,13 +86,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "wifi5GHzInformations", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "6", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -130,13 +115,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "lanConfiguration", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "9", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -164,13 +144,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "setDHCP", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "10", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -198,13 +173,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "set2GHzWiFi", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "12", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -231,13 +201,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "set5GHzWiFi", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "13", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -264,13 +229,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "setPeriodicInterval", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "15", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -388,13 +348,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "checkIPv6Telefonica", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "43", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -422,13 +377,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "indexWifi24ghz", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "39", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -456,13 +406,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "indexWifi5ghz", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "40", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 
@@ -519,13 +464,8 @@ class acs:
             "result": "failed",
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
-<<<<<<< Updated upstream
             "ProbeName": "rebootDevice", 
             "Probe#": "XXXXXXX", 
-=======
-            "ProbeName": "setAccessClass", 
-            "Probe#": "48", 
->>>>>>> Stashed changes
             "Description": "", 
             "obs": None}
 

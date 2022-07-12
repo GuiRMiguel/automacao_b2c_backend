@@ -480,7 +480,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         return self._dict_result
 
 
-    #386 mlv
+    #386
     def statusWizardIptv_386(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -834,11 +834,16 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         site3 = 'http://instaladorvivofibra.br'        
         try:
             self._driver.get(site1)
+            self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
-            #self._driver.switch_to.frame('mainFrame')
+            user_input = self._driver.find_element_by_xpath('//*[@id="txtUser"]')
+            user_input.send_keys('support')
+            pass_input = self._driver.find_element_by_xpath('//*[@id="txtPass"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="btnLogin"]')
             time.sleep(1)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
-            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
+            login_button.click()
+            time.sleep(1)
             resultado1 = 'ok'
         except:
             resultado1 = 'falhou'
@@ -861,14 +866,16 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
 
         try:
             self._driver.get(site3)
+            self._driver.switch_to.frame('mainFrame')
             time.sleep(1)
-            #self._driver.switch_to.frame('mainFrame')
+            user_input = self._driver.find_element_by_xpath('//*[@id="txtUser"]')
+            user_input.send_keys('support')
+            pass_input = self._driver.find_element_by_xpath('//*[@id="txtPass"]')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_xpath('//*[@id="btnLogin"]')
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click() 
-
-            elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
-            print('ALOOOOOOO')
-            print(elementos)
+            login_button.click()
+            time.sleep(1)
             resultado3 = 'ok'
         except:
             resultado3 = 'falhou'

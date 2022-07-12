@@ -784,13 +784,21 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
     # 399
     def testeSiteWizard_399(self, flask_username):
         site1 = 'http://menuvivofibra.br'
-        site2 = f'http://{self._address_ip}/index_instalador.asp'
+        site2 = f'http://{self._address_ip}/instalador'
         site3 = 'http://instaladorvivofibra.br'
         
         try:
             self._driver.get(site1)
-            time.sleep(5)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
+            time.sleep(2)
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys('support')
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
+            time.sleep(1)
+            login_button.click()
+            time.sleep(1)
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
             resultado1 = 'ok'
         except:
@@ -815,10 +823,17 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
 
         try:
             self._driver.get(site3)
+            time.sleep(5)
+            self._driver.switch_to.default_content()
+            user_input = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input')
+            user_input.send_keys('support')
+            time.sleep(5)
+            pass_input = self._driver.find_element_by_id('txtPass')
+            pass_input.send_keys(self._password)
+            login_button = self._driver.find_element_by_id('btnLogin')
             time.sleep(1)
-            self._driver.switch_to.frame('mainFrame')
+            login_button.click()
             time.sleep(1)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[1]/a').click()
             elementos = self._driver.find_elements_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[1]')
             resultado3 = 'ok'
         except:
