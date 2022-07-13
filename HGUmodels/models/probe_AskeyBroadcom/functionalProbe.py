@@ -1489,8 +1489,9 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.run(['sudo', 'ufw', 'disable'])
 
             # Making a request
+            self._driver.set_page_load_timeout(120)
             self._driver.get('http://ipv6-test.com/')
-            time.sleep(3)
+
             try:
                 icmpv6_status = self._driver.find_element_by_xpath('//*[@id="v6_conn"]/tbody/tr[9]/td[1]/span')
                 self._driver.implicitly_wait(10)
@@ -1758,12 +1759,30 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            time.sleep(15)
 
+
+            try:
+                self._driver.set_page_load_timeout(15)
+                self._driver.get('https://web.whatsapp.com/')
+                self._driver.execute_script("window.stop();")
+                self._driver.get('https://web.whatsapp.com/')
+                self._driver.execute_script("window.stop();")
+                self._driver.get('https://web.whatsapp.com/')
+            except Exception as e:
+                print(e)
+                self._driver.set_page_load_timeout(30)
+                self._driver.get('https://web.whatsapp.com/')
+                
             # Making a request
-            self._driver.get('https://web.whatsapp.com/')
             response = requests.get('https://web.whatsapp.com/').status_code
             time.sleep(2)
 
@@ -1779,6 +1798,20 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
         finally:
+            # Enabling all devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            time.sleep(5)
             return self._dict_result
 
 
