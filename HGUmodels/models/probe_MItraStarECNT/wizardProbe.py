@@ -753,6 +753,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result 
 
 
