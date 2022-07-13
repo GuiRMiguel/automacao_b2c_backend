@@ -2704,7 +2704,10 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 time.sleep(1)
                 self._driver.find_element_by_id('btnBasSave').click()
                 time.sleep(3)
-                self._driver.switch_to_alert().accept()
+                try:
+                    self._driver.switch_to_alert().accept()
+                except Exception as e:
+                    print(e)
 
             def enablingWiFi5G():
                 self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[4]/a').click()
@@ -2713,7 +2716,10 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 time.sleep(1)
                 self._driver.find_element_by_id('btnBasSave').click()
                 time.sleep(3)
-                self._driver.switch_to_alert().accept()
+                try:
+                    self._driver.switch_to_alert().accept()
+                except Exception as e:
+                    print(e)
 
             # Entering on Advanced Interface
             time.sleep(1)
@@ -2798,7 +2804,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(3)
             self._driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/ul/li[2]/a").click()
             self._driver.implicitly_wait(10)
-            select = Select(self._driver.find_element_by_id('selChannel'))
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/form/table/tbody/tr[2]/td[2]/select').click()
+            time.sleep(1)
+            select = Select(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/form/table/tbody/tr[2]/td[2]/select'))
+            time.sleep(1)
+            print(f'\n----- Selecting Channel {channel_5g_exp} for 5GHz WiFi on Basic Interface-----\n')
+            time.sleep(1)
             select.select_by_value(channel_5g_exp)
             time.sleep(2)
             try:
@@ -2822,8 +2834,10 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 time.sleep(3)
             
             # Entering on Status
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a').click()
-            time.sleep(1)
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(10)
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[5]/td[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[7]/td[2]/a').click()

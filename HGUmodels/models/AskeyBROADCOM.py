@@ -20,7 +20,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
         time.sleep(10)
         self._driver.switch_to.frame('mainFrame')
         self.check_before_login()
-        time.sleep(8)
+        time.sleep(10)
         user_input = self._driver.find_element_by_xpath('//*[@id="txtUser"]')
         self._driver.implicitly_wait(10)
         user_input.send_keys(self._username)

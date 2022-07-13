@@ -1891,8 +1891,8 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
             time.sleep(1)
             
-            # Desabling 2.4GHz WiFi
-            self._driver.find_element_by_xpath('//*[@id="radWifiEn0"]').click()
+            # Enabling 2.4GHz WiFi
+            self._driver.find_element_by_xpath('//*[@id="radWifiEn1"]').click()
             self._driver.implicitly_wait(10)
             pass_2g = str(self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[4]/td[2]/input').get_attribute('value'))
             if len(pass_2g) < 15:
@@ -2018,25 +2018,37 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # Entering on Advanced Interface
             self._driver.get('http://' + self._address_ip + '/padrao')
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('loginfrm')
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
+            time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
+            time.sleep(1)
             self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(3)
+            time.sleep(10)
 
             # Entering on TR-069 Settings
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('menufrm')
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[68]/table/tbody/tr/td/a').click()
-            self._driver.implicitly_wait(10)
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[77]/table/tbody/tr/td/a').click()
             time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[67]/table/tbody/tr/td/a').click()
+            time.sleep(1)
+            self._driver.implicitly_wait(10)
+            time.sleep(1)
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[76]/table/tbody/tr/td/a').click()
+            time.sleep(10)
 
             # Looking for specific informations
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame('basefrm')
+            time.sleep(1)
             acs_url = str(self._driver.find_element_by_xpath('/html/body/blockquote/form/table[2]/tbody/tr[2]/td[2]/input').get_attribute('value'))
+            time.sleep(1)
             acs_username = str(self._driver.find_element_by_xpath('/html/body/blockquote/form/table[2]/tbody/tr[3]/td[2]/input').get_attribute('value'))
+            time.sleep(1)
             port_7015 = bool(re.search(":7015/", acs_url))
             time.sleep(2)
 
