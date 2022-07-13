@@ -89,7 +89,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
 
-#378
+    #378
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -109,11 +109,19 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('menufrm')
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click() 
-            time.sleep(3)
-            print('1')
-
             time.sleep(5)
+
             # PPPoE
+            try:
+                self._driver.switch_to.default_content()
+                time.sleep(1)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+                self._driver.switch_to.frame(iframe)
+                time.sleep(1)
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a').click()
+                time.sleep(30)
+            except Exception as e:
+                print(e)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("basefrm")
 
@@ -154,11 +162,11 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             except UnexpectedAlertPresentException as e:
                 time.sleep(2)
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
+            
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
         
 
@@ -241,6 +249,9 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
                 dict_saida = {"Resultado_Probe": "NOK"}
 
             self._driver.quit()
+        except Exception as e:
+            dict_result = {'obs': f'{e}'}
+            self._dict_result.update(dict_result)
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
             return self._dict_result
@@ -561,6 +572,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             self._driver.find_element_by_id('tabtitle-3').click()
+            time.sleep(5)
             # Entering IP Address
             self._driver.find_element_by_xpath('/html/body/div/div/div[1]/div[5]/form/table/tbody/tr[2]/td[2]/input[1]').click()
             input_ip = self._driver.find_element_by_xpath('//*[@id="tab-03"]/form/table/tbody/tr[3]/td[2]/input')
@@ -573,7 +585,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.frame(iframe)
             self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[2]/td/a[1]/span').click()
             # Entering againg on settings
-            time.sleep(105)
+            time.sleep(120)
             self._driver.get('http://' + self._address_ip + '/')
             time.sleep(1)
             # config / Internet
