@@ -11,6 +11,7 @@ import json
 from json import JSONEncoder
 from HGUmodels.factory import HGUModelFactory
 from webdriver.webdriver import WebDriver
+import subprocess
 
 class acs:
     def __init__(self):
@@ -20,6 +21,35 @@ class acs:
 
     # 4
     def initialInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -52,6 +82,35 @@ class acs:
 
     # 5
     def wifi2GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -81,6 +140,35 @@ class acs:
 
     # 6
     def wifi5GHzInformations(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -110,6 +198,35 @@ class acs:
 
     # 9
     def lanConfiguration(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -139,6 +256,35 @@ class acs:
 
     # 10
     def setDHCP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -168,6 +314,35 @@ class acs:
 
     # 12
     def set2GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -196,6 +371,35 @@ class acs:
 
     # 13
     def set5GHzWiFi(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -224,6 +428,35 @@ class acs:
 
     # 15
     def setPeriodicInterval(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -253,6 +486,35 @@ class acs:
 
     # 17
     def setAccessClass(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -282,6 +544,35 @@ class acs:
 
     # 18
     def setVOIP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber, set_voip):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -312,6 +603,35 @@ class acs:
 
     # 18
     def cancelVOIP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber, set_voip):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -342,6 +662,35 @@ class acs:
 
     # 43
     def checkIPv6Telefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
 
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -372,6 +721,35 @@ class acs:
 
     # 39
     def indexWifi24ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -401,6 +779,35 @@ class acs:
 
     # 40
     def indexWifi5ghz(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -431,6 +838,35 @@ class acs:
 
     # 42
     def checkObjectsTelefonica(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -459,6 +895,35 @@ class acs:
 
     # 48
     def rebootDevice(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -489,6 +954,35 @@ class acs:
     # 50
     def firmwareUpgrade(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, 
             serialnumber, set_voip, versao_FW, velocidade_link, firmware_file):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
@@ -523,6 +1017,35 @@ class acs:
     # 51
     def firmwareDowngrade(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, 
             serialnumber, set_voip, versao_FW, velocidade_link, firmware_file):
+        # Desabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        time.sleep(5)
+
+        # Enabling other devices
+        pwd = '4ut0m4c40'
+        cmd = 'ls'
+        subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
             "result": "failed",
