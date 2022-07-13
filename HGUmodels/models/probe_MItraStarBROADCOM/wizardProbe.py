@@ -89,7 +89,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.quit()
             return self._dict_result
 
-#378 #mlv
+#378
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -97,14 +97,14 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             #config / Internet
             self._driver.switch_to.frame("menufrm")
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[1]/a').click()
-            time.sleep(2)
+            time.sleep(3)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
             self.admin_authentication_mitraStat()
-            time.sleep(2)
+            time.sleep(4)
             #config / Internet
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame('menufrm')
@@ -116,15 +116,34 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             # PPPoE
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("basefrm")
-            time.sleep(3)
-            self._driver.find_element_by_xpath('//*[@id="username"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
-            self._driver.find_element_by_xpath('//*[@id="password"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="password"]').send_keys('vivo')
-            login_button = self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span')
-            time.sleep(1)
-            login_button.click()
-            time.sleep(1)
+
+            try:
+                self._driver.switch_to.default_content()
+                time.sleep(2)
+                self._driver.switch_to.frame("basefrm")
+                time.sleep(3)
+                print('am')
+                self._driver.find_element_by_xpath('/html/body/div')
+                time.sleep(2)
+                print('dm')
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a/span').click()
+                time.sleep(30)
+            except Exception as e:
+                print(e)
+
+            try:
+                time.sleep(7)
+                self._driver.find_element_by_xpath('//*[@id="username"]').clear()
+                self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
+                self._driver.find_element_by_xpath('//*[@id="password"]').clear()
+                self._driver.find_element_by_xpath('//*[@id="password"]').send_keys('vivo')
+                login_button = self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span')
+                time.sleep(1)
+                login_button.click()
+                time.sleep(1)
+            except Exception as e:
+                print(e)
+                
             try:
                 time.sleep(22)
                 if self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span') == None:
