@@ -562,7 +562,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
         else:
             status = result['Status']['Telefone']
             print(status)
-            voip = wizard_config.VOIP
+            voip = wizard_config.VOIP_AB
             print(voip)
                 #
             if set(status) == set(voip):
@@ -580,7 +580,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         else:
             status = result['Status']['Telefone']
-            voip = wizard_config.VOIP
+            voip = wizard_config.VOIP_AB
 
             if set(status) == set(voip):
                 self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})

@@ -651,7 +651,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         else:
             status = result['Status']['Telefone']
-            voip = wizard_config.VOIP
+            voip = wizard_config.VOIP_ME
             print('\n\nstatus:', set(status), '\nvoip:', set(voip), '\n\n')
             if set(status) == set(voip):
                 self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
@@ -660,7 +660,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
     
 
-    #391 HPNA mlv
+    #391 HPNA
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -668,7 +668,7 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
         else:
             status = result['Status']['Telefone']
-            voip = wizard_config.VOIP
+            voip = wizard_config.VOIP_ME
 
             if set(status) == set(voip):
                 self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})

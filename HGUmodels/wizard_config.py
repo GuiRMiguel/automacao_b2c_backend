@@ -33,7 +33,11 @@ WIFI5_mitraBroadCom = {'Segurança:', 'WPS:', 'Anúnciar de SSID:', 'Canal:', 'E
 
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE Ao TELEFONE
 ####
-VOIP = ['Rede:', 'Telefone:', 'Estações Conectadas:']
+VOIP_ME = ['Rede:', 'Telefone:']
+VOIP_MB = ['Rede:', 'Telefone1:']
+VOIP_AE = ['Rede:', 'Telefone:', 'Estações Conectadas:']
+VOIP_AB = ['Rede:', 'Telefone:', 'Estações Conectadas:']
+
 
 ###--> INFORMAÇÕES INTERFACE GUI REFERENTE A TV
 ####
