@@ -660,6 +660,24 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
         return self._dict_result
     
 
+    #391 HPNA mlv
+    def statusWizardHpna_391(self, flask_username):
+        #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
+        result = session.get_result_from_test(flask_username, 'getFullConfig_425')
+        if len(result) == 0:
+            self._dict_result.update({"obs": 'Execute o teste 425 primeiro'})
+        else:
+            status = result['Status']['Telefone']
+            voip = wizard_config.VOIP
+
+            if set(status) == set(voip):
+                self._dict_result.update({"obs": f"Teste OK", "result":"passed", "Resultado_Probe": "OK"})
+            else:
+                self._dict_result.update({"obs": f"Teste incorreto, retorno VoIP: {status}"})
+            
+        return self._dict_result
+
+
     # 392
     def verifyDnsService_392(self, flask_username) -> dict:
         """
@@ -772,7 +790,9 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[1]/ul/li[3]/a').click()
             # Entering IP Address
+            time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/form[2]/div/table/tbody/tr[2]/td[2]/input[1]').click()
+            time.sleep(3)
             input_ip = self._driver.find_element_by_xpath('//*[@id="dmzHostIP"]')
             input_ip.clear()
             input_ip.send_keys('192.168.17.49')
@@ -784,6 +804,8 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             self._driver.find_element_by_id('MLG_Pop_DMZ_Reboot_Yes').click()
             # Entering againg on settings
             time.sleep(105)
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(1)
             self._driver.switch_to.frame("menufrm")
             self._driver.find_element_by_id('setmenu').click()
             time.sleep(1)
