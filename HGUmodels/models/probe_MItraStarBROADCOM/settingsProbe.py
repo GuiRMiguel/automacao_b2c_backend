@@ -421,6 +421,12 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         dados_entrada = dados
 
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
+        
         if gpv_get[0]['value'] != "192.168.18.6":
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
@@ -464,6 +470,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         dados_entrada = dados
 
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
         if gpv_get[0]['value'] != 'automacao_24':
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
@@ -544,6 +555,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             print(dados_entrada)
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             if gpv_get[0]['value'] != '600':
                 dict_result = {
                     "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente do esperado."}
@@ -580,6 +596,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             dados.update(dados_gpv)
             dados_entrada = dados
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             print(gpv_get)
 
             if gpv_get[0]['value'] != 'service04':
@@ -667,6 +688,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -814,6 +840,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -1059,6 +1090,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             print(gpv_get)
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
@@ -1258,6 +1294,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                         print('oi - 2')
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+                        if type(new_gpv_get) != list:
+                                dict_result = gpv_get
+                                self._dict_result.update(dict_result)
+                                print('\n', self._dict_result, '\n')
+                                return self._dict_result
                         for new_value_parameter in new_gpv_get:
                             if new_value_parameter['value'] =='0':
                                 dict_result = {"Resultado_Probe": "OK",
@@ -1279,6 +1320,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                         print('oi - 12')
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+                        if type(new_gpv_get) != list:
+                                dict_result = gpv_get
+                                self._dict_result.update(dict_result)
+                                print('\n', self._dict_result, '\n')
+                                return self._dict_result
                         for new_value_parameter in new_gpv_get:
                             if new_value_parameter['value'] =='1':
                                 dict_result = {"Resultado_Probe": "OK",
@@ -3590,7 +3636,7 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 'input').get_attribute('checked')
 
             print(dict_saida464)
-            if dict_saida464['IP Address'] == '192.168.18.1':
+            if dict_saida464['IP Address'] == '172.16.192.1':
                 self._dict_result.update(
                     {"Resultado_Probe": "OK", "obs": f"Gateway: {dict_saida464['IP Address']}", "result": "passed"})
             else:

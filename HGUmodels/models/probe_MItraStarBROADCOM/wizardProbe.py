@@ -234,12 +234,12 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[2]/a').click()
-            time.sleep(2)
-            time.sleep(5)
+            time.sleep(8)
             self._driver.switch_to.default_content()
+            time.sleep(1)
             self._driver.switch_to.frame("basefrm")
             time.sleep(5)
-            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]/span')
+            login_button = self._driver.find_element_by_xpath('/html/body/div/div/div[1]/form/table/tbody/tr[4]/td/a/span')
             time.sleep(1)
             if login_button.click() == None:
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
@@ -252,6 +252,7 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
         except Exception as e:
             dict_result = {'obs': f'{e}'}
             self._dict_result.update(dict_result)
+            dict_saida = {"Resultado_Probe": "NOK"}
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
             return self._dict_result
