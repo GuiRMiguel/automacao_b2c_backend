@@ -1059,14 +1059,14 @@ class gui:
                                      dict_result=dict_result)
         return hgu.changePPPoESettingsWrong_377(flask_username)
 
-    # 378 #mlv
+    # 378
     def changePPPoESettingsWrongAuthentication(self, ip, username, password, model_name, flask_username, **kwargs):
         driver = WebDriver.get_driver()
         dict_result = {"result":"failed",
                         "Resultado_Probe": "NOK", 
                         "ControllerName": "gui", 
                         "ProbeName": "changePPPoESettingsWrongAuthentication", 
-                        "Probe#": "XXXXXXX", 
+                        "Probe#": "378", 
                         "Description": "Erro de autenticacao com as credenciais PPPoE inseridas pelo usuario.", 
                         "obs": None}
                         

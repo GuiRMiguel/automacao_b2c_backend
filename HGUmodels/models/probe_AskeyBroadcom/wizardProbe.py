@@ -655,16 +655,17 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[2]/a').click()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.find_element_by_xpath('//*[@id="menu-loc-net"]/ul/li[1]/a').click()
-            time.sleep(2)
+            time.sleep(4)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[3]/a').click()
-            # Enabling DMZ            
-            #self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
+            # Enabling DMZ  
+            time.sleep(3)          
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[5]/table/tbody/tr[2]/td[2]/input[1]').click()
             time.sleep(3)
             print(3)
             self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('192.168.16.30')
+            self._driver.find_element_by_xpath('//*[@id="txtDmzHostAddress"]').send_keys('172.19.192.30')
             self._driver.find_element_by_xpath('//*[@id="aDmzHostSave"]').click()
             time.sleep(5)
 
@@ -798,15 +799,15 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             print('passou aqui 2')
 
             self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('00:0c:29:bb:0b:35')
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('D8:FB:5E:EB:74:BE')
             print('passou aqui 3')
 
             time.sleep(5)
             #self._driver.find_element_by_id('txtStaticMac').click()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('172')
             time.sleep(5)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('16')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('19')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('192')
             time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[4]').send_keys('3')
             time.sleep(5)
@@ -815,7 +816,7 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             
             try:
                 time.sleep(8)
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == '00:0c:29:bb:0b:35':
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == 'D8:FB:5E:EB:74:BE':
                     self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
                     self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})

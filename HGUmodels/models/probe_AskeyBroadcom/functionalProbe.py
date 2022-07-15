@@ -947,13 +947,14 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # mitra brdcm
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx mitra ecnt
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # askey ecnt
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx askey brdcm
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+
 
             # Executing a Speed Test
             try:
@@ -985,13 +986,13 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # mitra brdcm
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx mitra ecnt
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # askey ecnt
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx askey brdcm
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'uo']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
 
             # Verificar a velocidade contratada
             down_speed_exp = 300
@@ -1471,13 +1472,13 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # aky broadcom
             time.sleep(15)
 
 
@@ -1760,13 +1761,13 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # askey broadcom
             time.sleep(15)
 
 
@@ -3419,10 +3420,11 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             time.sleep(2)
             # #NetInf
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[2]/a').click()
-            time.sleep(3)
+            time.sleep(5)
             #Iframe Message Attention
             iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
             self._driver.switch_to.frame(iframe)
+            
             #Click OK
             self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a[1]/span').click()
             #Configure NetInf
@@ -3503,7 +3505,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
     def validiteUrlsWancfgCmd_64(self, flask_username):
         try:
             site1 = f'http://{self._address_ip}/wancfg.cmd'
-            site2 = 'http://192.168.1.1/wancfg.cmd'
+            site2 = 'http://172.19.1.1/wancfg.cmd'
 
             try:
                 self._driver.get('http://' + self._address_ip + '/')
@@ -3570,7 +3572,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
 
     def validiteUrlsWancfgCmdActionView_65(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd'
-        site2 = 'http://192.168.1.1/wancfg.cmd'
+        site2 = 'http://172.19.1.1/wancfg.cmd'
 
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -3725,7 +3727,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
    # 68
     def connectFakeWizard_68(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
-        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
+        site2 = 'http://172.19.1.1/wancfg.cmd?action=view'
         site3 = 'http://' + self._address_ip + '/'
         
         try:
