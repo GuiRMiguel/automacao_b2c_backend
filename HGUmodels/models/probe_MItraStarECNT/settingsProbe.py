@@ -56,6 +56,10 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -173,6 +177,10 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -276,6 +284,10 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:

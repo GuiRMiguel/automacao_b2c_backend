@@ -315,22 +315,27 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
     #381 mlv
     def getFullConfig_381(self, flask_username):
         try:
-            self._driver.get('http://' + self._address_ip + '/')
-            time.sleep(1)
-            self._driver.switch_to.frame("menufrm")
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a/span').click()
-            time.sleep(5)
-            login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
-            time.sleep(1)
-            login_button.click()
-            
-            self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
-            dict_saida = {"Resultado_Probe": "NOK"}
-        except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
-            self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
-            dict_saida = {"Resultado_Probe": "OK"}
+            try:
+                self._driver.get('http://' + self._address_ip + '/')
+                time.sleep(1)
+                self._driver.switch_to.frame("menufrm")
+                self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/a/span').click()
+                time.sleep(1)
+                self._driver.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[2]/ul/li[1]/a/span').click()
+                time.sleep(5)
+                login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]')
+                time.sleep(1)
+                login_button.click()
+                
+                self._dict_result.update({"obs": "Usuario acessou as configuracoes sem estar logado"})
+                dict_saida = {"Resultado_Probe": "NOK"}
+            except (InvalidSelectorException, NoSuchElementException, NoSuchFrameException) as exception:
+                dict_saida = {"Resultado_Probe": "OK"}
+                self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": 'Nao foi possivel acessar as configuracoes sem logar'})
+        except Exception as e:
+            print(e)
+            dict_saida = {"Resultado_Probe": "failed"}
+            self._dict_result.update({"obs": f"{e}"})
         finally:
             self.update_global_result_memory(flask_username, 'accessWizard_381', dict_saida)
             self._driver.quit()

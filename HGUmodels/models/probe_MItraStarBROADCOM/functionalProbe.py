@@ -58,7 +58,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -89,14 +89,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -107,14 +107,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -145,7 +145,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -176,14 +176,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -194,14 +194,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -220,17 +220,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -261,14 +261,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -279,14 +279,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -304,17 +304,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -345,14 +345,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -363,14 +363,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -388,17 +388,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -429,14 +429,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -447,14 +447,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -472,17 +472,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -513,14 +513,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -531,14 +531,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -556,17 +556,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -597,14 +597,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -615,14 +615,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -640,17 +640,17 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(15)
         
-        ip_device = '192.168.18.1'
+        ip_device = '172.16.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -681,14 +681,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -699,14 +699,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -765,14 +765,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
             time.sleep(15)
             
 
@@ -792,14 +792,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -810,14 +810,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -876,14 +876,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
             time.sleep(15)
 
             number_of_cicles = 1
@@ -902,14 +902,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             return self._dict_result
         
@@ -920,14 +920,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             print('Exception: ', e)
             self._dict_result.update({'obs': f'{e}'})
@@ -1045,23 +1045,27 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
+            time.sleep(15)
 
             # Executing a Speed Test
             try:
                 try:
                     self._driver.set_page_load_timeout(15)
-                    self._driver.get(speed_test)
-                    self._driver.execute_script("window.stop();")
-                    self._driver.get(speed_test)
-                    self._driver.execute_script("window.stop();")
+                    try:
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
+                    except Exception as e:
+                        print(e)
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
@@ -1070,10 +1074,10 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
-                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
                 print('Download Speed   -   ', download_speed)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:
@@ -1098,19 +1102,35 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
 
         except Exception as exception:
             print(exception)
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
+
         finally:
             return self._dict_result
 
@@ -1232,14 +1252,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
 
         except Exception as exception:
@@ -1368,14 +1388,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
 
         except Exception as exception:
@@ -1388,14 +1408,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
         finally:
             self._driver.quit()
@@ -1578,14 +1598,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up'])   #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up'])   # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
             time.sleep(15)
 
 
@@ -1623,14 +1643,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
             # Enabling Firewall
             pwd = '4ut0m4c40'
@@ -1647,14 +1667,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
             
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
@@ -1843,14 +1863,14 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) # Old 15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) # Old 16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) # Old 17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) # Old 18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
 
         except Exception as exception:
             print(exception)
@@ -3440,7 +3460,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
             time.sleep(3)
             try:
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == 'ACC662028CA8' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == 'ac:c6:62:02:8c:a8':
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == 'A433D7624EEA' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == 'ac:c6:62:02:8c:a8':
                     self._dict_result.update({"obs": "Teste passou. Numero de serie e MAC da WAN corretos.", "result":"passed", "Resultado_Probe": "OK"})
 
                 else:
@@ -3598,7 +3618,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             time.sleep(1)
             # Change Password
             self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[3]/ul/li[2]/a').click()
-            time.sleep(1)
+            time.sleep(15)
 
         def admin_authentication(driver, user, password):
             driver.switch_to.default_content()
@@ -3611,7 +3631,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             login_button = self._driver.find_element_by_xpath('//*[@id="acceptLogin"]/span')
             time.sleep(1)
             login_button.click()
-            time.sleep(1)
+            time.sleep(15)
 
         def changing_password(driver, old_password, new_password):
             driver.switch_to.default_content()
@@ -3624,12 +3644,12 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             gerenc_senha_new_valor2 = driver.find_element_by_xpath('//*[@id="pwdCfm"]').send_keys(str(new_password))
             time.sleep(1)
             config_wifi5_basico_ssid_senha_salvar = driver.find_element_by_xpath('//*[@id="btnapply"]').click()  ### SAVE BUTTON
-            time.sleep(8)  ### Tempo para recarregar a página após salvar as configs
+            time.sleep(30)  ### Tempo para recarregar a página após salvar as configs
 
         def change_password_back(driver, user, old_password, new_password):
-            # print("ola back 1")
+            print("ola back 1")
             open_change_password(driver)
-            # print("ola back 2")
+            print("ola back 2")
             print(' == Autenticando == ')
             admin_authentication(self._driver, user, new_password)
             time.sleep(5)
