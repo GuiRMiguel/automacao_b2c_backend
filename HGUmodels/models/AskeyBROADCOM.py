@@ -17,7 +17,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
 
 
     def login_admin(self):
-        time.sleep(8)
+        time.sleep(11)
         self._driver.switch_to.frame('mainFrame')
         self.check_before_login()
         time.sleep(10)
@@ -38,7 +38,7 @@ class HGU_AskeyBROADCOM(HGUModelInterface):
         try:
             if self._driver.find_element_by_xpath('//*[@id="status"]/tbody/tr[1]/th/span').text == 'GPON':
                 self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/a').click()
-                time.sleep(8)
+                time.sleep(12)
                 self._driver.find_element_by_xpath('//*[@id="accordion"]/li[2]/ul/li[1]/a').click()
         except:
             pass

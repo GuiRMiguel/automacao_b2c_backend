@@ -952,8 +952,10 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # askey ecnt
-            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx askey brdcm
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx askey brdcm
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
+            time.sleep(15)
+
 
 
             # Executing a Speed Test
@@ -2060,7 +2062,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
             time.sleep(1)
             self._driver.find_element_by_id('btnLogin').click()
-            time.sleep(10)
+            time.sleep(14)
 
             # Entering on TR-069 Settings
             self._driver.switch_to.default_content()
@@ -2078,7 +2080,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.switch_to.default_content()
             time.sleep(1)
             self._driver.switch_to.frame('basefrm')
-            time.sleep(1)
+            time.sleep(3)
             acs_url = str(self._driver.find_element_by_xpath('/html/body/blockquote/form/table[2]/tbody/tr[2]/td[2]/input').get_attribute('value'))
             time.sleep(1)
             acs_username = str(self._driver.find_element_by_xpath('/html/body/blockquote/form/table[2]/tbody/tr[3]/td[2]/input').get_attribute('value'))
@@ -3410,7 +3412,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             #Login
             self._driver.get('http://' + self._address_ip + '/')
             self.login_admin()
-            time.sleep(1)
+            time.sleep(3)
             self._driver.switch_to.frame('mainFrame')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
             time.sleep(1)
@@ -3422,8 +3424,12 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[2]/a').click()
             time.sleep(5)
             #Iframe Message Attention
+            self._driver.switch_to.default_content()
+            time.sleep(8)
             iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+            time.sleep(1)
             self._driver.switch_to.frame(iframe)
+            time.sleep(1)
             
             #Click OK
             self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a[1]/span').click()
