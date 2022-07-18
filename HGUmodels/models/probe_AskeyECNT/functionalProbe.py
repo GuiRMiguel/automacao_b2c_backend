@@ -973,20 +973,26 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             # Executing a Speed Test
             try:
                 try:
-                    self._driver.get(speed_test)
-                    self._driver.set_load_page_timeout(10)
-                    self._driver.execute_script("window.stop();")
+                    self._driver.set_page_load_timeout(15)
+                    try:
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
+                    except Exception as e:
+                        print(e)
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
+                    self._driver.set_page_load_timeout(30)
                     self._driver.get(speed_test)
                 time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
-                time.sleep(90)
-                download_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('/html/body/div[3]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[3]/div/div[2]/span').text)
+                time.sleep(60)
                 print('\n\n#####################################################################')
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
                 print('Download Speed   -   ', download_speed)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:

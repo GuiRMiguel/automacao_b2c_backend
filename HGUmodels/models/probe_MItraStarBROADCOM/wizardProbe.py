@@ -104,47 +104,72 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             self._driver.switch_to.frame('basefrm')
             time.sleep(4)
             self.admin_authentication_mitraStat()
-            time.sleep(4)
-            #config / Internet
-            self._driver.switch_to.default_content()
-            self._driver.switch_to.frame('menufrm')
-            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click() 
-            time.sleep(5)
+            time.sleep(10)
+            # #config / Internet
+            # self._driver.switch_to.default_content()
+            # self._driver.switch_to.frame('menufrm')
+            # self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click() 
+            # time.sleep(5)
 
             # PPPoE
+
+            # Pop-up 1
             try:
                 self._driver.switch_to.default_content()
                 time.sleep(1)
-                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
-                self._driver.switch_to.frame(iframe)
+                self._driver.switch_to.frame('basefrm')
+                print('\n====== Searching Pop-up Message 1... ======')
                 time.sleep(1)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+                print('====== Found it! ======')
+                time.sleep(1)
+                print('====== Switching to Message... ======')
+                self._driver.switch_to.frame(iframe)
+                print('====== Done! ======')
+                time.sleep(1)
+                print('====== Closing Pop-up... ======')
                 self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a').click()
-                time.sleep(30)
+                print('====== Done! ======\n')
+                time.sleep(20)
             except Exception as e:
                 print(e)
             self._driver.switch_to.default_content()
             self._driver.switch_to.frame("basefrm")
 
+            # Pop-up 2
             try:
                 self._driver.switch_to.default_content()
-                time.sleep(2)
-                self._driver.switch_to.frame("basefrm")
-                time.sleep(3)
-                print('am')
-                self._driver.find_element_by_xpath('/html/body/div')
-                time.sleep(2)
-                print('dm')
-                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a/span').click()
-                time.sleep(30)
+                time.sleep(1)
+                self._driver.switch_to.frame('basefrm')
+                print('\n====== Searching Pop-up Message 2... ======')
+                time.sleep(1)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+                print('====== Found it! =====')
+                time.sleep(1)
+                print('====== Switching to Message... ======')
+                self._driver.switch_to.frame(iframe)
+                print('====== Done! ======')
+                time.sleep(1)
+                print('====== Closing Pop-up... ======')
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a').click()
+                print('====== Done! ======\n\n')
+                time.sleep(20)
             except Exception as e:
                 print(e)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
 
             try:
-                time.sleep(7)
+                time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="username"]').clear()
+                time.sleep(1)
                 self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
+                time.sleep(1)
                 self._driver.find_element_by_xpath('//*[@id="password"]').clear()
+                time.sleep(1)
                 self._driver.find_element_by_xpath('//*[@id="password"]').send_keys('vivo')
+                time.sleep(1)
                 login_button = self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span')
                 time.sleep(1)
                 login_button.click()
@@ -162,6 +187,84 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             except UnexpectedAlertPresentException as e:
                 time.sleep(2)
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+
+            time.sleep(15)
+            self._driver.get('http://' + self._address_ip + '/')
+            time.sleep(10)
+            #config / Internet
+            self._driver.switch_to.frame("menufrm")
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/a').click()
+            time.sleep(3)
+            self._driver.find_element_by_xpath('/html/body/div/div/div/ul/li[2]/ul/li[1]/a').click()
+            time.sleep(3)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame('basefrm')
+            time.sleep(4)
+            
+            # PPoP
+            # Pop-up 1
+            try:
+                self._driver.switch_to.default_content()
+                time.sleep(1)
+                self._driver.switch_to.frame('basefrm')
+                print('\n====== Searching Pop-up Message 1... ======')
+                time.sleep(1)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+                print('====== Found it! ======')
+                time.sleep(1)
+                print('====== Switching to Message... ======')
+                self._driver.switch_to.frame(iframe)
+                print('====== Done! ======')
+                time.sleep(1)
+                print('====== Closing Pop-up... ======')
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a').click()
+                print('====== Done! ======\n')
+                time.sleep(20)
+            except Exception as e:
+                print(e)
+            self._driver.switch_to.default_content()
+            self._driver.switch_to.frame("basefrm")
+
+            # Pop-up 2
+            try:
+                self._driver.switch_to.default_content()
+                time.sleep(1)
+                self._driver.switch_to.frame('basefrm')
+                print('\n====== Searching Pop-up Message 2... ======')
+                time.sleep(1)
+                iframe = self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div/iframe')
+                print('====== Found it! ======')
+                time.sleep(1)
+                print('====== Switching to Message... ======')
+                self._driver.switch_to.frame(iframe)
+                print('====== Done! ======')
+                time.sleep(1)
+                print('====== Closing Pop-up... ======')
+                self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[4]/td/a').click()
+                print('====== Done! ======\n')
+                time.sleep(20)
+            except Exception as e:
+                print(e)
+            self._driver.switch_to.default_content()
+            time.sleep(1)
+            self._driver.switch_to.frame("basefrm")
+
+            try:
+                time.sleep(5)
+                self._driver.find_element_by_xpath('//*[@id="username"]').clear()
+                time.sleep(1)
+                self._driver.find_element_by_xpath('//*[@id="username"]').send_keys('cliente@cliente')
+                time.sleep(1)
+                self._driver.find_element_by_xpath('//*[@id="password"]').clear()
+                time.sleep(1)
+                self._driver.find_element_by_xpath('//*[@id="password"]').send_keys('cliente')
+                time.sleep(1)
+                login_button = self._driver.find_element_by_xpath('//*[@id="conteudo-gateway"]/form/table/tfoot/tr/td/a[2]/span')
+                time.sleep(1)
+                login_button.click()
+                time.sleep(1)
+            except Exception as e:
+                print(e)
             
         except Exception as e:
             self._dict_result.update({"obs": e})
@@ -775,13 +878,13 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
             time.sleep(8)
             #IP settings
             ip_field_1 = self._driver.find_element_by_name('staticDHCPIP_part1')
-            ip_field_1.send_keys('192')
+            ip_field_1.send_keys('172')
             time.sleep(1)
             ip_field_2 = self._driver.find_element_by_name('staticDHCPIP_part2')
-            ip_field_2.send_keys('168')
+            ip_field_2.send_keys('16')
             time.sleep(1)
             ip_field_3 = self._driver.find_element_by_name('staticDHCPIP_part3')
-            ip_field_3.send_keys('17')
+            ip_field_3.send_keys('192')
             time.sleep(1)
             ip_field_4 = self._driver.find_element_by_name('staticDHCPIP_part4')
             ip_field_4.send_keys('3')
@@ -801,11 +904,10 @@ class HGU_MItraStarBROADCOM_wizardProbe(HGU_MItraStarBROADCOM):
                     self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
             except UnexpectedAlertPresentException as e:                
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result 
 
 

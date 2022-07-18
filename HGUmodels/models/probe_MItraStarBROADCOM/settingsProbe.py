@@ -400,11 +400,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             {
                 "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
                 "type": "string",
-                "value": "192.168.18.6"
+                "value": "172.16.192.6"
             }, {
                 "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
                 "type": "string",
-                "value": "192.168.18.150"
+                "value": "172.16.192.150"
             }]}
         dados.update(dados_spv)
         dados_entrada = dados
@@ -427,10 +427,10 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
         
-        if gpv_get[0]['value'] != "192.168.18.6":
+        if gpv_get[0]['value'] != "172.16.192.6":
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] != "192.168.18.150":
+        elif gpv_get[1]['value'] != "172.16.192.150":
             dict_result = {
                 "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
         else:
@@ -518,6 +518,11 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
         dados_entrada = dados
 
         gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+        if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
         if gpv_get[0]['value'] != 'automacao_24':
             dict_result = {
                 "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
@@ -614,30 +619,46 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             dict_result = {
                 "obs": f'{e}'}
             self._dict_result.update(dict_result)
-        
-        # Set default value
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                "type": "string",
-                "value": "service05"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+        try:
+            # Set default value
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                    "type": "string",
+                    "value": "service05"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        print(gpv_get)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                print('\n', self._dict_result, '\n')
+                return self._dict_result
+            print(gpv_get)
+            if gpv_get[0]['value'] != 'service05':
+                dict_result = {
+                    "obs": f"Não foi possível alterar para o padrão o valor do objeto {gpv_get[0]['name']}. (esperado: service05; obtido: {gpv_get[0]['value']})"}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                               "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
 
-        print('\n', self._dict_result, '\n')
+            print('\n', self._dict_result, '\n')
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': 'Não foi possível alterar de volta o valor do parâmetro'}
+            self._dict_result.update(dict_result)
         return self._dict_result
 
     # 18

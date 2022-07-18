@@ -403,11 +403,11 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 {
                     "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
                     "type": "string",
-                    "value": "192.168.17.6"
+                    "value": "172.18.192.6"
                 }, {
                     "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
                     "type": "string",
-                    "value": "192.168.17.150"
+                    "value": "172.18.192.150"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
@@ -424,10 +424,10 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            if gpv_get[0]['value'] != "192.168.17.6":
+            if gpv_get[0]['value'] != "172.18.192.6":
                 dict_result = {
                     "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-            elif gpv_get[1]['value'] != "192.168.17.150":
+            elif gpv_get[1]['value'] != "172.18.192.150":
                 dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
             else:

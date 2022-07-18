@@ -1011,10 +1011,10 @@ class HGU_MItraStarECNT_wizardProbe(HGU_MItraStarECNT):
             input_mac.send_keys('00:0c:29:bb:0b:35')
             time.sleep(5)
             #IP settings
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[1]').send_keys('172')
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[3]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[2]').send_keys('18')
+            self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[3]').send_keys('192')
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[1]/td[4]/input[4]').send_keys('3')
             self._driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div[3]/form/table[2]/tbody/tr[2]/td/a/span').click()
