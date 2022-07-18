@@ -2707,7 +2707,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         :return : A dict with the result of the test
         """
         channel_2g_exp = "9"
-        channel_5g_exp = "36"
+        channel_5g_exp = "0"
         try:
             def enablingWiFi2G():
                 self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/ul/li[3]/a').click()
@@ -2826,24 +2826,27 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             select.select_by_value(channel_5g_exp)
             time.sleep(2)
             try:
-                self._driver.find_element_by_id('btnAdvSave').click()
-                time.sleep(5)
-                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
-                self._driver.switch_to.frame(iframe)
-                time.sleep(2)
-                button = self._driver.find_element_by_id('btnChannelAccept')
-                self._driver.execute_script("arguments[0].click();", button)
-                time.sleep(3)
+                try:
+                    self._driver.find_element_by_id('btnAdvSave').click()
+                    time.sleep(5)
+                    iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                    self._driver.switch_to.frame(iframe)
+                    time.sleep(2)
+                    button = self._driver.find_element_by_id('btnChannelAccept')
+                    self._driver.execute_script("arguments[0].click();", button)
+                    time.sleep(3)
+                except Exception as e:
+                    print("Exception",e)
+                    self._driver.find_element_by_id('btnAdvSave').click()
+                    time.sleep(5)
+                    iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+                    self._driver.switch_to.frame(iframe)
+                    time.sleep(2)
+                    button = self._driver.find_element_by_id('btnChannelAccept')
+                    self._driver.execute_script("arguments[0].click();", button)
+                    time.sleep(3)
             except Exception as e:
-                print("exceção",e)
-                self._driver.find_element_by_id('btnAdvSave').click()
-                time.sleep(5)
-                iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
-                self._driver.switch_to.frame(iframe)
-                time.sleep(2)
-                button = self._driver.find_element_by_id('btnChannelAccept')
-                self._driver.execute_script("arguments[0].click();", button)
-                time.sleep(3)
+                print(e)
             
             # Entering on Status
             self._driver.get('http://' + self._address_ip + '/')
@@ -2860,10 +2863,10 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
             if channel_2g != channel_2g_exp:
                 self._driver.quit()
-                self._dict_result.update({"obs": 'O canal do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_2g_exp, channel_2g)})
+                self._dict_result.update({"obs": 'O canal do WiFi 2.4GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(channel_2g_exp, channel_2g)})
             elif channel_5g != channel_5g_exp:
                 self._driver.quit()
-                self._dict_result.update({"obs": 'O canal do WiFI 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}}'.format(channel_5g_exp, channel_5g)})
+                self._dict_result.update({"obs": 'O canal do WiFI 5GHz não foi alterado corretamente:\nesperado: {}, \nobtido: {}'.format(channel_5g_exp, channel_5g)})
             else:
                 self._driver.quit()
                 self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})
