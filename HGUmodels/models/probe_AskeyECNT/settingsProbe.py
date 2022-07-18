@@ -2912,6 +2912,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         ### ------------------------------------------ ###
         config = self._driver.find_element_by_link_text(
             'Configurações').click()
+        time.sleep(5)
         gerenciamento = self._driver.find_element_by_xpath(
             '/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a')
         print(gerenciamento.text)
@@ -2934,7 +2935,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         if gerenciamento_idioma_valor == 'true':
             gerenciamento_idioma_valor = 'Português'
         else:
-            gerenciamento_idioma_valor = 'Inglês'
+            gerenciamento_idioma_valor = 'Inglês' or 'English'
         print(gerenciamento_idioma_valor)
 
         time.sleep(1)

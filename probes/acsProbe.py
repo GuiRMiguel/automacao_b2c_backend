@@ -56,7 +56,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "initialInformations", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "4", 
             "Description": "", 
             "obs": None}
 
@@ -117,7 +117,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "wifi2GHzInformations", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "5", 
             "Description": "", 
             "obs": None}
 
@@ -175,7 +175,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "wifi5GHzInformations", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "6", 
             "Description": "", 
             "obs": None}
 
@@ -233,7 +233,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "lanConfiguration", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "9", 
             "Description": "", 
             "obs": None}
 
@@ -291,7 +291,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "setDHCP", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "10", 
             "Description": "", 
             "obs": None}
 
@@ -349,7 +349,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "set2GHzWiFi", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "12", 
             "Description": "", 
             "obs": None}
 
@@ -406,7 +406,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "set5GHzWiFi", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "13", 
             "Description": "", 
             "obs": None}
 
@@ -463,7 +463,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "setPeriodicInterval", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "15", 
             "Description": "", 
             "obs": None}
 
@@ -601,7 +601,7 @@ class acs:
         return hgu.setVOIP_18(dados_entrada)
 
 
-    # 18
+    # 19
     def cancelVOIP(self, GPV_Param, IPACS, acsUsername, acsPassword, acsPort, model_name, password, ip, serialnumber, set_voip):
         # Desabling other devices
         pwd = '4ut0m4c40'
@@ -638,7 +638,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "cancelVOIP", 
-            "Probe#": "18", 
+            "Probe#": "19", 
             "Description": "", 
             "obs": None}
 
@@ -698,7 +698,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "checkIPv6Telefonica", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "43", 
             "Description": "", 
             "obs": None}
 
@@ -756,7 +756,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "indexWifi24ghz", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "39", 
             "Description": "", 
             "obs": None}
 
@@ -814,7 +814,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "indexWifi5ghz", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "40", 
             "Description": "", 
             "obs": None}
 
@@ -930,7 +930,7 @@ class acs:
             "Resultado_Probe": "NOK", 
             "ControllerName": "acs", 
             "ProbeName": "rebootDevice", 
-            "Probe#": "XXXXXXX", 
+            "Probe#": "48", 
             "Description": "", 
             "obs": None}
 

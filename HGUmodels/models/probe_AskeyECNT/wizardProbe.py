@@ -163,7 +163,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
 
 
-    #378 #mlv
+    #378
     def changePPPoESettingsWrongAuthentication_378(self, flask_username):
         try:
             self.doLogin()
@@ -243,7 +243,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result
 
 
-    #381 mlv
+    #381
     def getFullConfig_381(self, flask_username):
         dict_saida = {}
         try:
@@ -453,7 +453,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
 
-    #386 mlv
+    #386
     def statusWizardIptv_386(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -545,7 +545,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
         return self._dict_result
 
     
-    #391 HPNA
+    #391 
     def statusWizardHpna_391(self, flask_username):
         #TODO: Fazer logica no frontend para garantir que o teste 425 seja executado em conjunto
         result = session.get_result_from_test(flask_username, 'getFullConfig_425')
@@ -610,7 +610,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result 
             
 
-    #393 mlv
+    #393 
     def createDmzViaWizard_393(self, flask_username):
         try:
             self.doLogin()
@@ -642,7 +642,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
     
 
-    #395 mlv
+    #395 
     def configUpnpViaWizard_395(self, flask_username):
         try:
             self.doLogin()
@@ -718,7 +718,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             return self._dict_result  
     
 
-    #397 mlv
+    #397
     def configIpDhcpViaWizard_397(self, flask_username):
         try:
             self.doLogin()
@@ -734,15 +734,15 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             print('passou aqui 2')
 
             self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').clear()
-            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('00:0c:29:bb:0b:35')
+            self._driver.find_element_by_xpath('//*[@id="txtStaticMac"]').send_keys('C8:B4:22:E6:86:71')
             print('passou aqui 3')
 
             time.sleep(5)
             #self._driver.find_element_by_id('txtStaticMac').click()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[1]').send_keys('172')
             time.sleep(5)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[2]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[3]').send_keys('192')
             time.sleep(5)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[2]/tbody/tr[1]/td[3]/input[4]').send_keys('3')
             time.sleep(5)
@@ -751,7 +751,7 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             
             try:
                 time.sleep(8)
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == '00:0c:29:bb:0b:35':
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[3]/tbody/tr/td[2]').text == 'C8:B4:22:E6:86:71':
                     self._dict_result.update({"obs": f"Associar um endereco de IP no DHCP pelo usuario com sucesso.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
                     self._dict_result.update({"obs": f"Erro ao associar um endereco de IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
@@ -893,11 +893,11 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             time.sleep(2)
             #Changing IP
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('172')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('17')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').send_keys('3')
             time.sleep(2)
@@ -907,9 +907,9 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').send_keys('4')
             time.sleep(3)
             #renge-2
@@ -917,9 +917,9 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').send_keys('204')
 
             self._driver.find_element_by_xpath('//*[@id="btnDhcpSave"]/span').click()

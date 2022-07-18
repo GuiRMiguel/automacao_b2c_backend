@@ -50,16 +50,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -136,16 +136,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -220,16 +220,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -304,16 +304,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -388,16 +388,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -472,16 +472,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -556,16 +556,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -640,16 +640,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
         subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up'])   #16
+        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])   #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.16.1'
+        ip_device = '172.19.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -1855,7 +1855,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             try:
                 ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
                 for ipItem in ipsResponse:
-                    if'192.168.16.' in ipItem:
+                    if '172.19.192.' in ipItem:
                         ipSelected = ipItem
     
             except subprocess.CalledProcessError:
@@ -1878,7 +1878,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             # ----------------------------------------- #
             # ----------------------------------------- #
             
-            sshClient.connect('192.168.16.3', port=22, username='automacao', password='4ut0m4c40', timeout=3)
+            sshClient.connect('172.19.192.3', port=22, username='automacao', password='4ut0m4c40', timeout=3)
 
             stdin, stdout, stderr = sshClient.exec_command('telnet ' + str(publicIp) + ' 11002')
 
@@ -3213,11 +3213,11 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             time.sleep(2)
             #Changing IP
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('172')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('19')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('16')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').send_keys('3')
             time.sleep(2)
@@ -3227,9 +3227,9 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('16')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('19')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').send_keys('4')
             time.sleep(3)
             #renge-2
@@ -3237,9 +3237,9 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('16')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('19')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').send_keys('204')
 
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[11]/td[2]/a[2]').click()
@@ -3410,57 +3410,63 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
     def validiteConectStbTv_41(self, flask_username):
         try:
             #Login
+            print("=======================================================")
+            print("ESTE TESTE FUNCIONA APENAS PARA O APARELHO ASKEY ECNT")
+            print("=======================================================")
             self._driver.get('http://' + self._address_ip + '/')
             self.login_admin()
             time.sleep(3)
-            self._driver.switch_to.frame('mainFrame')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/a').click()
-            time.sleep(1)
-            self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/ul/li[6]/a').click()
-            time.sleep(2)
-            # #NetInf
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[2]/a').click()
-            time.sleep(5)
-            #Iframe Message Attention
-            self._driver.switch_to.default_content()
-            time.sleep(8)
-            iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
-            time.sleep(1)
-            self._driver.switch_to.frame(iframe)
-            time.sleep(1)
             
-            #Click OK
-            self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a[1]/span').click()
-            #Configure NetInf
-            self._driver.switch_to.default_content()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/ul/li[6]/a').click()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[2]/td[2]/input').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[2]/td[2]/input').send_keys('-50')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[3]/td[2]/input').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[3]/td[2]/input').send_keys('150')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[4]/td[2]/input').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[4]/td[2]/input').send_keys('1300')
+            
+            # self._driver.switch_to.frame('mainFrame')
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[2]/a').click()
+            # time.sleep(1)
+            # self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/a').click()
+            # time.sleep(1)
+            # self._driver.find_element_by_xpath('//*[@id="accordion"]/li[3]/ul/li[6]/a').click()
+            # time.sleep(2)
+            # # #NetInf
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[1]/ul/li[2]/a').click()
+            # time.sleep(5)
+            # #Iframe Message Attention
+            # self._driver.switch_to.default_content()
+            # time.sleep(8)
+            # iframe = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/iframe')
+            # time.sleep(1)
+            # self._driver.switch_to.frame(iframe)
+            # time.sleep(1)
+            
+            # #Click OK
+            # self._driver.find_element_by_xpath('/html/body/div/table/tbody/tr[3]/td/a[1]/span').click()
+            # #Configure NetInf
+            # self._driver.switch_to.default_content()
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/ul/li[6]/a').click()
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[2]/td[2]/input').clear()
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[2]/td[2]/input').send_keys('-50')
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[3]/td[2]/input').clear()
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[3]/td[2]/input').send_keys('150')
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[4]/td[2]/input').clear()
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[4]/td[2]/input').send_keys('1300')
 
-            #Save Configure NetInf
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[5]/td/a[2]/span').click()
-            time.sleep(5)
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[2]/tbody/tr[3]/td[2]/a[2]/span').click()
-            time.sleep(100)
-            try:
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[2]/tbody/tr[1]/td[3]/strong/label').text != 'HPNA desprevenido':
-                    self._dict_result.update({"obs": "Teste passou. Net Inf validada.", "result":"passed", "Resultado_Probe": "OK"})
+            # #Save Configure NetInf
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[1]/tbody/tr[5]/td/a[2]/span').click()
+            # time.sleep(5)
+            # self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[2]/tbody/tr[3]/td[2]/a[2]/span').click()
+            # time.sleep(100)
+            # try:
+            #     if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[4]/table[2]/tbody/tr[1]/td[3]/strong/label').text != 'HPNA desprevenido':
+            #         self._dict_result.update({"obs": "Teste passou. Net Inf validada.", "result":"passed", "Resultado_Probe": "OK"})
 
-                else:
-                    self._dict_result.update({"obs": f"Teste falhou.", "result":"passed", "Resultado_Probe": "OK"})
-            except UnexpectedAlertPresentException as e:                
-                self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
+            #     else:
+            #         self._dict_result.update({"obs": f"Teste falhou.", "result":"passed", "Resultado_Probe": "OK"})
+            # except UnexpectedAlertPresentException as e:                
+            #     self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
+            # finally:
+            #     self._driver.quit()
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
 
     
@@ -3493,7 +3499,7 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
             time.sleep(3)
             try:
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == '94EAEAD5EF47' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == '94:EA:EA:D5:EF:47':
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == 'D8FB5EEB74BE' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == '94:EA:EA:D5:EF:47':
                     self._dict_result.update({"obs": "Teste passou. Numero de serie e MAC da WAN corretos.", "result":"passed", "Resultado_Probe": "OK"})
 
                 else:

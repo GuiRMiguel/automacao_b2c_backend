@@ -64,7 +64,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '192.17.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -150,7 +150,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -235,7 +235,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -319,7 +319,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -404,7 +404,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -488,7 +488,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -562,17 +562,17 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
         subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
         subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
         subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
         subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 50
         timeInSeconds = 10
         timeDeactivate = 500
@@ -656,7 +656,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
         time.sleep(15)
         
-        ip_device = '192.168.15.1'
+        ip_device = '172.17.192.1'
         number_of_cicles = 20
         timeInSeconds = 10
         timeDeactivate = 500
@@ -960,13 +960,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
 
@@ -1097,13 +1097,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
 
@@ -1228,13 +1228,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
 
@@ -1453,13 +1453,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up'])   #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
 
@@ -1744,11 +1744,11 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(2)
             #Changing IP
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('192')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[1]').send_keys('172')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('168')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[2]').send_keys('17')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[3]/td[2]/input[4]').send_keys('3')
             time.sleep(2)
@@ -1758,9 +1758,9 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[2]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[5]/td[2]/input[4]').send_keys('4')
             time.sleep(3)
             #renge-2
@@ -1768,9 +1768,9 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').clear()
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').clear()
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('192')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('168')
-            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('15')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[1]').send_keys('172')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[2]').send_keys('17')
+            self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[3]').send_keys('192')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[3]/table[1]/tbody/tr[6]/td/input[4]').send_keys('204')
 
             self._driver.find_element_by_xpath('//*[@id="btnDhcpSave"]/span').click()
@@ -1778,7 +1778,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             time.sleep(1)
             try:
                 time.sleep(2)
-                if self._driver.get('http://192.168.15.3/') ==None:
+                if self._driver.get('http://172.17.192.3/') ==None:
                     self._dict_result.update({"obs": f"Alterar range de IP do DHCP.", "result":"passed", "Resultado_Probe": "OK"})
                 else:
                     self._dict_result.update({"obs": f"Erro ao associar alterar range do IP no DHCP pelo usuario.", "result":"passed", "Resultado_Probe": "NOK"})
@@ -1830,7 +1830,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 ipsResponse = subprocess.check_output(['hostname', '-I'], stderr=subprocess.STDOUT, universal_newlines=True).split(' ')
 
                 for ipItem in ipsResponse:
-                    if '192.168.15' in ipItem:
+                    if '172.17.192' in ipItem:
                         ipSelected = ipItem
     
             except subprocess.CalledProcessError:
@@ -1854,7 +1854,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             # ----------------------------------------- #
             # ----------------------------------------- #
             
-            sshClient.connect('192.168.15.8', port=22, username='automacao', password='4ut0m4c40', timeout=3)
+            sshClient.connect('172.17.192.8', port=22, username='automacao', password='4ut0m4c40', timeout=3)
 
             stdin, stdout, stderr = sshClient.exec_command('telnet ' + str(publicIp) + ' 11002')
 
@@ -1978,10 +1978,15 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             return self._dict_result  
 
 
-
+    # SO funciona para o Askey ECNT
     def validiteConectStbTv_41(self, flask_username):
         try:
             #Login
+            print("=======================================================")
+            print("ESTE TESTE FUNCIONA APENAS PARA O APARELHO ASKEY ECNT")
+            print("CASO ESTEJA CONFIGURADO")
+            print("=======================================================")
+
             self._driver.get('http://' + self._address_ip + '/')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a').click()
             time.sleep(1)
@@ -2033,6 +2038,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
 
     #48
@@ -2439,7 +2445,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[4]/a').click()
             time.sleep(3)
             try:
-                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == '7CDB984180E1' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == '7C:DB:98:41:80:E1':
+                if self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[3]/td[2]').text == 'C8B422E68671' and self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table[1]/tbody/tr[4]/td[2]').text == '7C:DB:98:41:80:E1':
                     self._dict_result.update({"obs": "Teste passou. Numero de serie e MAC da WAN corretos.", "result":"passed", "Resultado_Probe": "OK"})
 
                 else:
@@ -2457,7 +2463,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
     def validiteUrlsWancfgCmd_64(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd'
-        site2 = 'http://192.168.1.1/wancfg.cmd'
+        site2 = 'http://172.17.1.1/wancfg.cmd'
 
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -2518,7 +2524,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
     def validiteUrlsWancfgCmdActionView_65(self, flask_username):
         site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
-        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
+        site2 = 'http://172.17.1.1/wancfg.cmd?action=view'
 
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -2670,9 +2676,9 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'down'])
-            subprocess.run(['sudo', 'ifconfig', 'ens256', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'down'])
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'down'])
 
             # Making a request
             self._driver.get('https://web.whatsapp.com/')
@@ -3613,7 +3619,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
     def connectFakeWizard_68(self, flask_username):
         
         site1 = f'http://{self._address_ip}/wancfg.cmd?action=view'
-        site2 = 'http://192.168.1.1/wancfg.cmd?action=view'
+        site2 = 'http://172.17.1.1/wancfg.cmd?action=view'
         site3 = 'http://' + self._address_ip + '/'
 
         try:
