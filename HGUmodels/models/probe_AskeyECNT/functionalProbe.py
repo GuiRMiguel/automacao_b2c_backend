@@ -1987,7 +1987,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             print("CASO ESTEJA CONFIGURADO")
             print("=======================================================")
 
-            self._driver.get('http://' + self._address_ip + '/')
+            self._driver.get('http://' + self._address_ip + '/index_cliente.asp')
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/a').click()
             time.sleep(1)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[3]/ul/li[6]/a').click()
