@@ -7,7 +7,9 @@ from zeep.transports import Transport
 from zeep.wsse.username import UsernameToken
 import sys
 from zeep import xsd
+import zeep
 import ast
+import json
 
 import logging.config
 
@@ -152,8 +154,12 @@ class SDO:
             # getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=xsd.AnyObject(xsd.String(), object), arg2=nBIOptions, arg3=timeout)
             getParameterValue = self.client.service.getParameterValues(arg0=nbiDeviceId, arg1=object, arg2=nBIOptions, arg3=timeout)
             self.msgTagExecution_GPV = 'EXECUTED'
-            #print(getParameterValue)
-            return getParameterValue
+            get_ParameterValue = list()
+            for i in getParameterValue:
+                input_dict = zeep.helpers.serialize_object(i)
+                output_dict = json.loads(json.dumps(input_dict))
+                get_ParameterValue.append(output_dict)
+            return get_ParameterValue
         except TypeError:
             print("'NoneType' object is not iterable")
         except:

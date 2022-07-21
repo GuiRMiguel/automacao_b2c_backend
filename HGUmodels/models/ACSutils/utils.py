@@ -132,86 +132,89 @@ class ACS():
         # print(f'\ndados_entrada = {dados_entrada}')
         # for chave, valor in dados_entrada.items():
         #     print(chave, valor)
+        try:
+            ts = time.time()
+            start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 
-        ts = time.time()
-        start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
+            print('\n\n >>> Iniciando Função SetParameterValues ACS -', start_time, '\n\n')
 
-        print('\n\n >>> Iniciando Função SetParameterValues ACS -', start_time, '\n\n')
+            print(' -- Validações de Entrada --')
+            if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
+                print(' -- INFORMAÇÔES DE ENTRADA OK --')
+                #
+                ###Testando Conectividade ACS-NOKIA###
+                #
+                try:
+                    url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
+                    connTest = requests.post(url, timeout=4)
+                    print(' -- Validação de Conectividade com ACS --')
+                    if connTest.status_code == 200:
+                        print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
+                        print(' -- Validação de WebServices ACS --')
+                        try:
+                            nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                            nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                            nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                            print(' -- WebServices OK --')
+                            print(' -- Executando ACS [FindDeviceBySerial] --')
+                            nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
+                            if nbiRH.msgTagExecution_02 == 'EXECUTED':
+                                print(' -- FindDeviceBySerial OK --')
+                                OUI = str(nbiRH.device["OUI"])
+                                productClass = str(nbiRH.device["productClass"])
+                                protocol = str(nbiRH.device["protocol"])
+                                subscriberId = str(nbiRH.device["subscriberId"])
+                                lastContactTime = str(nbiRH.device["lastContactTime"])
+                                softwareVersion = str(nbiRH.device["softwareVersion"])
 
-        print(' -- Validações de Entrada --')
-        if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
-            print(' -- INFORMAÇÔES DE ENTRADA OK --')
-            #
-            ###Testando Conectividade ACS-NOKIA###
-            #
-            try:
-                url = 'http://' + dados_entrada['IPACS'] + ':' + dados_entrada['portaACS'] + '/hdm'
-                connTest = requests.post(url, timeout=4)
-                print(' -- Validação de Conectividade com ACS --')
-                if connTest.status_code == 200:
-                    print(' -- CONECTIVIDADE COM ACS OK -- IP: ', dados_entrada['IPACS'])
-                    print(' -- Validação de WebServices ACS --')
-                    try:
-                        nbiRH = Setup.ACS.webRemoteHDM.NRH(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSDO = Setup.ACS.webSDO.SDO(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        nbiSI = Setup.ACS.webServiceImpl.NSI(dados_entrada['IPACS'], dados_entrada['portaACS'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        print(' -- WebServices OK --')
-                        print(' -- Executando ACS [FindDeviceBySerial] --')
-                        nbiRH.findDeviceBySerial(dados_entrada['serialnumber'], dados_entrada['acsUsername'], dados_entrada['acsPassword'])
-                        if nbiRH.msgTagExecution_02 == 'EXECUTED':
-                            print(' -- FindDeviceBySerial OK --')
-                            OUI = str(nbiRH.device["OUI"])
-                            productClass = str(nbiRH.device["productClass"])
-                            protocol = str(nbiRH.device["protocol"])
-                            subscriberId = str(nbiRH.device["subscriberId"])
-                            lastContactTime = str(nbiRH.device["lastContactTime"])
-                            softwareVersion = str(nbiRH.device["softwareVersion"])
-
-                            print(' -- Executando ACS [SetParameterValues] --')
-                            spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['SPV_Param'])
-                            if spv == 0:
-                                print(' -- SetParameterValues OK --')
-                                final_time = time.time()
-                                total_time = (final_time - ts)
-                                print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                                return spv
+                                print(' -- Executando ACS [SetParameterValues] --')
+                                spv = nbiSDO.setParameterValue(OUI, productClass, protocol, dados_entrada['serialnumber'], dados_entrada['SPV_Param'])
+                                if spv == 0:
+                                    print(' -- SetParameterValues OK --')
+                                    final_time = time.time()
+                                    total_time = (final_time - ts)
+                                    print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                    return spv
+                                else:
+                                    print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
+                                    final_time = time.time()
+                                    total_time = (final_time - ts)
+                                    print(' -- SetParameterValues NOK --')
+                                    print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
+                                    print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                                    dict_result = {"obs": "ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST!"}
                             else:
-                                print(' -- SetParameterValues NOK -- ERRO: Device OFFLINE')
                                 final_time = time.time()
                                 total_time = (final_time - ts)
-                                print(' -- SetParameterValues NOK --')
-                                print(' -- ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST! -- ')
+                                print(' -- FindDeviceBySerial NOK --')
+                                print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
                                 print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                                dict_result = {"obs": "ATENÇÃO! DISPOSITIVO OFFLINE OU NÃO RESPONDENDO A CONNECTION REQUEST!"}
-                        else:
+                                dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
+                        except:
                             final_time = time.time()
                             total_time = (final_time - ts)
-                            print(' -- FindDeviceBySerial NOK --')
-                            print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+                            print(' -- WEBSERVICES NOK --')
                             print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
-                    except:
+                            dict_result = {"obs": "WEBSERVICES NOK"}
+                    else:
                         final_time = time.time()
                         total_time = (final_time - ts)
-                        print(' -- WEBSERVICES NOK --')
+                        print(' -- CONECTIVIDADE COM ACS NOK --')
                         print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                        dict_result = {"obs": "WEBSERVICES NOK"}
-                else:
-                    final_time = time.time()
-                    total_time = (final_time - ts)
-                    print(' -- CONECTIVIDADE COM ACS NOK --')
-                    print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-                    dict_result = {"obs": "CONECTIVIDADE COM ACS NOK"}
+                        dict_result = {"obs": "CONECTIVIDADE COM ACS NOK"}
 
-            except:
-                e = sys.exc_info()[1]
-        else:
-            final_time = time.time()
-            total_time = (final_time - ts)
-            print(' -- Informações de Entrada NOK --')
-            print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
-            print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
-            dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
+                except:
+                    e = sys.exc_info()[1]
+            else:
+                final_time = time.time()
+                total_time = (final_time - ts)
+                print(' -- Informações de Entrada NOK --')
+                print(' -- ATENÇÃO! REVEJA PARAMETROS DE ENTRADA! -- ')
+                print('\n\n >>> Finalizando SetParameterValues ACS - Tempo de Execução:', total_time, '\n\n')
+                dict_result = {"obs": "ATENÇÃO! REVEJA PARAMETROS DE ENTRADA!"}
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': f'{e}'}
         return dict_result
 
     def getParameterValues(**dados_entrada):

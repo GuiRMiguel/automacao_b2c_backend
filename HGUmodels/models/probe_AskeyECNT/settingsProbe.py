@@ -52,7 +52,19 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     def initialInformations_4(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
         try:
-            
+            try:
+                with open('objectsTestsTR-069.json', 'r') as tests_file:
+                    initial_data = tests_file
+            except:
+                pass
+
+            test_result = {'tests': {
+                'initialInformations_4': [
+                    {'obtainedResults': None},
+                    {'expectedResults': None}
+                ]
+                }
+            }
 
             dados_gpv = {'GPV_Param': {'parameterNames': [
                 "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
@@ -170,6 +182,11 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
                 self._dict_result.update(dict_result)
+
+            test_result['tests']['initialInformations_4'][0]['obtainedResults'] = gpv_get
+            with open('objectsTestsTR-069.json', 'w') as tests_file_result:
+                tests_file_result.write(test_result)
+
         except Exception as e:
             dict_result = {
                 "obs": e

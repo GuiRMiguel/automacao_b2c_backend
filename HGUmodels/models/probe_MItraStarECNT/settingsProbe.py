@@ -22,6 +22,7 @@ import json
 
 from HGUmodels.main_session import MainSession
 from HGUmodels import wizard_config
+# from HGUmodels.models.probe_MItraStarECNT import objectsTestsTR069_MitraECNT
 
 session = MainSession()
 
@@ -38,6 +39,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
     # 4
     def initialInformations_4(self, dados):
         try:
+
             dados_gpv = {'GPV_Param': {'parameterNames': [
                 "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
                 "InternetGatewayDevice.DeviceInfo.Manufacturer",
@@ -149,10 +151,39 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                             dict_result = {
                                 "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
 
-
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
+            
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'initialInformations_4'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
         except Exception as e:
             dict_result = {
                             "obs": e}
@@ -260,6 +291,35 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
+        
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'wifi2GHzInformations_5'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -354,6 +414,35 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
+        
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'wifi5GHzInformations_6'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -376,6 +465,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
+            print('\n\ngpv_get: ', gpv_get, '\n\n')
             
             for value_parameter in gpv_get:
                 print(value_parameter)
@@ -386,9 +476,65 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     dict_result = {"Resultado_Probe": "OK",
                                         "obs": "Teste OK", "result": "passed"}
                     self._dict_result.update(dict_result)
+                    objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                    with open(objectFile, 'r') as initial_file:
+                        initial_data = json.load(initial_file)
+
+                    keys_list = initial_data['tests'][0].keys()
+                    test_name = 'lanConfiguration_9'
+                    if test_name in keys_list:
+                        gpv_obj = list()
+                        for i in gpv_get:
+                            gpv_obj.append(i)
+                        test_result = {
+                                'obtainedResults': gpv_obj
+                                }  
+                        initial_data['tests'][0][test_name].update(test_result)
+                    else:
+                        gpv_obj = list()
+                        for i in gpv_get:
+                            gpv_obj.append(i)
+                        test_result = {
+                        test_name: {
+                            'obtainedResults': gpv_obj
+                            }  
+                        }
+                        initial_data['tests'][0].update(test_result)
+
+                    with open(objectFile, 'w') as final_file:
+                        json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                     return self._dict_result
-                    
+
             self._dict_result.update(dict_result)
+        
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'lanConfiguration_9'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
@@ -476,15 +622,16 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     "obs": f"Objeto {gpv_get[0]['name']} obteve um valor diferente"}
             elif gpv_get[1]['value'] != "vivo@12345678" or gpv_get[1]['value'] is None:
                 print('\nExpected Value: ', 'vivo@12345678', '\nValue Obtained: ', gpv_get[1]['value'], '\n')
-                ddict_result = {
+                dict_result = {
                     "obs": f"Objeto {gpv_get[1]['name']} obteve um valor diferente"}
             else:
                 dict_result = {"Resultado_Probe": "OK",
                                "obs": "Teste OK", "result": "passed"}
 
+            self._dict_result.update(dict_result)
         except Exception as e:
             dict_result = {'obs': f'{e}'}
-        self._dict_result.update(dict_result)
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
@@ -667,297 +814,362 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
     # 39
     def indexWifi24ghz_39(self, dados):
-     
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
-             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
-             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
-             "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
-       
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+        try:
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+        
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-        # GET
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        parameter = default_settings['Default_Settings']
-        print(gpv_get)
-        for value_parameter in gpv_get:
-            print('\nvalue parameter:', value_parameter['value'])
-            if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ['Main Wireless network’s Enabled']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+            # GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            parameter = default_settings['Default_Settings']
+            print(gpv_get)
+            for value_parameter in gpv_get:
+                print('\nvalue parameter:', value_parameter['value'])
+                if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable":
+                    print('parameter:', parameter['Wifi 2.4']['Parameter']
+                        ['Main Wireless network’s Enabled']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Main Wireless network’s Enabled']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Status']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
+                    print('parameter:', parameter['Wifi 2.4']['Parameter']
+                        ["Main Wireless network’s SSID"]['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Security type']['Value'])
+                    if value_parameter['value'] == '11i' and parameter['Wifi 5']['Parameter']['Default Security type']['Value'] == "WPA2 -PSK":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Mode']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Channel']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+                #New
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Channels in use - frequency plan']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Channels in use - frequency plan']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default Channel width']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel width']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase":
+                    print(value_parameter['value'])
+                    if value_parameter['value'] != None:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['Default cipher mode']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default cipher mode']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable":
+                    print('parameter:', parameter['Wifi 2.4']
+                        ['Parameter']['WPS default status']['Value'])
+                    print("Verificar valor 1")
+                    if value_parameter['value'] != '1':
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+
                 else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Status']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Status']['Value']:
                     dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
+                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
+        
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID":
-                print('parameter:', parameter['Wifi 2.4']['Parameter']
-                      ["Main Wireless network’s SSID"]['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']["Main Wireless network’s SSID"]['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Security type']['Value'])
-                if value_parameter['value'] == '11i' and parameter['Wifi 5']['Parameter']['Default Security type']['Value'] == "WPA2 -PSK":
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Mode']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Channel']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-            #New
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Channels in use - frequency plan']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Channels in use - frequency plan']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default Channel width']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default Channel width']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase":
-                print(value_parameter['value'])
-                if value_parameter['value'] != None:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['Default cipher mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 2.4']['Parameter']['Default cipher mode']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable":
-                print('parameter:', parameter['Wifi 2.4']
-                      ['Parameter']['WPS default status']['Value'])
-                print("Verificar valor 1")
-                if value_parameter['value'] != '1':
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'indexWifi24ghz_39'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
             else:
-                dict_result = {
-                    "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
 
-        self._dict_result.update(dict_result)
-        print('\n', self._dict_result, '\n')
-        return self._dict_result
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': f'{e}'}
+        finally:
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
 
     # 40
     def indexWifi5ghz_40(self, dados):
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+        try:
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
 
-            #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+                #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
 
-        # GET
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
-                print('\n', self._dict_result, '\n')
-                return self._dict_result
-        parameter = default_settings['Default_Settings']
+            # GET
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                    self._dict_result.update(gpv_get)
+                    print('\n', self._dict_result, '\n')
+                    return self._dict_result
+            parameter = default_settings['Default_Settings']
 
-        for value_parameter in gpv_get:
-            print('\nvalue parameter:', value_parameter['value'])
-            if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable":
-                print('parameter:', parameter['Wifi 5']['Parameter']
-                      ['Main Wireless network’s Enabled']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Main Wireless network’s Enabled']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+            for value_parameter in gpv_get:
+                print('\nvalue parameter:', value_parameter['value'])
+                if value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable":
+                    print('parameter:', parameter['Wifi 5']['Parameter']
+                        ['Main Wireless network’s Enabled']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Main Wireless network’s Enabled']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default Status']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Status']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID":
+                    print('parameter:', parameter['Wifi 5']['Parameter']
+                        ["Main Wireless network’s SSID"]['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']["Main Wireless network’s SSID"]['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default Security type']['Value'])
+                    if value_parameter['value'] == '11i' and parameter['Wifi 5']['Parameter']['Default Security type']['Value'] == "WPA2 -PSK":
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default Mode']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Mode']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default Channel']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Channel']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+                
+                #New
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Channels in use - frequency plan']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Channels in use - frequency plan']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default Channel width']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Channel width']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase":
+                    print(value_parameter['value'])
+                    if value_parameter['value'] != None:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['Default cipher mode']['Value'])
+                    if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default cipher mode']['Value']:
+                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+                elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable":
+                    print('parameter:', parameter['Wifi 5']
+                        ['Parameter']['WPS default status']['Value'])
+                    print("Verificar valor 1")
+                    if value_parameter['value'] != '1':
+                                        dict_result = {
+                            "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
+                    else:
+                        dict_result = {"Resultado_Probe": "OK",
+                                    "obs": "Teste OK", "result": "passed"}
+
+
                 else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default Status']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Status']['Value']:
                     dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID":
-                print('parameter:', parameter['Wifi 5']['Parameter']
-                      ["Main Wireless network’s SSID"]['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']["Main Wireless network’s SSID"]['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default Security type']['Value'])
-                if value_parameter['value'] == '11i' and parameter['Wifi 5']['Parameter']['Default Security type']['Value'] == "WPA2 -PSK":
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default Mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Mode']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default Channel']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Channel']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
+                        "obs": f"Objeto {value_parameter['name']} não encontrado"}
             
-            #New
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Channels in use - frequency plan']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Channels in use - frequency plan']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
 
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default Channel width']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default Channel width']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase":
-                print(value_parameter['value'])
-                if value_parameter['value'] != None:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['Default cipher mode']['Value'])
-                if value_parameter['value'] != parameter['Wifi 5']['Parameter']['Default cipher mode']['Value']:
-                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-            elif value_parameter['name'] == "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable":
-                print('parameter:', parameter['Wifi 5']
-                      ['Parameter']['WPS default status']['Value'])
-                print("Verificar valor 1")
-                if value_parameter['value'] != '1':
-                                    dict_result = {
-                        "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
-                else:
-                    dict_result = {"Resultado_Probe": "OK",
-                                   "obs": "Teste OK", "result": "passed"}
-
-
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'indexWifi5ghz_40'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
             else:
-                dict_result = {
-                    "obs": f"Objeto {value_parameter['name']} não encontrado"}
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
 
-        self._dict_result.update(dict_result)
-        print('\n', self._dict_result, '\n')
-        return self._dict_result
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': f'{e}'}
+        finally:
+            self._dict_result.update(dict_result)
+            print('\n', self._dict_result, '\n')
+            return self._dict_result
 
     # 42
     def checkObjectsTelefonica_42(self, dados):
@@ -1221,6 +1433,34 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                         dict_result = {"Resultado_Probe": "OK",
                             "obs": "Teste OK", "result": "passed"}
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'checkObjectsTelefonica_42'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
         except Exception as e:
             dict_result = {
                 "obs": e
@@ -1298,6 +1538,35 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     dict_result = {
                         "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
                 self._dict_result.update(dict_result)
+        
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'checkIPv6Telefonica_43'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                        'obtainedResults': gpv_obj
+                        }  
+                initial_data['tests'][0][test_name].update(test_result)
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: {
+                    'obtainedResults': gpv_obj
+                    }  
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+        
         except Exception as e:
             dict_result = {
                 "obs": e
