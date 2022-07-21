@@ -219,9 +219,9 @@
             "checkIPv6Telefonica_43": {
                 "obtainedResults": [
                     {
-                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable",
                         "type": "boolean",
-                        "value": "0"
+                        "value": "1"
                     }
                 ]
             },
@@ -424,6 +424,60 @@
                     },
                     {
                         "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.Active",
+                        "type": "boolean",
+                        "value": "1"
+                    }
+                ]
+            },
+            "indexWifi24ghz_39": {
+                "obtainedResults": [
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                        "type": "boolean",
+                        "value": "1"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                        "type": "string",
+                        "value": "Up"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                        "type": "string",
+                        "value": "automacao_24"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                        "type": "string",
+                        "value": "11i"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                        "type": "string",
+                        "value": "n"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                        "type": "unsignedInt",
+                        "value": "9"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+                        "type": "string",
+                        "value": "40MHz"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                        "type": "string",
+                        "value": " "
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+                        "type": "string",
+                        "value": "AESEncryption"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable",
                         "type": "boolean",
                         "value": "1"
                     }

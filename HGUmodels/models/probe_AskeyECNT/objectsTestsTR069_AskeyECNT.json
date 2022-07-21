@@ -1,0 +1,124 @@
+{
+    "tests": [
+        {
+            "initialInformations_4": {
+                "obtainedResults": [
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                        "type": "string",
+                        "value": "009096"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                        "type": "string",
+                        "value": "Askey"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.ModelName",
+                        "type": "string",
+                        "value": "RTF8117VW"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
+                        "type": "string",
+                        "value": "RTF8117VW"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                        "type": "string",
+                        "value": "F45420941B71"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                        "type": "string",
+                        "value": "BR_SV_g12.6_RTF_TEF001_V7.20_V016"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                        "type": "string",
+                        "value": "189.79.218.85"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.ManagementServer.URL",
+                        "type": "string",
+                        "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                        "type": "boolean",
+                        "value": "1"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                        "type": "unsignedInt",
+                        "value": "108000"
+                    }
+                ]
+            },
+            "checkObjectsTelefonica_42": {
+                "obtainedResults": [
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                        "type": "string",
+                        "value": "service05"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                        "type": "boolean",
+                        "value": "0"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                        "type": "string",
+                        "value": null
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                        "type": "string",
+                        "value": null
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                        "type": "string",
+                        "value": null
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                        "type": "string",
+                        "value": null
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                        "type": "string",
+                        "value": null
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                        "type": "string",
+                        "value": "GPON"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                        "type": "string",
+                        "value": "Auto"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                        "type": "boolean",
+                        "value": "1"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                        "type": "string",
+                        "value": "Stateful"
+                    },
+                    {
+                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
+                        "type": "string",
+                        "value": null
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1570,10 +1570,10 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                                     for i in new_gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
-                                    }
+                                        test_name: {
+                                            'obtainedResults': gpv_obj
+                                            }  
+                                        }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:

@@ -10,6 +10,7 @@ import threading
 import json
 from json import JSONEncoder
 from HGUmodels.models.SSHutils import infoDevices_utils
+import pprint
 
 dict_result = dict()
 
@@ -223,8 +224,10 @@ class ACS():
         start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 
         print('\n\n >>> Iniciando Função GetParameterValues ACS -', start_time, '\n\n')
+        print(' -- Dados de Entrada -- \n')
+        pprint.pprint(dados_entrada, width=59, depth=2)
 
-        print(' -- Validações de Entrada --')
+        print('\n -- Validações de Entrada --')
 
         if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
             print(' -- INFORMACOES DE ENTRADA OK --')
