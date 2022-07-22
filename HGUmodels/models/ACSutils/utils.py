@@ -138,8 +138,9 @@ class ACS():
             start_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 
             print('\n\n >>> Iniciando Função SetParameterValues ACS -', start_time, '\n\n')
-
-            print(' -- Validações de Entrada --')
+            print(' -- Dados de Entrada -- ')
+            pprint.pprint(dados_entrada, width=59, depth=2)
+            print('\n -- Validações de Entrada --')
             if dados_entrada.get('serialnumber') and dados_entrada.get('IPACS') and dados_entrada.get('portaACS') and dados_entrada.get('IPACS') and dados_entrada.get('acsUsername') and dados_entrada.get('acsPassword'):
                 print(' -- INFORMAÇÔES DE ENTRADA OK --')
                 #

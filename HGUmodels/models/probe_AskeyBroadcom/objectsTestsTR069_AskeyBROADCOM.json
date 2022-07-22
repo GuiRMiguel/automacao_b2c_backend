@@ -1,254 +1,767 @@
 {
     "tests": [
         {
-            "initialInformations_4": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
-                        "type": "unsignedInt",
-                        "value": "93600"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
-                        "type": "boolean",
-                        "value": "1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.URL",
-                        "type": "string",
-                        "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
-                        "type": "string",
-                        "value": "191.17.215.7"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
-                        "type": "string",
-                        "value": "BR_SV_g000_R3507VWN1001_s37"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
-                        "type": "string",
-                        "value": "D8FB5EEB74BE"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
-                        "type": "string",
-                        "value": "RTF3507VW-N1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ModelName",
-                        "type": "string",
-                        "value": "RTF3507VW-N1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
-                        "type": "string",
-                        "value": "Askey"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
-                        "type": "string",
-                        "value": "009096"
+            "initialInformations_4": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                                "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                                "InternetGatewayDevice.DeviceInfo.ModelName",
+                                "InternetGatewayDevice.DeviceInfo.ProductClass",
+                                "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                                "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                                "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                                "InternetGatewayDevice.ManagementServer.URL",
+                                "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                                "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                            ]
+                        }
                     }
-                ]
-            },
-            "wifi2GHzInformations_5": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-                        "type": "unsignedInt",
-                        "value": "11"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-                        "type": "string",
-                        "value": "n"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-                        "type": "string",
-                        "value": "11i"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                        "type": "string",
-                        "value": "V!VO-AUTO-2GHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-                        "type": "string",
-                        "value": "Up"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-                        "type": "boolean",
-                        "value": "1"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                            "type": "unsignedInt",
+                            "value": "600"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.URL",
+                            "type": "string",
+                            "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                            "type": "string",
+                            "value": "200.158.213.39"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                            "type": "string",
+                            "value": "BR_SV_g000_R3507VWN1001_s37"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                            "type": "string",
+                            "value": "D8FB5EEB74BE"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
+                            "type": "string",
+                            "value": "RTF3507VW-N1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ModelName",
+                            "type": "string",
+                            "value": "RTF3507VW-N1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                            "type": "string",
+                            "value": "Askey"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                            "type": "string",
+                            "value": "009096"
+                        }
+                    ]
+                }
+            ],
+            "wifi2GHzInformations_5": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel"
+                            ]
+                        }
                     }
-                ]
-            },
-            "wifi5GHzInformations_6": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
-                        "type": "unsignedInt",
-                        "value": "36"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
-                        "type": "string",
-                        "value": "ac"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
-                        "type": "string",
-                        "value": "11i"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                        "type": "string",
-                        "value": "V!VO-AUTO-5GHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
-                        "type": "string",
-                        "value": "Up"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
-                        "type": "boolean",
-                        "value": "1"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                            "type": "unsignedInt",
+                            "value": "6"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                            "type": "string",
+                            "value": "n"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                            "type": "string",
+                            "value": "11i"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "type": "string",
+                            "value": "automacao_24"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                            "type": "string",
+                            "value": "Up"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "wifi5GHzInformations_6": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel"
+                            ]
+                        }
                     }
-                ]
-            },
-            "checkObjectsTelefonica_42": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
-                        "type": "boolean",
-                        "value": "0"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+                            "type": "unsignedInt",
+                            "value": "36"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                            "type": "string",
+                            "value": "ac"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                            "type": "string",
+                            "value": "11i"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                            "type": "string",
+                            "value": "automacao_24"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                            "type": "string",
+                            "value": "Up"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "checkObjectsTelefonica_42": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.InternetService",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.LAN",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Config",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version"
+                            ]
+                        }
                     }
-                ]
-            },
-            "indexWifi5ghz_40": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable",
-                        "type": "boolean",
-                        "value": "1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
-                        "type": "string",
-                        "value": "AESEncryption"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
-                        "type": "string",
-                        "value": "80MHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
-                        "type": "unsignedInt",
-                        "value": "36"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
-                        "type": "string",
-                        "value": "ac"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
-                        "type": "string",
-                        "value": "11i"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                        "type": "string",
-                        "value": "V!VO-AUTO-5GHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
-                        "type": "string",
-                        "value": "Up"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
-                        "type": "boolean",
-                        "value": "1"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                            "type": "string",
+                            "value": "Stateful"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Config",
+                            "type": "string",
+                            "value": "Advanced"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.LAN",
+                            "type": "string",
+                            "value": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.IPInterface.1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Interfaces.InternetService",
+                            "type": "string",
+                            "value": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                            "type": "string",
+                            "value": "Auto"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                            "type": "string",
+                            "value": "GPON"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                            "type": "string",
+                            "value": "telefonicalabs.ddns.net"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                            "type": "string",
+                            "value": "vivo@123"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                            "type": "string",
+                            "value": "telefonica.labs@gmail.com"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                            "type": "string",
+                            "value": "no-ip"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                            "type": "boolean",
+                            "value": "0"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                            "type": "string",
+                            "value": "service05"
+                        }
+                    ]
+                }
+            ],
+            "indexWifi5ghz_40": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"
+                            ]
+                        }
                     }
-                ]
-            },
-            "indexWifi24ghz_39": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable",
-                        "type": "boolean",
-                        "value": "1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
-                        "type": "string",
-                        "value": "AESEncryption"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
-                        "type": "string",
-                        "value": "40MHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
-                        "type": "unsignedInt",
-                        "value": "11"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-                        "type": "string",
-                        "value": "n"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-                        "type": "string",
-                        "value": "11i"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                        "type": "string",
-                        "value": "V!VO-AUTO-2GHz"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-                        "type": "string",
-                        "value": "Up"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-                        "type": "boolean",
-                        "value": "1"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
+                            "type": "string",
+                            "value": "AESEncryption"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
+                            "type": "string",
+                            "value": "80MHz"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+                            "type": "unsignedInt",
+                            "value": "36"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                            "type": "string",
+                            "value": "ac"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                            "type": "string",
+                            "value": "11i"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                            "type": "string",
+                            "value": "automacao_24"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                            "type": "string",
+                            "value": "Up"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "indexWifi24ghz_39": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+                            ]
+                        }
                     }
-                ]
-            },
-            "checkIPv6Telefonica_43": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
-                        "type": "boolean",
-                        "value": "1"
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+                            "type": "string",
+                            "value": "AESEncryption"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+                            "type": "string",
+                            "value": "40MHz"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                            "type": "unsignedInt",
+                            "value": "6"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                            "type": "string",
+                            "value": "n"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                            "type": "string",
+                            "value": "11i"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "type": "string",
+                            "value": "automacao_24"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                            "type": "string",
+                            "value": "Up"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "checkIPv6Telefonica_43": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled"
+                            ]
+                        }
                     }
-                ]
-            }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "lanConfiguration_9": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.Hosts.Host."
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.IPAddress",
+                            "type": "string",
+                            "value": "172.19.192.6"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.AddressSource",
+                            "type": "string",
+                            "value": "DHCP"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.LeaseTimeRemaining",
+                            "type": "int",
+                            "value": "14388"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.MACAddress",
+                            "type": "string",
+                            "value": "00:0C:29:F8:BF:53"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.HostName",
+                            "type": "string",
+                            "value": "automacao-vm-06"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.InterfaceType",
+                            "type": "string",
+                            "value": "Ethernet"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.VendorClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.ClientID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.UserClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.Active",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.Layer2Interface",
+                            "type": "string",
+                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2."
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.IPAddress",
+                            "type": "string",
+                            "value": "172.19.192.8"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.AddressSource",
+                            "type": "string",
+                            "value": "DHCP"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.LeaseTimeRemaining",
+                            "type": "int",
+                            "value": "74"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.MACAddress",
+                            "type": "string",
+                            "value": "00:0C:29:CE:CF:DA"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.HostName",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.InterfaceType",
+                            "type": "string",
+                            "value": "Ethernet"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.VendorClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.ClientID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.UserClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.Active",
+                            "type": "boolean",
+                            "value": "0"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.Layer2Interface",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.IPAddress",
+                            "type": "string",
+                            "value": "172.19.192.230"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.AddressSource",
+                            "type": "string",
+                            "value": "DHCP"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.LeaseTimeRemaining",
+                            "type": "int",
+                            "value": "12183"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.MACAddress",
+                            "type": "string",
+                            "value": "98:F7:D7:87:C3:41"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.HostName",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.InterfaceType",
+                            "type": "string",
+                            "value": "Ethernet"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.VendorClassID",
+                            "type": "string",
+                            "value": "TEF_IPTV"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.ClientID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.UserClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.Active",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.Layer2Interface",
+                            "type": "string",
+                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.1."
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.IPAddress",
+                            "type": "string",
+                            "value": "172.19.192.9"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.AddressSource",
+                            "type": "string",
+                            "value": "DHCP"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.LeaseTimeRemaining",
+                            "type": "int",
+                            "value": "14199"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.MACAddress",
+                            "type": "string",
+                            "value": "00:0C:29:41:6F:8F"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.HostName",
+                            "type": "string",
+                            "value": "automacao-vm-04"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.InterfaceType",
+                            "type": "string",
+                            "value": "Ethernet"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.VendorClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.ClientID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.UserClassID",
+                            "type": "string",
+                            "value": null
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.Active",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.Layer2Interface",
+                            "type": "string",
+                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2."
+                        }
+                    ]
+                }
+            ],
+            "setDHCP_10": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                                "type": "string",
+                                "value": "172.19.192.6"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+                                "type": "string",
+                                "value": "172.19.192.150"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "set2GHzWiFi_12": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "type": "string",
+                                "value": "automacao_24"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                                "type": "string",
+                                "value": "vivo@12345678"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "set5GHzWiFi_13": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "type": "string",
+                                "value": "automacao_24"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                                "type": "string",
+                                "value": "vivo@12345678"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "setPeriodicInterval_15": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                                "type": "unsignedInt",
+                                "value": "600"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "setAccessClass_17": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                                "type": "string",
+                                "value": "service04"
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     ]
 }

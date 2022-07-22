@@ -960,13 +960,13 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down'])   #15
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
             subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
             subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up'])   # xx WiFi
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
             time.sleep(15)
 
@@ -990,14 +990,21 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
                 print('\n\n#####################################################################')
+                try:
+                    time.sleep(1)
+                    self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/a/svg/use').click()
+                    time.sleep(3)
+                except Exception as e:
+                    print(e)
                 download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
-                print('Download Speed   -   ', download_speed)
+                print(' -- Download Speed   -   ', download_speed)
                 upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                print('Upload Speed     -   ', upload_speed)
+                print(' -- Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
             
+
             # Verificar a velocidade contratada
             down_speed_exp = 300
             up_speed_exp = 300
@@ -1029,6 +1036,21 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
 
         except Exception as exception:
             print(exception)
+
+            # Enabling other devices
+            pwd = '4ut0m4c40'
+            cmd = 'ls'
+            subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
+
+            subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
+            subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
+            subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
+            subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
+            subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
+            subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+
             self._driver.quit()
             self._dict_result.update({"obs": str(exception)})
         finally:

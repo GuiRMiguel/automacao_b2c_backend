@@ -1055,7 +1055,6 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
             time.sleep(15)
 
-            # Executing a Speed Test
             try:
                 try:
                     self._driver.set_page_load_timeout(15)
@@ -1075,10 +1074,16 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
                 print('\n\n#####################################################################')
+                try:
+                    time.sleep(1)
+                    self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/a/svg/use').click()
+                    time.sleep(3)
+                except Exception as e:
+                    print(e)
                 download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
-                print('Download Speed   -   ', download_speed)
+                print(' -- Download Speed   -   ', download_speed)
                 upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                print('Upload Speed     -   ', upload_speed)
+                print(' -- Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
@@ -1606,8 +1611,6 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
             subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
-            time.sleep(15)
-
 
             # Desabling Firewall
             pwd = '4ut0m4c40'
@@ -1615,6 +1618,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
             subprocess.run(['sudo', 'systemctl', 'stop', 'firewalld'])
             subprocess.run(['sudo', 'ufw', 'disable'])
+            time.sleep(15)
 
             # Making a request
             self._driver.get('http://ipv6-test.com/')
@@ -1626,7 +1630,7 @@ class HGU_MItraStarBROADCOM_functionalProbe(HGU_MItraStarBROADCOM):
 
                 if icmpv6_status != 'Reachable':
                     self._driver.quit()
-                    self._dict_result.update({'result': 'NOK' ,"obs": 'O ICMP não está acessível'})
+                    self._dict_result.update({'result': 'NOK' ,"obs": f'O ICMP não está acessível. Status: "{icmpv6_status}"'})
                 else:
                     self._driver.quit()
                     self._dict_result.update({"Resultado_Probe": "OK",'result':'passed', "obs": None})

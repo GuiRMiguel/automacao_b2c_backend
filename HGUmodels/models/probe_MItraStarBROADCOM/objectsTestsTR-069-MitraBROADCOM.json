@@ -21,7 +21,7 @@
                     {
                         "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
                         "type": "string",
-                        "value": "191.19.29.48"
+                        "value": "177.45.29.48"
                     },
                     {
                         "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
@@ -75,7 +75,7 @@
                     {
                         "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
                         "type": "string",
-                        "value": "automacao_24"
+                        "value": "V!VO-AUTO-2GHz"
                     },
                     {
                         "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
@@ -275,7 +275,7 @@
                     {
                         "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
                         "type": "boolean",
-                        "value": "0"
+                        "value": "1"
                     }
                 ]
             },

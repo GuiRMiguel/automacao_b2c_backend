@@ -956,16 +956,16 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
             time.sleep(15)
 
-
-
-            # Executing a Speed Test
             try:
                 try:
                     self._driver.set_page_load_timeout(15)
-                    self._driver.get(speed_test)
-                    self._driver.execute_script("window.stop();")
-                    self._driver.get(speed_test)
-                    self._driver.execute_script("window.stop();")
+                    try:
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
+                    except Exception as e:
+                        print(e)
+                        self._driver.get(speed_test)
+                        self._driver.execute_script("window.stop();")
                     self._driver.get(speed_test)
                 except Exception as e:
                     print(e)
@@ -974,16 +974,22 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
                 time.sleep(5)
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
-                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
-                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
                 print('\n\n#####################################################################')
-                print('Download Speed   -   ', download_speed)
-                print('Upload Speed     -   ', upload_speed)
+                try:
+                    time.sleep(1)
+                    self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/a/svg/use').click()
+                    time.sleep(3)
+                except Exception as e:
+                    print(e)
+                download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
+                print(' -- Download Speed   -   ', download_speed)
+                upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
+                print(' -- Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
 
-            # Habling other devices
+            # Enabling other devices
             pwd = '4ut0m4c40'
             cmd = 'ls'
             subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
@@ -2069,11 +2075,11 @@ class HGU_AskeyBROADCOM_functionalProbe(HGU_AskeyBROADCOM):
             time.sleep(1)
             self._driver.switch_to.frame('menufrm')
             time.sleep(3)
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[67]/table/tbody/tr/td/a').click()
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[68]/table/tbody/tr/td/a').click()
             time.sleep(1)
             self._driver.implicitly_wait(10)
             time.sleep(1)
-            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[76]/table/tbody/tr/td/a').click()
+            self._driver.find_element_by_xpath('/html/body/table/tbody/tr/td[2]/div[77]/table/tbody/tr/td/a').click()
             time.sleep(10)
 
             # Looking for specific informations

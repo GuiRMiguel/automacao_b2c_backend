@@ -199,11 +199,24 @@ class HGU_AskeyBROADCOM_wizardProbe(HGU_AskeyBROADCOM):
             except UnexpectedAlertPresentException as e:
                 time.sleep(2)
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
+            try:
+                time.sleep(1)
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                pass
+
+            time.sleep(10)
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').send_keys('cliente@cliente')
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').send_keys('cliente')
+            self._driver.find_element_by_xpath('//*[@id="btnSave"]').click()
+            time.sleep(22)
+
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
         
 

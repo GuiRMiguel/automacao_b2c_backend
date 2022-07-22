@@ -179,18 +179,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -315,18 +325,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -438,18 +458,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -479,7 +509,7 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
-            
+            print('\n ip:', dados_entrada['ip'][:-2], '\n')
             for value_parameter in gpv_get:
                 print(value_parameter)
                 if dados_entrada['ip'][:-2] not in value_parameter['value']:
@@ -499,18 +529,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
-                        test_result = {
+                        test_result = [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
                                 'obtainedResults': gpv_obj
-                                }  
-                        initial_data['tests'][0][test_name].update(test_result)
+                            }
+                            ]
+                        initial_data['tests'][0][test_name] = test_result
                     else:
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
                         test_result = {
-                        test_name: {
-                            'obtainedResults': gpv_obj
-                            }  
+                        test_name: [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_obj
+                            }
+                            ]
                         }
                         initial_data['tests'][0].update(test_result)
 
@@ -530,18 +570,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -571,6 +621,38 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             dados.update(dados_spv)
             dados_entrada = dados
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyBroadcom/objectsTestsTR069_AskeyBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setDHCP_10'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -596,6 +678,8 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             else:
                 dict_result = {"Resultado_Probe": "OK",
                             "obs": "Teste OK", "result": "passed"}
+
+            
         except Exception as e:
             dict_result = {'obs': f'{e}'}
         self._dict_result.update(dict_result)
@@ -619,6 +703,38 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyBroadcom/objectsTestsTR069_AskeyBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set2GHzWiFi_12'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -669,6 +785,38 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             dados.update(dados_spv)
             dados_entrada = dados
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyBroadcom/objectsTestsTR069_AskeyBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set5GHzWiFi_13'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -715,6 +863,38 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
             dados.update(dados_spv)
             dados_entrada = dados
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyBroadcom/objectsTestsTR069_AskeyBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setPeriodicInterval_15'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -756,6 +936,38 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyBroadcom/objectsTestsTR069_AskeyBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setAccessClass_17'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -889,21 +1101,31 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                        test_name: {
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
                                         }
+                                        ]
+                                    }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:
@@ -940,21 +1162,31 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                        test_name: {
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
                                         }
+                                        ]
+                                    }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:
@@ -985,18 +1217,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
-                        test_result = {
+                        test_result = [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
                                 'obtainedResults': gpv_obj
-                                }  
-                        initial_data['tests'][0][test_name].update(test_result)
+                            }
+                            ]
+                        initial_data['tests'][0][test_name] = test_result
                     else:
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
                         test_result = {
-                        test_name: {
-                            'obtainedResults': gpv_obj
-                            }  
+                        test_name: [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_obj
+                            }
+                            ]
                         }
                         initial_data['tests'][0].update(test_result)
 
@@ -1012,7 +1254,7 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
-     # 39
+    # 39
     def indexWifi24ghz_39(self, dados):
         try:
             dados_gpv = {'GPV_Param': {'parameterNames': [
@@ -1167,18 +1409,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -1348,18 +1600,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -1645,18 +1907,28 @@ class HGU_AskeyBROADCOM_settingsProbe(HGU_AskeyBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 

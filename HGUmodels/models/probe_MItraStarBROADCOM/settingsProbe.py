@@ -11,6 +11,7 @@ from paramiko.ssh_exception import AuthenticationException
 import socket
 from json import JSONEncoder
 import json
+import pprint
 
 # import pyperclip
 
@@ -1540,6 +1541,8 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                             }]}
                         dados.update(dict_object)
                         spv_dados_entrada = dados
+                        print('\n -- SPV Data -- ')
+                        pprint.pprint(spv_dados_entrada, width=59, depth=2)
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
                         if type(new_gpv_get) != list:
@@ -1590,7 +1593,8 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                             }]}
                         dados.update(dict_object)
                         spv_dados_entrada = dados
-                        print(spv_dados_entrada)
+                        print('\n -- SPV Data -- ')
+                        pprint.pprint(spv_dados_entrada, width=59, depth=2)
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
                         if type(new_gpv_get) != list:

@@ -572,7 +572,6 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
             subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
             time.sleep(15)
 
-            # Executing a Speed Test
             try:
                 try:
                     self._driver.set_page_load_timeout(15)
@@ -592,17 +591,23 @@ class HGU_MItraStarECNT_functionalProbe(HGU_MItraStarECNT):
                 self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]').click()
                 time.sleep(60)
                 print('\n\n#####################################################################')
+                try:
+                    time.sleep(1)
+                    self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/a/svg/use').click()
+                    time.sleep(3)
+                except Exception as e:
+                    print(e)
                 download_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[1]/div/div[2]/span').text)
-                print('Download Speed   -   ', download_speed)
+                print(' -- Download Speed   -   ', download_speed)
                 upload_speed = float(self._driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[3]/div/div/div[2]/div[1]/div[2]/div/div[2]/span').text)
-                print('Upload Speed     -   ', upload_speed)
+                print(' -- Upload Speed     -   ', upload_speed)
                 print('#####################################################################\n\n')
             except Exception as e:
                 print(e)
             
             # Verificar a velocidade contratada
-            down_speed_exp = 300
-            up_speed_exp = 300
+            down_speed_exp = 100
+            up_speed_exp = 100
 
             if download_speed < 0.8*down_speed_exp:
                 self._driver.quit()

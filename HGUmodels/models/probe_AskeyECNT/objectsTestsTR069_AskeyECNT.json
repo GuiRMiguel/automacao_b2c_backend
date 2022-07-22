@@ -1,124 +1,384 @@
 {
     "tests": [
         {
-            "initialInformations_4": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
-                        "type": "string",
-                        "value": "009096"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
-                        "type": "string",
-                        "value": "Askey"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ModelName",
-                        "type": "string",
-                        "value": "RTF8117VW"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
-                        "type": "string",
-                        "value": "RTF8117VW"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
-                        "type": "string",
-                        "value": "F45420941B71"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
-                        "type": "string",
-                        "value": "BR_SV_g12.6_RTF_TEF001_V7.20_V016"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
-                        "type": "string",
-                        "value": "189.79.218.85"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.URL",
-                        "type": "string",
-                        "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
-                        "type": "boolean",
-                        "value": "1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
-                        "type": "unsignedInt",
-                        "value": "108000"
+            "initialInformations_4": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                                "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                                "InternetGatewayDevice.DeviceInfo.ModelName",
+                                "InternetGatewayDevice.DeviceInfo.ProductClass",
+                                "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                                "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                                "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                                "InternetGatewayDevice.ManagementServer.URL",
+                                "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                                "InternetGatewayDevice.ManagementServer.PeriodicInformInterval"
+                            ]
+                        }
                     }
-                ]
-            },
-            "checkObjectsTelefonica_42": {
-                "obtainedResults": [
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                        "type": "string",
-                        "value": "service05"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
-                        "type": "boolean",
-                        "value": "0"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
-                        "type": "string",
-                        "value": null
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
-                        "type": "string",
-                        "value": "GPON"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
-                        "type": "string",
-                        "value": "Auto"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
-                        "type": "boolean",
-                        "value": "1"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
-                        "type": "string",
-                        "value": "Stateful"
-                    },
-                    {
-                        "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
-                        "type": "string",
-                        "value": null
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                            "type": "string",
+                            "value": "009096"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                            "type": "string",
+                            "value": "Askey"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ModelName",
+                            "type": "string",
+                            "value": "RTF8117VW"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
+                            "type": "string",
+                            "value": "RTF8117VW"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                            "type": "string",
+                            "value": "F45420941B71"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                            "type": "string",
+                            "value": "BR_SV_g12.6_RTF_TEF001_V7.20_V016"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                            "type": "string",
+                            "value": "177.189.20.6"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.URL",
+                            "type": "string",
+                            "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                            "type": "unsignedInt",
+                            "value": "600"
+                        }
+                    ]
+                }
+            ],
+            "checkObjectsTelefonica_42": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                                "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version"
+                            ]
+                        }
                     }
-                ]
-            }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                            "type": "string",
+                            "value": "service05"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
+                            "type": "boolean",
+                            "value": "0"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Provider",
+                            "type": "string",
+                            "value": "no-ip"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.User",
+                            "type": "string",
+                            "value": "telefonica.labs@gmail.com"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Password",
+                            "type": "string",
+                            "value": "vivo@123"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Hostname",
+                            "type": "string",
+                            "value": "telefonicalabs.ddns.net"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.ProviderURL",
+                            "type": "string",
+                            "value": "dynupdate.no-ip.com"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.WanMode",
+                            "type": "string",
+                            "value": "GPON"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.FTTHMode",
+                            "type": "string",
+                            "value": "Auto"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Type",
+                            "type": "string",
+                            "value": "Stateful"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR.Firewall.Version",
+                            "type": "string",
+                            "value": null
+                        }
+                    ]
+                }
+            ],
+            "checkIPv6Telefonica_43": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "name": "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "setDHCP_10": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                                "type": "string",
+                                "value": "192.168.15.6"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+                                "type": "string",
+                                "value": "192.168.15.150"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "set2GHzWiFi_12": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "type": "string",
+                                "value": "automacao_24"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                                "type": "string",
+                                "value": "vivo@12345678"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "set5GHzWiFi_13": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "type": "string",
+                                "value": "automacao_24"
+                            },
+                            {
+                                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                                "type": "string",
+                                "value": "vivo@12345678"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "setPeriodicInterval_15": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                                "type": "unsignedInt",
+                                "value": "600"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "setAccessClass_17": [
+                {
+                    "allObjects": {
+                        "SPV_Param": [
+                            {
+                                "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                                "type": "string",
+                                "value": "service05"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "wifi2GHzInformations_5": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                        }
+                    ]
+                }
+            ],
+            "wifi5GHzInformations_6": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                        }
+                    ]
+                }
+            ],
+            "indexWifi24ghz_39": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                        }
+                    ]
+                }
+            ],
+            "indexWifi5ghz_40": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
+                                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                        }
+                    ]
+                }
+            ],
+            "lanConfiguration_9": [
+                {
+                    "allObjects": {
+                        "GPV_Param": {
+                            "parameterNames": [
+                                "InternetGatewayDevice.LANDevice.1.Hosts.Host."
+                            ]
+                        }
+                    }
+                },
+                {
+                    "obtainedResults": [
+                        {
+                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

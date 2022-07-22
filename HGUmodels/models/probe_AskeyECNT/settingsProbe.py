@@ -27,6 +27,7 @@ from paramiko.ssh_exception import AuthenticationException, BadAuthenticationTyp
 from paramiko.ssh_exception import SSHException
 import socket
 from selenium.common.exceptions import UnexpectedAlertPresentException
+import pprint
 
 from HGUmodels.main_session import MainSession
 
@@ -193,24 +194,34 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {
                 "obs": e
@@ -226,12 +237,12 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",       # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType", # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",   # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",    # -> NOK
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
@@ -241,6 +252,44 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi2GHzInformations_5'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -332,24 +381,34 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -363,12 +422,12 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel"
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",       # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType", # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",   # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel"     # -> NOK
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
@@ -378,6 +437,44 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi5GHzInformations_6'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -457,18 +554,28 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -487,7 +594,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             
             dados_gpv = {'GPV_Param': {'parameterNames': [
-               "InternetGatewayDevice.LANDevice.1.Hosts.Host."
+               "InternetGatewayDevice.LANDevice.1.Hosts.Host."  # -> NOK
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
@@ -497,8 +604,46 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'lanConfiguration_9'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
-            
+            print('\nip: ', dados_entrada['ip'][:-2], '\n')
             for value_parameter in gpv_get:
                 print(value_parameter)
                 if dados_entrada['ip'][:-2] not in value_parameter['value']:
@@ -518,18 +663,28 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
-                        test_result = {
+                        test_result = [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
                                 'obtainedResults': gpv_obj
-                                }  
-                        initial_data['tests'][0][test_name].update(test_result)
+                            }
+                            ]
+                        initial_data['tests'][0][test_name] = test_result
                     else:
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
                         test_result = {
-                        test_name: {
-                            'obtainedResults': gpv_obj
-                            }  
+                        test_name: [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_obj
+                            }
+                            ]
                         }
                         initial_data['tests'][0].update(test_result)
 
@@ -549,18 +704,28 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -580,16 +745,48 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             
             dados_spv = {'SPV_Param': [
                 {
-                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress", # -> NOK
                     "type": "string",
                     "value": "192.168.15.6"
                 }, {
-                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress", # -> NOK
                     "type": "string",
                     "value": "192.168.15.150"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setDHCP_10'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -625,17 +822,49 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             
             dados_spv = {'SPV_Param': [
                 {
-                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",                           # -> NOK
                     "type": "string",
                     "value": "automacao_24"
                 },
                 {
-                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",   # -> NOK
                     "type": "string",
                     "value": "vivo@12345678"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set2GHzWiFi_12'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -673,17 +902,49 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             
             dados_spv = {'SPV_Param': [
                 {
-                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",                           # -> NOK
                     "type": "string",
                     "value": "automacao_24"
                 },
                 {
-                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",   # -> NOK
                     "type": "string",
                     "value": "vivo@12345678"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set5GHzWiFi_13'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -723,12 +984,44 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             
             dados_spv = {'SPV_Param': [
                 {
-                    "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                    "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",    # -> NOK
                     "type": "unsignedInt",
                     "value": "600"
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setPeriodicInterval_15'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -803,6 +1096,38 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         dados.update(dados_spv)
         dados_entrada = dados
 
+        objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+        with open(objectFile, 'r') as initial_file:
+            initial_data = json.load(initial_file)
+
+        keys_list = initial_data['tests'][0].keys()
+        test_name = 'setAccessClass_17'
+        if test_name in keys_list:
+            # gpv_obj = list()
+            # for i in gpv_get:
+            #     gpv_obj.append(i)
+            test_result = [
+                {
+                    'allObjects': dados_spv 
+                }
+                ]
+            initial_data['tests'][0][test_name] = test_result
+        else:
+            # gpv_obj = list()
+            # for i in gpv_get:
+            #     gpv_obj.append(i)
+            test_result = {
+            test_name: [
+                {
+                    'allObjects': dados_spv 
+                }
+                ]
+            }
+            initial_data['tests'][0].update(test_result)
+
+        with open(objectFile, 'w') as final_file:
+            json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
         # SET
         spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -851,17 +1176,17 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",                         # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",                         # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",                           # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",                     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",                       # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",                        # -> NOK
                 #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_TELEFONICA-ES_Bandwidth",      # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",   # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPAEncryptionModes",             # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WPS.Enable"                      # -> NOK
         
             ]}}
             dados.update(dados_gpv)
@@ -870,9 +1195,47 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                    self._dict_result.update(gpv_get)
-                    print('\n', self._dict_result, '\n')
-                    return self._dict_result
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi24ghz_39'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
             print(gpv_get)
             for value_parameter in gpv_get:
@@ -991,6 +1354,45 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 else:
                     dict_result = {
                         "obs": f"Objeto {value_parameter['name']} não encontrado"}
+            
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'indexWifi24ghz_39'
+            if test_name in keys_list:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                gpv_obj = list()
+                for i in gpv_get:
+                    gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
         except Exception as e:
             print(e)
             dict_result = {'obs': f'{e}'}
@@ -1003,18 +1405,18 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         try:
             
             dados_gpv = {'GPV_Param': {'parameterNames': [
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Enable",                         # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",                         # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",                           # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",                     # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",                       # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",                        # -> NOK
 
                 #"InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_BROADCOM_COM_WlanAdapter.WlBaseCfg.WlCountry",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",
-                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.X_TELEFONICA-ES_Bandwidth",      # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",   # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPAEncryptionModes",             # -> NOK
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.WPS.Enable"                      # -> NOK
             ]}}
             dados.update(dados_gpv)
             dados_entrada = dados
@@ -1022,9 +1424,47 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                    self._dict_result.update(gpv_get)
-                    print('\n', self._dict_result, '\n')
-                    return self._dict_result
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi5ghz_40'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -1155,24 +1595,34 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+                
         except Exception as e:
             print(e)
             dict_result = {'obs': f'{e}'}
@@ -1453,24 +1903,34 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {
                 "obs": e
@@ -1497,7 +1957,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 return self._dict_result
 
             for value_parameter in gpv_get:
-                print(value_parameter)
+                print('\n -- Value Parameter -- ')
+                pprint.pprint(value_parameter)
                 if value_parameter['name'] == "InternetGatewayDevice.X_VIVO_COM_BR_IPv6Forwarding.IPv6Forwarding.1.Enable":
                     if value_parameter['value'] == '1':
                         # print('oi -1')
@@ -1511,6 +1972,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                         spv_dados_entrada = dados
                         # print(spv_dados_entrada)
                         # print('oi - 2')
+                        print('\n -- SPV Data -- ')
+                        pprint.pprint(spv_dados_entrada, width=59, depth=2)
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
                         for new_value_parameter in new_gpv_get:
@@ -1525,26 +1988,38 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
+                                            'obtainedResults': gpv_obj
+                                        }
+                                        ]
                                     }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:
                                     json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                             else:
+                                print('\n -- New Value Parameter -- ')
+                                pprint.pprint(new_value_parameter)
                                 dict_result = {
                                     "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                     elif value_parameter['value'] == '0':
@@ -1557,8 +2032,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                             }]}
                         dados.update(dict_object)
                         spv_dados_entrada = dados
-                        # print(spv_dados_entrada)
-                        # print('oi - 12')
+                        print('\n -- SPV Data -- ')
+                        pprint.pprint(spv_dados_entrada, width=59, depth=2)
                         spv__result = utils.ACS.setParameterValues(**spv_dados_entrada)
                         new_gpv_get = utils.ACS.getParameterValues(**dados_entrada)
                         for new_value_parameter in new_gpv_get:
@@ -1573,26 +2048,38 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
+                                            'obtainedResults': gpv_obj
+                                        }
+                                        ]
                                     }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:
                                     json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                             else:
+                                print('\n -- New Value Parameter -- ')
+                                pprint.pprint(new_value_parameter)
                                 dict_result = {
                                     "obs": f"Objeto {value_parameter['name']} obteve um valor diferente"}
                                     
@@ -1606,7 +2093,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
             self._dict_result.update(dict_result)
 
             if dict_result != {"Resultado_Probe": "OK", "obs": "Teste OK", "result": "passed"}:
-                objectFile = 'automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
                 with open(objectFile, 'r') as initial_file:
                     initial_data = json.load(initial_file)
 
@@ -1616,18 +2103,28 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
-                    test_result = {
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
                             'obtainedResults': gpv_obj
-                            }  
-                    initial_data['tests'][0][test_name].update(test_result)
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
                 else:
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
                     test_result = {
-                    test_name: {
-                        'obtainedResults': gpv_obj
-                        }  
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
                     }
                     initial_data['tests'][0].update(test_result)
 

@@ -186,11 +186,25 @@ class HGU_AskeyECNT_wizardProbe(HGU_AskeyECNT):
                         self._dict_result.update({"obs": f"Erro de autenticacao com as credenciais PPPoE inseridas pelo usuario.", "result":"passed", "Resultado_Probe": "OK"})
             except UnexpectedAlertPresentException as e:                
                 self._dict_result.update({"obs": f"Teste falhou. {e}", "result":"passed", "Resultado_Probe": "OK"})
-            finally:
-                self._driver.quit()
+            
+            try:
+                time.sleep(1)
+                self._driver.switch_to.alert.accept()
+            except Exception as e:
+                pass
+
+            time.sleep(15)
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtUsername"]').send_keys('cliente@cliente')
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').clear()
+            self._driver.find_element_by_xpath('//*[@id="txtPassword"]').send_keys('cliente')
+            self._driver.find_element_by_xpath('//*[@id="btnSave"]').click()
+            time.sleep(15)
+
         except Exception as e:
             self._dict_result.update({"obs": e})
         finally:
+            self._driver.quit()
             return self._dict_result  
 
 
