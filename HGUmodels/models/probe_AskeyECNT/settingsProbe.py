@@ -53,19 +53,6 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     def initialInformations_4(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
         try:
-            try:
-                with open('objectsTestsTR-069.json', 'r') as tests_file:
-                    initial_data = tests_file
-            except:
-                pass
-
-            test_result = {'tests': {
-                'initialInformations_4': [
-                    {'obtainedResults': None},
-                    {'expectedResults': None}
-                ]
-                }
-            }
 
             dados_gpv = {'GPV_Param': {'parameterNames': [
                 "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",

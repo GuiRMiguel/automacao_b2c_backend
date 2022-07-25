@@ -63,6 +63,43 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             if type(gpv_get) != list:
                 dict_result = gpv_get
                 self._dict_result.update(dict_result)
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'initialInformations_4'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
             parameter = default_settings['Default_Settings']
@@ -169,18 +206,28 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -212,6 +259,48 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi2GHzInformations_5'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -302,18 +391,28 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -344,6 +443,48 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi5GHzInformations_6'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -422,24 +563,34 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -459,7 +610,45 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'lanConfiguration_9'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_get['obs']
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_get['obs']
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
             
@@ -472,6 +661,7 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                     dict_result = {"Resultado_Probe": "OK",
                                         "obs": "Teste OK", "result": "passed"}
                     self._dict_result.update(dict_result)
+
                     objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
                     with open(objectFile, 'r') as initial_file:
                         initial_data = json.load(initial_file)
@@ -482,18 +672,28 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
-                        test_result = {
+                        test_result = [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
                                 'obtainedResults': gpv_obj
-                                }  
-                        initial_data['tests'][0][test_name].update(test_result)
+                            }
+                            ]
+                        initial_data['tests'][0][test_name] = test_result
                     else:
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
                         test_result = {
-                        test_name: {
-                            'obtainedResults': gpv_obj
-                            }  
+                        test_name: [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_obj
+                            }
+                            ]
                         }
                         initial_data['tests'][0].update(test_result)
 
@@ -513,24 +713,34 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             self._dict_result.update({"obs": f"{e}"})
         finally:
@@ -541,95 +751,168 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
     # 10
     def setDHCP_10(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                    "type": "string",
+                    "value": "172.16.192.6"
+                }, {
+                    "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
+                    "type": "string",
+                    "value": "172.16.192.150"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
-                "type": "string",
-                "value": "172.16.192.6"
-            }, {
-                "name": "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress",
-                "type": "string",
-                "value": "172.16.192.150"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setDHCP_10'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
-            "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
-                print('\n', self._dict_result, '\n')
-                return self._dict_result
-        
-        if gpv_get[0]['value'] != "172.16.192.6":
-            dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] != "172.16.192.150":
-            dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
-        else:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        self._dict_result.update(dict_result)
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MinAddress",
+                "InternetGatewayDevice.LANDevice.1.LANHostConfigManagement.MaxAddress"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                    dict_result = gpv_get
+                    self._dict_result.update(dict_result)
+                    print('\n', self._dict_result, '\n')
+                    return self._dict_result
+            
+            if gpv_get[0]['value'] != "172.16.192.6":
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] != "172.16.192.150":
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            else:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': e}
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
     # 12
     def set2GHzWiFi_12(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                    "type": "string",
+                    "value": "automacao_24"
+                },
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
+                    "type": "string",
+                    "value": "vivo@12345678"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-                "type": "string",
-                "value": "automacao_24"
-            },
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase",
-                "type": "string",
-                "value": "vivo@12345678"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set2GHzWiFi_12'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
-                print('\n', self._dict_result, '\n')
-                return self._dict_result
-        if gpv_get[0]['value'] != 'automacao_24':
-            dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        else:
-            dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                    dict_result = gpv_get
+                    self._dict_result.update(dict_result)
+                    print('\n', self._dict_result, '\n')
+                    return self._dict_result
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            else:
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': e}
+            self._dict_result.update(dict_result)
         self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
@@ -637,48 +920,84 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
     # 13
     def set5GHzWiFi_13(self, dados):
         # TODO: This function needs refactoring, zeep library not working, test crashing
+        try:
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                    "type": "string",
+                    "value": "automacao_24"
+                },
+                {
+                    "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
+                    "type": "string",
+                    "value": "vivo@12345678"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-                "type": "string",
-                "value": "automacao_24"
-            },
-            {
-                "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase",
-                "type": "string",
-                "value": "vivo@12345678"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set5GHzWiFi_13'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
 
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
-            "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
-                print('\n', self._dict_result, '\n')
-                return self._dict_result
-        if gpv_get[0]['value'] != 'automacao_24':
-            dict_result = {
-                "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
-        elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
-            dict_result = {"Resultado_Probe": "OK",
-                           "obs": "Teste OK", "result": "passed"}
-        else:
-            dict_result = {
-                "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
-        self._dict_result.update(dict_result)
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
+                "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.PreSharedKey.1.KeyPassphrase"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                    dict_result = gpv_get
+                    self._dict_result.update(dict_result)
+                    print('\n', self._dict_result, '\n')
+                    return self._dict_result
+            if gpv_get[0]['value'] != 'automacao_24':
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[0]['name']} não encontrado"}
+            elif gpv_get[1]['value'] == "vivo@12345678" or gpv_get[1]['value'] is None:
+                dict_result = {"Resultado_Probe": "OK",
+                            "obs": "Teste OK", "result": "passed"}
+            else:
+                dict_result = {
+                    "obs": f"Objeto {gpv_get[1]['name']} não encontrado"}
+            self._dict_result.update(dict_result)
+        except Exception as e:
+            print(e)
+            dict_result = {'obs': e}
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
@@ -693,6 +1012,38 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setPeriodicInterval_15'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -736,6 +1087,38 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setAccessClass_17'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -856,9 +1239,46 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
+                self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi24ghz_39'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -988,24 +1408,34 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             print(e)
             dict_result = {'obs': f'{e}'}
@@ -1036,9 +1466,46 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
+                self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi5ghz_40'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -1169,24 +1636,34 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             print(e)
             dict_result = {'obs': f'{e}'}
@@ -1315,14 +1792,48 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                dict_result = gpv_get
-                self._dict_result.update(dict_result)
-                print('\n', self._dict_result, '\n')
-                return self._dict_result
-            print(gpv_get)
-            if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarBROADCOM/objectsTestsTR-069-MitraBROADCOM.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'checkObjectsTelefonica_42'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
                 return self._dict_result
 
             for value_parameter in gpv_get:
@@ -1474,24 +1985,34 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {
                 "obs": e
@@ -1562,21 +2083,31 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                        test_name: {
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
                                         }
+                                        ]
+                                    }
                                     initial_data['tests'][0].update(test_result)
 
                                 with open(objectFile, 'w') as final_file:
@@ -1614,20 +2145,30 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
+                                            'obtainedResults': gpv_obj
+                                        }
+                                        ]
                                     }
                                     initial_data['tests'][0].update(test_result)
 
@@ -1656,18 +2197,28 @@ class HGU_MItraStarBROADCOM_settingsProbe(HGU_MItraStarBROADCOM):
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
-                    test_result = {
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
                             'obtainedResults': gpv_obj
-                            }  
-                    initial_data['tests'][0][test_name].update(test_result)
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
                 else:
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
                     test_result = {
-                    test_name: {
-                        'obtainedResults': gpv_obj
-                        }  
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
                     }
                     initial_data['tests'][0].update(test_result)
 

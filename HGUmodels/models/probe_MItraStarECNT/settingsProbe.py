@@ -59,7 +59,45 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'initialInformations_4'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
             parameter = default_settings['Default_Settings']
@@ -158,7 +196,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
             with open(objectFile, 'r') as initial_file:
-                initial_data = json.load(initial_file)
+                    initial_data = json.load(initial_file)
 
             keys_list = initial_data['tests'][0].keys()
             test_name = 'initialInformations_4'
@@ -166,24 +204,34 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {
                             "obs": e}
@@ -211,6 +259,44 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'                
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi2GHzInformations_5'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -294,7 +380,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         
             objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
             with open(objectFile, 'r') as initial_file:
-                initial_data = json.load(initial_file)
+                    initial_data = json.load(initial_file)
 
             keys_list = initial_data['tests'][0].keys()
             test_name = 'wifi2GHzInformations_5'
@@ -302,24 +388,34 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -347,6 +443,45 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'wifi5GHzInformations_6'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 return self._dict_result
             parameter = default_settings['Default_Settings']
 
@@ -425,24 +560,34 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
         except Exception as e:
             dict_result = {'obs': f'{e}'}
 
@@ -462,10 +607,48 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
+                dict_result = gpv_get
+                self._dict_result.update(dict_result)
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'lanConfiguration_9'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_get
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_get
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
                 print('\n', self._dict_result, '\n')
                 return self._dict_result
-            print('\n\ngpv_get: ', gpv_get, '\n\n')
             
             for value_parameter in gpv_get:
                 print(value_parameter)
@@ -486,18 +669,28 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
-                        test_result = {
-                                'obtainedResults': gpv_obj
-                                }  
-                        initial_data['tests'][0][test_name].update(test_result)
+                        test_result = [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_get
+                            }
+                            ]
+                        initial_data['tests'][0][test_name] = test_result
                     else:
                         gpv_obj = list()
                         for i in gpv_get:
                             gpv_obj.append(i)
                         test_result = {
-                        test_name: {
-                            'obtainedResults': gpv_obj
-                            }  
+                        test_name: [
+                            {
+                                'allObjects': dados_gpv 
+                            },
+                            {
+                                'obtainedResults': gpv_get
+                            }
+                            ]
                         }
                         initial_data['tests'][0].update(test_result)
 
@@ -517,18 +710,28 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
-                        'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_get
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_get
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -557,6 +760,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setDHCP_10'
+            if test_name in keys_list:
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -602,6 +831,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set2GHzWiFi_12'
+            if test_name in keys_list:
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -653,6 +908,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados.update(dados_spv)
             dados_entrada = dados
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'set5GHzWiFi_13'
+            if test_name in keys_list:
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -699,6 +980,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados.update(dados_spv)
             dados_entrada = dados
 
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setPeriodicInterval_15'
+            if test_name in keys_list:
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
@@ -736,6 +1043,32 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 }]}
             dados.update(dados_spv)
             dados_entrada = dados
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setAccessClass_17'
+            if test_name in keys_list:
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             # SET
             spv_set = utils.ACS.setParameterValues(**dados_entrada)
@@ -834,6 +1167,49 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            if type(gpv_get) != list:
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi24ghz_39'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
             print(gpv_get)
             for value_parameter in gpv_get:
@@ -963,27 +1339,39 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
-        
+
+            self._dict_result.update(dict_result)
         except Exception as e:
             print(e)
             dict_result = {'obs': f'{e}'}
+            self._dict_result.update(dict_result)
         finally:
             self._dict_result.update(dict_result)
             print('\n', self._dict_result, '\n')
@@ -1012,9 +1400,48 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             # GET
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                    self._dict_result.update(gpv_get)
-                    print('\n', self._dict_result, '\n')
-                    return self._dict_result
+                self._dict_result.update(gpv_get)
+                print('\n', self._dict_result, '\n')
+                gpv_get = [gpv_get]
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'indexWifi5ghz_40'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
             parameter = default_settings['Default_Settings']
 
             for value_parameter in gpv_get:
@@ -1145,18 +1572,28 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -1288,11 +1725,48 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-            print(gpv_get)
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
-                return self._dict_result
+                gpv_get = [gpv_get]
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'checkObjectsTelefonica_42'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             for value_parameter in gpv_get:
                 print('\nvalue parameter:', value_parameter['value'])
@@ -1443,18 +1917,28 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
-                test_result = {
+                test_result = [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
                         'obtainedResults': gpv_obj
-                        }  
-                initial_data['tests'][0][test_name].update(test_result)
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
             else:
                 gpv_obj = list()
                 for i in gpv_get:
                     gpv_obj.append(i)
                 test_result = {
-                test_name: {
-                    'obtainedResults': gpv_obj
-                    }  
+                test_name: [
+                    {
+                        'allObjects': dados_gpv 
+                    },
+                    {
+                        'obtainedResults': gpv_obj
+                    }
+                    ]
                 }
                 initial_data['tests'][0].update(test_result)
 
@@ -1483,7 +1967,45 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             if type(gpv_get) != list:
                 self._dict_result.update(gpv_get)
                 print('\n', self._dict_result, '\n')
-                return self._dict_result
+                gpv_get = [gpv_get]
+
+                objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_MItraStarECNT/objectsTestsTR069_MitraECNT.json'
+                with open(objectFile, 'r') as initial_file:
+                    initial_data = json.load(initial_file)
+
+                keys_list = initial_data['tests'][0].keys()
+                test_name = 'checkIPv6Telefonica_43'
+                if test_name in keys_list:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
+                else:
+                    gpv_obj = list()
+                    for i in gpv_get:
+                        gpv_obj.append(i)
+                    test_result = {
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
+                    }
+                    initial_data['tests'][0].update(test_result)
+
+                with open(objectFile, 'w') as final_file:
+                    json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
 
             for value_parameter in gpv_get:
                 print(value_parameter)
@@ -1514,20 +2036,30 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
+                                            'obtainedResults': gpv_obj
+                                        }
+                                        ]
                                     }
                                     initial_data['tests'][0].update(test_result)
 
@@ -1562,20 +2094,30 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                                 test_name = 'checkIPv6Telefonica_43'
                                 if test_name in keys_list:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
-                                    test_result = {
+                                    test_result = [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
                                             'obtainedResults': gpv_obj
-                                            }  
-                                    initial_data['tests'][0][test_name].update(test_result)
+                                        }
+                                        ]
+                                    initial_data['tests'][0][test_name] = test_result
                                 else:
                                     gpv_obj = list()
-                                    for i in new_gpv_get:
+                                    for i in gpv_get:
                                         gpv_obj.append(i)
                                     test_result = {
-                                    test_name: {
-                                        'obtainedResults': gpv_obj
-                                        }  
+                                    test_name: [
+                                        {
+                                            'allObjects': dados_gpv 
+                                        },
+                                        {
+                                            'obtainedResults': gpv_obj
+                                        }
+                                        ]
                                     }
                                     initial_data['tests'][0].update(test_result)
 
@@ -1604,18 +2146,28 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
-                    test_result = {
+                    test_result = [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
                             'obtainedResults': gpv_obj
-                            }  
-                    initial_data['tests'][0][test_name].update(test_result)
+                        }
+                        ]
+                    initial_data['tests'][0][test_name] = test_result
                 else:
                     gpv_obj = list()
                     for i in gpv_get:
                         gpv_obj.append(i)
                     test_result = {
-                    test_name: {
-                        'obtainedResults': gpv_obj
-                        }  
+                    test_name: [
+                        {
+                            'allObjects': dados_gpv 
+                        },
+                        {
+                            'obtainedResults': gpv_obj
+                        }
+                        ]
                     }
                     initial_data['tests'][0].update(test_result)
 
