@@ -1068,64 +1068,65 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                 dict_result = {"Resultado_Probe": "OK",
                                "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
+
+            objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
+            with open(objectFile, 'r') as initial_file:
+                initial_data = json.load(initial_file)
+
+            keys_list = initial_data['tests'][0].keys()
+            test_name = 'setAccessClass_17'
+            if test_name in keys_list:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                initial_data['tests'][0][test_name] = test_result
+            else:
+                # gpv_obj = list()
+                # for i in gpv_get:
+                #     gpv_obj.append(i)
+                test_result = {
+                test_name: [
+                    {
+                        'allObjects': dados_spv 
+                    }
+                    ]
+                }
+                initial_data['tests'][0].update(test_result)
+
+            with open(objectFile, 'w') as final_file:
+                json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                
         except Exception as e:
             dict_result = {
                 "obs": f'{e}'}
             self._dict_result.update(dict_result)
         
-        # Set default value
-        dados_spv = {'SPV_Param': [
-            {
-                "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
-                "type": "string",
-                "value": "service05"
-            }]}
-        dados.update(dados_spv)
-        dados_entrada = dados
-
-        objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
-        with open(objectFile, 'r') as initial_file:
-            initial_data = json.load(initial_file)
-
-        keys_list = initial_data['tests'][0].keys()
-        test_name = 'setAccessClass_17'
-        if test_name in keys_list:
-            # gpv_obj = list()
-            # for i in gpv_get:
-            #     gpv_obj.append(i)
-            test_result = [
+            # Set default value
+            dados_spv = {'SPV_Param': [
                 {
-                    'allObjects': dados_spv 
-                }
-                ]
-            initial_data['tests'][0][test_name] = test_result
-        else:
-            # gpv_obj = list()
-            # for i in gpv_get:
-            #     gpv_obj.append(i)
-            test_result = {
-            test_name: [
-                {
-                    'allObjects': dados_spv 
-                }
-                ]
-            }
-            initial_data['tests'][0].update(test_result)
+                    "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                    "type": "string",
+                    "value": "service05"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
 
-        with open(objectFile, 'w') as final_file:
-            json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
 
-        # SET
-        spv_set = utils.ACS.setParameterValues(**dados_entrada)
-
-        # GET
-        dados_gpv = {'GPV_Param': {'parameterNames': [
-            "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
-        ]}}
-        dados.update(dados_gpv)
-        dados_entrada = dados
-        gpv_get = utils.ACS.getParameterValues(**dados_entrada)
-        print(gpv_get)
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            print(gpv_get)
         
         print('\n', self._dict_result, '\n')
         return self._dict_result

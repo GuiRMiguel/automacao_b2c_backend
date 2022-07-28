@@ -44,7 +44,34 @@
                 {
                     "obtainedResults": [
                         {
-                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
+                            "type": "string",
+                            "value": "Up"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
+                            "type": "string",
+                            "value": "V!VO-AUTO-2GHz"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
+                            "type": "string",
+                            "value": "11i"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
+                            "type": "string",
+                            "value": "n"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
+                            "type": "unsignedInt",
+                            "value": "9"
                         }
                     ]
                 }
