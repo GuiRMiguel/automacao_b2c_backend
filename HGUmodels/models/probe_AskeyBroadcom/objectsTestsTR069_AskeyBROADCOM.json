@@ -40,7 +40,7 @@
                         {
                             "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
                             "type": "string",
-                            "value": "200.158.213.39"
+                            "value": "179.247.162.44"
                         },
                         {
                             "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
@@ -95,7 +95,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel",
                             "type": "unsignedInt",
-                            "value": "6"
+                            "value": "1"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard",
@@ -110,7 +110,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
                             "type": "string",
-                            "value": "automacao_24"
+                            "value": "VIVO automacao 2GHz"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
@@ -145,7 +145,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
                             "type": "unsignedInt",
-                            "value": "36"
+                            "value": "100"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
@@ -160,7 +160,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
                             "type": "string",
-                            "value": "automacao_24"
+                            "value": "VIVO automacao 5GHz"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Status",
@@ -323,7 +323,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Channel",
                             "type": "unsignedInt",
-                            "value": "36"
+                            "value": "100"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.Standard",
@@ -417,7 +417,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status",
                             "type": "string",
-                            "value": "Up"
+                            "value": "Disabled"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable",

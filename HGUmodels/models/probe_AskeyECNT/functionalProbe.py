@@ -1743,7 +1743,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.quit()
             return self._dict_result
 
-    #29
+    # 29
     def changeIPDhcpViaWizard_29(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/')
@@ -1813,7 +1813,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         finally:
             return self._dict_result  
 
-    #30
+    # 30
     def useDMZ_30(self, flask_username):
         """
             Turn on DMZ
@@ -1904,7 +1904,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._driver.quit()
             return self._dict_result
 
-    #32
+    # 32
     def UpgradeDowngradeFirmware_32(self, flask_username):
         try:
             self._driver.get('http://' + self._address_ip + '/padrao')
@@ -1998,7 +1998,6 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             self._dict_result.update({"obs": e})
         finally:
             return self._dict_result  
-
 
     # SO funciona para o Askey ECNT
     def validiteConectStbTv_41(self, flask_username):
@@ -2758,6 +2757,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             # Entering on Advanced Interface
             time.sleep(1)
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
             self._driver.find_element_by_id('btnLogin').click()
@@ -2909,6 +2909,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
         try:
             # Entering on Advanced Interface
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
             self._driver.find_element_by_id('btnLogin').click()
@@ -3259,6 +3260,7 @@ class HGU_AskeyECNT_functionalProbe(HGU_AskeyECNT):
             # Entering on Advanced Interface
             time.sleep(1)
             self._driver.get('http://' + self._address_ip + '/padrao')
+            time.sleep(3)
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/input').send_keys("support")
             self._driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/table/tbody/tr[3]/td[2]/input').send_keys(self._password)
             self._driver.find_element_by_id('btnLogin').click()

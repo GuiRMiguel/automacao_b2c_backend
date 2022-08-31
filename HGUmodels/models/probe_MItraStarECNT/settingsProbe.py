@@ -1373,7 +1373,6 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dict_result = {'obs': f'{e}'}
             self._dict_result.update(dict_result)
         finally:
-            self._dict_result.update(dict_result)
             print('\n', self._dict_result, '\n')
             return self._dict_result
 
@@ -1604,7 +1603,6 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             print(e)
             dict_result = {'obs': f'{e}'}
         finally:
-            self._dict_result.update(dict_result)
             print('\n', self._dict_result, '\n')
             return self._dict_result
 
@@ -1726,7 +1724,9 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
+                dict_value = str(gpv_get['obs'])
+                dict_result = {'obs': dict_value}
+                self._dict_result.update(dict_result)
                 print('\n', self._dict_result, '\n')
                 gpv_get = [gpv_get]
 
@@ -1767,6 +1767,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
                 with open(objectFile, 'w') as final_file:
                     json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
 
             for value_parameter in gpv_get:
                 print('\nvalue parameter:', value_parameter['value'])
@@ -1944,13 +1945,13 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
             with open(objectFile, 'w') as final_file:
                 json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+            self._dict_result.update(dict_result)
 
         except Exception as e:
             dict_result = {
-                "obs": e
+                "obs": f'{e}'
             }
-        self._dict_result.update(dict_result)
-
+            self._dict_result.update(dict_result)
         print('\n', self._dict_result, '\n')
         return self._dict_result
 
@@ -1965,7 +1966,9 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
             dados_entrada = dados
             gpv_get = utils.ACS.getParameterValues(**dados_entrada)
             if type(gpv_get) != list:
-                self._dict_result.update(gpv_get)
+                dict_value = str(gpv_get['obs'])
+                dict_result = {'obs': dict_value}
+                self._dict_result.update(dict_result)
                 print('\n', self._dict_result, '\n')
                 gpv_get = [gpv_get]
 
@@ -2006,6 +2009,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
 
                 with open(objectFile, 'w') as final_file:
                     json.dump(dict(initial_data), final_file, indent=4, separators=(',', ': '))
+                return self._dict_result
 
             for value_parameter in gpv_get:
                 print(value_parameter)
@@ -2176,7 +2180,7 @@ class HGU_MItraStarECNT_settingsProbe(HGU_MItraStarECNT):
         
         except Exception as e:
             dict_result = {
-                "obs": e
+                "obs": f'{e}'
             }
             self._dict_result.update(dict_result)
 

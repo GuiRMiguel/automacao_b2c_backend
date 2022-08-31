@@ -997,7 +997,7 @@ class ACS():
                                     print('\n\n >>> Finalizando Firmware Update ACS - Tempo de Execução:', total_time, '\n\n')
                                     dict_result = {'obs': 'Não foi possível fazer o upgrade da versão do firmware'}
                                     return dict_result
-                                # Todo: Fazer comparação entre versão que estava antes e versão que será atualizada
+                                # TODO: Fazer comparação entre versão que estava antes e versão que será atualizada
                             else:
                                 final_time = time.time()
                                 total_time = (final_time - ts)

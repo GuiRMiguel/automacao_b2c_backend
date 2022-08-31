@@ -1069,6 +1069,28 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
                                "obs": "Teste OK", "result": "passed"}
             self._dict_result.update(dict_result)
 
+            # Set default value
+            dados_spv = {'SPV_Param': [
+                {
+                    "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
+                    "type": "string",
+                    "value": "service05"
+                }]}
+            dados.update(dados_spv)
+            dados_entrada = dados
+
+            # SET
+            spv_set = utils.ACS.setParameterValues(**dados_entrada)
+
+            # GET
+            dados_gpv = {'GPV_Param': {'parameterNames': [
+                "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass"
+            ]}}
+            dados.update(dados_gpv)
+            dados_entrada = dados
+            gpv_get = utils.ACS.getParameterValues(**dados_entrada)
+            print(gpv_get)
+
             objectFile = '/home/automacao/Projects/automacao_b2c_backend/HGUmodels/models/probe_AskeyECNT/objectsTestsTR069_AskeyECNT.json'
             with open(objectFile, 'r') as initial_file:
                 initial_data = json.load(initial_file)
@@ -2146,6 +2168,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     def firmwareUpgrade_50(self, dados):
         try:
             dados_entrada = dados
+            print('\n\n -- Firmware File: ', dados_entrada['firmware_file'], '\n\n')
             firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
 
             self._dict_result.update(firmware_up)
@@ -2158,8 +2181,8 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
     # 51
     def firmwareDowngrade_51(self, dados):
         try:
-            
             dados_entrada = dados
+            print('\n\n -- Firmware File: ', dados_entrada['firmware_file'], '\n\n')
             firmware_up = utils.ACS.firmwareUpdate(**dados_entrada)
 
             self._dict_result.update(firmware_up)
@@ -2168,6 +2191,7 @@ class HGU_AskeyECNT_settingsProbe(HGU_AskeyECNT):
         finally:
             print('\n', self._dict_result, '\n')
             return self._dict_result
+
 
     def accessWizard_401(self, flask_username):
         try:

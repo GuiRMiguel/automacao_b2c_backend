@@ -26,14 +26,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -41,14 +38,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar # 50ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -87,14 +81,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -102,14 +93,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -145,14 +133,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -160,14 +145,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -203,14 +185,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -218,14 +197,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -261,14 +237,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -276,14 +249,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -319,14 +289,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -334,14 +301,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -376,14 +340,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -391,14 +352,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -433,14 +391,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -448,14 +403,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -491,14 +443,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -506,14 +455,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -549,14 +495,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -564,14 +507,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -608,14 +548,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -623,14 +560,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -667,14 +601,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -682,14 +613,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
 
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
@@ -726,14 +654,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -741,14 +666,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -784,14 +706,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -799,14 +718,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -843,14 +759,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -858,14 +771,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -900,14 +810,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -915,14 +822,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -959,14 +863,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -974,14 +875,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {
@@ -1022,14 +920,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'down']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'down']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'down']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'down']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'down']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'down']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'down']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'down']) # Askey BROADCOM
         time.sleep(5)
 
         # Enabling other devices
@@ -1037,14 +932,11 @@ class acs:
         cmd = 'ls'
         subprocess.call('echo {} | sudo -S {}'.format(pwd, cmd), shell=True)
 
-        subprocess.run(['sudo', 'ifconfig', 'ens192', 'up']) #15
-        subprocess.run(['sudo', 'ifconfig', 'ens256', 'up']) #16
-        subprocess.run(['sudo', 'ifconfig', 'ens193', 'up']) #17
-        subprocess.run(['sudo', 'ifconfig', 'ens257', 'up']) #18
-        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # xx WiFi
-        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # xx WiFi
+        
+        subprocess.run(['sudo', 'ifconfig', 'ens160', 'up']) # MitraStar BROADCOM
+        subprocess.run(['sudo', 'ifconfig', 'ens161', 'up']) # MitraStar ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens224', 'up']) # Askey ECNT
+        subprocess.run(['sudo', 'ifconfig', 'ens225', 'up']) # Askey BROADCOM
         time.sleep(10)
         ssh_results = infoDevices_utils.getInfoHgu(password, ip)
         dict_result = {

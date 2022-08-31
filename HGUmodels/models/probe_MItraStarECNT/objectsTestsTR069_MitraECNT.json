@@ -22,7 +22,56 @@
                 },
                 {
                     "obtainedResults": [
-                        "obs"
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ManufacturerOUI",
+                            "type": "string",
+                            "value": "b046fc"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.Manufacturer",
+                            "type": "string",
+                            "value": "MitraStar"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ModelName",
+                            "type": "string",
+                            "value": "GPT-2731GN2A4P"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.ProductClass",
+                            "type": "string",
+                            "value": "GPT-2731GN2A4P"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SerialNumber",
+                            "type": "string",
+                            "value": "C03DD94800D8"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.DeviceInfo.SoftwareVersion",
+                            "type": "string",
+                            "value": "BR_g5.9_1.11(WVK.0)b32"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress",
+                            "type": "string",
+                            "value": "191.193.149.189"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.URL",
+                            "type": "string",
+                            "value": "http://acs.telesp.net.br:7015/cwmpWeb/CPEMgt"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformEnable",
+                            "type": "boolean",
+                            "value": "1"
+                        },
+                        {
+                            "name": "InternetGatewayDevice.ManagementServer.PeriodicInformInterval",
+                            "type": "unsignedInt",
+                            "value": "600"
+                        }
                     ]
                 }
             ],
@@ -56,7 +105,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID",
                             "type": "string",
-                            "value": "V!VO-AUTO-2GHz"
+                            "value": "VIVO automacao 2GHz"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType",
@@ -106,7 +155,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
                             "type": "string",
-                            "value": "V!VO-AUTO-5GHz"
+                            "value": "VIVO automacao 5GHz"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
@@ -160,7 +209,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID",
                             "type": "string",
-                            "value": "V!VO-AUTO-5GHz"
+                            "value": "VIVO automacao 5GHz"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.BeaconType",
@@ -221,7 +270,7 @@
                         {
                             "name": "InternetGatewayDevice.X_VIVO_COM_BR.AccessClass",
                             "type": "string",
-                            "value": "service05"
+                            "value": "service04"
                         },
                         {
                             "name": "InternetGatewayDevice.X_VIVO_COM_BR.DDNS.Enable",
@@ -269,7 +318,9 @@
                 {
                     "obtainedResults": [
                         {
-                            "obs": "ATEN\u00c7\u00c3O! DISPOSITIVO OFFLINE OU N\u00c3O RESPONDENDO A CONNECTION REQUEST!"
+                            "name": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANIPConnection.1.X_TELEFONICA-ES_IPv6Enabled",
+                            "type": "boolean",
+                            "value": "1"
                         }
                     ]
                 }
@@ -289,7 +340,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.IPAddress",
                             "type": "string",
-                            "value": "172.18.192.144"
+                            "value": "172.18.192.26"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.AddressSource",
@@ -299,7 +350,7 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.LeaseTimeRemaining",
                             "type": "int",
-                            "value": "11158"
+                            "value": "14385"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.Layer2Interface",
@@ -314,17 +365,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.ClientID",
                             "type": "string",
-                            "value": "00000001000000000000110000101001011101000110010101011001"
+                            "value": "00000001000000000000110000101001111110001011111100101011"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.MACAddress",
                             "type": "string",
-                            "value": "00:0C:29:74:65:59"
+                            "value": "00:0C:29:F8:BF:2B"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.HostName",
                             "type": "string",
-                            "value": "automacao-vm-03"
+                            "value": "automacao-vm-06"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.1.InterfaceType",
@@ -339,17 +390,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.IPAddress",
                             "type": "string",
-                            "value": "172.18.192.28"
+                            "value": "172.18.192.16"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.AddressSource",
                             "type": "string",
-                            "value": "DHCP"
+                            "value": "Static"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.LeaseTimeRemaining",
                             "type": "int",
-                            "value": "10180"
+                            "value": "0"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.Layer2Interface",
@@ -364,17 +415,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.ClientID",
                             "type": "string",
-                            "value": "00000001000000000000110000101001001100010000101011011110"
+                            "value": null
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.MACAddress",
                             "type": "string",
-                            "value": "00:0C:29:31:0A:DE"
+                            "value": "00:0C:29:BF:D0:C9"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.HostName",
                             "type": "string",
-                            "value": "automacao-vm-01"
+                            "value": "Unknown"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.2.InterfaceType",
@@ -389,17 +440,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.IPAddress",
                             "type": "string",
-                            "value": "172.18.192.25"
+                            "value": "172.18.192.142"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.AddressSource",
                             "type": "string",
-                            "value": "DHCP"
+                            "value": "Static"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.LeaseTimeRemaining",
                             "type": "int",
-                            "value": "14356"
+                            "value": "0"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.Layer2Interface",
@@ -414,17 +465,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.ClientID",
                             "type": "string",
-                            "value": "00000001000000000000110000101001010000010110111101111011"
+                            "value": null
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.MACAddress",
                             "type": "string",
-                            "value": "00:0C:29:41:6F:7B"
+                            "value": "00:0C:29:84:37:2A"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.HostName",
                             "type": "string",
-                            "value": "automacao-vm-04"
+                            "value": "Unknown"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.3.InterfaceType",
@@ -439,17 +490,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.IPAddress",
                             "type": "string",
-                            "value": "172.18.192.146"
+                            "value": "172.18.192.123"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.AddressSource",
                             "type": "string",
-                            "value": "DHCP"
+                            "value": "Static"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.LeaseTimeRemaining",
                             "type": "int",
-                            "value": "12449"
+                            "value": "0"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.Layer2Interface",
@@ -464,17 +515,17 @@
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.ClientID",
                             "type": "string",
-                            "value": "00000001000000000000110000101001110011101100111111000110"
+                            "value": null
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.MACAddress",
                             "type": "string",
-                            "value": "00:0C:29:CE:CF:C6"
+                            "value": "00:0C:29:41:6F:67"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.HostName",
                             "type": "string",
-                            "value": "automacao-vm-02"
+                            "value": "Unknown"
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.InterfaceType",
@@ -483,156 +534,6 @@
                         },
                         {
                             "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.4.Active",
-                            "type": "boolean",
-                            "value": "1"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.IPAddress",
-                            "type": "string",
-                            "value": "172.18.192.29"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.AddressSource",
-                            "type": "string",
-                            "value": "DHCP"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.LeaseTimeRemaining",
-                            "type": "int",
-                            "value": "14248"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.Layer2Interface",
-                            "type": "string",
-                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2."
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.VendorClassID",
-                            "type": "string",
-                            "value": null
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.ClientID",
-                            "type": "string",
-                            "value": "00000001000000000000110000101001111110001011111100111111"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.MACAddress",
-                            "type": "string",
-                            "value": "00:0C:29:F8:BF:3F"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.HostName",
-                            "type": "string",
-                            "value": "automacao-vm-06"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.InterfaceType",
-                            "type": "string",
-                            "value": "Ethernet"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.5.Active",
-                            "type": "boolean",
-                            "value": "1"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.IPAddress",
-                            "type": "string",
-                            "value": "172.18.192.142"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.AddressSource",
-                            "type": "string",
-                            "value": "DHCP"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.LeaseTimeRemaining",
-                            "type": "int",
-                            "value": "12698"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.Layer2Interface",
-                            "type": "string",
-                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2."
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.VendorClassID",
-                            "type": "string",
-                            "value": null
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.ClientID",
-                            "type": "string",
-                            "value": "00000001000000000000110000101001100001000011011100101010"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.MACAddress",
-                            "type": "string",
-                            "value": "00:0C:29:84:37:2A"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.HostName",
-                            "type": "string",
-                            "value": "automacao-Aux"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.InterfaceType",
-                            "type": "string",
-                            "value": "Ethernet"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.6.Active",
-                            "type": "boolean",
-                            "value": "1"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.IPAddress",
-                            "type": "string",
-                            "value": "172.18.192.100"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.AddressSource",
-                            "type": "string",
-                            "value": "Static"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.LeaseTimeRemaining",
-                            "type": "int",
-                            "value": "0"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.Layer2Interface",
-                            "type": "string",
-                            "value": "InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2."
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.VendorClassID",
-                            "type": "string",
-                            "value": null
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.ClientID",
-                            "type": "string",
-                            "value": null
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.MACAddress",
-                            "type": "string",
-                            "value": "C4:0A:CB:51:B1:C7"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.HostName",
-                            "type": "string",
-                            "value": "Unknown"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.InterfaceType",
-                            "type": "string",
-                            "value": "Ethernet"
-                        },
-                        {
-                            "name": "InternetGatewayDevice.LANDevice.1.Hosts.Host.7.Active",
                             "type": "boolean",
                             "value": "1"
                         }
